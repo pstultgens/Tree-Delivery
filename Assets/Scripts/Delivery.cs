@@ -8,7 +8,7 @@ public class Delivery : MonoBehaviour
     [Header("Stats")]
     [SerializeField] GameObject collectedPackage;
     [SerializeField] float destroyDelay = 0.5f;
-    [SerializeField] float wrongDeliveryColorDelay = 2.0f;
+    [SerializeField] float wrongDeliveryDelay = 2.0f;
 
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
@@ -18,13 +18,11 @@ public class Delivery : MonoBehaviour
     private int currentPackageValue;
 
     private TextMeshPro textMeshPro;
-    private SpriteRenderer spriteRenderer;
 
 
     private void Start()
     {
         textMeshPro = GetComponentInChildren<TextMeshPro>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 
@@ -64,10 +62,10 @@ public class Delivery : MonoBehaviour
                 hasPackage = false;
                 collectedPackage.SetActive(false);
 
+                UpdateMinimap(mailbox);
 
-                // Update Minimap Node
-                mailbox.minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
-                mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
+                // Remove obstacle and open path to next Node
+                mailbox.OpenToNextNode();
 
                 mailboxSpriteRenderer.color = correctDeliverdColor;
 
@@ -76,22 +74,53 @@ public class Delivery : MonoBehaviour
             else
             {
                 Debug.Log("Package Wrong Delivered");
+                SpriteRenderer minimapNodeSpriteRenderer = mailbox.minimapNode.GetComponent<SpriteRenderer>();
+                TextMeshPro minimapNodeTMPro = mailbox.minimapNode.GetComponentInChildren<TextMeshPro>();
 
-                StartCoroutine(WrongDeliveryColor(mailboxSpriteRenderer));
+                StartCoroutine(GiveHintCoroutine(otherTMPro, minimapNodeTMPro, mailbox.correctValue.ToString()));
+                StartCoroutine(WrongDeliveryColorCoroutine(mailboxSpriteRenderer, minimapNodeSpriteRenderer));
             }
-
         }
     }
 
-    IEnumerator WrongDeliveryColor(SpriteRenderer spriteRenderer)
+    private void UpdateMinimap(Mailbox mailbox)
     {
-        Color32 defaultMailboxColor = spriteRenderer.color;
-        spriteRenderer.color = wrongDeliverdColor;
-        yield return new WaitForSeconds(wrongDeliveryColorDelay);
-        spriteRenderer.color = defaultMailboxColor;
+        // Update Minimap Node
+        mailbox.minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
+        mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
+
+        // Update Minimap Edges
+        if (mailbox.minimapEdgeLeft != null)
+        {
+            mailbox.minimapEdgeLeft.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
+        }
+
+        if (mailbox.minimapEdgeRight != null)
+        {
+            mailbox.minimapEdgeRight.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
+        }
     }
 
-    
+    IEnumerator WrongDeliveryColorCoroutine(SpriteRenderer spriteRenderer, SpriteRenderer minimapNodeSpriteRenderer)
+    {
+        Color32 defaultMailboxColor = spriteRenderer.color;
+        Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
 
+        spriteRenderer.color = wrongDeliverdColor;
+        minimapNodeSpriteRenderer.color = wrongDeliverdColor;
 
+        yield return new WaitForSeconds(wrongDeliveryDelay);
+
+        spriteRenderer.color = defaultMailboxColor;
+        minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
+    }
+
+    IEnumerator GiveHintCoroutine(TextMeshPro mailboxTMPro, TextMeshPro minimapNodeTMPro, string correctValue)
+    {
+        mailboxTMPro.text = correctValue;
+        minimapNodeTMPro.text = correctValue;
+        yield return new WaitForSeconds(wrongDeliveryDelay);
+        mailboxTMPro.text = "";
+        minimapNodeTMPro.text = "";
+    }
 }

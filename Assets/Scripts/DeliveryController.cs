@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Delivery : MonoBehaviour
+public class DeliveryController : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] GameObject collectedPackage;
+    [SerializeField] GameObject dropPackagePrefab;
+    [SerializeField] Transform dropPackageSpawnPoint;
     [SerializeField] float destroyDelay = 0.5f;
     [SerializeField] float wrongDeliveryDelay = 2.0f;
 
@@ -17,12 +19,9 @@ public class Delivery : MonoBehaviour
     private bool hasPackage;
     private int currentPackageValue;
 
-    private TextMeshPro textMeshPro;
-
-
     private void Start()
     {
-        textMeshPro = GetComponentInChildren<TextMeshPro>();
+        
     }
 
 
@@ -41,11 +40,11 @@ public class Delivery : MonoBehaviour
             Debug.Log("Package picked up");
             hasPackage = true;
             collectedPackage.SetActive(true);
+            collectedPackage.GetComponentInChildren<TextMeshPro>().text = otherTMPro.text;
 
             currentPackageValue = int.Parse(otherTMPro.text);
-            textMeshPro.text = otherTMPro.text;
-
-            Destroy(other.gameObject, destroyDelay);
+            
+            Destroy(other.gameObject, destroyDelay);   
         }
 
         if (other.tag.Equals("Mailbox") && hasPackage)
@@ -61,6 +60,7 @@ public class Delivery : MonoBehaviour
                 otherTMPro.text = currentPackageValue.ToString();
                 hasPackage = false;
                 collectedPackage.SetActive(false);
+                collectedPackage.GetComponentInChildren<TextMeshPro>().text = "";
 
                 UpdateMinimap(mailbox);
 
@@ -68,8 +68,6 @@ public class Delivery : MonoBehaviour
                 mailbox.OpenToNextNode();
 
                 mailboxSpriteRenderer.color = correctDeliverdColor;
-
-                textMeshPro.text = "";
             }
             else
             {
@@ -122,5 +120,26 @@ public class Delivery : MonoBehaviour
         yield return new WaitForSeconds(wrongDeliveryDelay);
         mailboxTMPro.text = "";
         minimapNodeTMPro.text = "";
+    }
+
+    public void DropPackage()
+    {
+        if (hasPackage)
+        {
+            Debug.Log("Drop package");
+            
+            dropPackagePrefab.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
+            dropPackagePrefab.GetComponent<Package>().minimapIcon.SetActive(true);
+
+
+            // Instantiate package behind player at given spawn point
+            Instantiate(dropPackagePrefab, new Vector2(dropPackageSpawnPoint.position.x, dropPackageSpawnPoint.position.y), Quaternion.identity);
+           
+
+            collectedPackage.SetActive(false);
+            collectedPackage.GetComponentInChildren<TextMeshPro>().text = "";
+
+            hasPackage = false;
+        }
     }
 }

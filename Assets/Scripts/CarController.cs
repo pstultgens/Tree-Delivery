@@ -159,6 +159,16 @@ public class CarController : MonoBehaviour
         accelerationInput = inputVector.y;
     }
 
+    public void SetSteering(float x)
+    {
+        steeringInput = x;
+    }
+
+    public void SetAcceleration(float y)
+    {        
+        accelerationInput = y;
+    }
+
     public float GetVelocityMagnitude()
     {
         return carRigidbody.velocity.magnitude;

@@ -12,17 +12,23 @@ public class CarController : MonoBehaviour
     [SerializeField] public float boostSpeed = 30f;
     [SerializeField] public float boostTime = 2f;
 
+    [Header("Sprites")]
+    [SerializeField] public SpriteRenderer carSpriteRenderer;
+    [SerializeField] public SpriteRenderer carShadowSpriteRenderer;
+
+
     float accelerationInput = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
     float velocityVsUp = 0;
-    bool inBoostMode;
 
-    Rigidbody2D rigidbody;
+    bool inBoostMode;
+    
+    Rigidbody2D carRigidbody;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        carRigidbody = GetComponent<Rigidbody2D>();       
     }
 
     void Start()
@@ -44,11 +50,11 @@ public class CarController : MonoBehaviour
     {
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
-            StartCoroutine(Boost());
-        }
+            StartCoroutine(BoostCoroutine());
+        }       
     }
 
-    private IEnumerator Boost()
+    private IEnumerator BoostCoroutine()
     {
         inBoostMode = true;
         float originalMaxSpeed = maxSpeed;
@@ -61,7 +67,7 @@ public class CarController : MonoBehaviour
     private void ApplyEngineForce()
     {
         // Calculate how much "forward" we are going in terms of the direction of our velocity
-        velocityVsUp = Vector2.Dot(transform.up, rigidbody.velocity);
+        velocityVsUp = Vector2.Dot(transform.up, carRigidbody.velocity);
 
         // Limit so we cant go faster than the max speed in the "forward" direction
         if (velocityVsUp > maxSpeed && accelerationInput > 0)
@@ -76,7 +82,7 @@ public class CarController : MonoBehaviour
         }
 
         // Limit so we cant go faster in any direction while accelerating
-        if (rigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
+        if (carRigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
         {
             return;
         }
@@ -84,45 +90,45 @@ public class CarController : MonoBehaviour
         // Apply drag if there is no accelerationInput so the car stops when the player lets go of the accelerator
         if (accelerationInput == 0)
         {
-            rigidbody.drag = Mathf.Lerp(rigidbody.drag, 3f, Time.fixedDeltaTime * 3);
+            carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3f, Time.fixedDeltaTime * 3);
         }
         else
         {
-            rigidbody.drag = 0;
+            carRigidbody.drag = 0;
         }
 
         // Create a force for the engine
         Vector2 engineForceVector = transform.up * accelerationInput * accelerationFactor;
 
         // Apply force and pushes the car forward
-        rigidbody.AddForce(engineForceVector, ForceMode2D.Force);
+        carRigidbody.AddForce(engineForceVector, ForceMode2D.Force);
     }
 
     private void ApplySteering()
     {
         // Limit the cars ability to turn when moving slowly
-        float minSpeedBeforeAllowTurningFactor = (rigidbody.velocity.magnitude / 8);
+        float minSpeedBeforeAllowTurningFactor = (carRigidbody.velocity.magnitude / 8);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
         // Update the rotation angle based on input
         rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
 
         // Apply steering by rotating the car object
-        rigidbody.MoveRotation(rotationAngle);
+        carRigidbody.MoveRotation(rotationAngle);
     }
 
     private void KillOrthogonalVelocity()
     {
-        Vector2 forwardVelocity = transform.up * Vector2.Dot(rigidbody.velocity, transform.up);
-        Vector2 rightVelocity = transform.right * Vector2.Dot(rigidbody.velocity, transform.right);
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(carRigidbody.velocity, transform.up);
+        Vector2 rightVelocity = transform.right * Vector2.Dot(carRigidbody.velocity, transform.right);
 
-        rigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
+        carRigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
     private float GetLateralVelocity()
     {
         // Returns how fast the car is moving sideways
-        return Vector2.Dot(transform.right, rigidbody.velocity);
+        return Vector2.Dot(transform.right, carRigidbody.velocity);
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
@@ -155,8 +161,7 @@ public class CarController : MonoBehaviour
 
     public float GetVelocityMagnitude()
     {
-        return rigidbody.velocity.magnitude;
+        return carRigidbody.velocity.magnitude;
     }
-
 
 }

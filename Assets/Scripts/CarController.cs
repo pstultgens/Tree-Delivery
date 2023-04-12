@@ -1,0 +1,162 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CarController : MonoBehaviour
+{
+    [Header("Car settings")]
+    [SerializeField] public float driftFactor = 0.95f;
+    [SerializeField] public float accelerationFactor = 30f;
+    [SerializeField] public float turnFactor = 3.5f;
+    [SerializeField] public float maxSpeed = 20f;
+    [SerializeField] public float boostSpeed = 30f;
+    [SerializeField] public float boostTime = 2f;
+
+    float accelerationInput = 0;
+    float steeringInput = 0;
+    float rotationAngle = 0;
+    float velocityVsUp = 0;
+    bool inBoostMode;
+
+    Rigidbody2D rigidbody;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+    }
+
+    void Update()
+    {
+    }
+
+    private void FixedUpdate()
+    {
+        ApplyEngineForce();
+        KillOrthogonalVelocity();
+        ApplySteering();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Equals("Boost") && !inBoostMode)
+        {
+            StartCoroutine(Boost());
+        }
+    }
+
+    private IEnumerator Boost()
+    {
+        inBoostMode = true;
+        float originalMaxSpeed = maxSpeed;
+        maxSpeed = boostSpeed;
+        yield return new WaitForSeconds(boostTime);
+        maxSpeed = originalMaxSpeed;
+        inBoostMode = false;
+    }
+
+    private void ApplyEngineForce()
+    {
+        // Calculate how much "forward" we are going in terms of the direction of our velocity
+        velocityVsUp = Vector2.Dot(transform.up, rigidbody.velocity);
+
+        // Limit so we cant go faster than the max speed in the "forward" direction
+        if (velocityVsUp > maxSpeed && accelerationInput > 0)
+        {
+            return;
+        }
+
+        // Limit so we cant go faster than the 50% of max speed in the "reverse" direction
+        if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
+        {
+            return;
+        }
+
+        // Limit so we cant go faster in any direction while accelerating
+        if (rigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
+        {
+            return;
+        }
+
+        // Apply drag if there is no accelerationInput so the car stops when the player lets go of the accelerator
+        if (accelerationInput == 0)
+        {
+            rigidbody.drag = Mathf.Lerp(rigidbody.drag, 3f, Time.fixedDeltaTime * 3);
+        }
+        else
+        {
+            rigidbody.drag = 0;
+        }
+
+        // Create a force for the engine
+        Vector2 engineForceVector = transform.up * accelerationInput * accelerationFactor;
+
+        // Apply force and pushes the car forward
+        rigidbody.AddForce(engineForceVector, ForceMode2D.Force);
+    }
+
+    private void ApplySteering()
+    {
+        // Limit the cars ability to turn when moving slowly
+        float minSpeedBeforeAllowTurningFactor = (rigidbody.velocity.magnitude / 8);
+        minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
+
+        // Update the rotation angle based on input
+        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+
+        // Apply steering by rotating the car object
+        rigidbody.MoveRotation(rotationAngle);
+    }
+
+    private void KillOrthogonalVelocity()
+    {
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(rigidbody.velocity, transform.up);
+        Vector2 rightVelocity = transform.right * Vector2.Dot(rigidbody.velocity, transform.right);
+
+        rigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
+    }
+
+    private float GetLateralVelocity()
+    {
+        // Returns how fast the car is moving sideways
+        return Vector2.Dot(transform.right, rigidbody.velocity);
+    }
+
+    public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
+    {
+        lateralVelocity = GetLateralVelocity();
+        isBraking = false;
+
+        // Check if we ware moving forward and if the player is hitting the brakes
+        // In that case the tires should screech
+        if (velocityVsUp > 0 && accelerationInput < 0)
+        {
+            isBraking = true;
+            return true;
+        }
+
+        // If we have a lot of side movement then the tires should be screeching
+        if (Mathf.Abs(GetLateralVelocity()) > 4f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void SetInputVector(Vector2 inputVector)
+    {
+        steeringInput = inputVector.x;
+        accelerationInput = inputVector.y;
+    }
+
+    public float GetVelocityMagnitude()
+    {
+        return rigidbody.velocity.magnitude;
+    }
+
+
+}

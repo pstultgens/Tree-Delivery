@@ -9,8 +9,6 @@ public class Delivery : MonoBehaviour
     [SerializeField] GameObject collectedPackage;
     [SerializeField] float destroyDelay = 0.5f;
     [SerializeField] float wrongDeliveryColorDelay = 2.0f;
-    [SerializeField] Color32 hasPackageColor = new Color32(1, 1, 1, 1);
-    [SerializeField] Color32 noPackageColor = new Color32(1, 1, 1, 1);
 
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
@@ -44,7 +42,6 @@ public class Delivery : MonoBehaviour
         {
             Debug.Log("Package picked up");
             hasPackage = true;
-            spriteRenderer.color = hasPackageColor;
             collectedPackage.SetActive(true);
 
             currentPackageValue = int.Parse(otherTMPro.text);
@@ -67,7 +64,11 @@ public class Delivery : MonoBehaviour
                 hasPackage = false;
                 collectedPackage.SetActive(false);
 
-                spriteRenderer.color = noPackageColor;
+
+                // Update Minimap Node
+                mailbox.minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
+                mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
+
                 mailboxSpriteRenderer.color = correctDeliverdColor;
 
                 textMeshPro.text = "";
@@ -89,6 +90,8 @@ public class Delivery : MonoBehaviour
         yield return new WaitForSeconds(wrongDeliveryColorDelay);
         spriteRenderer.color = defaultMailboxColor;
     }
+
+    
 
 
 }

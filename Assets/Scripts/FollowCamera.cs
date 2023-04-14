@@ -5,8 +5,15 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     [SerializeField] GameObject thingToFollow;
+
     void LateUpdate()
     {
-        transform.position = thingToFollow.transform.position + new Vector3(0, 0, -10);
+        if (thingToFollow != null)
+        {
+            transform.position = thingToFollow.transform.position + new Vector3(0, 0, -10);
+        } else
+        {
+            Debug.Log("Camera thingToFollow is Empty!");
+        }
     }
 }

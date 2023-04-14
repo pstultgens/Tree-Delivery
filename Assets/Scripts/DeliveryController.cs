@@ -6,24 +6,15 @@ using TMPro;
 public class DeliveryController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] GameObject collectedPackage;
-    [SerializeField] GameObject dropPackagePrefab;
-    [SerializeField] Transform dropPackageSpawnPoint;
-    [SerializeField] float destroyDelay = 0.5f;
+    [SerializeField] GameObject collectedPackageOnCarSprite;
+    [SerializeField] Transform dropPackageLocation;
     [SerializeField] float wrongDeliveryDelay = 2.0f;
 
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
-
-
-    private bool hasPackage;
-    private int currentPackageValue;
-
-    private void Start()
-    {
         
-    }
-
+    private Package collectedPackage;
+    private int collectedPackageValue;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -35,32 +26,35 @@ public class DeliveryController : MonoBehaviour
         TextMeshPro otherTMPro = other.GetComponentInChildren<TextMeshPro>();
 
 
-        if (other.tag.Equals("Package") && !hasPackage)
+        if (other.tag.Equals("Package") && collectedPackage == null)
         {
             Debug.Log("Package picked up");
-            hasPackage = true;
-            collectedPackage.SetActive(true);
-            collectedPackage.GetComponentInChildren<TextMeshPro>().text = otherTMPro.text;
+            collectedPackage = other.GetComponent<Package>();
 
-            currentPackageValue = int.Parse(otherTMPro.text);
-            
-            Destroy(other.gameObject, destroyDelay);   
+            collectedPackageOnCarSprite.SetActive(true);
+            collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = otherTMPro.text;
+            collectedPackageValue = int.Parse(otherTMPro.text);
+
+            other.GetComponent<Package>().Pickedup();
         }
 
-        if (other.tag.Equals("Mailbox") && hasPackage)
+        if (other.tag.Equals("Mailbox") && collectedPackage != null)
         {
 
 
             Mailbox mailbox = other.GetComponent<Mailbox>();
             SpriteRenderer mailboxSpriteRenderer = other.GetComponent<SpriteRenderer>();
 
-            if (mailbox.correctValue.Equals(currentPackageValue))
+            if (mailbox.correctValue.Equals(collectedPackageValue))
             {
                 Debug.Log("Package Correct Delivered");
-                otherTMPro.text = currentPackageValue.ToString();
-                hasPackage = false;
-                collectedPackage.SetActive(false);
-                collectedPackage.GetComponentInChildren<TextMeshPro>().text = "";
+                otherTMPro.text = collectedPackageValue.ToString();
+                
+                collectedPackageOnCarSprite.SetActive(false);
+                collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
+
+                collectedPackage.Delivered();
+                collectedPackage = null;
 
                 UpdateMinimap(mailbox);
 
@@ -68,6 +62,7 @@ public class DeliveryController : MonoBehaviour
                 mailbox.OpenToNextNode();
 
                 mailboxSpriteRenderer.color = correctDeliverdColor;
+
             }
             else
             {
@@ -81,11 +76,27 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
+    public void DropPackage()
+    {
+        if (collectedPackage != null)
+        {
+            Debug.Log("Drop package");
+
+            Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
+            collectedPackage.Drop(dropLocation);
+
+            collectedPackageOnCarSprite.SetActive(false);
+            collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
+
+            collectedPackage = null;
+        }
+    }
+
     private void UpdateMinimap(Mailbox mailbox)
     {
         // Update Minimap Node
         mailbox.minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
-        mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
+        mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = collectedPackageValue.ToString();
 
         // Update Minimap Edges
         if (mailbox.minimapEdgeLeft != null)
@@ -122,24 +133,5 @@ public class DeliveryController : MonoBehaviour
         minimapNodeTMPro.text = "";
     }
 
-    public void DropPackage()
-    {
-        if (hasPackage)
-        {
-            Debug.Log("Drop package");
-            
-            dropPackagePrefab.GetComponentInChildren<TextMeshPro>().text = currentPackageValue.ToString();
-            dropPackagePrefab.GetComponent<Package>().minimapIcon.SetActive(true);
-
-
-            // Instantiate package behind player at given spawn point
-            Instantiate(dropPackagePrefab, new Vector2(dropPackageSpawnPoint.position.x, dropPackageSpawnPoint.position.y), Quaternion.identity);
-           
-
-            collectedPackage.SetActive(false);
-            collectedPackage.GetComponentInChildren<TextMeshPro>().text = "";
-
-            hasPackage = false;
-        }
-    }
+    
 }

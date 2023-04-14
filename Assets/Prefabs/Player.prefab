@@ -5783,7 +5783,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2687430653576696417}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.4, y: -3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5886,10 +5886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2f8cd687942400eb80c959a99a3752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectedPackage: {fileID: 2687430653085865048}
-  dropPackagePrefab: {fileID: 5933653308523958302, guid: 0fc959689d03c49cba635b0f4a36e9e5, type: 3}
-  dropPackageSpawnPoint: {fileID: 2687430653836382434}
-  destroyDelay: 0
+  collectedPackageOnCarSprite: {fileID: 2687430653085865048}
+  dropPackageLocation: {fileID: 2687430653836382434}
   wrongDeliveryDelay: 3
   correctDeliverdColor:
     serializedVersion: 2
@@ -5953,7 +5951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2687430653836382434}
   m_Layer: 0
-  m_Name: Drop Package Spawn Point
+  m_Name: Drop Package Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

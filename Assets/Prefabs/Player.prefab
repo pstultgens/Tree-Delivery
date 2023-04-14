@@ -5858,8 +5858,8 @@ MonoBehaviour:
   accelerationFactor: 30
   turnFactor: 3.5
   maxSpeed: 15
-  boostSpeed: 20
-  boostTime: 1.5
+  boostSpeed: 25
+  boostTime: 1
   carSpriteRenderer: {fileID: 2687430654004967469}
   carShadowSpriteRenderer: {fileID: 0}
 --- !u!114 &2687430653576696422

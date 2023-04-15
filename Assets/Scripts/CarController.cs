@@ -33,6 +33,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        rotationAngle = transform.rotation.eulerAngles.z;
     }
 
     void Update()

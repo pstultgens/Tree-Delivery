@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CarIAHandler : MonoBehaviour
 {
@@ -12,11 +13,16 @@ public class CarIAHandler : MonoBehaviour
     private Vector3 targetPosition = Vector3.zero;
     private Transform targetTransform = null;
 
+    // Waypoints
+    private WaypointNode currentWaypoint = null;
+    private WaypointNode[] allWaypoints;
+
     private CarController carController;
 
     private void Awake()
     {
         carController = GetComponent<CarController>();
+        allWaypoints = FindObjectsOfType<WaypointNode>();
     }
 
     void Start()
@@ -33,10 +39,13 @@ public class CarIAHandler : MonoBehaviour
             case AIMode.followPlayer:
                 FollowPlayer();
                 break;
+            case AIMode.followWaypoints:
+                FollowWaypoints();
+                break;
         }
 
         inputVector.x = TurnTowardTarget();
-        inputVector.y = 0.5f;
+        inputVector.y = 0.1f;
 
         // Send the input to the car controller.
         carController.SetInputVector(inputVector);
@@ -44,15 +53,47 @@ public class CarIAHandler : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if(targetTransform == null)
+        if (targetTransform == null)
         {
             targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        if(targetTransform != null)
+        if (targetTransform != null)
         {
             targetPosition = targetTransform.position;
         }
+    }
+
+    private void FollowWaypoints()
+    {
+        // Pick the closest waypoint if we don't have a waypoint set
+        if (currentWaypoint == null)
+        {
+            currentWaypoint = FindClosestWaypoint();
+        }
+
+        if(currentWaypoint != null)
+        {
+            targetPosition = currentWaypoint.transform.position;
+
+            // Store how close we are to the target
+            float distanceToWaypoint = (targetPosition - transform.position).magnitude;
+
+            // Check if we are close enough to consider that we have reached the waypoint
+            if(distanceToWaypoint <= currentWaypoint.minimalDistanceToReachWaypoint)
+            {
+                // If we are close enough then follow to the next waypoint, if there are multiple waypoints then pick one at random
+                currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
+            }
+        }
+
+    }
+
+    private WaypointNode FindClosestWaypoint()
+    {
+        return allWaypoints
+                    .OrderBy(t => Vector3.Distance(transform.position, t.transform.position))
+                    .FirstOrDefault();
     }
 
     private float TurnTowardTarget()

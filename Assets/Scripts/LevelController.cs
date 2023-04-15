@@ -12,13 +12,15 @@ public class LevelController : MonoBehaviour
     [SerializeField] public int[] defaultPackageValues;
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
-    private List<Package> packages = new List<Package>();
+    private Package[] allPackages;
+
+    private void Awake()
+    {
+        allPackages = FindObjectsOfType<Package>();
+    }
 
     void Start()
-    {
-        DeterminePackagesFromNodes();
-
-
+    {    
         if (randomizePackageValues)
         {
             GenerateRandomPackageValues();
@@ -34,14 +36,6 @@ public class LevelController : MonoBehaviour
         if (AllPackagesDelivered())
         {
             LevelComplete();
-        }
-    }
-
-    private void DeterminePackagesFromNodes()
-    {
-        foreach (GameObject gameObject in nodes)
-        {
-            packages.Add(gameObject.GetComponentInChildren<Package>());
         }
     }
 
@@ -66,7 +60,7 @@ public class LevelController : MonoBehaviour
 
     private bool AllPackagesDelivered()
     {
-        foreach (Package package in packages)
+        foreach (Package package in allPackages)
         {
             if (!package.isDelivered)
             {

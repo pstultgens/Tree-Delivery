@@ -9,6 +9,7 @@ public class CarIAHandler : MonoBehaviour
 
     [Header("AI Settings")]
     [SerializeField] public AIMode aiMode;
+    [SerializeField] public float maxSpeed = 16f;
 
     private Vector3 targetPosition = Vector3.zero;
     private Transform targetTransform = null;
@@ -45,7 +46,7 @@ public class CarIAHandler : MonoBehaviour
         }
 
         inputVector.x = TurnTowardTarget();
-        inputVector.y = 0.1f;
+        inputVector.y = ApplyThrottleOrBrake(inputVector.x);
 
         // Send the input to the car controller.
         carController.SetInputVector(inputVector);
@@ -82,6 +83,15 @@ public class CarIAHandler : MonoBehaviour
             // Check if we are close enough to consider that we have reached the waypoint
             if(distanceToWaypoint <= currentWaypoint.minimalDistanceToReachWaypoint)
             {
+                if(currentWaypoint.maxSpeed > 0)
+                {
+                    maxSpeed = currentWaypoint.maxSpeed;
+                } else
+                {
+                    // Go as fast as possible
+                    maxSpeed = 1000;
+                }
+
                 // If we are close enough then follow to the next waypoint, if there are multiple waypoints then pick one at random
                 currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
             }
@@ -112,6 +122,19 @@ public class CarIAHandler : MonoBehaviour
         steerAmount = Mathf.Clamp(steerAmount, -1.0f, 1.0f);
 
         return steerAmount;
+    }
+
+    private float ApplyThrottleOrBrake(float inputX)
+    {
+        // If we are going too fast then do not accelerate further
+        if(carController.GetVelocityMagnitude() > maxSpeed)
+        {
+            return 0;
+        }
+
+        // Apply throttle forward based on how much the car wants to turn
+        // If it's a sharp turn this will cause the to apply less speed forward
+        return 1.05f - Mathf.Abs(inputX) / 1.0f;
     }
 
 }

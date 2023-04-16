@@ -17,6 +17,7 @@ public class CarIAHandler : MonoBehaviour
 
     // Waypoints
     private WaypointNode currentWaypoint = null;
+    private WaypointNode previousWaypoint = null;
     private WaypointNode[] allWaypoints;
 
     // Avoidance
@@ -81,6 +82,7 @@ public class CarIAHandler : MonoBehaviour
         if (currentWaypoint == null)
         {
             currentWaypoint = FindClosestWaypoint();
+            previousWaypoint = currentWaypoint;
         }
 
         if (currentWaypoint != null)
@@ -89,6 +91,18 @@ public class CarIAHandler : MonoBehaviour
 
             // Store how close we are to the target
             float distanceToWaypoint = (targetPosition - transform.position).magnitude;
+
+            // Navigate towards nearest point on line
+            if(distanceToWaypoint > 20)
+            {
+                Vector3 nearestPointOnTheWaypointLine = FindNearestPointOnLine(previousWaypoint.transform.position, currentWaypoint.transform.position, transform.position);
+
+                float segment = distanceToWaypoint / 20f;
+
+                targetPosition = (targetPosition + nearestPointOnTheWaypointLine * segment) / (segment + 1);
+
+                Debug.DrawLine(transform.position, targetPosition, Color.cyan);
+            }
 
             // Check if we are close enough to consider that we have reached the waypoint
             if (distanceToWaypoint <= currentWaypoint.minimalDistanceToReachWaypoint)
@@ -102,6 +116,9 @@ public class CarIAHandler : MonoBehaviour
                     // Go as fast as possible
                     maxSpeed = 1000;
                 }
+
+                // Store the current waypoint as previous before we assign a new current one
+                previousWaypoint = currentWaypoint;
 
                 // If we are close enough then follow to the next waypoint, if there are multiple waypoints then pick one at random
                 currentWaypoint = currentWaypoint.nextWaypointNode[Random.Range(0, currentWaypoint.nextWaypointNode.Length)];
@@ -162,6 +179,28 @@ public class CarIAHandler : MonoBehaviour
         // If it's a sharp turn this will cause the to apply less speed forward
         return 1.05f - Mathf.Abs(inputX) / 1.0f;
     }
+
+    // Find the nearest point on a line
+    private Vector2 FindNearestPointOnLine(Vector2 lineStartPosition, Vector2 lineEndPosition, Vector2 point)
+    {
+        // Get heading as a vector
+        Vector2 lineHeadingVector = (lineEndPosition - lineStartPosition);
+
+        // Store the max distance
+        float maxDistance = lineHeadingVector.magnitude;
+        lineHeadingVector.Normalize();
+
+        // Do projection from the start position to the point
+        Vector2 lineVectorStartToPoint = point - lineStartPosition;
+        float dotProduct = Vector2.Dot(lineVectorStartToPoint, lineHeadingVector);
+
+        // Clamp the dot product to maxDistance
+        dotProduct = Mathf.Clamp(dotProduct, 0f, maxDistance);
+
+        return lineStartPosition + lineHeadingVector * dotProduct;
+    }
+
+
 
     // Checks for cars ahead of the car
     private bool IsCarInFrontOfAICar(out Vector3 otherCarPosition, out Vector3 otherCarRightVector)

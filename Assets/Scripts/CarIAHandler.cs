@@ -11,9 +11,11 @@ public class CarIAHandler : MonoBehaviour
     [SerializeField] public AIMode aiMode;
     [SerializeField] public float maxSpeed = 16f;
     [SerializeField] public bool isAvoidingCars = true;
+    [SerializeField] [Range(0f, 1f)] public float skillLevel = 1f;
 
     private Vector3 targetPosition = Vector3.zero;
     private Transform targetTransform = null;
+    private float originalMaxSpeed;
 
     // Waypoints
     private WaypointNode currentWaypoint = null;
@@ -32,11 +34,13 @@ public class CarIAHandler : MonoBehaviour
         carController = GetComponent<CarController>();
         allWaypoints = FindObjectsOfType<WaypointNode>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        originalMaxSpeed = maxSpeed;
     }
 
     void Start()
     {
-
+        SetMaxSpeedBasedOnSkillLevel(maxSpeed);
     }
 
     void FixedUpdate()
@@ -93,7 +97,7 @@ public class CarIAHandler : MonoBehaviour
             float distanceToWaypoint = (targetPosition - transform.position).magnitude;
 
             // Navigate towards nearest point on line
-            if(distanceToWaypoint > 20)
+            if (distanceToWaypoint > 20)
             {
                 Vector3 nearestPointOnTheWaypointLine = FindNearestPointOnLine(previousWaypoint.transform.position, currentWaypoint.transform.position, transform.position);
 
@@ -109,12 +113,11 @@ public class CarIAHandler : MonoBehaviour
             {
                 if (currentWaypoint.maxSpeed > 0)
                 {
-                    maxSpeed = currentWaypoint.maxSpeed;
+                    SetMaxSpeedBasedOnSkillLevel(currentWaypoint.maxSpeed);
                 }
                 else
                 {
-                    // Go as fast as possible
-                    maxSpeed = 1000;
+                    SetMaxSpeedBasedOnSkillLevel(100);
                 }
 
                 // Store the current waypoint as previous before we assign a new current one
@@ -177,7 +180,17 @@ public class CarIAHandler : MonoBehaviour
 
         // Apply throttle forward based on how much the car wants to turn
         // If it's a sharp turn this will cause the to apply less speed forward
-        return 1.05f - Mathf.Abs(inputX) / 1.0f;
+        float reduceSpeedDueToCornering = Mathf.Abs(inputX) / 1.0f;
+
+        return 1.05f - reduceSpeedDueToCornering * skillLevel;
+    }
+
+    private void SetMaxSpeedBasedOnSkillLevel(float newSpeed)
+    {
+        maxSpeed = Mathf.Clamp(newSpeed, 0, originalMaxSpeed);
+
+        float skillbasedMaxSpeed = Mathf.Clamp(skillLevel, 0.3f, 1f);
+        maxSpeed = maxSpeed * skillbasedMaxSpeed;
     }
 
     // Find the nearest point on a line

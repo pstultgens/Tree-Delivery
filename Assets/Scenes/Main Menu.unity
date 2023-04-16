@@ -5459,7 +5459,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: skillLevel
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name
@@ -5511,11 +5515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: accelerationFactor
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7862271226491695116, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Sprite
@@ -8973,7 +8977,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: skillLevel
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name
@@ -9025,7 +9033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: accelerationFactor
@@ -9148,7 +9156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name
@@ -9204,7 +9212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: accelerationFactor
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7862271226491695116, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Sprite
@@ -10754,7 +10762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362709789034261529, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: skillLevel
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name
@@ -10806,7 +10818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100230, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: accelerationFactor

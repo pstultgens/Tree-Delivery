@@ -8,11 +8,11 @@ public class Package : MonoBehaviour
     [SerializeField] public float pickUpDelay = 1f;
     [SerializeField] public bool isDelivered;
 
-    private Collider2D collider2D;
+    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
-        collider2D = GetComponent<Collider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     public void Pickedup()
@@ -36,9 +36,9 @@ public class Package : MonoBehaviour
 
     IEnumerator PickUpDelayCoroutine()
     {
-        collider2D.enabled = false;
+        boxCollider.enabled = false;
         yield return new WaitForSeconds(pickUpDelay);
-        collider2D.enabled = true;
+        boxCollider.enabled = true;
     }
 
 }

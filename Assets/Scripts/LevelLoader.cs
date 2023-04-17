@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -11,19 +13,41 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] public Animator transition;
     [SerializeField] public float tranistionTime = 1f;
 
-    [Header("Player")]
+    [Header("Instantiate Player")]
     [SerializeField] public GameObject playerPrefab;
     [SerializeField] public Transform spawnPlayerPosition;
     [SerializeField] public Sprite carYellowSprite;
     [SerializeField] public Sprite carRedSprite;
     [SerializeField] public Sprite carBlueSprite;
 
+    [Header("Pause Menu")]
+    [SerializeField] public GameObject pauseMenu;
+
+    [Header("Audio Mixers")]
+    [SerializeField] public AudioMixer audioMixer;
+
+    private PlayerInputActions playerActions;
+
     private void Awake()
     {
-        if(selectedCar != null)
+        playerActions = new PlayerInputActions();
+
+        if (selectedCar != null)
         {
             InstantiatePlayer();
         }
+    }
+
+    private void OnEnable()
+    {
+        playerActions.Enable();
+
+        playerActions.Player.Pause.performed += PauseGame;
+    }
+
+    private void OnDisable()
+    {
+        playerActions.Enable();
     }
 
     // Instantiate player with selected car stats
@@ -68,14 +92,46 @@ public class LevelLoader : MonoBehaviour
     // Sets the sprite of the car and minimapIcon
     private void SetCarSprites(SpriteRenderer[] carSriteRenderers, Sprite sprite)
     {
-        foreach(SpriteRenderer spriteRenderer in carSriteRenderers)
+        foreach (SpriteRenderer spriteRenderer in carSriteRenderers)
         {
             spriteRenderer.sprite = sprite;
         }
-    }    
+    }
+
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        if(pauseMenu == null)
+        {
+            Debug.Log("Pause Menu in LevelLoader not set");
+            return;
+        }
+
+        // Mute audio when paused
+        audioMixer.SetFloat("SFXVolume", -80f);
+
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        // Resume audio when resuming
+        audioMixer.SetFloat("SFXVolume", 0f);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void BackToMainMenu()
+    {
+        selectedCar = null;
+        selectedLevel = null;
+        Time.timeScale = 1f;
+        GoToScene("Main Menu");
+    }
 
     public void LoadNextLevel()
     {
+        
         StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
@@ -102,7 +158,7 @@ public class LevelLoader : MonoBehaviour
     {
         selectedLevel = sceneName;
         StartCoroutine(LoadLevelCoroutine(sceneName));
-    }    
+    }
 
     public void QuitGame()
     {

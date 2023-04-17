@@ -14,6 +14,39 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-7125931738718142404
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 9724921355c2c41d28a42ae5328b4d4e
+  m_EffectName: Attenuation
+  m_MixLevel: a3a983a710ef448fa9e39788e208db16
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-4949759922381846400
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Music
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: e8a72f528a76b471f860a2bd079085da
+  m_Children: []
+  m_Volume: 1719f1ad76ef14581bb873885663a310
+  m_Pitch: 65ce379a57cc2415aabb01bd864c8757
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7125931738718142404}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-4738330871434905123
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -98,6 +131,7 @@ AudioMixerController:
     - aa76726fec92c40f7884d5477d7b5c37
     - be9ebb2e7dbae4f38a250e3d0c80c4c8
     - 76be6bdf9424244798fce1fbb99200a4
+    - e8a72f528a76b471f860a2bd079085da
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -111,6 +145,7 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 946f6336b722f4ca68156309b2fb338d
   m_Children:
+  - {fileID: -4949759922381846400}
   - {fileID: 4070074776243457779}
   m_Volume: ff58754ec1e464d3f8fcd622431f5868
   m_Pitch: 9fbe0383e4c72474fb42185da8b10d5d
@@ -145,6 +180,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 9ca223bfc8b8e4236b6e70711c3e56e0
   m_FloatValues:
+    a2d12ea0076334fe8912461a24187735: 0
     0f491c3775a364b35b84b317b23c81a3: -3.1841109
     8d5e3a1d69a1b42a1915384b8e343343: -10.345207
     ff58754ec1e464d3f8fcd622431f5868: -0.16685188

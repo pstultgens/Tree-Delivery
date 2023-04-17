@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class CarSfxHandler : MonoBehaviour
 {
-    [Header("Mixers")]
+    [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
     [Header("Audio sources")]
@@ -25,7 +25,7 @@ public class CarSfxHandler : MonoBehaviour
 
     void Start()
     {
-        audioMixer.SetFloat("SFXVolume", 0.5f);
+        audioMixer.SetFloat("SFXVolume", 0f);        
     }
 
     void Update()

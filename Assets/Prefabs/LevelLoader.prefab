@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &439333091917504623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +174,8 @@ MonoBehaviour:
   carYellowSprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
   carRedSprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
   carBlueSprite: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
+  pauseMenu: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: e69075b6cfc2d4958a0ec60a88fd55de, type: 2}
 --- !u!1 &439333093159659450
 GameObject:
   m_ObjectHideFlags: 0

@@ -423,7 +423,7 @@ SpriteRenderer:
   m_SortingLayerID: -95882591
   m_SortingLayer: 9
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5855,10 +5855,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   driftFactor: 0.97
-  accelerationFactor: 27.5
-  turnFactor: 2
-  maxSpeed: 10
-  boostSpeed: 17.5
+  accelerationFactor: 12.5
+  turnFactor: 5
+  maxSpeed: 20
+  boostSpeed: 27.5
   boostTime: 1
   carSpriteRenderer: {fileID: 2687430654004967469}
   carShadowSpriteRenderer: {fileID: 0}
@@ -10884,7 +10884,7 @@ SpriteRenderer:
   m_SortingLayerID: 1040913995
   m_SortingLayer: 6
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960, y: 540}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &439333091917504617
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &439333091917504623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439333092404982164}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -169,6 +169,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 439333091917504616}
   tranistionTime: 1
+  playerPrefab: {fileID: 2687430653576696417, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+  spawnPlayerPosition: {fileID: 0}
+  carYellowSprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
+  carRedSprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
+  carBlueSprite: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
 --- !u!1 &439333093159659450
 GameObject:
   m_ObjectHideFlags: 0

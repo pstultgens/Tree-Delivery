@@ -5,10 +5,75 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    public static string selectedLevel;
+    public static string selectedCar;
+
     [SerializeField] public Animator transition;
     [SerializeField] public float tranistionTime = 1f;
 
-    
+    [Header("Player")]
+    [SerializeField] public GameObject playerPrefab;
+    [SerializeField] public Transform spawnPlayerPosition;
+    [SerializeField] public Sprite carYellowSprite;
+    [SerializeField] public Sprite carRedSprite;
+    [SerializeField] public Sprite carBlueSprite;
+
+    private void Awake()
+    {
+        if(selectedCar != null)
+        {
+            InstantiatePlayer();
+        }
+    }
+
+    // Instantiate player with selected car stats
+    private void InstantiatePlayer()
+    {
+        CarController carController = playerPrefab.GetComponent<CarController>();
+        SpriteRenderer[] carSriteRenderers = playerPrefab.GetComponentsInChildren<SpriteRenderer>();
+
+        switch (selectedCar)
+        {
+            case "CarYellow":
+                carController.maxSpeed = 15f;
+                carController.accelerationFactor = 20f;
+                carController.turnFactor = 3.5f;
+                carController.boostSpeed = carController.maxSpeed + 7.5f;
+                SetCarSprites(carSriteRenderers, carYellowSprite);
+                break;
+            case "CarRed":
+                carController.maxSpeed = 20f;
+                carController.accelerationFactor = 12.5f;
+                carController.turnFactor = 5f;
+                carController.boostSpeed = carController.maxSpeed + 7.5f;
+                SetCarSprites(carSriteRenderers, carRedSprite);
+                break;
+            case "CarBlue":
+                carController.maxSpeed = 10f;
+                carController.accelerationFactor = 27.5f;
+                carController.turnFactor = 2f;
+                carController.boostSpeed = carController.maxSpeed + 7.5f;
+                SetCarSprites(carSriteRenderers, carBlueSprite);
+                break;
+        }
+
+        GameObject player = Instantiate(playerPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
+
+        // Set player as thing to follow for the MainCamera and the MinimapCamera
+        Camera.main.GetComponent<FollowCamera>().thingToFollow = player;
+        GameObject minimapCamera = GameObject.FindGameObjectWithTag("MinimapCamera");
+        minimapCamera.GetComponent<FollowCamera>().thingToFollow = player;
+    }
+
+    // Sets the sprite of the car and minimapIcon
+    private void SetCarSprites(SpriteRenderer[] carSriteRenderers, Sprite sprite)
+    {
+        foreach(SpriteRenderer spriteRenderer in carSriteRenderers)
+        {
+            spriteRenderer.sprite = sprite;
+        }
+    }    
+
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
@@ -23,6 +88,21 @@ public class LevelLoader : MonoBehaviour
     {
         StartCoroutine(LoadLevelCoroutine(sceneName));
     }
+
+    public void CarSelect(string carName)
+    {
+        selectedCar = carName;
+
+        // When Select Level Menu is implemented
+        //StartCoroutine(LoadLevelCoroutine("Select Level Menu"));
+        StartCoroutine(LoadLevelCoroutine("Tutorial"));
+    }
+
+    public void LevelSelect(string sceneName)
+    {
+        selectedLevel = sceneName;
+        StartCoroutine(LoadLevelCoroutine(sceneName));
+    }    
 
     public void QuitGame()
     {

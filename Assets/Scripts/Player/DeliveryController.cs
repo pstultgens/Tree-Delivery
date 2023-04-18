@@ -12,7 +12,7 @@ public class DeliveryController : MonoBehaviour
 
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
-        
+
     private Package collectedPackage;
     private int collectedPackageValue;
 
@@ -40,8 +40,6 @@ public class DeliveryController : MonoBehaviour
 
         if (other.tag.Equals("Mailbox") && collectedPackage != null)
         {
-
-
             Mailbox mailbox = other.GetComponent<Mailbox>();
             SpriteRenderer mailboxSpriteRenderer = other.GetComponent<SpriteRenderer>();
 
@@ -49,7 +47,7 @@ public class DeliveryController : MonoBehaviour
             {
                 Debug.Log("Package Correct Delivered");
                 otherTMPro.text = collectedPackageValue.ToString();
-                
+
                 collectedPackageOnCarSprite.SetActive(false);
                 collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
@@ -58,13 +56,12 @@ public class DeliveryController : MonoBehaviour
 
                 UpdateMinimap(mailbox);
 
-                // Remove obstacle and open path to next Node
-                mailbox.OpenToNextNode();
+                mailbox.Complete();
 
                 mailboxSpriteRenderer.color = correctDeliverdColor;
 
             }
-            else
+            else if (!mailbox.isComplete)
             {
                 Debug.Log("Package Wrong Delivered");
                 SpriteRenderer minimapNodeSpriteRenderer = mailbox.minimapNode.GetComponent<SpriteRenderer>();
@@ -92,7 +89,7 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
-   
+
     private void UpdateMinimap(Mailbox mailbox)
     {
         // Update Minimap Node
@@ -134,5 +131,5 @@ public class DeliveryController : MonoBehaviour
         minimapNodeTMPro.text = "";
     }
 
-    
+
 }

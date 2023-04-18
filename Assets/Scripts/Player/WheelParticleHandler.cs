@@ -20,11 +20,6 @@ public class WheelParticleHandler : MonoBehaviour
         particleSystemEmissionModule.rateOverTime = 0;
     }
 
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

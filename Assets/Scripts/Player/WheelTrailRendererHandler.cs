@@ -13,12 +13,7 @@ public class WheelTrailRendererHandler : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
 
         trailRenderer.emitting = false;
-    }
-
-    void Start()
-    {
-
-    }
+    }    
 
     void Update()
     {

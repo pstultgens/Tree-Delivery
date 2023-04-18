@@ -16,28 +16,23 @@ public class CarController : MonoBehaviour
     [SerializeField] public SpriteRenderer carSpriteRenderer;
     [SerializeField] public SpriteRenderer carShadowSpriteRenderer;
 
-
     float accelerationInput = 0;
     float steeringInput = 0;
     float rotationAngle = 0;
     float velocityVsUp = 0;
 
     bool inBoostMode;
-    
+
     Rigidbody2D carRigidbody;
 
     private void Awake()
     {
-        carRigidbody = GetComponent<Rigidbody2D>();       
+        carRigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
         rotationAngle = transform.rotation.eulerAngles.z;
-    }
-
-    void Update()
-    {
     }
 
     private void FixedUpdate()
@@ -52,7 +47,7 @@ public class CarController : MonoBehaviour
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
             StartCoroutine(BoostCoroutine());
-        }       
+        }
     }
 
     private IEnumerator BoostCoroutine()
@@ -156,6 +151,7 @@ public class CarController : MonoBehaviour
 
     public void SetInputVector(Vector2 inputVector)
     {
+
         steeringInput = inputVector.x;
         accelerationInput = inputVector.y;
     }
@@ -166,7 +162,7 @@ public class CarController : MonoBehaviour
     }
 
     public void SetAcceleration(float y)
-    {        
+    {
         accelerationInput = y;
     }
 

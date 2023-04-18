@@ -17,18 +17,15 @@ public class Mailbox : MonoBehaviour
     [SerializeField] public GameObject edgeLeftClosed;
     [SerializeField] public GameObject edgeRightClosed;
 
+    public bool isComplete;
 
-    void Start()
+    public void Complete()
     {
-        
+        isComplete = true;
+        OpenToNextNode();
     }
 
-    void Update()
-    {
-        
-    }
-
-    public void OpenToNextNode()
+    private void OpenToNextNode()
     {
         if (edgeLeftClosed != null)
         {

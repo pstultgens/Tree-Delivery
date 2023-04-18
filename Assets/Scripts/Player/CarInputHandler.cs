@@ -45,12 +45,6 @@ public class CarInputHandler : MonoBehaviour
         playerActions = new PlayerInputActions();
     }
 
-
-    void Update()
-    {       
-
-    }
-
     private void Move(InputAction.CallbackContext context)
     {
         Vector2 inputVector = Vector2.zero;

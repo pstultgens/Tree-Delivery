@@ -9,6 +9,7 @@ TagManager:
   - Boost
   - AI
   - MinimapCamera
+  - UIController
   layers:
   - Default
   - TransparentFX

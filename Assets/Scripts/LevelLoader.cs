@@ -100,7 +100,7 @@ public class LevelLoader : MonoBehaviour
 
     private void PauseGame(InputAction.CallbackContext context)
     {
-        if(pauseMenu == null)
+        if (pauseMenu == null)
         {
             Debug.Log("Pause Menu in LevelLoader not set");
             return;
@@ -131,7 +131,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        
+
         StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
     }
 

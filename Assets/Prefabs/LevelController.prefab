@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 0}
-  randomizePackageValues: 0
-  defaultPackageValues: 
+  randomizePackageValues: 1
+  rangeStart: 1
+  rangeEnd: 100
+  defaultPackageValuesLowToHigh: 
   nodes:
   - {fileID: 0}

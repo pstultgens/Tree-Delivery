@@ -172,7 +172,7 @@ public class LevelLoader : MonoBehaviour
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);
-
+        
         // Load Scene
         SceneManager.LoadScene(levelIndex);
     }

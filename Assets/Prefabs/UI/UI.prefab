@@ -626,7 +626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPackagePrefab: {fileID: 2115991718567306393, guid: 9611436708afc45a1b59d44b97589cfa, type: 3}
   uiPackageWindowGrid: {fileID: 6533167778507357620}
-  allPackages: []
 --- !u!1 &3390315942768426336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,7 +2227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 439333092404982166, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: pauseMenu

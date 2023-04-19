@@ -10,19 +10,20 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] public Transform dropPackageLocation;
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
-    [Header("Hint stats")]
-    [SerializeField] public bool showHintText = true;
+    [Header("Hint stats")]   
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
 
     private Package collectedPackage;
     private int collectedPackageValue;
     private Package[] allPackages;
+    private DifficultyController difficultyController;
 
     private void Awake()
     {
         allPackages = FindObjectsOfType<Package>();
-    }
+        difficultyController = FindObjectOfType<DifficultyController>();
+    }    
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -72,10 +73,13 @@ public class DeliveryController : MonoBehaviour
             else if (!mailbox.isComplete)
             {
                 Debug.Log("Package Wrong Delivered");
+
+                difficultyController.IncreaseWrongDelivery();
+
                 SpriteRenderer minimapNodeSpriteRenderer = mailbox.minimapNode.GetComponent<SpriteRenderer>();
                 TextMeshPro minimapNodeTMPro = mailbox.minimapNode.GetComponentInChildren<TextMeshPro>();
 
-                if (showHintText)
+                if (DifficultyController.showHintWhenWrongDelivered)
                 {
                     StartCoroutine(GiveHintCoroutine(otherTMPro, minimapNodeTMPro, mailbox.correctValue.ToString()));
                 }

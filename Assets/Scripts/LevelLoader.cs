@@ -26,11 +26,14 @@ public class LevelLoader : MonoBehaviour
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
+    private bool isLoadingLevel;
     private PlayerInputActions playerActions;
+    private DifficultyController difficultyController;
 
     private void Awake()
     {
         playerActions = new PlayerInputActions();
+        difficultyController = FindObjectOfType<DifficultyController>();
 
         if (selectedCar != null)
         {
@@ -131,8 +134,70 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        if (isLoadingLevel)
+        {
+            return;
+        }
 
-        StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
+        isLoadingLevel = true;
+        Debug.Log("Load next Level...");
+
+        // When Level Mode is Tutorial, then next level is Test
+        if (LevelModeEnum.Tutorial.Equals(DifficultyController.currentLevelMode))
+        {
+            DifficultyController.currentLevelMode = LevelModeEnum.Test;
+            StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
+            return;
+        }
+
+        // When Level Mode is Test, then first determine difficulty before loading next level.
+        if (LevelModeEnum.Test.Equals(DifficultyController.currentLevelMode))
+        {
+            difficultyController.DetermineDifficulty();
+        }
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("Current level: " + sceneName);
+
+        if (LevelModeEnum.Easy.Equals(DifficultyController.currentLevelMode))
+        {
+
+            if (sceneName == "Test Difficulty Level")
+            {
+                // Load first easy level
+                StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
+            }
+            else
+            {
+                StartCoroutine(LoadLevelCoroutine(DetermineNextLevelName()));
+            }
+
+        }
+        else if (LevelModeEnum.Hard.Equals(DifficultyController.currentLevelMode))
+        {
+
+            if (sceneName == "Test Difficulty Level")
+            {
+                // Load first hard level
+                StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
+            }
+            else
+            {
+                StartCoroutine(LoadLevelCoroutine(DetermineNextLevelName()));
+            }
+        }
+
+        //StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    private string DetermineNextLevelName()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        int onlyIndex = int.Parse(sceneName.Substring(sceneName.Length - 1));
+        string onlyName = sceneName.Substring(0, sceneName.Length - 1);
+        string nextLevel = onlyName + ++onlyIndex;
+        Debug.Log("Determined next level: " + nextLevel);
+        return nextLevel;
     }
 
     public void LoadLevel(int levelIndex)
@@ -172,7 +237,7 @@ public class LevelLoader : MonoBehaviour
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);
-        
+
         // Load Scene
         SceneManager.LoadScene(levelIndex);
     }

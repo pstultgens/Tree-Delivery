@@ -40,7 +40,12 @@ public class Package : MonoBehaviour
     public void Delivered()
     {
         isDelivered = true;
-        uiController.PackageDelivered(Value());
+
+        if (DifficultyController.showUIPackages)
+        {
+            uiController.PackageDelivered(Value());
+        }
+
         this.gameObject.SetActive(false);
     }
 

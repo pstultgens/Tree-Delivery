@@ -10,6 +10,7 @@ TagManager:
   - AI
   - MinimapCamera
   - UIController
+  - DifficultyController
   layers:
   - Default
   - TransparentFX

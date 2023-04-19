@@ -10,42 +10,38 @@ public class LevelController : MonoBehaviour
     [SerializeField] public UIController uiController;
 
     [Header("Level Setup")]
-    [SerializeField] public bool randomizePackageValues;
     [SerializeField] public int rangeStart = 1;
     [SerializeField] public int rangeEnd = 100;
-    [SerializeField] public List<int> defaultPackageValuesLowToHigh; 
+    [SerializeField] public List<int> defaultPackageValuesLowToHigh;
 
     [Header("Add Nodes in BST sorted order")]
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
     private DeliveryController deliveryController;
 
-    private void Awake()
+    void Start()
     {
         deliveryController = GameObject.FindGameObjectWithTag("Player").GetComponent<DeliveryController>();
-    }
 
-    void Start()
-    {    
-        if (randomizePackageValues)
+        if (DifficultyController.randomizePackageValues)
         {
-            UpdateNodes(GenerateUniqueRandomIntegersBasedOnNodes());
+            FillNodes(GenerateUniqueRandomIntegersBasedOnNodes());
         }
         else
         {
-            UpdateNodes(defaultPackageValuesLowToHigh);
+            FillNodes(defaultPackageValuesLowToHigh);
         }
     }
 
     void Update()
     {
         if (deliveryController.AllPackagesDelivered())
-        {
-            LevelComplete();
+        {          
+            levelLoader.LoadNextLevel();
         }
     }
 
-    private void UpdateNodes(List<int> values)
+    private void FillNodes(List<int> values)
     {
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -60,13 +56,19 @@ public class LevelController : MonoBehaviour
             packageTMPro.text = value.ToString();
             mailbox.correctValue = value;
         }
-
-        uiController.ShowUIPackages(values);
+        if (DifficultyController.showUIPackages)
+        {
+            uiController.ShowUIPackages(values);
+        }
+        else
+        {
+            uiController.HideUIPackages();
+        }
     }
 
     private List<int> GenerateUniqueRandomIntegersBasedOnNodes()
     {
-        int count = nodes.Count;      
+        int count = nodes.Count;
 
         List<int> uniqueRandomIntegers = new List<int>();
         HashSet<int> usedIntegers = new HashSet<int>();
@@ -87,16 +89,6 @@ public class LevelController : MonoBehaviour
         uniqueRandomIntegers.Sort((a, b) => a.CompareTo(b));
 
         return uniqueRandomIntegers;
-    }    
-
-    
-
-    private void LevelComplete()
-    {
-        
-            levelLoader.LoadNextLevel();
-        
     }
 
-    
 }

@@ -12,10 +12,17 @@ public class UIController : MonoBehaviour
 
     public void ShowUIPackages(List<int> packageValues)
     {
+        Debug.Log("Show the UI packages");
         for (int i = 0; i < packageValues.Count; i++)
         {
             AddPackageToUI(packageValues[i]);
         }
+    }
+
+    public void HideUIPackages()
+    {
+        Debug.Log("Hide the UI packages");
+        uiPackageWindowGrid.transform.parent.gameObject.SetActive(false);
     }
 
     private void AddPackageToUI(int value)

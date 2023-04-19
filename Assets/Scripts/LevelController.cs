@@ -13,16 +13,16 @@ public class LevelController : MonoBehaviour
     [SerializeField] public bool randomizePackageValues;
     [SerializeField] public int rangeStart = 1;
     [SerializeField] public int rangeEnd = 100;
-    [SerializeField] public List<int> defaultPackageValuesLowToHigh;
+    [SerializeField] public List<int> defaultPackageValuesLowToHigh; 
 
     [Header("Add Nodes in BST sorted order")]
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
-    private Package[] allPackages;
+    private DeliveryController deliveryController;
 
     private void Awake()
     {
-        allPackages = FindObjectsOfType<Package>();
+        deliveryController = GameObject.FindGameObjectWithTag("Player").GetComponent<DeliveryController>();
     }
 
     void Start()
@@ -39,7 +39,7 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        if (AllPackagesDelivered())
+        if (deliveryController.AllPackagesDelivered())
         {
             LevelComplete();
         }
@@ -93,21 +93,10 @@ public class LevelController : MonoBehaviour
 
     private void LevelComplete()
     {
-        if (AllPackagesDelivered())
-        {
+        
             levelLoader.LoadNextLevel();
-        }
+        
     }
 
-    private bool AllPackagesDelivered()
-    {
-        foreach (Package package in allPackages)
-        {
-            if (!package.isDelivered)
-            {
-                return false;
-            }            
-        }
-        return true;
-    }
+    
 }

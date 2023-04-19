@@ -6,15 +6,23 @@ using TMPro;
 public class DeliveryController : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] GameObject collectedPackageOnCarSprite;
-    [SerializeField] Transform dropPackageLocation;
-    [SerializeField] float wrongDeliveryDelay = 2.0f;
+    [SerializeField] public GameObject collectedPackageOnCarSprite;
+    [SerializeField] public Transform dropPackageLocation;
+    [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
+    [Header("Hint stats")]
+    [SerializeField] public bool showHintText = true;
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
 
     private Package collectedPackage;
     private int collectedPackageValue;
+    private Package[] allPackages;
+
+    private void Awake()
+    {
+        allPackages = FindObjectsOfType<Package>();
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -67,10 +75,27 @@ public class DeliveryController : MonoBehaviour
                 SpriteRenderer minimapNodeSpriteRenderer = mailbox.minimapNode.GetComponent<SpriteRenderer>();
                 TextMeshPro minimapNodeTMPro = mailbox.minimapNode.GetComponentInChildren<TextMeshPro>();
 
-                StartCoroutine(GiveHintCoroutine(otherTMPro, minimapNodeTMPro, mailbox.correctValue.ToString()));
+                if (showHintText)
+                {
+                    StartCoroutine(GiveHintCoroutine(otherTMPro, minimapNodeTMPro, mailbox.correctValue.ToString()));
+                }
+
+
                 StartCoroutine(WrongDeliveryColorCoroutine(mailboxSpriteRenderer, minimapNodeSpriteRenderer));
             }
         }
+    }
+
+    public bool AllPackagesDelivered()
+    {
+        foreach (Package package in allPackages)
+        {
+            if (!package.isDelivered)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void DropPackage()

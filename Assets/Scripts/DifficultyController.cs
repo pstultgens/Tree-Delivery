@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DifficultyController : MonoBehaviour
 {
-    [SerializeField] public static LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+    public static LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
     public static bool showAlreadyCorrectValueOnNode;
     public static bool showHintValueWhenWrongDelivered;
     public static bool showHintColorWhenDelivered; // Correct or wrong
@@ -14,8 +14,15 @@ public class DifficultyController : MonoBehaviour
     public static bool randomizeOrderUIPackages;
     public static bool randomizePackageValues;
 
+
+    [SerializeField] public LevelDifficultyEnum _currentLevelDifficulty;
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
     private int countWrongDeliveries = 0;
+
+    void OnValidate()
+    {
+        currentLevelDifficulty = _currentLevelDifficulty;
+    }
 
     private void Awake()
     {
@@ -27,7 +34,7 @@ public class DifficultyController : MonoBehaviour
                 Debug.Log("Set Test Mode stats");
                 showAlreadyCorrectValueOnNode = true;
                 showHintValueWhenWrongDelivered = false;
-                showHintColorWhenDelivered = false;
+                showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;

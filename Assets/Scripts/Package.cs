@@ -6,16 +6,22 @@ using TMPro;
 public class Package : MonoBehaviour
 {
     [SerializeField] public GameObject minimapIcon;
-    [SerializeField] public float pickUpDelay = 1f;
-    [SerializeField] public bool isDelivered;
+    //[SerializeField] public float pickUpDelay = 1f;
+    [SerializeField] public bool isCorrectDelivered;
 
-    private BoxCollider2D boxCollider;
+    //private BoxCollider2D boxCollider;
     private UIController uiController;
+    private GameObject player;
 
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        //boxCollider = GetComponent<BoxCollider2D>();
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public int Value()
@@ -26,7 +32,8 @@ public class Package : MonoBehaviour
 
     public void Pickedup()
     {
-        this.gameObject.SetActive(false);
+        uiController.PackagePickedup(Value());
+        gameObject.SetActive(false);
     }
 
     public void Drop(Vector2 dropLocation)
@@ -34,26 +41,42 @@ public class Package : MonoBehaviour
         transform.position = dropLocation;
         minimapIcon.SetActive(true);
         this.gameObject.SetActive(true);
-        StartCoroutine(PickUpDelayCoroutine());
+        //StartCoroutine(PickUpDelayCoroutine());
     }
 
-    public void Delivered()
+    public void CorrectDelivered()
     {
-        isDelivered = true;
+        isCorrectDelivered = true;
 
-        if (DifficultyController.showUIPackages)
+        if (DifficultyController.showHintUIPackageAndMinimap)
         {
-            uiController.PackageDelivered(Value());
+            uiController.PackageCorrectDelivered(Value());
         }
+        // Set delivered package at players location
+        transform.position = player.transform.position;
 
         this.gameObject.SetActive(false);
     }
 
-    IEnumerator PickUpDelayCoroutine()
+    public void WrongDelivered()
     {
-        boxCollider.enabled = false;
-        yield return new WaitForSeconds(pickUpDelay);
-        boxCollider.enabled = true;
+        isCorrectDelivered = false;
+
+        if (DifficultyController.showHintUIPackageAndMinimap)
+        {
+            uiController.PackageWrongDelivered(Value());
+        }
+        // Set delivered package at players location
+        transform.position = player.transform.position;
+
+        this.gameObject.SetActive(false);
     }
+
+    //IEnumerator PickUpDelayCoroutine()
+    //{
+    //    boxCollider.enabled = false;
+    //    yield return new WaitForSeconds(pickUpDelay);
+    //    boxCollider.enabled = true;
+    //}
 
 }

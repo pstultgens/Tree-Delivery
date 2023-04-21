@@ -5,11 +5,31 @@ using TMPro;
 
 public class UIPackage : MonoBehaviour
 {
-    [SerializeField] GameObject imageGameObject;
+    [SerializeField] GameObject imageCorrectDeliveredGameObject;
+    [SerializeField] GameObject imageWrongDeliveredGameObject;
 
-    public void Delivered()
+    private void Awake()
     {
-        imageGameObject.SetActive(true);
+        imageCorrectDeliveredGameObject.SetActive(false);
+        imageWrongDeliveredGameObject.SetActive(false);
+    }
+
+    public void CorrectDelivered()
+    {
+        imageWrongDeliveredGameObject.SetActive(false);
+        imageCorrectDeliveredGameObject.SetActive(true);
+    }
+
+    public void WrongDelivered()
+    {
+        imageCorrectDeliveredGameObject.SetActive(false);
+        imageWrongDeliveredGameObject.SetActive(true);
+    }
+
+    public void PackagePickedup()
+    {
+        imageCorrectDeliveredGameObject.SetActive(false);
+        imageWrongDeliveredGameObject.SetActive(false);
     }
 
     public int Value()

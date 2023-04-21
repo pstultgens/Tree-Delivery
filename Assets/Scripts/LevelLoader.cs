@@ -142,62 +142,27 @@ public class LevelLoader : MonoBehaviour
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
-        // When Level Mode is Tutorial, then next level is Test
-        if (LevelModeEnum.Tutorial.Equals(DifficultyController.currentLevelMode))
+        switch (difficultyController.DetermineDifficulty())
         {
-            DifficultyController.currentLevelMode = LevelModeEnum.Test;
-            StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
-            return;
-        }
-
-        // When Level Mode is Test, then first determine difficulty before loading next level.
-        if (LevelModeEnum.Test.Equals(DifficultyController.currentLevelMode))
-        {
-            difficultyController.DetermineDifficulty();
-        }
-
-        string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log("Current level: " + sceneName);
-
-        if (LevelModeEnum.Easy.Equals(DifficultyController.currentLevelMode))
-        {
-
-            if (sceneName == "Test Difficulty Level")
-            {
-                // Load first easy level
+            case LevelDifficultyEnum.Test:
+                StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
+                break;
+            case LevelDifficultyEnum.Easy1:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
-            }
-            else
-            {
-                StartCoroutine(LoadLevelCoroutine(DetermineNextLevelName()));
-            }
-
-        }
-        else if (LevelModeEnum.Hard.Equals(DifficultyController.currentLevelMode))
-        {
-
-            if (sceneName == "Test Difficulty Level")
-            {
-                // Load first hard level
+                break;
+            case LevelDifficultyEnum.Easy2:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
+                break;
+            case LevelDifficultyEnum.Hard1:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
-            }
-            else
-            {
-                StartCoroutine(LoadLevelCoroutine(DetermineNextLevelName()));
-            }
+                break;
+            case LevelDifficultyEnum.Hard2:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
+                break;
+            default:
+                Debug.LogWarning("Unable to load level by difficulty!");
+                break;
         }
-
-        //StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
-    }
-
-    private string DetermineNextLevelName()
-    {
-        string sceneName = SceneManager.GetActiveScene().name;
-        int onlyIndex = int.Parse(sceneName.Substring(sceneName.Length - 1));
-        string onlyName = sceneName.Substring(0, sceneName.Length - 1);
-        string nextLevel = onlyName + ++onlyIndex;
-        Debug.Log("Determined next level: " + nextLevel);
-        return nextLevel;
     }
 
     public void LoadLevel(int levelIndex)

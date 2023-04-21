@@ -423,7 +423,7 @@ SpriteRenderer:
   m_SortingLayerID: -95882591
   m_SortingLayer: 9
   m_SortingOrder: 15
-  m_Sprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5855,10 +5855,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   driftFactor: 0.97
-  accelerationFactor: 12.5
-  turnFactor: 5
-  maxSpeed: 20
-  boostSpeed: 27.5
+  accelerationFactor: 20
+  turnFactor: 3.5
+  maxSpeed: 15
+  boostSpeed: 22.5
   boostTime: 1
   carSpriteRenderer: {fileID: 2687430654004967469}
   carShadowSpriteRenderer: {fileID: 0}
@@ -5895,6 +5895,11 @@ MonoBehaviour:
   wrongDeliverdColor:
     serializedVersion: 2
     rgba: 4278190335
+  isCollidingWithMailbox: 0
+  isCollidingWithPackage: 0
+  currentCollectedPackage: {fileID: 0}
+  currentCollidingMailbox: {fileID: 0}
+  currentCollidingPackage: {fileID: 0}
 --- !u!114 &2687430653576696441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10884,7 +10889,7 @@ SpriteRenderer:
   m_SortingLayerID: 1040913995
   m_SortingLayer: 6
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

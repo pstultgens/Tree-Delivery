@@ -37,13 +37,37 @@ public class UIController : MonoBehaviour
         allUIPackages.Add(instantiatedUIPackage.GetComponent<UIPackage>());
     }
 
-    public void PackageDelivered(int value)
+    public void PackageCorrectDelivered(int value)
     {
         foreach (UIPackage uiPackage in allUIPackages)
         {
             if (uiPackage.Value() == value)
             {
-                uiPackage.Delivered();
+                uiPackage.CorrectDelivered();
+                return;
+            }
+        }
+    }
+
+    public void PackageWrongDelivered(int value)
+    {
+        foreach (UIPackage uiPackage in allUIPackages)
+        {
+            if (uiPackage.Value() == value)
+            {
+                uiPackage.WrongDelivered();
+                return;
+            }
+        }
+    }
+
+    public void PackagePickedup(int value)
+    {
+        foreach (UIPackage uiPackage in allUIPackages)
+        {
+            if (uiPackage.Value() == value)
+            {
+                uiPackage.PackagePickedup();
                 return;
             }
         }

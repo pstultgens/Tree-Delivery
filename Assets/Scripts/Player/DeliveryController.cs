@@ -10,20 +10,21 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] public Transform dropPackageLocation;
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
-    [Header("Hint stats")]   
-    [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
-    [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
-
-    private Package collectedPackage;
-    private int collectedPackageValue;
-    private Package[] allPackages;
     private DifficultyController difficultyController;
+
+    public bool isCollidingWithMailbox;
+    public bool isCollidingWithPackage;
+
+    public Package currentCollectedPackage;
+    private Package[] allPackages;
+    public Mailbox currentCollidingMailbox;
+    public Package currentCollidingPackage;
 
     private void Awake()
     {
         allPackages = FindObjectsOfType<Package>();
         difficultyController = FindObjectOfType<DifficultyController>();
-    }    
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -32,61 +33,30 @@ public class DeliveryController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        TextMeshPro otherTMPro = other.GetComponentInChildren<TextMeshPro>();
-
-
-        if (other.tag.Equals("Package") && collectedPackage == null)
+        if (other.tag.Equals("Mailbox"))
         {
-            Debug.Log("Package picked up");
-            collectedPackage = other.GetComponent<Package>();
-
-            collectedPackageOnCarSprite.SetActive(true);
-            collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = otherTMPro.text;
-            collectedPackageValue = int.Parse(otherTMPro.text);
-
-            other.GetComponent<Package>().Pickedup();
+            isCollidingWithMailbox = true;
+            currentCollidingMailbox = other.GetComponent<Mailbox>();
         }
 
-        if (other.tag.Equals("Mailbox") && collectedPackage != null)
+        if (other.tag.Equals("Package"))
         {
-            Mailbox mailbox = other.GetComponent<Mailbox>();
-            SpriteRenderer mailboxSpriteRenderer = other.GetComponent<SpriteRenderer>();
+            isCollidingWithPackage = true;
+            currentCollidingPackage = other.GetComponent<Package>();
+        }
+    }
 
-            if (mailbox.correctValue.Equals(collectedPackageValue))
-            {
-                Debug.Log("Package Correct Delivered");
-                otherTMPro.text = collectedPackageValue.ToString();
-
-                collectedPackageOnCarSprite.SetActive(false);
-                collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
-
-                collectedPackage.Delivered();
-                collectedPackage = null;
-
-                UpdateMinimap(mailbox);
-
-                mailbox.Complete();
-
-                mailboxSpriteRenderer.color = correctDeliverdColor;
-
-            }
-            else if (!mailbox.isComplete)
-            {
-                Debug.Log("Package Wrong Delivered");
-
-                difficultyController.IncreaseWrongDelivery();
-
-                SpriteRenderer minimapNodeSpriteRenderer = mailbox.minimapNode.GetComponent<SpriteRenderer>();
-                TextMeshPro minimapNodeTMPro = mailbox.minimapNode.GetComponentInChildren<TextMeshPro>();
-
-                if (DifficultyController.showHintWhenWrongDelivered)
-                {
-                    StartCoroutine(GiveHintCoroutine(otherTMPro, minimapNodeTMPro, mailbox.correctValue.ToString()));
-                }
-
-
-                StartCoroutine(WrongDeliveryColorCoroutine(mailboxSpriteRenderer, minimapNodeSpriteRenderer));
-            }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag.Equals("Mailbox"))
+        {
+            isCollidingWithMailbox = false;
+            currentCollidingMailbox = null;
+        }
+        if (other.tag.Equals("Package"))
+        {
+            isCollidingWithPackage = false;
+            currentCollidingPackage = null;
         }
     }
 
@@ -94,7 +64,7 @@ public class DeliveryController : MonoBehaviour
     {
         foreach (Package package in allPackages)
         {
-            if (!package.isDelivered)
+            if (!package.isCorrectDelivered)
             {
                 return false;
             }
@@ -102,62 +72,139 @@ public class DeliveryController : MonoBehaviour
         return true;
     }
 
-    public void DropPackage()
+    public void DropOrPickupPackage()
     {
-        if (collectedPackage != null)
+        if(currentCollidingPackage == null && currentCollidingMailbox == null && currentCollectedPackage == null)
         {
-            Debug.Log("Drop package");
+            return;
+        }
 
-            Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
-            collectedPackage.Drop(dropLocation);
+        if (currentCollectedPackage != null && !isCollidingWithMailbox)
+        {
+            DropPackage();
+        }
+        else if (currentCollectedPackage == null && isCollidingWithPackage)
+        {
+            PickupPackage();
+        }
+        else if (currentCollectedPackage == null && !currentCollidingMailbox.hasReceivedCorrectPackage && isCollidingWithMailbox && !isCollidingWithPackage)
+        {
+            PickupDeliveredPackage();
+        }
+        else if (currentCollectedPackage != null && isCollidingWithMailbox)
+        {
+            TryToDeliverPackage();
+        }
+    }
+
+    private void PickupPackage()
+    {
+        Debug.Log("Pickup Package");
+
+        currentCollectedPackage = currentCollidingPackage;
+        TextMeshPro packageTMPro = currentCollectedPackage.GetComponentInChildren<TextMeshPro>();
+
+        collectedPackageOnCarSprite.SetActive(true);
+        collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = packageTMPro.text;
+
+        currentCollectedPackage.Pickedup();
+    }
+
+    private void DropPackage()
+    {
+        Debug.Log("Drop package");
+
+        Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
+        currentCollectedPackage.Drop(dropLocation);
+
+        collectedPackageOnCarSprite.SetActive(false);
+        collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
+
+        currentCollectedPackage = null;
+    }
+
+    private void TryToDeliverPackage()
+    {
+        Debug.Log("Try to deliver package");
+
+        int packageValue = currentCollectedPackage.Value();
+
+        if (currentCollidingMailbox.hasReceivedPackage)
+        {
+            return;
+        }
+
+        if (currentCollidingMailbox.correctValue.Equals(packageValue))
+        {
+            Debug.Log("Package Correct Delivered");
 
             collectedPackageOnCarSprite.SetActive(false);
             collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
-            collectedPackage = null;
+            currentCollidingMailbox.CorrectPackageReceived();
+            currentCollectedPackage.CorrectDelivered();
+
+            currentCollectedPackage = null;
         }
-    }
-
-
-    private void UpdateMinimap(Mailbox mailbox)
-    {
-        // Update Minimap Node
-        mailbox.minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
-        mailbox.minimapNode.GetComponentInChildren<TextMeshPro>().text = collectedPackageValue.ToString();
-
-        // Update Minimap Edges
-        if (mailbox.minimapEdgeLeft != null)
+        else if (!currentCollidingMailbox.hasReceivedCorrectPackage)
         {
-            mailbox.minimapEdgeLeft.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
-        }
+            Debug.Log("Package Wrong Delivered");
+            difficultyController.IncreaseWrongDelivery();
 
-        if (mailbox.minimapEdgeRight != null)
+            if (DifficultyController.canPackageBeDeliveredAtWrongNode)
+            {
+                collectedPackageOnCarSprite.SetActive(false);
+                collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
+
+                currentCollidingMailbox.WrongPackageReceived(currentCollectedPackage.Value());
+                currentCollectedPackage.WrongDelivered();
+
+                currentCollectedPackage = null;
+            }
+            else
+            {             
+                if (DifficultyController.showHintValueWhenWrongDelivered)
+                {
+                    StartCoroutine(currentCollidingMailbox.ShowHintValueCoroutine());
+                }
+
+                if (DifficultyController.showHintColorWhenDelivered)
+                {
+                    StartCoroutine(currentCollidingMailbox.WrongDeliveryColorCoroutine());
+                }
+            }            
+        }
+    }
+
+    private void PickupDeliveredPackage()
+    {
+        Debug.Log("Pickup delivered package");
+        Package package = FindPackage(currentCollidingMailbox.receivedPackageValue);
+        package.gameObject.SetActive(true);
+
+        currentCollectedPackage = package;
+
+        TextMeshPro packageTMPro = currentCollectedPackage.GetComponentInChildren<TextMeshPro>();
+
+        collectedPackageOnCarSprite.SetActive(true);
+        collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = packageTMPro.text;
+
+        currentCollidingMailbox.PickupPackage();
+
+        currentCollectedPackage.Pickedup();
+    }
+
+    private Package FindPackage(int value)
+    {
+        for (int i = 0; i < allPackages.Length; i++)
         {
-            mailbox.minimapEdgeRight.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
+            Package package = allPackages[i];
+            if (package.Value().Equals(value))
+            {
+                return package;
+            }
         }
-    }
-
-    IEnumerator WrongDeliveryColorCoroutine(SpriteRenderer spriteRenderer, SpriteRenderer minimapNodeSpriteRenderer)
-    {
-        Color32 defaultMailboxColor = spriteRenderer.color;
-        Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
-
-        spriteRenderer.color = wrongDeliverdColor;
-        minimapNodeSpriteRenderer.color = wrongDeliverdColor;
-
-        yield return new WaitForSeconds(wrongDeliveryDelay);
-
-        spriteRenderer.color = defaultMailboxColor;
-        minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
-    }
-
-    IEnumerator GiveHintCoroutine(TextMeshPro mailboxTMPro, TextMeshPro minimapNodeTMPro, string correctValue)
-    {
-        mailboxTMPro.text = correctValue;
-        minimapNodeTMPro.text = correctValue;
-        yield return new WaitForSeconds(wrongDeliveryDelay);
-        mailboxTMPro.text = "";
-        minimapNodeTMPro.text = "";
+        return null;
     }
 
 

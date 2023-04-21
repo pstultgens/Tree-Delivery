@@ -101,6 +101,6 @@ public class CarInputHandler : MonoBehaviour
 
     private void Drop(InputAction.CallbackContext context)
     {
-        deliveryController.DropPackage();
+        deliveryController.DropOrPickupPackage();
     }
 }

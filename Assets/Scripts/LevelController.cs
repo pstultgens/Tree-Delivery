@@ -55,6 +55,11 @@ public class LevelController : MonoBehaviour
 
             packageTMPro.text = value.ToString();
             mailbox.correctValue = value;
+
+            if (DifficultyController.showAlreadyCorrectValueOnNode)
+            {
+                mailbox.ShowCorrectValue();
+            }
         }
         if (DifficultyController.showUIPackages)
         {

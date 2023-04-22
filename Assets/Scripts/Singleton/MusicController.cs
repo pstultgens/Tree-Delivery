@@ -66,7 +66,7 @@ public class MusicController : Singleton
         buttonSubmitAudioSource.Play();
     }
 
-    public void PlayPickuSFX()
+    public void PlayPickupSFX()
     {
         pickupAudioSource.Play();
     }

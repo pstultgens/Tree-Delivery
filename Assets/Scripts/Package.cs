@@ -34,7 +34,7 @@ public class Package : MonoBehaviour
 
     public void Pickedup()
     {
-        musicController.PlayPickuSFX();
+        musicController.PlayPickupSFX();
 
         uiController.PackagePickedup(Value());
         gameObject.SetActive(false);
@@ -53,7 +53,6 @@ public class Package : MonoBehaviour
     public void CorrectDelivered()
     {        
         isCorrectDelivered = true;
-        musicController.PlayCorrectDeliveredSFX();
 
         if (DifficultyController.showHintUIPackageAndMinimap)
         {

@@ -9,15 +9,10 @@ public class UIEventTrigger : EventTrigger
 
     private void Start()
     {
-            musicController = FindObjectOfType<MusicController>();
+        musicController = FindObjectOfType<MusicController>();
     }
 
-    public override void OnPointerEnter(PointerEventData data)
-    {
-        musicController.PlayMenuNavigationSFX();
-    }
-
-    public override void OnSelect(BaseEventData data)
+    public override void OnDeselect(BaseEventData data)
     {
         musicController.PlayMenuNavigationSFX();
     }

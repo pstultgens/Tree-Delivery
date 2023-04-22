@@ -30,6 +30,8 @@ public class Mailbox : MonoBehaviour
     private TextMeshPro minimapNodeTextMeshPro;
     private SpriteRenderer minimapNodeSpriteRenderer;
 
+    private MusicController musicController;
+
 
     private void Awake()
     {
@@ -38,7 +40,9 @@ public class Mailbox : MonoBehaviour
 
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
         minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
-    }
+
+        musicController = FindAnyObjectByType<MusicController>
+();    }
 
     public void ShowCorrectValue()
     {
@@ -66,6 +70,7 @@ public class Mailbox : MonoBehaviour
 
         if (DifficultyController.showHintColorWhenDelivered)
         {
+            musicController.PlayCorrectDeliveredSFX();
             spriteRenderer.color = correctDeliverdColor;
         }
 

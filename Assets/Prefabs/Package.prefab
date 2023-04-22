@@ -268,7 +268,6 @@ GameObject:
   - component: {fileID: 5933653308523958303}
   - component: {fileID: 5933653308523958296}
   - component: {fileID: 8598804241306349614}
-  - component: {fileID: 1426192284201444544}
   m_Layer: 0
   m_Name: Package
   m_TagString: Package
@@ -334,21 +333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapIcon: {fileID: 5807231385882173286}
   isCorrectDelivered: 0
---- !u!114 &1426192284201444544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5933653308523958302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2aab06ce16e4b17b221d84715887f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: e69075b6cfc2d4958a0ec60a88fd55de, type: 2}
-  pickupAudioSource: {fileID: 0}
-  dropAudioSource: {fileID: 0}
 --- !u!1 &5933653309465691454
 GameObject:
   m_ObjectHideFlags: 0

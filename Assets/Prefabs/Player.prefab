@@ -5889,12 +5889,6 @@ MonoBehaviour:
   collectedPackageOnCarSprite: {fileID: 2687430653085865048}
   dropPackageLocation: {fileID: 2687430653836382434}
   wrongDeliveryDelay: 3
-  correctDeliverdColor:
-    serializedVersion: 2
-    rgba: 4278255421
-  wrongDeliverdColor:
-    serializedVersion: 2
-    rgba: 4278190335
   isCollidingWithMailbox: 0
   isCollidingWithPackage: 0
   currentCollectedPackage: {fileID: 0}

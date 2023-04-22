@@ -14,11 +14,16 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerEnter(PointerEventData data)
     {
-        musicController.PlayMenuNavigationSound();
+        musicController.PlayMenuNavigationSFX();
     }
 
     public override void OnSelect(BaseEventData data)
     {
-        musicController.PlayMenuNavigationSound();
+        musicController.PlayMenuNavigationSFX();
+    }
+
+    public override void OnSubmit(BaseEventData data)
+    {
+        musicController.PlayButtonSubmitSFX();
     }
 }

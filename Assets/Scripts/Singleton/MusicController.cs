@@ -13,6 +13,7 @@ public class MusicController : Singleton
     [SerializeField] public AudioSource menuAudioSource;
     [SerializeField] public AudioSource levelAudioSource;
     [SerializeField] public AudioSource menuNavigationAudioSource;
+    [SerializeField] public AudioSource buttonSubmitAudioSource;
 
     void Start()
     {
@@ -46,9 +47,14 @@ public class MusicController : Singleton
         }
     }
 
-    public void PlayMenuNavigationSound()
+    public void PlayMenuNavigationSFX()
     {
         menuNavigationAudioSource.Play();
 
+    }
+
+    public void PlayButtonSubmitSFX()
+    {
+        buttonSubmitAudioSource.Play();
     }
 }

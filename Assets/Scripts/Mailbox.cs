@@ -31,6 +31,7 @@ public class Mailbox : MonoBehaviour
     private SpriteRenderer minimapNodeSpriteRenderer;
 
     private MusicController musicController;
+    private DifficultyController difficultyController;
 
 
     private void Awake()
@@ -41,17 +42,25 @@ public class Mailbox : MonoBehaviour
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
         minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
 
-        musicController = FindAnyObjectByType<MusicController>
-();    }
+        musicController = FindAnyObjectByType<MusicController>();
+        difficultyController = FindAnyObjectByType<DifficultyController>();
+    }
 
     public void ShowCorrectValue()
     {
         textMeshPro.text = correctValue.ToString();
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
+    }
+
+    public void ShowHintCorrectValue()
+    {
+        textMeshPro.text = correctValue.ToString();
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0.6f);
     }
 
     public void HideValue()
     {
-        textMeshPro.text = "";
+        textMeshPro.text = "?";
     }
 
     public void PickupPackage()
@@ -68,7 +77,7 @@ public class Mailbox : MonoBehaviour
         receivedPackageValue = correctValue;
         ShowCorrectValue();
 
-        if (DifficultyController.showHintColorWhenDelivered)
+        if (difficultyController.showHintColorWhenDelivered)
         {
             musicController.PlayCorrectDeliveredSFX();
             spriteRenderer.color = correctDeliverdColor;
@@ -91,7 +100,7 @@ public class Mailbox : MonoBehaviour
         // Update Minimap Node
         minimapNode.GetComponentInChildren<TextMeshPro>().text = correctValue.ToString();
 
-        if (DifficultyController.showHintUIPackageAndMinimap)
+        if (difficultyController.showHintUIPackageAndMinimap)
         {
             minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
 
@@ -143,6 +152,6 @@ public class Mailbox : MonoBehaviour
         minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
         HideValue();
-        minimapNodeTextMeshPro.text = "";
+        minimapNodeTextMeshPro.text = "?";
     }
 }

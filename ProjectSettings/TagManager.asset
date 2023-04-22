@@ -58,10 +58,13 @@ TagManager:
   - name: PowerUps
     uniqueID: 571518887
     locked: 0
+  - name: Mailbox
+    uniqueID: 2474154763
+    locked: 0
   - name: Skidmarks
     uniqueID: 693075757
     locked: 0
-  - name: Delivery
+  - name: Package
     uniqueID: 676648329
     locked: 0
   - name: Player

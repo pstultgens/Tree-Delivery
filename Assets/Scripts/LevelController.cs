@@ -18,12 +18,14 @@ public class LevelController : MonoBehaviour
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
     private DeliveryController deliveryController;
+    private DifficultyController difficultyController;
 
     void Start()
     {
         deliveryController = GameObject.FindGameObjectWithTag("Player").GetComponent<DeliveryController>();
+        difficultyController = FindAnyObjectByType<DifficultyController>();
 
-        if (DifficultyController.randomizePackageValues)
+        if (difficultyController.randomizePackageValues)
         {
             FillNodes(GenerateUniqueRandomIntegersBasedOnNodes());
         }
@@ -56,12 +58,12 @@ public class LevelController : MonoBehaviour
             packageTMPro.text = value.ToString();
             mailbox.correctValue = value;
 
-            if (DifficultyController.showAlreadyCorrectValueOnNode)
+            if (difficultyController.showAlreadyCorrectValueOnNode)
             {
-                mailbox.ShowCorrectValue();
+                mailbox.ShowHintCorrectValue();
             }
         }
-        if (DifficultyController.showUIPackages)
+        if (difficultyController.showUIPackages)
         {
             uiController.ShowUIPackages(values);
         }

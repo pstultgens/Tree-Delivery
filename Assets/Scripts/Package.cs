@@ -12,6 +12,7 @@ public class Package : MonoBehaviour
     //private BoxCollider2D boxCollider;
     private UIController uiController;
     private MusicController musicController;
+    private DifficultyController difficultyController;
     private GameObject player;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class Package : MonoBehaviour
         //boxCollider = GetComponent<BoxCollider2D>();
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
         musicController = FindAnyObjectByType<MusicController>();
+        difficultyController = FindAnyObjectByType<DifficultyController>();
     }
 
     private void Start()
@@ -46,15 +48,15 @@ public class Package : MonoBehaviour
 
         transform.position = dropLocation;
         minimapIcon.SetActive(true);
-        gameObject.SetActive(true);        
+        gameObject.SetActive(true);
         //StartCoroutine(PickUpDelayCoroutine());
     }
 
     public void CorrectDelivered()
-    {        
+    {
         isCorrectDelivered = true;
 
-        if (DifficultyController.showHintUIPackageAndMinimap)
+        if (difficultyController.showHintUIPackageAndMinimap)
         {
             uiController.PackageCorrectDelivered(Value());
         }
@@ -68,7 +70,7 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = false;
 
-        if (DifficultyController.showHintUIPackageAndMinimap)
+        if (difficultyController.showHintUIPackageAndMinimap)
         {
             uiController.PackageWrongDelivered(Value());
         }

@@ -151,7 +151,7 @@ public class DeliveryController : MonoBehaviour
             Debug.Log("Package Wrong Delivered");
             difficultyController.IncreaseWrongDelivery();
 
-            if (DifficultyController.canPackageBeDeliveredAtWrongNode)
+            if (difficultyController.canPackageBeDeliveredAtWrongNode)
             {
                 collectedPackageOnCarSprite.SetActive(false);
                 collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
@@ -163,12 +163,12 @@ public class DeliveryController : MonoBehaviour
             }
             else
             {             
-                if (DifficultyController.showHintValueWhenWrongDelivered)
+                if (difficultyController.showHintValueWhenWrongDelivered)
                 {
                     StartCoroutine(currentCollidingMailbox.ShowHintValueCoroutine());
                 }
 
-                if (DifficultyController.showHintColorWhenDelivered)
+                if (difficultyController.showHintColorWhenDelivered)
                 {                    
                     StartCoroutine(currentCollidingMailbox.WrongDeliveryColorCoroutine());
                 }

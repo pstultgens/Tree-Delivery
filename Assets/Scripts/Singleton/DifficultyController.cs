@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DifficultyController : Singleton
 {
-    private static LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
-    public static bool showAlreadyCorrectValueOnNode;
-    public static bool showHintValueWhenWrongDelivered;
-    public static bool showHintColorWhenDelivered; // Correct or wrong
-    public static bool showHintUIPackageAndMinimap;
-    public static bool canPackageBeDeliveredAtWrongNode;
-    public static bool showUIPackages;
-    public static bool randomizeOrderUIPackages;
-    public static bool randomizePackageValues;
+    [SerializeField] public LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+    [SerializeField] public bool showAlreadyCorrectValueOnNode;
+    [SerializeField] public bool showHintValueWhenWrongDelivered;
+    [SerializeField] public bool showHintColorWhenDelivered; // Correct or wrong
+    [SerializeField] public bool showHintUIPackageAndMinimap;
+    [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
+    [SerializeField] public bool showUIPackages;
+    [SerializeField] public bool randomizeOrderUIPackages;
+    [SerializeField] public bool randomizePackageValues;
 
 
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
@@ -21,7 +21,7 @@ public class DifficultyController : Singleton
     private void Start()
     {
         UpdateDifficultyStats();
-    }    
+    }
 
     public void IncreaseWrongDelivery()
     {
@@ -39,7 +39,7 @@ public class DifficultyController : Singleton
             case LevelDifficultyEnum.Test:
                 if (countWrongDeliveries > acceptableNumberOfWrongDeliveries)
                 {
-                    currentLevelDifficulty = LevelDifficultyEnum.Easy1;                    
+                    currentLevelDifficulty = LevelDifficultyEnum.Easy1;
                 }
                 else
                 {
@@ -59,13 +59,13 @@ public class DifficultyController : Singleton
         Debug.Log("Next Determined Level Difficulty: " + currentLevelDifficulty.ToString());
 
         UpdateDifficultyStats();
-        
+
         return currentLevelDifficulty;
     }
 
     private void UpdateDifficultyStats()
     {
-        Debug.Log("Update Difficulty Stats");       
+        Debug.Log("Update Difficulty Stats");
 
         switch (currentLevelDifficulty)
         {
@@ -85,9 +85,9 @@ public class DifficultyController : Singleton
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = false;
-                canPackageBeDeliveredAtWrongNode = true;
-                showUIPackages = false;
+                showHintUIPackageAndMinimap = true;
+                canPackageBeDeliveredAtWrongNode = false;
+                showUIPackages = true;
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
                 break;
@@ -104,13 +104,13 @@ public class DifficultyController : Singleton
                 break;
             case LevelDifficultyEnum.Easy2:
                 Debug.Log("Set Easy 2 Mode stats");
-                showAlreadyCorrectValueOnNode = true;
+                showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = false;
+                randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
                 break;
             case LevelDifficultyEnum.Hard1:

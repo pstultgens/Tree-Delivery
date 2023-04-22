@@ -11,12 +11,14 @@ public class Package : MonoBehaviour
 
     //private BoxCollider2D boxCollider;
     private UIController uiController;
+    private MusicController musicController;
     private GameObject player;
 
     private void Awake()
     {
         //boxCollider = GetComponent<BoxCollider2D>();
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+        musicController = FindAnyObjectByType<MusicController>();
     }
 
     private void Start()
@@ -32,15 +34,19 @@ public class Package : MonoBehaviour
 
     public void Pickedup()
     {
+        musicController.PlayPickuSFX();
+
         uiController.PackagePickedup(Value());
         gameObject.SetActive(false);
     }
 
     public void Drop(Vector2 dropLocation)
     {
+        musicController.PlayDropSFX();
+
         transform.position = dropLocation;
         minimapIcon.SetActive(true);
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);        
         //StartCoroutine(PickUpDelayCoroutine());
     }
 

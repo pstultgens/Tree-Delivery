@@ -9,15 +9,22 @@ public class MusicController : Singleton
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
-    [Header("Audio sources")]
-    [SerializeField] public AudioSource menuAudioSource;
+    [Header("Game Music Audio sources")]   
     [SerializeField] public AudioSource levelAudioSource;
+
+    [Header("Menu Audio sources")]
+    [SerializeField] public AudioSource menuAudioSource;
     [SerializeField] public AudioSource menuNavigationAudioSource;
     [SerializeField] public AudioSource buttonSubmitAudioSource;
 
+    [Header("SFX Audio sources")]
+    [SerializeField] public AudioSource pickupAudioSource;
+    [SerializeField] public AudioSource dropAudioSource;
+
+
     void Start()
     {
-        audioMixer.SetFloat("MusicVolume", -6f);
+        audioMixer.SetFloat("MusicVolume", -10f);
         audioMixer.SetFloat("UIVolume", 0f);
     }
 
@@ -56,5 +63,15 @@ public class MusicController : Singleton
     public void PlayButtonSubmitSFX()
     {
         buttonSubmitAudioSource.Play();
+    }
+
+    public void PlayPickuSFX()
+    {
+        pickupAudioSource.Play();
+    }
+
+    public void PlayDropSFX()
+    {
+        dropAudioSource.Play();
     }
 }

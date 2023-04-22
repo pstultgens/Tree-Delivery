@@ -51,8 +51,9 @@ public class Package : MonoBehaviour
     }
 
     public void CorrectDelivered()
-    {
+    {        
         isCorrectDelivered = true;
+        musicController.PlayCorrectDeliveredSFX();
 
         if (DifficultyController.showHintUIPackageAndMinimap)
         {

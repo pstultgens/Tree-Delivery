@@ -17,9 +17,10 @@ public class MusicController : Singleton
     [SerializeField] public AudioSource menuNavigationAudioSource;
     [SerializeField] public AudioSource buttonSubmitAudioSource;
 
-    [Header("SFX Audio sources")]
+    [Header("Package SFX Audio sources")]
     [SerializeField] public AudioSource pickupAudioSource;
     [SerializeField] public AudioSource dropAudioSource;
+    [SerializeField] public AudioSource correctDeliveredAudioSource;
 
 
     void Start()
@@ -73,5 +74,10 @@ public class MusicController : Singleton
     public void PlayDropSFX()
     {
         dropAudioSource.Play();
+    }
+
+    public void PlayCorrectDeliveredSFX()
+    {
+        correctDeliveredAudioSource.Play();
     }
 }

@@ -25,7 +25,7 @@ public class CarSfxHandler : MonoBehaviour
 
     void Start()
     {
-        audioMixer.SetFloat("SFXVolume", 0f);        
+        audioMixer.SetFloat("SFXVolume", -2f);        
     }
 
     void Update()

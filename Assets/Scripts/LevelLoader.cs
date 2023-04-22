@@ -111,6 +111,7 @@ public class LevelLoader : MonoBehaviour
 
         // Mute audio when paused
         audioMixer.SetFloat("SFXVolume", -80f);
+        audioMixer.SetFloat("MusicVolume", -80f);
 
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
@@ -120,6 +121,8 @@ public class LevelLoader : MonoBehaviour
     {
         // Resume audio when resuming
         audioMixer.SetFloat("SFXVolume", 0f);
+        audioMixer.SetFloat("MusicVolume", -6f);
+
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }

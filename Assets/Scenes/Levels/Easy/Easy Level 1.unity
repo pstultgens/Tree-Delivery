@@ -43508,11 +43508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4812683332753349292, guid: 92e45ea9568b24d82baaf82473aab298, type: 3}
       propertyPath: defaultPackageValuesLowToHigh.Array.data[0]
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4812683332753349292, guid: 92e45ea9568b24d82baaf82473aab298, type: 3}
       propertyPath: defaultPackageValuesLowToHigh.Array.data[1]
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4812683332753349292, guid: 92e45ea9568b24d82baaf82473aab298, type: 3}
       propertyPath: defaultPackageValuesLowToHigh.Array.data[2]

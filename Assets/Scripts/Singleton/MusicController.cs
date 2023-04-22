@@ -21,6 +21,7 @@ public class MusicController : Singleton
     [SerializeField] public AudioSource pickupAudioSource;
     [SerializeField] public AudioSource dropAudioSource;
     [SerializeField] public AudioSource correctDeliveredAudioSource;
+    [SerializeField] public AudioSource wrongDeliveredAudioSource;
 
 
     void Start()
@@ -79,5 +80,10 @@ public class MusicController : Singleton
     public void PlayCorrectDeliveredSFX()
     {
         correctDeliveredAudioSource.Play();
+    }
+
+    public void PlayWrongDeliveredSFX()
+    {
+        wrongDeliveredAudioSource.Play();
     }
 }

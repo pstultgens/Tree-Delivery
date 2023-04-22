@@ -123,6 +123,8 @@ public class Mailbox : MonoBehaviour
 
     public IEnumerator WrongDeliveryColorCoroutine()
     {
+        musicController.PlayWrongDeliveredSFX();
+
         Color32 defaultMailboxColor = spriteRenderer.color;
         Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
 

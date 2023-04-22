@@ -169,7 +169,7 @@ public class DeliveryController : MonoBehaviour
                 }
 
                 if (DifficultyController.showHintColorWhenDelivered)
-                {
+                {                    
                     StartCoroutine(currentCollidingMailbox.WrongDeliveryColorCoroutine());
                 }
             }            

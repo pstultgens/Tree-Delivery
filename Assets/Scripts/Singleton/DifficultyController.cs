@@ -9,6 +9,8 @@ public class DifficultyController : Singleton
     [SerializeField] public bool showHintValueWhenWrongDelivered;
     [SerializeField] public bool showHintColorWhenDelivered; // Correct or wrong
     [SerializeField] public bool showHintUIPackageAndMinimap;
+    [SerializeField] public bool showPackageOnMinimap;
+    [SerializeField] public bool showPackageValueOnMinimap;
     [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
     [SerializeField] public bool showUIPackages;
     [SerializeField] public bool randomizeOrderUIPackages;
@@ -75,6 +77,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = true;
@@ -86,6 +90,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = true;
@@ -97,6 +103,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = false;
@@ -108,6 +116,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = true;
@@ -119,6 +129,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = true;
@@ -130,6 +142,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = true;
+                showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizePackageValues = true;
@@ -141,6 +155,8 @@ public class DifficultyController : Singleton
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
                 showHintUIPackageAndMinimap = true;
+                showPackageOnMinimap = false;
+                showPackageValueOnMinimap = false;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = false;
                 randomizePackageValues = true;

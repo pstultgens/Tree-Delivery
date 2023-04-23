@@ -26,6 +26,11 @@ public class Package : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        if (difficultyController.showPackageOnMinimap)
+        {
+            ShowOnMinimap();
+        }
     }
 
     public int Value()
@@ -47,7 +52,7 @@ public class Package : MonoBehaviour
         musicController.PlayDropSFX();
 
         transform.position = dropLocation;
-        minimapIcon.SetActive(true);
+        ShowOnMinimap();
         gameObject.SetActive(true);
         //StartCoroutine(PickUpDelayCoroutine());
     }
@@ -78,6 +83,17 @@ public class Package : MonoBehaviour
         transform.position = player.transform.position;
 
         this.gameObject.SetActive(false);
+    }
+
+    private void ShowOnMinimap()
+    {
+        minimapIcon.SetActive(true);
+
+        if (difficultyController.showPackageValueOnMinimap)
+        {
+            TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
+            minimapIconText.text = Value().ToString();
+        }
     }
 
     //IEnumerator PickUpDelayCoroutine()

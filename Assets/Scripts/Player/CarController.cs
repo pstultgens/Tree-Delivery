@@ -16,18 +16,20 @@ public class CarController : MonoBehaviour
     [SerializeField] public SpriteRenderer carSpriteRenderer;
     [SerializeField] public SpriteRenderer carShadowSpriteRenderer;
 
-    float accelerationInput = 0;
-    float steeringInput = 0;
-    float rotationAngle = 0;
-    float velocityVsUp = 0;
+    private float accelerationInput = 0;
+    private float steeringInput = 0;
+    private float rotationAngle = 0;
+    private float velocityVsUp = 0;
 
-    bool inBoostMode;
+    private bool inBoostMode;
 
-    Rigidbody2D carRigidbody;
+    private Rigidbody2D carRigidbody;
+    private MusicController musicController;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody2D>();
+        musicController = FindAnyObjectByType<MusicController>();
     }
 
     void Start()
@@ -46,6 +48,7 @@ public class CarController : MonoBehaviour
     {
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
+            musicController.PlayBoosterSFX();
             StartCoroutine(BoostCoroutine());
         }
     }

@@ -23,6 +23,10 @@ public class MusicController : Singleton
     [SerializeField] public AudioSource correctDeliveredAudioSource;
     [SerializeField] public AudioSource wrongDeliveredAudioSource;
 
+    [Header("Other SFX Audio sources")]
+    [SerializeField] public AudioSource boosterAudioSource;
+
+
 
     void Start()
     {
@@ -85,5 +89,10 @@ public class MusicController : Singleton
     public void PlayWrongDeliveredSFX()
     {
         wrongDeliveredAudioSource.Play();
+    }
+
+    public void PlayBoosterSFX()
+    {
+        boosterAudioSource.Play();
     }
 }

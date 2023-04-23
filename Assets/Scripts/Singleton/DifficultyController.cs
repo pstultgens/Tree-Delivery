@@ -113,6 +113,17 @@ public class DifficultyController : Singleton
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
                 break;
+            case LevelDifficultyEnum.Easy3:
+                Debug.Log("Set Easy 3 Mode stats");
+                showAlreadyCorrectValueOnNode = false;
+                showHintValueWhenWrongDelivered = true;
+                showHintColorWhenDelivered = true;
+                showHintUIPackageAndMinimap = true;
+                canPackageBeDeliveredAtWrongNode = false;
+                showUIPackages = true;
+                randomizePackageValues = true;
+                randomizeOrderUIPackages = false;
+                break;
             case LevelDifficultyEnum.Hard1:
                 Debug.Log("Set Hard 1 Mode stats");
                 showAlreadyCorrectValueOnNode = false;

@@ -156,6 +156,9 @@ public class LevelLoader : MonoBehaviour
             case LevelDifficultyEnum.Easy2:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
                 break;
+            case LevelDifficultyEnum.Easy3:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
+                break;
             case LevelDifficultyEnum.Hard1:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
                 break;

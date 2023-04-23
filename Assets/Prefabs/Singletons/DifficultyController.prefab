@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c06e23eafe245728108feaef1e4ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyMode: 0
-  showHintWhenWrongDelivered: 1
+  currentLevelDifficulty: 0
+  showAlreadyCorrectValueOnNode: 0
+  showHintValueWhenWrongDelivered: 0
+  showHintColorWhenDelivered: 0
+  showHintUIPackageAndMinimap: 0
+  canPackageBeDeliveredAtWrongNode: 0
+  showUIPackages: 0
+  randomizeOrderUIPackages: 0
   randomizePackageValues: 0
+  acceptableNumberOfWrongDeliveries: 2

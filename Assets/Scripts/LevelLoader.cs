@@ -31,18 +31,21 @@ public class LevelLoader : MonoBehaviour
     private DifficultyController difficultyController;
 
     private void Awake()
-    {
-        playerActions = new PlayerInputActions();
-        difficultyController = FindObjectOfType<DifficultyController>();
-
+    {                
         if (selectedCar != null)
         {
             InstantiatePlayer();
         }
     }
 
+    private void Start()
+    {
+        difficultyController = FindObjectOfType<DifficultyController>();
+    }
+
     private void OnEnable()
     {
+        playerActions = new PlayerInputActions();
         playerActions.Enable();
 
         playerActions.Player.Pause.performed += PauseGame;
@@ -121,7 +124,7 @@ public class LevelLoader : MonoBehaviour
     {
         // Resume audio when resuming
         audioMixer.SetFloat("SFXVolume", 0f);
-        audioMixer.SetFloat("MusicVolume", -6f);
+        audioMixer.SetFloat("MusicVolume", -10f);
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -167,6 +170,7 @@ public class LevelLoader : MonoBehaviour
                 break;
             default:
                 Debug.LogWarning("Unable to load level by difficulty!");
+                BackToMainMenu();
                 break;
         }
     }
@@ -187,6 +191,8 @@ public class LevelLoader : MonoBehaviour
 
         // When Select Level Menu is implemented
         //StartCoroutine(LoadLevelCoroutine("Select Level Menu"));
+        difficultyController.currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FollowCamera : MonoBehaviour
 {
     [SerializeField] public GameObject thingToFollow;
@@ -11,7 +12,8 @@ public class FollowCamera : MonoBehaviour
         if (thingToFollow != null)
         {
             transform.position = thingToFollow.transform.position + new Vector3(0, 0, -10);
-        } else
+        }
+        else
         {
             Debug.Log("Camera thingToFollow is Empty!");
         }

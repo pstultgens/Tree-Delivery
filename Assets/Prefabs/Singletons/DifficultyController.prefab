@@ -49,8 +49,10 @@ MonoBehaviour:
   showHintValueWhenWrongDelivered: 0
   showHintColorWhenDelivered: 0
   showHintUIPackageAndMinimap: 0
+  showPackageOnMinimap: 0
+  showPackageValueOnMinimap: 0
   canPackageBeDeliveredAtWrongNode: 0
   showUIPackages: 0
   randomizeOrderUIPackages: 0
   randomizePackageValues: 0
-  acceptableNumberOfWrongDeliveries: 2
+  acceptableNumberOfWrongDeliveries: 1

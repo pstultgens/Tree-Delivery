@@ -87,7 +87,11 @@ public class DeliveryController : MonoBehaviour
         {
             PickupPackage();
         }
-        else if (currentCollectedPackage == null && !currentCollidingMailbox.hasReceivedCorrectPackage && isCollidingWithMailbox && !isCollidingWithPackage)
+        else if (currentCollectedPackage == null &&
+            !currentCollidingMailbox.hasReceivedCorrectPackage &&
+            currentCollidingMailbox.hasReceivedPackage && 
+            isCollidingWithMailbox &&
+            !isCollidingWithPackage)
         {
             PickupDeliveredPackage();
         }

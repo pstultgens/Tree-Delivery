@@ -80,6 +80,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Minimap"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe6b40f9-75fc-4284-bd85-0efb92bf905e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e5d35a6-004d-494f-9f95-89720525ea2d"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44500d3e-2d68-4904-9421-a25027510390"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af02f5d6-df64-4020-bc8f-fff7d5ba3789"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minimap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -727,6 +769,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_MoveUp = m_Player.FindAction("MoveUp", throwIfNotFound: true);
         m_Player_MoveDown = m_Player.FindAction("MoveDown", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Minimap = m_Player.FindAction("Minimap", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -801,6 +844,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveUp;
     private readonly InputAction m_Player_MoveDown;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Minimap;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -811,6 +855,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @MoveUp => m_Wrapper.m_Player_MoveUp;
         public InputAction @MoveDown => m_Wrapper.m_Player_MoveDown;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Minimap => m_Wrapper.m_Player_Minimap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -838,6 +883,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Minimap.started += instance.OnMinimap;
+            @Minimap.performed += instance.OnMinimap;
+            @Minimap.canceled += instance.OnMinimap;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -860,6 +908,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Minimap.started -= instance.OnMinimap;
+            @Minimap.performed -= instance.OnMinimap;
+            @Minimap.canceled -= instance.OnMinimap;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1008,6 +1059,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMoveUp(InputAction.CallbackContext context);
         void OnMoveDown(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnMinimap(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

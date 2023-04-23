@@ -56,6 +56,8 @@ public class Mailbox : MonoBehaviour
     {
         textMeshPro.text = correctValue.ToString();
         textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0.6f);
+
+        minimapNodeTextMeshPro.text = correctValue.ToString();
     }
 
     public void HideValue()
@@ -152,6 +154,14 @@ public class Mailbox : MonoBehaviour
         minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
         HideValue();
-        minimapNodeTextMeshPro.text = "?";
+
+        if (difficultyController.showAlreadyCorrectValueOnNode)
+        {
+            minimapNodeTextMeshPro.text = correctValue.ToString();
+        }
+        else
+        {
+            minimapNodeTextMeshPro.text = "?";
+        }
     }
 }

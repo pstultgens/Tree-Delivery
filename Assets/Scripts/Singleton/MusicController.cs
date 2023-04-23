@@ -44,6 +44,8 @@ public class MusicController : Singleton
         if (SceneManager.GetActiveScene().name.Equals("Main Menu") ||
             SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
+            audioMixer.SetFloat("MusicVolume", -10f);
+
             levelAudioSource.Stop();
             if (!menuAudioSource.isPlaying)
             {

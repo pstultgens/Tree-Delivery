@@ -16,8 +16,8 @@ public class DifficultyController : Singleton
     [SerializeField] public bool randomizeOrderUIPackages;
     [SerializeField] public bool randomizePackageValues;
 
-
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
+
     private int countWrongDeliveries = 0;
 
     private void Start()
@@ -51,11 +51,14 @@ public class DifficultyController : Singleton
             case LevelDifficultyEnum.Easy1:
                 currentLevelDifficulty = LevelDifficultyEnum.Easy2;
                 break;
+            case LevelDifficultyEnum.Easy2:
+                currentLevelDifficulty = LevelDifficultyEnum.Easy3;
+                break;
             case LevelDifficultyEnum.Hard1:
                 currentLevelDifficulty = LevelDifficultyEnum.Hard2;
                 break;
             default:
-                Debug.LogWarning("Unable to determine difficulty!");
+                Debug.LogWarning("Unable to determine difficulty, back to main menu!");
                 break;
         }
         Debug.Log("Next Determined Level Difficulty: " + currentLevelDifficulty.ToString());

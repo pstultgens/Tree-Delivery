@@ -53,12 +53,10 @@ public class CarController : MonoBehaviour
             return;
         }
 
-        Debug.Log("Shake Camera");
+        // Shake Camera
         float relativeVelocity = other.relativeVelocity.magnitude;
-
         float intensity = relativeVelocity * 0.35f;
-        Debug.Log("Shake Intensity: " + intensity);
-
+        Debug.Log("Shake Camera with intensity: " + intensity);
         CinemachineShake.Instance.ShakeCamera(intensity, 0.2f);
     }
 

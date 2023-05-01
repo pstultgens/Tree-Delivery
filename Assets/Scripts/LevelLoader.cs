@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using Cinemachine;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class LevelLoader : MonoBehaviour
     private bool isLoadingLevel;
     private PlayerInputActions playerActions;
     private DifficultyController difficultyController;
+    private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     private void Awake()
     {                
@@ -90,7 +92,11 @@ public class LevelLoader : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
 
         // Set player as thing to follow for the MainCamera and the MinimapCamera
-        Camera.main.GetComponent<FollowCamera>().thingToFollow = player;
+        //Camera.main.GetComponent<FollowCamera>().thingToFollow = player;
+        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        cinemachineVirtualCamera.Follow = player.transform;
+        cinemachineVirtualCamera.LookAt = player.transform;
+
         GameObject minimapCamera = GameObject.FindGameObjectWithTag("MinimapCamera");
         minimapCamera.GetComponent<FollowCamera>().thingToFollow = player;
     }

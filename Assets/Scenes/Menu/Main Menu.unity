@@ -6145,6 +6145,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 611974909528101202, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: orthographic size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2810408504813003141, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6200,6 +6216,22 @@ PrefabInstance:
     - target: {fileID: 4143323609977291258, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611038, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}

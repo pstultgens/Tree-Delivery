@@ -25,7 +25,5 @@ public class CollisionParticleHandler : MonoBehaviour
 
         float relativeVelocity = other.relativeVelocity.magnitude;
         particleEmissionRate = relativeVelocity * 5f;
-
-        Debug.Log("Emission: " + particleEmissionRate);
     }
 }

@@ -10203,6 +10203,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2407642
+      objectReference: {fileID: 0}
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.024081929
+      objectReference: {fileID: 0}
+    - target: {fileID: 611974909528101293, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.999999
+      objectReference: {fileID: 0}
     - target: {fileID: 2605117346711065346, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: zoomOutFactor
       value: 1.5
@@ -10263,6 +10275,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -25
       objectReference: {fileID: 0}
+    - target: {fileID: 5230891468368481063, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: thingToFollow
+      value: 
+      objectReference: {fileID: 1346390441}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2407642
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.024081929
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611033, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503327485611038, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 2687430652230310857}
+    - target: {fileID: 6203503327485611038, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 2687430652230310857}
     - target: {fileID: 7487626109312039923, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: thingToFollow
       value: 
@@ -44288,6 +44324,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7361895035014830474, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+--- !u!4 &2687430652230310857 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+  m_PrefabInstance: {fileID: 2687430652230310856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3390315943804007291
 PrefabInstance:
   m_ObjectHideFlags: 0

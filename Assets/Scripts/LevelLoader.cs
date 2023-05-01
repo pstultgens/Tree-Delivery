@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using Cinemachine;
+using UnityEngine.EventSystems;
+
 
 public class LevelLoader : MonoBehaviour
 {
@@ -33,7 +35,7 @@ public class LevelLoader : MonoBehaviour
     private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     private void Awake()
-    {                
+    {
         if (selectedCar != null)
         {
             InstantiatePlayer();
@@ -42,8 +44,8 @@ public class LevelLoader : MonoBehaviour
 
     private void Start()
     {
-        difficultyController = FindObjectOfType<DifficultyController>();
-    }
+        difficultyController = FindObjectOfType<DifficultyController>();        
+    }  
 
     private void OnEnable()
     {
@@ -123,6 +125,7 @@ public class LevelLoader : MonoBehaviour
         audioMixer.SetFloat("MusicVolume", -80f);
 
         pauseMenu.SetActive(true);
+
         Time.timeScale = 0f;
     }
 
@@ -133,6 +136,8 @@ public class LevelLoader : MonoBehaviour
         audioMixer.SetFloat("MusicVolume", -10f);
 
         pauseMenu.SetActive(false);
+        
+
         Time.timeScale = 1f;
     }
 

@@ -312,6 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7594771265673672976}
   - component: {fileID: 5048254510781450523}
+  - component: {fileID: 1502986725379489899}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -367,6 +368,14 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!222 &1502986725379489899
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579080606617900559}
+  m_CullTransparentMesh: 1
 --- !u!1 &3284529654512052461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,8 +2042,8 @@ RectTransform:
   m_GameObject: {fileID: 9025034276664056874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6592613934251587058}
   m_Father: {fileID: 5814557633523040960}
@@ -2289,6 +2298,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 4811103010101662201}
+    - target: {fileID: 439333092404982166, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: firstSelectedMenuButton
+      value: 
+      objectReference: {fileID: 9025034276664056874}
     - target: {fileID: 439333092404982167, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_RootOrder
       value: 3

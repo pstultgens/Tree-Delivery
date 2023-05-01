@@ -6161,6 +6161,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 1331112747861937647, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331112747861937647, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: intensity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2810408504813003141, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6232,6 +6240,14 @@ PrefabInstance:
     - target: {fileID: 6203503327485611038, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
       propertyPath: m_Lens.OrthographicSize
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503328145970034, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_AmplitudeGain
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203503328145970034, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_FrequencyGain
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}

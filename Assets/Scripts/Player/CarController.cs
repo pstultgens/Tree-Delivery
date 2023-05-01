@@ -22,6 +22,7 @@ public class CarController : MonoBehaviour
     private float velocityVsUp = 0;
 
     private bool inBoostMode;
+    private bool isAI;
 
     private Rigidbody2D carRigidbody;
     private MusicController musicController;
@@ -30,6 +31,7 @@ public class CarController : MonoBehaviour
     {
         carRigidbody = GetComponent<Rigidbody2D>();
         musicController = FindAnyObjectByType<MusicController>();
+        isAI = GetComponent<CarIAHandler>() != null;
     }
 
     void Start()
@@ -42,6 +44,22 @@ public class CarController : MonoBehaviour
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (isAI)
+        {
+            return;
+        }
+
+        Debug.Log("Shake Camera");
+        float relativeVelocity = other.relativeVelocity.magnitude;
+
+        float intensity = relativeVelocity * 0.35f;
+        Debug.Log("Shake Intensity: " + intensity);
+
+        CinemachineShake.Instance.ShakeCamera(intensity, 0.2f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

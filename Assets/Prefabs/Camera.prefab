@@ -266,6 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6203503327485611033}
   - component: {fileID: 6203503327485611038}
+  - component: {fileID: 1331112747861937647}
   m_Layer: 0
   m_Name: Cinemachine Virtual Camera
   m_TagString: Untagged
@@ -327,6 +328,20 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 6203503328145970039}
+--- !u!114 &1331112747861937647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6203503327485611039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5689cee43f554402ac27c0ef64e5ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 5
+  time: 0.5
 --- !u!1 &6203503328145970036
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 0}
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 1
   m_FrequencyGain: 1

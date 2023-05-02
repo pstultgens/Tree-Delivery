@@ -55,9 +55,9 @@ public class CarController : MonoBehaviour
 
         // Shake Camera
         float relativeVelocity = other.relativeVelocity.magnitude;
-        float intensity = relativeVelocity * 0.35f;
+        float intensity = relativeVelocity * 0.4f;
         Debug.Log("Shake Camera with intensity: " + intensity);
-        CinemachineShake.Instance.ShakeCamera(intensity, 0.2f);
+        CinemachineShake.Instance.ShakeCamera(intensity, 0.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

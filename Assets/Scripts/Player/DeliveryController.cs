@@ -173,12 +173,12 @@ public class DeliveryController : MonoBehaviour
             {             
                 if (DifficultyController.Instance.showHintValueWhenWrongDelivered)
                 {
-                    StartCoroutine(currentCollidingMailbox.ShowHintValueCoroutine());
+                    currentCollidingMailbox.ShowWrongDeliveryHintValue();
                 }
 
                 if (DifficultyController.Instance.showHintColorWhenDelivered)
                 {                    
-                    StartCoroutine(currentCollidingMailbox.WrongDeliveryColorCoroutine());
+                    currentCollidingMailbox.ShowWrongDeliveryHintColor();                                            
                 }
             }            
         }

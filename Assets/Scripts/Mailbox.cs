@@ -20,6 +20,10 @@ public class Mailbox : MonoBehaviour
     [SerializeField] public GameObject edgeLeftClosed;
     [SerializeField] public GameObject edgeRightClosed;
 
+    [Header("VFX")]
+    [SerializeField] public ParticleSystem correctDeliveredVFX;
+    [SerializeField] public ParticleSystem wrongDeliveredVFX;
+
     [Header("SFX Audio sources")]
     [SerializeField] public AudioSource correctDeliveredAudioSource;
     [SerializeField] public AudioSource wrongDeliveredAudioSource;
@@ -27,6 +31,9 @@ public class Mailbox : MonoBehaviour
     public bool hasReceivedCorrectPackage;
     public bool hasReceivedPackage;
     public int receivedPackageValue;
+
+    private bool isWrongDeliveryColorCoroutineRunning;
+    private bool isShowHintValueCoroutineRunning;
 
     private SpriteRenderer spriteRenderer;
     private TextMeshPro textMeshPro;
@@ -57,6 +64,22 @@ public class Mailbox : MonoBehaviour
         minimapNodeTextMeshPro.text = correctValue.ToString();
     }
 
+    public void ShowWrongDeliveryHintValue()
+    {
+        if (!isShowHintValueCoroutineRunning)
+        {
+            StartCoroutine(ShowHintValueCoroutine());
+        }
+    }
+
+    public void ShowWrongDeliveryHintColor()
+    {
+        if (!isWrongDeliveryColorCoroutineRunning)
+        {
+            StartCoroutine(WrongDeliveryColorCoroutine());
+        }
+    }
+
     public void HideValue()
     {
         textMeshPro.text = "?";
@@ -79,6 +102,7 @@ public class Mailbox : MonoBehaviour
         if (DifficultyController.Instance.showHintColorWhenDelivered)
         {
             PlayCorrectDeliveredSFX();
+            PlayCorrectDeliveredVFX();
             spriteRenderer.color = correctDeliverdColor;
         }
 
@@ -129,9 +153,12 @@ public class Mailbox : MonoBehaviour
         }
     }
 
-    public IEnumerator WrongDeliveryColorCoroutine()
+    private IEnumerator WrongDeliveryColorCoroutine()
     {
+        isWrongDeliveryColorCoroutineRunning = true;
+
         PlayWrongDeliveredSFX();
+        PlayWrongDeliveredVFX();
 
         Color32 defaultMailboxColor = spriteRenderer.color;
         Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
@@ -143,10 +170,14 @@ public class Mailbox : MonoBehaviour
 
         spriteRenderer.color = defaultMailboxColor;
         minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
+
+        isWrongDeliveryColorCoroutineRunning = false;
     }
 
-    public IEnumerator ShowHintValueCoroutine()
+    private IEnumerator ShowHintValueCoroutine()
     {
+        isShowHintValueCoroutineRunning = true;
+
         ShowCorrectValue();
         minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
@@ -160,6 +191,18 @@ public class Mailbox : MonoBehaviour
         {
             minimapNodeTextMeshPro.text = "?";
         }
+
+        isShowHintValueCoroutineRunning = false;
+    }
+
+    private void PlayCorrectDeliveredVFX()
+    {
+        correctDeliveredVFX.Play();
+    }
+
+    private void PlayWrongDeliveredVFX()
+    {
+        wrongDeliveredVFX.Play();
     }
 
     private void PlayCorrectDeliveredSFX()

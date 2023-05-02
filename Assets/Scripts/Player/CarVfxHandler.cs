@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CarVfxHandler : MonoBehaviour
 {
-    
-
+    [Header("VFX")]
     [SerializeField] public ParticleSystem collisionVFX;
     [SerializeField] public ParticleSystem pickupPackageVFX;
 

@@ -84,23 +84,25 @@ public class CarController : MonoBehaviour
     {
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
+            inBoostMode = true;
             StartCoroutine(BoostCoroutine());
         }
 
         if (other.tag.Equals("OilTrap") && !inOilTrapMode)
         {
+            inOilTrapMode = true;
             StartCoroutine(OilTrapCoroutine());
         }
 
         if (other.tag.Equals("SpikeTrap") && !inSpikeTrapMode)
         {
+            inSpikeTrapMode = true;
             StartCoroutine(SpikeTrapCoroutine());
         }
     }
 
     private IEnumerator BoostCoroutine()
-    {
-        inBoostMode = true;
+    {        
         maxSpeed = boostSpeed;
         yield return new WaitForSeconds(boostTime);
         maxSpeed = originalMaxSpeed;
@@ -108,8 +110,7 @@ public class CarController : MonoBehaviour
     }
 
     private IEnumerator OilTrapCoroutine()
-    {
-        inOilTrapMode = true;
+    {        
         driftFactor = oilTrapDriftFactor;
         turnFactor = oilTrapTurnFactor;
         yield return new WaitForSeconds(oilTrapTime);
@@ -119,8 +120,7 @@ public class CarController : MonoBehaviour
     }
 
     private IEnumerator SpikeTrapCoroutine()
-    {
-        inSpikeTrapMode = true;
+    {        
         maxSpeed = spikeTrapSpeed;
         turnFactor = spikeTrapTurnFactor;
         yield return new WaitForSeconds(spikeTrapTime);
@@ -143,21 +143,18 @@ public class CarController : MonoBehaviour
         // Limit so we cant go faster than the max speed in the "forward" direction
         if (velocityVsUp > maxSpeed && accelerationInput > 0)
         {
-            Debug.Log("MAX FOWARD");
             return;
         }
 
         // Limit so we cant go faster than the 50% of max speed in the "reverse" direction
         if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
         {
-            Debug.Log("MAX REVERSE");
             return;
         }
 
         // Limit so we cant go faster in any direction while accelerating
         if (carRigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
         {
-            Debug.Log("MAX ANY");
             return;
         }
 

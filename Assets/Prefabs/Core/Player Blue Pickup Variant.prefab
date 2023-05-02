@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
     - target: {fileID: 2687430653576696417, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_Name
-      value: Player Blue Pickup
+      value: Player Blue Pickup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_RootOrder
@@ -58,6 +58,18 @@ PrefabInstance:
     - target: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: turnFactor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: accelerationFactor
+      value: 27.5
       objectReference: {fileID: 0}
     - target: {fileID: 2687430654004967469, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_Sprite

@@ -13,11 +13,11 @@ public class WheelTrailRendererHandler : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
 
         trailRenderer.emitting = false;
-    }    
+    }
 
     void Update()
     {
-        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking) || carController.inOilTrapMode || carController.inSpikeTrapMode)
+        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking) || carController.inOilTrapMode)
         {
             trailRenderer.emitting = true;
         }

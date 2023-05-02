@@ -5,12 +5,7 @@ using UnityEngine.EventSystems;
 
 public class UIEventTrigger : EventTrigger
 {
-    private MusicController musicController;
 
-    private void Start()
-    {
-        musicController = FindObjectOfType<MusicController>();        
-    }
 
     public override void OnSelect(BaseEventData data)
     {
@@ -22,12 +17,12 @@ public class UIEventTrigger : EventTrigger
     {
         Debug.Log("OnDeselect");
         StartCoroutine(Transition(Vector3.one, 0.2f));
-        musicController.PlayMenuNavigationSFX();
+        MusicController.Instance.PlayMenuNavigationSFX();
     }
 
     public override void OnSubmit(BaseEventData data)
     {
-        musicController.PlayButtonSubmitSFX();
+        MusicController.Instance.PlayButtonSubmitSFX();
     }
 
     private IEnumerator Transition(Vector3 newSize, float transitionTime)

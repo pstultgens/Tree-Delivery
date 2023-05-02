@@ -122,6 +122,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &439333092404982164
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 439333091917504616}
   tranistionTime: 1
-  playerPrefab: {fileID: 2687430653576696417, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+  playerYellowPickupPrefab: {fileID: 4404808166535952826, guid: 87ad68b634e6d4c6c934466fe3bf6af9, type: 3}
+  playerRedPickupPrefab: {fileID: 8548987101248584728, guid: b66f988e62a13411e982e32ff6d1976a, type: 3}
+  playerBluePickupPrefab: {fileID: 2536914393385794817, guid: a68b748db388f482f98c22ba02b2f7b0, type: 3}
   spawnPlayerPosition: {fileID: 0}
   carYellowSprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
   carRedSprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}

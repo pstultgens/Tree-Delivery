@@ -10,7 +10,6 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] public Transform dropPackageLocation;
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
-    private DifficultyController difficultyController;
     private CarVfxHandler carVfxHandler;
 
     public bool isCollidingWithMailbox;
@@ -24,7 +23,6 @@ public class DeliveryController : MonoBehaviour
     private void Awake()
     {
         allPackages = FindObjectsOfType<Package>();
-        difficultyController = FindObjectOfType<DifficultyController>();
         carVfxHandler = GetComponent<CarVfxHandler>();
     }
 
@@ -159,9 +157,9 @@ public class DeliveryController : MonoBehaviour
         else if (!currentCollidingMailbox.hasReceivedCorrectPackage)
         {
             Debug.Log("Package Wrong Delivered");
-            difficultyController.IncreaseWrongDelivery();
+            DifficultyController.Instance.IncreaseWrongDelivery();
 
-            if (difficultyController.canPackageBeDeliveredAtWrongNode)
+            if (DifficultyController.Instance.canPackageBeDeliveredAtWrongNode)
             {
                 collectedPackageOnCarSprite.SetActive(false);
                 collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
@@ -173,12 +171,12 @@ public class DeliveryController : MonoBehaviour
             }
             else
             {             
-                if (difficultyController.showHintValueWhenWrongDelivered)
+                if (DifficultyController.Instance.showHintValueWhenWrongDelivered)
                 {
                     StartCoroutine(currentCollidingMailbox.ShowHintValueCoroutine());
                 }
 
-                if (difficultyController.showHintColorWhenDelivered)
+                if (DifficultyController.Instance.showHintColorWhenDelivered)
                 {                    
                     StartCoroutine(currentCollidingMailbox.WrongDeliveryColorCoroutine());
                 }

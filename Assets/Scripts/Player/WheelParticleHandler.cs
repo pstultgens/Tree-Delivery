@@ -27,7 +27,7 @@ public class WheelParticleHandler : MonoBehaviour
         particleEmissionRate = Mathf.Lerp(particleEmissionRate, 0, Time.deltaTime * 5);
         particleSystemEmissionModule.rateOverTime = particleEmissionRate;
 
-        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking) || carController.inOilTrapMode || carController.inSpikeTrapMode)
+        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking) || carController.inSpikeTrapMode)
         {
             // If the car tires are screeching then we will emitt smoke.
             // If the player is braking then emitt a lot of smoke.

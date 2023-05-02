@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using Cinemachine;
-using UnityEngine.EventSystems;
 
 
 public class LevelLoader : MonoBehaviour
@@ -17,12 +16,11 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] public float tranistionTime = 1f;
 
     [Header("Instantiate Player")]
-    [SerializeField] public GameObject playerPrefab;
+    [SerializeField] public GameObject playerYellowPickupPrefab;
+    [SerializeField] public GameObject playerRedPickupPrefab;
+    [SerializeField] public GameObject playerBluePickupPrefab;
     [SerializeField] public Transform spawnPlayerPosition;
-    [SerializeField] public Sprite carYellowSprite;
-    [SerializeField] public Sprite carRedSprite;
-    [SerializeField] public Sprite carBlueSprite;
-
+   
     [Header("Pause Menu")]
     [SerializeField] public GameObject pauseMenu;
 
@@ -31,7 +29,6 @@ public class LevelLoader : MonoBehaviour
 
     private bool isLoadingLevel;
     private PlayerInputActions playerActions;
-    private DifficultyController difficultyController;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     private void Awake()
@@ -41,11 +38,6 @@ public class LevelLoader : MonoBehaviour
             InstantiatePlayer();
         }
     }
-
-    private void Start()
-    {
-        difficultyController = FindObjectOfType<DifficultyController>();        
-    }  
 
     private void OnEnable()
     {
@@ -63,35 +55,41 @@ public class LevelLoader : MonoBehaviour
     // Instantiate player with selected car stats
     private void InstantiatePlayer()
     {
-        CarController carController = playerPrefab.GetComponent<CarController>();
-        SpriteRenderer[] carSriteRenderers = playerPrefab.GetComponentsInChildren<SpriteRenderer>();
+        GameObject selectedCarPrefab = null;
+        CarController carController;
 
         switch (selectedCar)
         {
             case "CarYellow":
+                selectedCarPrefab = playerYellowPickupPrefab;
+                carController = playerYellowPickupPrefab.GetComponent<CarController>();
                 carController.maxSpeed = 15f;
                 carController.accelerationFactor = 20f;
                 carController.turnFactor = 3.5f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-                SetCarSprites(carSriteRenderers, carYellowSprite);
+                          
                 break;
             case "CarRed":
+                selectedCarPrefab = playerRedPickupPrefab;
+                carController = playerRedPickupPrefab.GetComponent<CarController>();
                 carController.maxSpeed = 20f;
                 carController.accelerationFactor = 12.5f;
                 carController.turnFactor = 5f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-                SetCarSprites(carSriteRenderers, carRedSprite);
+              
                 break;
             case "CarBlue":
+                selectedCarPrefab = playerBluePickupPrefab;
+                carController = playerBluePickupPrefab.GetComponent<CarController>();
                 carController.maxSpeed = 10f;
                 carController.accelerationFactor = 27.5f;
                 carController.turnFactor = 2f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-                SetCarSprites(carSriteRenderers, carBlueSprite);
+                
                 break;
         }
 
-        GameObject player = Instantiate(playerPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
+        GameObject player = Instantiate(selectedCarPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
 
         // Set player as thing to follow for the MainCamera and the MinimapCamera
         //Camera.main.GetComponent<FollowCamera>().thingToFollow = player;
@@ -101,15 +99,6 @@ public class LevelLoader : MonoBehaviour
 
         GameObject minimapCamera = GameObject.FindGameObjectWithTag("MinimapCamera");
         minimapCamera.GetComponent<FollowCamera>().thingToFollow = player;
-    }
-
-    // Sets the sprite of the car and minimapIcon
-    private void SetCarSprites(SpriteRenderer[] carSriteRenderers, Sprite sprite)
-    {
-        foreach (SpriteRenderer spriteRenderer in carSriteRenderers)
-        {
-            spriteRenderer.sprite = sprite;
-        }
     }
 
     private void PauseGame(InputAction.CallbackContext context)
@@ -124,6 +113,8 @@ public class LevelLoader : MonoBehaviour
         audioMixer.SetFloat("SFXVolume", -80f);
         audioMixer.SetFloat("MusicVolume", -80f);
 
+        MusicController.Instance.Mute();
+
         pauseMenu.SetActive(true);
 
         Time.timeScale = 0f;
@@ -132,8 +123,7 @@ public class LevelLoader : MonoBehaviour
     public void ResumeGame()
     {
         // Resume audio when resuming
-        audioMixer.SetFloat("SFXVolume", 0f);
-        audioMixer.SetFloat("MusicVolume", -10f);
+        MusicController.Instance.Unmute();
 
         pauseMenu.SetActive(false);
         
@@ -143,6 +133,7 @@ public class LevelLoader : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        MusicController.Instance.Unmute();
         selectedCar = null;
         selectedLevel = null;
         Time.timeScale = 1f;
@@ -159,7 +150,7 @@ public class LevelLoader : MonoBehaviour
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
-        switch (difficultyController.DetermineDifficulty())
+        switch (DifficultyController.Instance.DetermineDifficulty())
         {
             case LevelDifficultyEnum.Test:
                 StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
@@ -202,7 +193,7 @@ public class LevelLoader : MonoBehaviour
 
         // When Select Level Menu is implemented
         //StartCoroutine(LoadLevelCoroutine("Select Level Menu"));
-        difficultyController.currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+        DifficultyController.Instance.currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
 
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
     }

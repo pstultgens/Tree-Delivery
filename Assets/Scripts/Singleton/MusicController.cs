@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class MusicController : Singleton
+public class MusicController : MonoBehaviour
 {
+    public static MusicController Instance { get; private set; }
+
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
@@ -20,6 +22,20 @@ public class MusicController : Singleton
     [Header("Package SFX Audio sources")]
     [SerializeField] public AudioSource pickupAudioSource;
     [SerializeField] public AudioSource dropAudioSource;
+
+    private void Awake()
+    {
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -55,6 +71,20 @@ public class MusicController : Singleton
             }
         }
     }
+
+    public void Mute()
+    {
+        audioMixer.SetFloat("MusicVolume", -80f);
+        audioMixer.SetFloat("SFXVolume", -80f);
+    }
+
+    public void Unmute()
+    {
+        audioMixer.SetFloat("MusicVolume", -10f);
+        audioMixer.SetFloat("UIVolume", 0f);
+        audioMixer.SetFloat("SFXVolume", -2f);
+    }
+
 
     public void PlayMenuNavigationSFX()
     {

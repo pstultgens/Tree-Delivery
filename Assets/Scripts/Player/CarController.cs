@@ -31,7 +31,7 @@ public class CarController : MonoBehaviour
     private float steeringInput = 0;
     private float rotationAngle = 0;
     private float velocityVsUp = 0;
-    
+
     private float originalDriftFactor;
     private float originalTurnFactor;
     private float originalMaxSpeed;
@@ -40,7 +40,7 @@ public class CarController : MonoBehaviour
     private bool isAI;
 
     public bool inOilTrapMode;
-    public bool inSpikeTrapMode;      
+    public bool inSpikeTrapMode;
 
     private Rigidbody2D carRigidbody;
 
@@ -96,7 +96,7 @@ public class CarController : MonoBehaviour
         {
             StartCoroutine(SpikeTrapCoroutine());
         }
-    }    
+    }
 
     private IEnumerator BoostCoroutine()
     {
@@ -131,31 +131,47 @@ public class CarController : MonoBehaviour
 
     private void ApplyEngineForce()
     {
+        // Drag if max speed has changed into less
+        if (originalMaxSpeed > maxSpeed)
+        {
+            carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3f, Time.fixedDeltaTime * 3);
+        }
+
         // Calculate how much "forward" we are going in terms of the direction of our velocity
         velocityVsUp = Vector2.Dot(transform.up, carRigidbody.velocity);
 
         // Limit so we cant go faster than the max speed in the "forward" direction
         if (velocityVsUp > maxSpeed && accelerationInput > 0)
         {
+            Debug.Log("MAX FOWARD");
             return;
         }
 
         // Limit so we cant go faster than the 50% of max speed in the "reverse" direction
         if (velocityVsUp < -maxSpeed * 0.5f && accelerationInput < 0)
         {
+            Debug.Log("MAX REVERSE");
             return;
         }
 
         // Limit so we cant go faster in any direction while accelerating
         if (carRigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
         {
+            Debug.Log("MAX ANY");
             return;
         }
 
         // Apply drag if there is no accelerationInput so the car stops when the player lets go of the accelerator
         if (accelerationInput == 0)
         {
-            carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3f, Time.fixedDeltaTime * 3);
+            if (inOilTrapMode)
+            {
+                carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 1f, Time.fixedDeltaTime * 3);
+            }
+            else
+            {
+                carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3f, Time.fixedDeltaTime * 3);
+            }
         }
         else
         {
@@ -220,7 +236,6 @@ public class CarController : MonoBehaviour
 
     public void SetInputVector(Vector2 inputVector)
     {
-
         steeringInput = inputVector.x;
         accelerationInput = inputVector.y;
     }

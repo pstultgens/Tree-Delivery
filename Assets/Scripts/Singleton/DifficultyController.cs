@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DifficultyController : Singleton
+public class DifficultyController : MonoBehaviour
 {
+    public static DifficultyController Instance { get; private set; }
+
     [SerializeField] public LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
     [SerializeField] public bool showAlreadyCorrectValueOnNode;
     [SerializeField] public bool showHintValueWhenWrongDelivered;
@@ -19,6 +21,20 @@ public class DifficultyController : Singleton
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
 
     private int countWrongDeliveries = 0;
+
+    private void Awake()
+    {
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {

@@ -34,9 +34,6 @@ public class Mailbox : MonoBehaviour
     private TextMeshPro minimapNodeTextMeshPro;
     private SpriteRenderer minimapNodeSpriteRenderer;
 
-    private DifficultyController difficultyController;
-
-
     private void Awake()
     {
         textMeshPro = GetComponentInChildren<TextMeshPro>();
@@ -44,8 +41,6 @@ public class Mailbox : MonoBehaviour
 
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
         minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
-
-        difficultyController = FindAnyObjectByType<DifficultyController>();
     }
 
     public void ShowCorrectValue()
@@ -81,7 +76,7 @@ public class Mailbox : MonoBehaviour
         receivedPackageValue = correctValue;
         ShowCorrectValue();
 
-        if (difficultyController.showHintColorWhenDelivered)
+        if (DifficultyController.Instance.showHintColorWhenDelivered)
         {
             PlayCorrectDeliveredSFX();
             spriteRenderer.color = correctDeliverdColor;
@@ -104,7 +99,7 @@ public class Mailbox : MonoBehaviour
         // Update Minimap Node
         minimapNode.GetComponentInChildren<TextMeshPro>().text = correctValue.ToString();
 
-        if (difficultyController.showHintUIPackageAndMinimap)
+        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
         {
             minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
 
@@ -157,7 +152,7 @@ public class Mailbox : MonoBehaviour
         yield return new WaitForSeconds(wrongDeliveryDelay);
         HideValue();
 
-        if (difficultyController.showAlreadyCorrectValueOnNode)
+        if (DifficultyController.Instance.showAlreadyCorrectValueOnNode)
         {
             minimapNodeTextMeshPro.text = correctValue.ToString();
         }

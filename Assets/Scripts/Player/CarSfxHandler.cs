@@ -22,7 +22,7 @@ public class CarSfxHandler : MonoBehaviour
     CarController carController;
 
     private void Awake()
-    {
+    {        
         carController = GetComponent<CarController>();
     }
 

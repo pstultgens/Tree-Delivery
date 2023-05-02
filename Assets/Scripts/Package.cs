@@ -9,22 +9,18 @@ public class Package : MonoBehaviour
     [SerializeField] public bool isCorrectDelivered;
 
     private UIController uiController;
-    private MusicController musicController;
-    private DifficultyController difficultyController;
     private GameObject player;
 
     private void Awake()
     {
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
-        musicController = FindAnyObjectByType<MusicController>();
-        difficultyController = FindAnyObjectByType<DifficultyController>();
     }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if (difficultyController.showPackageOnMinimap)
+        if (DifficultyController.Instance.showPackageOnMinimap)
         {
             ShowOnMinimap();
         }
@@ -38,7 +34,7 @@ public class Package : MonoBehaviour
 
     public void Pickedup()
     {
-        musicController.PlayPickupSFX();
+        MusicController.Instance.PlayPickupSFX();
 
         uiController.PackagePickedup(Value());
         gameObject.SetActive(false);
@@ -46,7 +42,7 @@ public class Package : MonoBehaviour
 
     public void Drop(Vector2 dropLocation)
     {
-        musicController.PlayDropSFX();
+        MusicController.Instance.PlayDropSFX();
 
         transform.position = dropLocation;
         ShowOnMinimap();
@@ -57,7 +53,7 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = true;
 
-        if (difficultyController.showHintUIPackageAndMinimap)
+        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
         {
             uiController.PackageCorrectDelivered(Value());
         }
@@ -71,7 +67,7 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = false;
 
-        if (difficultyController.showHintUIPackageAndMinimap)
+        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
         {
             uiController.PackageWrongDelivered(Value());
         }
@@ -85,7 +81,7 @@ public class Package : MonoBehaviour
     {
         minimapIcon.SetActive(true);
 
-        if (difficultyController.showPackageValueOnMinimap)
+        if (DifficultyController.Instance.showPackageValueOnMinimap)
         {
             TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
             minimapIconText.text = Value().ToString();

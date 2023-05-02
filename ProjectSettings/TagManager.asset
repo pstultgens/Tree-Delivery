@@ -12,7 +12,8 @@ TagManager:
   - UIController
   - DifficultyController
   - MusicController
-  - Trap
+  - SpikeTrap
+  - OilTrap
   layers:
   - Default
   - TransparentFX
@@ -56,17 +57,17 @@ TagManager:
   - name: Road
     uniqueID: 2919723561
     locked: 0
-  - name: Trap
-    uniqueID: 946880717
+  - name: Mailbox
+    uniqueID: 2474154763
     locked: 0
   - name: PowerUps
     uniqueID: 571518887
     locked: 0
-  - name: Mailbox
-    uniqueID: 2474154763
-    locked: 0
   - name: Skidmarks
     uniqueID: 693075757
+    locked: 0
+  - name: Trap
+    uniqueID: 946880717
     locked: 0
   - name: Package
     uniqueID: 676648329

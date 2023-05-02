@@ -19,6 +19,10 @@ public class CarController : MonoBehaviour
     [SerializeField] public float oilTrapTurnFactor = 10f;
     [SerializeField] public float oilTrapTime = 2f;
 
+    [SerializeField] public float spikeTrapSpeed = 6f;
+    [SerializeField] public float spikeTrapTurnFactor = 2f;
+    [SerializeField] public float spikeTrapTime = 2f;
+
     [Header("Sprites")]
     [SerializeField] public SpriteRenderer carSpriteRenderer;
     [SerializeField] public SpriteRenderer carShadowSpriteRenderer;
@@ -27,10 +31,16 @@ public class CarController : MonoBehaviour
     private float steeringInput = 0;
     private float rotationAngle = 0;
     private float velocityVsUp = 0;
+    
+    private float originalDriftFactor;
+    private float originalTurnFactor;
+    private float originalMaxSpeed;
 
     private bool inBoostMode;
-    public bool inOilTrapMode;
     private bool isAI;
+
+    public bool inOilTrapMode;
+    public bool inSpikeTrapMode;      
 
     private Rigidbody2D carRigidbody;
     private MusicController musicController;
@@ -45,6 +55,10 @@ public class CarController : MonoBehaviour
     void Start()
     {
         rotationAngle = transform.rotation.eulerAngles.z;
+
+        originalDriftFactor = driftFactor;
+        originalTurnFactor = turnFactor;
+        originalMaxSpeed = maxSpeed;
     }
 
     private void FixedUpdate()
@@ -76,39 +90,48 @@ public class CarController : MonoBehaviour
             StartCoroutine(BoostCoroutine());
         }
 
-        if (other.tag.Equals("Trap") && !inOilTrapMode)
+        if (other.tag.Equals("OilTrap") && !inOilTrapMode)
         {
             //musicController.PlayOilTrapSFX();
             StartCoroutine(OilTrapCoroutine());
         }
+
+        if (other.tag.Equals("SpikeTrap") && !inSpikeTrapMode)
+        {
+            //musicController.PlaySpikeTrapSFX();
+            StartCoroutine(SpikeTrapCoroutine());
+        }
+    }    
+
+    private IEnumerator BoostCoroutine()
+    {
+        inBoostMode = true;
+        maxSpeed = boostSpeed;
+        yield return new WaitForSeconds(boostTime);
+        maxSpeed = originalMaxSpeed;
+        inBoostMode = false;
     }
 
     private IEnumerator OilTrapCoroutine()
     {
         inOilTrapMode = true;
-
-        float originalDriftFactor = driftFactor;
         driftFactor = oilTrapDriftFactor;
-
-        float originalTurnFactor = turnFactor;
         turnFactor = oilTrapTurnFactor;
-
-
         yield return new WaitForSeconds(oilTrapTime);
-
         driftFactor = originalDriftFactor;
         turnFactor = originalTurnFactor;
         inOilTrapMode = false;
     }
 
-    private IEnumerator BoostCoroutine()
+    private IEnumerator SpikeTrapCoroutine()
     {
-        inBoostMode = true;
-        float originalMaxSpeed = maxSpeed;
-        maxSpeed = boostSpeed;
-        yield return new WaitForSeconds(boostTime);
+        inSpikeTrapMode = true;
+        maxSpeed = spikeTrapSpeed;
+        turnFactor = spikeTrapTurnFactor;
+        yield return new WaitForSeconds(spikeTrapTime);
         maxSpeed = originalMaxSpeed;
-        inBoostMode = false;
+        turnFactor = originalTurnFactor;
+        inSpikeTrapMode = false;
     }
 
     private void ApplyEngineForce()

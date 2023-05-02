@@ -4789,7 +4789,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4924,10 +4924,14 @@ MonoBehaviour:
   accelerationFactor: 20
   turnFactor: 3.5
   maxSpeed: 15
-  boostSpeed: 25
+  boostSpeed: 20
   boostTime: 1
+  oilTrapDriftFactor: 0.99
+  oilTrapTurnFactor: 7
+  oilTrapTime: 2
   carSpriteRenderer: {fileID: 7862271226491695116}
   carShadowSpriteRenderer: {fileID: 0}
+  inOilTrapMode: 0
 --- !u!114 &3156916313685743698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5046,7 +5050,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 693075757
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Time: 50
   m_Parameters:
@@ -9907,7 +9911,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -10154,7 +10158,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1040913995
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 399f0988c97e24942be8b5dd5b78eba6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10240,7 +10244,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 693075757
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Time: 50
   m_Parameters:
@@ -15135,7 +15139,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

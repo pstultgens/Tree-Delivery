@@ -12,6 +12,7 @@ TagManager:
   - UIController
   - DifficultyController
   - MusicController
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -54,6 +55,9 @@ TagManager:
     locked: 0
   - name: Road
     uniqueID: 2919723561
+    locked: 0
+  - name: Trap
+    uniqueID: 946880717
     locked: 0
   - name: PowerUps
     uniqueID: 571518887

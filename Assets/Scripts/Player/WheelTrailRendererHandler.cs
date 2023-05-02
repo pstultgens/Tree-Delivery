@@ -17,7 +17,7 @@ public class WheelTrailRendererHandler : MonoBehaviour
 
     void Update()
     {
-        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking))
+        if (carController.IsTireScreeching(out float lateralVelocity, out bool isBraking) || carController.inOilTrapMode)
         {
             trailRenderer.emitting = true;
         }

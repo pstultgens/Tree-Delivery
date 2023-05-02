@@ -9,8 +9,15 @@ public class CarController : MonoBehaviour
     [SerializeField] public float accelerationFactor = 30f;
     [SerializeField] public float turnFactor = 3.5f;
     [SerializeField] public float maxSpeed = 20f;
+
+    [Header("Powerup settings")]
     [SerializeField] public float boostSpeed = 30f;
     [SerializeField] public float boostTime = 2f;
+
+    [Header("Trap settings")]
+    [SerializeField] public float oilTrapDriftFactor = 1f;
+    [SerializeField] public float oilTrapTurnFactor = 10f;
+    [SerializeField] public float oilTrapTime = 2f;
 
     [Header("Sprites")]
     [SerializeField] public SpriteRenderer carSpriteRenderer;
@@ -22,6 +29,7 @@ public class CarController : MonoBehaviour
     private float velocityVsUp = 0;
 
     private bool inBoostMode;
+    public bool inOilTrapMode;
     private bool isAI;
 
     private Rigidbody2D carRigidbody;
@@ -67,6 +75,30 @@ public class CarController : MonoBehaviour
             musicController.PlayBoosterSFX();
             StartCoroutine(BoostCoroutine());
         }
+
+        if (other.tag.Equals("Trap") && !inOilTrapMode)
+        {
+            //musicController.PlayOilTrapSFX();
+            StartCoroutine(OilTrapCoroutine());
+        }
+    }
+
+    private IEnumerator OilTrapCoroutine()
+    {
+        inOilTrapMode = true;
+
+        float originalDriftFactor = driftFactor;
+        driftFactor = oilTrapDriftFactor;
+
+        float originalTurnFactor = turnFactor;
+        turnFactor = oilTrapTurnFactor;
+
+
+        yield return new WaitForSeconds(oilTrapTime);
+
+        driftFactor = originalDriftFactor;
+        turnFactor = originalTurnFactor;
+        inOilTrapMode = false;
     }
 
     private IEnumerator BoostCoroutine()

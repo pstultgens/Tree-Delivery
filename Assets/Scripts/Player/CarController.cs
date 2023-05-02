@@ -43,12 +43,10 @@ public class CarController : MonoBehaviour
     public bool inSpikeTrapMode;      
 
     private Rigidbody2D carRigidbody;
-    private MusicController musicController;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody2D>();
-        musicController = FindAnyObjectByType<MusicController>();
         isAI = GetComponent<CarIAHandler>() != null;
     }
 
@@ -86,19 +84,16 @@ public class CarController : MonoBehaviour
     {
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
-            musicController.PlayBoosterSFX();
             StartCoroutine(BoostCoroutine());
         }
 
         if (other.tag.Equals("OilTrap") && !inOilTrapMode)
         {
-            //musicController.PlayOilTrapSFX();
             StartCoroutine(OilTrapCoroutine());
         }
 
         if (other.tag.Equals("SpikeTrap") && !inSpikeTrapMode)
         {
-            //musicController.PlaySpikeTrapSFX();
             StartCoroutine(SpikeTrapCoroutine());
         }
     }    

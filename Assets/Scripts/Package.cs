@@ -6,10 +6,8 @@ using TMPro;
 public class Package : MonoBehaviour
 {
     [SerializeField] public GameObject minimapIcon;
-    //[SerializeField] public float pickUpDelay = 1f;
     [SerializeField] public bool isCorrectDelivered;
 
-    //private BoxCollider2D boxCollider;
     private UIController uiController;
     private MusicController musicController;
     private DifficultyController difficultyController;
@@ -17,7 +15,6 @@ public class Package : MonoBehaviour
 
     private void Awake()
     {
-        //boxCollider = GetComponent<BoxCollider2D>();
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
         musicController = FindAnyObjectByType<MusicController>();
         difficultyController = FindAnyObjectByType<DifficultyController>();
@@ -54,7 +51,6 @@ public class Package : MonoBehaviour
         transform.position = dropLocation;
         ShowOnMinimap();
         gameObject.SetActive(true);
-        //StartCoroutine(PickUpDelayCoroutine());
     }
 
     public void CorrectDelivered()
@@ -95,12 +91,4 @@ public class Package : MonoBehaviour
             minimapIconText.text = Value().ToString();
         }
     }
-
-    //IEnumerator PickUpDelayCoroutine()
-    //{
-    //    boxCollider.enabled = false;
-    //    yield return new WaitForSeconds(pickUpDelay);
-    //    boxCollider.enabled = true;
-    //}
-
 }

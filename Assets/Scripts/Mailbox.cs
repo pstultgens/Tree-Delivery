@@ -20,6 +20,10 @@ public class Mailbox : MonoBehaviour
     [SerializeField] public GameObject edgeLeftClosed;
     [SerializeField] public GameObject edgeRightClosed;
 
+    [Header("SFX Audio sources")]
+    [SerializeField] public AudioSource correctDeliveredAudioSource;
+    [SerializeField] public AudioSource wrongDeliveredAudioSource;
+
     public bool hasReceivedCorrectPackage;
     public bool hasReceivedPackage;
     public int receivedPackageValue;
@@ -30,7 +34,6 @@ public class Mailbox : MonoBehaviour
     private TextMeshPro minimapNodeTextMeshPro;
     private SpriteRenderer minimapNodeSpriteRenderer;
 
-    private MusicController musicController;
     private DifficultyController difficultyController;
 
 
@@ -42,7 +45,6 @@ public class Mailbox : MonoBehaviour
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
         minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
 
-        musicController = FindAnyObjectByType<MusicController>();
         difficultyController = FindAnyObjectByType<DifficultyController>();
     }
 
@@ -81,7 +83,7 @@ public class Mailbox : MonoBehaviour
 
         if (difficultyController.showHintColorWhenDelivered)
         {
-            musicController.PlayCorrectDeliveredSFX();
+            PlayCorrectDeliveredSFX();
             spriteRenderer.color = correctDeliverdColor;
         }
 
@@ -134,7 +136,7 @@ public class Mailbox : MonoBehaviour
 
     public IEnumerator WrongDeliveryColorCoroutine()
     {
-        musicController.PlayWrongDeliveredSFX();
+        PlayWrongDeliveredSFX();
 
         Color32 defaultMailboxColor = spriteRenderer.color;
         Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
@@ -163,5 +165,15 @@ public class Mailbox : MonoBehaviour
         {
             minimapNodeTextMeshPro.text = "?";
         }
+    }
+
+    private void PlayCorrectDeliveredSFX()
+    {
+        correctDeliveredAudioSource.Play();
+    }
+
+    private void PlayWrongDeliveredSFX()
+    {
+        wrongDeliveredAudioSource.Play();
     }
 }

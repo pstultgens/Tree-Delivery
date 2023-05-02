@@ -9,7 +9,7 @@ public class MusicController : Singleton
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
-    [Header("Game Music Audio sources")]   
+    [Header("Game Music Audio sources")]
     [SerializeField] public AudioSource levelAudioSource;
 
     [Header("Menu Audio sources")]
@@ -20,18 +20,12 @@ public class MusicController : Singleton
     [Header("Package SFX Audio sources")]
     [SerializeField] public AudioSource pickupAudioSource;
     [SerializeField] public AudioSource dropAudioSource;
-    [SerializeField] public AudioSource correctDeliveredAudioSource;
-    [SerializeField] public AudioSource wrongDeliveredAudioSource;
-
-    [Header("Other SFX Audio sources")]
-    [SerializeField] public AudioSource boosterAudioSource;
-
-
 
     void Start()
     {
         audioMixer.SetFloat("MusicVolume", -10f);
         audioMixer.SetFloat("UIVolume", 0f);
+        audioMixer.SetFloat("SFXVolume", -2f);
     }
 
     void Update()
@@ -81,20 +75,5 @@ public class MusicController : Singleton
     public void PlayDropSFX()
     {
         dropAudioSource.Play();
-    }
-
-    public void PlayCorrectDeliveredSFX()
-    {
-        correctDeliveredAudioSource.Play();
-    }
-
-    public void PlayWrongDeliveredSFX()
-    {
-        wrongDeliveredAudioSource.Play();
-    }
-
-    public void PlayBoosterSFX()
-    {
-        boosterAudioSource.Play();
     }
 }

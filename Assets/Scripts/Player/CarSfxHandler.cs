@@ -12,6 +12,9 @@ public class CarSfxHandler : MonoBehaviour
     [SerializeField] public AudioSource tireScreechingAudioSource;
     [SerializeField] public AudioSource engineAudioSource;
     [SerializeField] public AudioSource carHitAudioSource;
+    [SerializeField] public AudioSource boosterAudioSource;
+    [SerializeField] public AudioSource spikeTrapAudioSource;
+    [SerializeField] public AudioSource oilTrapAudioSource;
 
     private float enginePitch = 0.5f;
     private float tiresScreechingPitch = 0.5f;
@@ -21,11 +24,6 @@ public class CarSfxHandler : MonoBehaviour
     private void Awake()
     {
         carController = GetComponent<CarController>();
-    }
-
-    void Start()
-    {
-        audioMixer.SetFloat("SFXVolume", -2f);        
     }
 
     void Update()
@@ -70,7 +68,8 @@ public class CarSfxHandler : MonoBehaviour
                 tireScreechingAudioSource.volume = Mathf.Abs(lateralVelocity) * 0.5f;
                 tiresScreechingPitch = Mathf.Abs(lateralVelocity) * 0.1f;
             }
-        } else
+        }
+        else
         {
             // Fade out the tire screech SFX if we are not screeching
             tireScreechingAudioSource.volume = Mathf.Lerp(tireScreechingAudioSource.volume, 0, Time.deltaTime * 10);
@@ -88,8 +87,41 @@ public class CarSfxHandler : MonoBehaviour
 
         if (!carHitAudioSource.isPlaying)
         {
-            carHitAudioSource.Play(); 
+            carHitAudioSource.Play();
+        }
+    }
+       
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Equals("Boost") && !boosterAudioSource.isPlaying)
+        {
+            PlayBoosterSFX();
+        }
+
+        if (other.tag.Equals("SpikeTrap") && !spikeTrapAudioSource.isPlaying)
+        {
+            PlaySpikeTrapSFX();
+        }
+
+        if (other.tag.Equals("OilTrap") && !oilTrapAudioSource.isPlaying)
+        {
+            PlayOilTrapSFX();
         }
     }
 
+    public void PlaySpikeTrapSFX()
+    {
+        spikeTrapAudioSource.Play();
+    }
+
+    public void PlayOilTrapSFX()
+    {
+        oilTrapAudioSource.Play();
+    }
+
+    public void PlayBoosterSFX()
+    {
+        boosterAudioSource.Play();
+    }
 }

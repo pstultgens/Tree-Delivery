@@ -11,6 +11,7 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
     private DifficultyController difficultyController;
+    private CarVfxHandler carVfxHandler;
 
     public bool isCollidingWithMailbox;
     public bool isCollidingWithPackage;
@@ -24,6 +25,7 @@ public class DeliveryController : MonoBehaviour
     {
         allPackages = FindObjectsOfType<Package>();
         difficultyController = FindObjectOfType<DifficultyController>();
+        carVfxHandler = GetComponent<CarVfxHandler>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -103,7 +105,7 @@ public class DeliveryController : MonoBehaviour
 
     private void PickupPackage()
     {
-        Debug.Log("Pickup Package");
+        Debug.Log("Pickup Package");       
 
         currentCollectedPackage = currentCollidingPackage;
         TextMeshPro packageTMPro = currentCollectedPackage.GetComponentInChildren<TextMeshPro>();
@@ -112,17 +114,21 @@ public class DeliveryController : MonoBehaviour
         collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = packageTMPro.text;
 
         currentCollectedPackage.Pickedup();
+
+        carVfxHandler.PlayPickupPackageVFX(dropPackageLocation.position);
     }
 
     private void DropPackage()
     {
-        Debug.Log("Drop package");
-
+        Debug.Log("Drop package");       
+            
         Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
-        currentCollectedPackage.Drop(dropLocation);
+        currentCollectedPackage.Drop(dropLocation);              
 
         collectedPackageOnCarSprite.SetActive(false);
         collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
+
+        carVfxHandler.PlayDropPackageVFX(dropLocation);
 
         currentCollectedPackage = null;
     }

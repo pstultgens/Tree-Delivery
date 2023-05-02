@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6757871321732453415}
   - component: {fileID: 5674160718178999835}
   m_Layer: 0
-  m_Name: ParticleSystemCollision
+  m_Name: CollisionVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,8 +158,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7862271225779100228}
-  m_RootOrder: 2
+  m_Father: {fileID: 7649490981272637821}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6757871321732453415
 ParticleSystem:
@@ -4949,6 +4949,38 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4799860327440757262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7649490981272637821}
+  m_Layer: 7
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7649490981272637821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799860327440757262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7072830558610536929}
+  m_Father: {fileID: 7862271225779100228}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6061919178898933162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,7 +5249,7 @@ GameObject:
   - component: {fileID: 7862271225779100226}
   - component: {fileID: 7862271225779100227}
   - component: {fileID: 7862271225779100230}
-  - component: {fileID: 3156916313685743698}
+  - component: {fileID: 2099065491208819141}
   - component: {fileID: 7862271225779100248}
   - component: {fileID: 7362709789034261529}
   m_Layer: 7
@@ -5240,8 +5272,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7862271226491695117}
+  - {fileID: 7649490981272637821}
   - {fileID: 7862271226972032719}
-  - {fileID: 7072830558610536929}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5320,7 +5352,7 @@ MonoBehaviour:
   carShadowSpriteRenderer: {fileID: 0}
   inOilTrapMode: 0
   inSpikeTrapMode: 0
---- !u!114 &3156916313685743698
+--- !u!114 &2099065491208819141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5329,10 +5361,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7862271225779100224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db3c926b09c84d99afc120ce17d6a49, type: 3}
+  m_Script: {fileID: 11500000, guid: 0701bbc5b386146aebe8063ad6e46e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionParticleSystem: {fileID: 6757871321732453415}
+  collisionVFX: {fileID: 6757871321732453415}
+  pickupPackageVFX: {fileID: 0}
 --- !u!114 &7862271225779100248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10741,7 +10774,7 @@ Transform:
   - {fileID: 3863815595854689571}
   - {fileID: 1216186288771082872}
   m_Father: {fileID: 7862271225779100228}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7862271227049249132
 GameObject:

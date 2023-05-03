@@ -5,6 +5,8 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
+    public static int currentScore;
+
     [SerializeField] public int startScore = 99999;
     [SerializeField] public int scoreDelayAmount = 1;
 
@@ -27,5 +29,6 @@ public class ScoreController : MonoBehaviour
         }
 
         scoringText.text = startScore.ToString();
+        currentScore = startScore;
     }
 }

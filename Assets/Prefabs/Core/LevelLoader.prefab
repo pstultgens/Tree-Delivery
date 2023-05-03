@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &439333091917504623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 55c2be3408cf84b15a40958f841de1c0, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -168,16 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166b3b53f746a491aa30bb318d10e12f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 439333091917504616}
-  tranistionTime: 1
+  fadeTransition: {fileID: 439333091917504616}
+  tranistionTime: 1.1
   playerYellowPickupPrefab: {fileID: 4404808166535952826, guid: 87ad68b634e6d4c6c934466fe3bf6af9, type: 3}
   playerRedPickupPrefab: {fileID: 8548987101248584728, guid: b66f988e62a13411e982e32ff6d1976a, type: 3}
   playerBluePickupPrefab: {fileID: 2536914393385794817, guid: a68b748db388f482f98c22ba02b2f7b0, type: 3}
   spawnPlayerPosition: {fileID: 0}
-  carYellowSprite: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
-  carRedSprite: {fileID: 21300000, guid: c728acffc3b81487f882b9f9d27411b5, type: 3}
-  carBlueSprite: {fileID: 21300000, guid: 0d18f1a4c28c1448283a7119c6e9f839, type: 3}
   pauseMenu: {fileID: 0}
+  levelCompleteWindow: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: e69075b6cfc2d4958a0ec60a88fd55de, type: 2}
 --- !u!1 &439333093159659450
 GameObject:

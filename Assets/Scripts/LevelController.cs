@@ -22,7 +22,7 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         deliveryController = GameObject.FindGameObjectWithTag("Player").GetComponent<DeliveryController>();
-        
+
 
         if (DifficultyController.Instance.randomizePackageValues)
         {
@@ -36,9 +36,17 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        if (deliveryController.AllPackagesDelivered())
-        {          
-            levelLoader.LoadNextLevel();
+        if (deliveryController.allPackagesCorrectDelivered)
+        {
+            if (LevelDifficultyEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
+                || LevelDifficultyEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
+            {
+                levelLoader.LoadNextLevel();
+            }
+            else
+            {
+                levelLoader.ShowLevelComplete();
+            }
         }
     }
 

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using Cinemachine;
+using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class LevelLoader : MonoBehaviour
@@ -12,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     public static string selectedLevel;
     public static string selectedCar;
 
-    [SerializeField] public Animator transition;
+    [SerializeField] public Animator fadeTransition;
     [SerializeField] public float tranistionTime = 1f;
 
     [Header("Instantiate Player")]
@@ -20,14 +22,22 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] public GameObject playerRedPickupPrefab;
     [SerializeField] public GameObject playerBluePickupPrefab;
     [SerializeField] public Transform spawnPlayerPosition;
-   
+
     [Header("Pause Menu")]
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] public GameObject pauseMenuFirstSelectedButton;
+
+    [Header("Level Complete")]
+    [SerializeField] public GameObject levelCompleteWindow;
+    [SerializeField] public GameObject levelCompleteFirstSelectedButton;
+    [SerializeField] public TextMeshProUGUI levelCompleteScoreText;
 
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
     private bool isLoadingLevel;
+    private bool isShowingLevelComplete;
+
     private PlayerInputActions playerActions;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
 
@@ -37,6 +47,8 @@ public class LevelLoader : MonoBehaviour
         {
             InstantiatePlayer();
         }
+
+        MusicController.Instance.Unmute();
     }
 
     private void OnEnable()
@@ -67,7 +79,7 @@ public class LevelLoader : MonoBehaviour
                 carController.accelerationFactor = 20f;
                 carController.turnFactor = 3.5f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-                          
+
                 break;
             case "CarRed":
                 selectedCarPrefab = playerRedPickupPrefab;
@@ -76,7 +88,7 @@ public class LevelLoader : MonoBehaviour
                 carController.accelerationFactor = 12.5f;
                 carController.turnFactor = 5f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-              
+
                 break;
             case "CarBlue":
                 selectedCarPrefab = playerBluePickupPrefab;
@@ -85,7 +97,7 @@ public class LevelLoader : MonoBehaviour
                 carController.accelerationFactor = 27.5f;
                 carController.turnFactor = 2f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
-                
+
                 break;
         }
 
@@ -109,10 +121,16 @@ public class LevelLoader : MonoBehaviour
             return;
         }
 
-        // Mute audio when paused
-        audioMixer.SetFloat("SFXVolume", -80f);
-        audioMixer.SetFloat("MusicVolume", -80f);
+        if (isShowingLevelComplete)
+        {
+            return;
+        }
 
+        // Set UI first selected button
+        EventSystem eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(pauseMenuFirstSelectedButton, new BaseEventData(eventSystem));
+
+        // Mute audio when paused
         MusicController.Instance.Mute();
 
         pauseMenu.SetActive(true);
@@ -126,7 +144,6 @@ public class LevelLoader : MonoBehaviour
         MusicController.Instance.Unmute();
 
         pauseMenu.SetActive(false);
-        
 
         Time.timeScale = 1f;
     }
@@ -140,13 +157,43 @@ public class LevelLoader : MonoBehaviour
         GoToScene("Main Menu");
     }
 
+    public void ShowLevelComplete()
+    {
+        if (isShowingLevelComplete)
+        {
+            return;
+        }
+        isShowingLevelComplete = true;        
+
+        // Set UI first selected button
+        EventSystem eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(levelCompleteFirstSelectedButton, new BaseEventData(eventSystem));
+
+        // Show Level Complete
+        if (levelCompleteWindow == null)
+        {
+            Debug.Log("Level Complete Window in LevelLoader not set");
+            return;
+        }
+        
+        fadeTransition.SetTrigger("Start");
+
+        new WaitForSeconds(tranistionTime);
+
+        levelCompleteWindow.SetActive(true);
+        fadeTransition.SetTrigger("End");
+
+        Time.timeScale = 0f;
+        audioMixer.SetFloat("SFXVolume", -80f);
+    }
+
     public void LoadNextLevel()
     {
         if (isLoadingLevel)
         {
             return;
         }
-
+        Time.timeScale = 1f;
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
@@ -212,7 +259,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevelCoroutine(int levelIndex)
     {
         // Play animation
-        transition.SetTrigger("Start");
+        fadeTransition.SetTrigger("Start");
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);
@@ -224,7 +271,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevelCoroutine(string sceneName)
     {
         // Play animation
-        transition.SetTrigger("Start");
+        fadeTransition.SetTrigger("Start");
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);

@@ -12,6 +12,7 @@ public class DeliveryController : MonoBehaviour
 
     private CarVfxHandler carVfxHandler;
 
+    public bool allPackagesCorrectDelivered;
     public bool isCollidingWithMailbox;
     public bool isCollidingWithPackage;
 
@@ -60,7 +61,7 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
-    public bool AllPackagesDelivered()
+    private bool AllPackagesCorrectDelivered()
     {
         foreach (Package package in allPackages)
         {
@@ -152,6 +153,7 @@ public class DeliveryController : MonoBehaviour
             currentCollidingMailbox.CorrectPackageReceived();
             currentCollectedPackage.CorrectDelivered();
 
+            allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
             currentCollectedPackage = null;
         }
         else if (!currentCollidingMailbox.hasReceivedCorrectPackage)

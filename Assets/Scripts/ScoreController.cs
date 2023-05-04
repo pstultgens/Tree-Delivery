@@ -7,8 +7,12 @@ public class ScoreController : MonoBehaviour
 {
     public static int currentScore;
 
-    [SerializeField] public int startScore = 99999;
+    [SerializeField] public int startScore = 999;
     [SerializeField] public int scoreDelayAmount = 1;
+
+    [SerializeField] public int addScoreFirstTimeCorrectDelivered = 20;
+    [SerializeField] public int removeScoreWrongDelivered = 15;
+
 
     private TextMeshProUGUI scoringText;
     private float timer;
@@ -28,10 +32,10 @@ public class ScoreController : MonoBehaviour
             return;
         }
 
-        DecreaseScore();
+        DecreaseScoreOverTime();
     }
 
-    private void DecreaseScore()
+    private void DecreaseScoreOverTime()
     {
         timer += Time.deltaTime;
 
@@ -43,5 +47,17 @@ public class ScoreController : MonoBehaviour
 
         scoringText.text = startScore.ToString();
         currentScore = startScore;
+    }
+
+    public void AddScorePackageFirstTimeCorrectDelivered()
+    {
+        Debug.Log("Add score: Package first time correct delivered");
+        startScore += addScoreFirstTimeCorrectDelivered;
+    }
+
+    public void RemoveScorePackageWrongDelivered()
+    {
+        Debug.Log("Remove score: Package wrong delivered");
+        startScore -= removeScoreWrongDelivered;
     }
 }

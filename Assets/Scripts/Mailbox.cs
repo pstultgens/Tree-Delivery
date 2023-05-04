@@ -41,13 +41,16 @@ public class Mailbox : MonoBehaviour
     private TextMeshPro minimapNodeTextMeshPro;
     private SpriteRenderer minimapNodeSpriteRenderer;
 
+    
+
+    
     private void Awake()
     {
         textMeshPro = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
-        minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
+        minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();        
     }
 
     public void ShowCorrectValue()

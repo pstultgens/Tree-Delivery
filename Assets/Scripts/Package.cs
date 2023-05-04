@@ -11,9 +11,13 @@ public class Package : MonoBehaviour
     private UIController uiController;
     private GameObject player;
 
+    private ScoreController scoreController;
+    private int timesPackageWrongDeliveredCounter = 0;
+
     private void Awake()
     {
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
+        scoreController = FindObjectOfType<ScoreController>();
     }
 
     private void Start()
@@ -53,6 +57,11 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = true;
 
+        if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
+        {
+            scoreController.AddScorePackageFirstTimeCorrectDelivered();
+        }
+
         if (DifficultyController.Instance.showHintUIPackageAndMinimap)
         {
             uiController.PackageCorrectDelivered(Value());
@@ -77,6 +86,11 @@ public class Package : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    public void AddCounterWrongDelivered()
+    {
+        timesPackageWrongDeliveredCounter++;
+    }
+
     private void ShowOnMinimap()
     {
         minimapIcon.SetActive(true);
@@ -87,4 +101,6 @@ public class Package : MonoBehaviour
             minimapIconText.text = Value().ToString();
         }
     }
+
+
 }

@@ -23,10 +23,13 @@ public class DeliveryController : MonoBehaviour
     public Mailbox currentCollidingMailbox;
     public Package currentCollidingPackage;
 
+    private ScoreController scoreController;
+
     private void Awake()
     {
         allPackages = FindObjectsOfType<Package>();
         carVfxHandler = GetComponent<CarVfxHandler>();
+        scoreController = FindObjectOfType<ScoreController>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -148,7 +151,7 @@ public class DeliveryController : MonoBehaviour
         if (currentCollidingMailbox.correctValue.Equals(packageValue))
         {
             Debug.Log("Package Correct Delivered");
-
+            
             collectedPackageOnCarSprite.SetActive(false);
             collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
@@ -161,6 +164,14 @@ public class DeliveryController : MonoBehaviour
         else if (!currentCollidingMailbox.hasReceivedCorrectPackage)
         {
             Debug.Log("Package Wrong Delivered");
+
+            currentCollectedPackage.AddCounterWrongDelivered();
+
+            if (scoreController != null)
+            {
+                scoreController.RemoveScorePackageWrongDelivered();
+            }
+
             DifficultyController.Instance.IncreaseWrongDelivery();
 
             if (DifficultyController.Instance.canPackageBeDeliveredAtWrongNode)

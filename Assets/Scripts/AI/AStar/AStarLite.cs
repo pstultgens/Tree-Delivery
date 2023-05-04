@@ -6,10 +6,10 @@ using UnityEditor;
 
 public class AStarLite : MonoBehaviour
 {
-    private int gridSizeX = 400;
-    private int gridSizeY = 400;
+    private int gridSizeX = 300;
+    private int gridSizeY = 300;
 
-    private float cellSize = 1f;
+    private float cellSize = 2f;
 
     private AStarNode[,] aStarNodes;
     private AStarNode startNode;
@@ -364,16 +364,16 @@ public class AStarLite : MonoBehaviour
             GUIStyle style = new GUIStyle();
 
             style.normal.textColor = Color.green;
-            Handles.Label(labelPosition + new Vector3(-0.3f, 0.5f, 0), $"{checkedNode.hCostDistanceFromGoal}", style);
+            Handles.Label(labelPosition + new Vector3(-0.75f, 0.75f, 0), $"{checkedNode.hCostDistanceFromGoal}", style);
 
             style.normal.textColor = Color.red;
-            Handles.Label(labelPosition + new Vector3(0.25f, 0.5f, 0), $"{checkedNode.gCostDistanceFromStart}", style);
+            Handles.Label(labelPosition + new Vector3(0.75f, 0.75f, 0), $"{checkedNode.gCostDistanceFromStart}", style);
 
             style.normal.textColor = Color.yellow;
-            Handles.Label(labelPosition + new Vector3(0.25f, -0.25f, 0), $"{checkedNode.pickedOrder}", style);
+            Handles.Label(labelPosition + new Vector3(0.75f, -0.5f, 0), $"{checkedNode.pickedOrder}", style);
 
             style.normal.textColor = Color.white;
-            Handles.Label(labelPosition + new Vector3(0f, 0.1f, 0), $"{checkedNode.fCostTotal}", style);
+            Handles.Label(labelPosition + new Vector3(0f, 0.2f, 0), $"{checkedNode.fCostTotal}", style);
 #endif
         }
 

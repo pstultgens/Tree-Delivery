@@ -17,12 +17,13 @@ public class LevelController : MonoBehaviour
     [Header("Add Nodes in BST sorted order")]
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
+    private bool isInLevelCompleteTransition;
+
     private DeliveryController deliveryController;
 
     void Start()
     {
-        deliveryController = GameObject.FindGameObjectWithTag("Player").GetComponent<DeliveryController>();
-
+        deliveryController = FindObjectOfType<DeliveryController>();
 
         if (DifficultyController.Instance.randomizePackageValues)
         {
@@ -38,6 +39,13 @@ public class LevelController : MonoBehaviour
     {
         if (deliveryController.allPackagesCorrectDelivered)
         {
+            // This should only be once
+            if (isInLevelCompleteTransition)
+            {
+                return;
+            }
+            isInLevelCompleteTransition = true;
+
             if (LevelDifficultyEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
                 || LevelDifficultyEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
             {

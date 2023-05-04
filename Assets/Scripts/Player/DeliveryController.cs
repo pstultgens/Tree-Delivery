@@ -5,16 +5,18 @@ using TMPro;
 
 public class DeliveryController : MonoBehaviour
 {
+   
+
     [Header("Stats")]
     [SerializeField] public GameObject collectedPackageOnCarSprite;
     [SerializeField] public Transform dropPackageLocation;
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
-    private CarVfxHandler carVfxHandler;
-
     public bool allPackagesCorrectDelivered;
     public bool isCollidingWithMailbox;
     public bool isCollidingWithPackage;
+
+    private CarVfxHandler carVfxHandler;
 
     public Package currentCollectedPackage;
     private Package[] allPackages;
@@ -29,7 +31,7 @@ public class DeliveryController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision!");        
+        Debug.Log("Collision!");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -75,7 +77,7 @@ public class DeliveryController : MonoBehaviour
 
     public void DropOrPickupPackage()
     {
-        if(currentCollidingPackage == null && currentCollidingMailbox == null && currentCollectedPackage == null)
+        if (currentCollidingPackage == null && currentCollidingMailbox == null && currentCollectedPackage == null)
         {
             return;
         }
@@ -90,7 +92,7 @@ public class DeliveryController : MonoBehaviour
         }
         else if (currentCollectedPackage == null &&
             !currentCollidingMailbox.hasReceivedCorrectPackage &&
-            currentCollidingMailbox.hasReceivedPackage && 
+            currentCollidingMailbox.hasReceivedPackage &&
             isCollidingWithMailbox &&
             !isCollidingWithPackage)
         {
@@ -104,7 +106,7 @@ public class DeliveryController : MonoBehaviour
 
     private void PickupPackage()
     {
-        Debug.Log("Pickup Package");       
+        Debug.Log("Pickup Package");
 
         currentCollectedPackage = currentCollidingPackage;
         TextMeshPro packageTMPro = currentCollectedPackage.GetComponentInChildren<TextMeshPro>();
@@ -119,10 +121,10 @@ public class DeliveryController : MonoBehaviour
 
     private void DropPackage()
     {
-        Debug.Log("Drop package");       
-            
+        Debug.Log("Drop package");
+
         Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
-        currentCollectedPackage.Drop(dropLocation);              
+        currentCollectedPackage.Drop(dropLocation);
 
         collectedPackageOnCarSprite.SetActive(false);
         collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
@@ -172,17 +174,17 @@ public class DeliveryController : MonoBehaviour
                 currentCollectedPackage = null;
             }
             else
-            {             
+            {
                 if (DifficultyController.Instance.showHintValueWhenWrongDelivered)
                 {
                     currentCollidingMailbox.ShowWrongDeliveryHintValue();
                 }
 
                 if (DifficultyController.Instance.showHintColorWhenDelivered)
-                {                    
-                    currentCollidingMailbox.ShowWrongDeliveryHintColor();                                            
+                {
+                    currentCollidingMailbox.ShowWrongDeliveryHintColor();
                 }
-            }            
+            }
         }
     }
 

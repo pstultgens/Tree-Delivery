@@ -163,7 +163,7 @@ public class LevelLoader : MonoBehaviour
         {
             return;
         }
-        isShowingLevelComplete = true;        
+        isShowingLevelComplete = true;
 
         // Set UI first selected button
         EventSystem eventSystem = EventSystem.current;
@@ -175,14 +175,22 @@ public class LevelLoader : MonoBehaviour
             Debug.Log("Level Complete Window in LevelLoader not set");
             return;
         }
-        
-        fadeTransition.SetTrigger("Start");
 
-        new WaitForSeconds(tranistionTime);
+        StartCoroutine(ShowLevelCompleteCoroutine());
+    }
+
+    IEnumerator ShowLevelCompleteCoroutine()
+    {
+        Debug.Log("Start Fade");
+        fadeTransition.SetTrigger("Start");
+                    
+        yield return new WaitForSeconds(tranistionTime);
 
         levelCompleteWindow.SetActive(true);
+        Debug.Log("End Fade");
         fadeTransition.SetTrigger("End");
 
+        Debug.Log("Done");
         Time.timeScale = 0f;
         audioMixer.SetFloat("SFXVolume", -80f);
     }

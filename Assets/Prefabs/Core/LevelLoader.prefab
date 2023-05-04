@@ -169,13 +169,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTransition: {fileID: 439333091917504616}
-  tranistionTime: 1.1
+  tranistionTime: 1
   playerYellowPickupPrefab: {fileID: 4404808166535952826, guid: 87ad68b634e6d4c6c934466fe3bf6af9, type: 3}
   playerRedPickupPrefab: {fileID: 8548987101248584728, guid: b66f988e62a13411e982e32ff6d1976a, type: 3}
   playerBluePickupPrefab: {fileID: 2536914393385794817, guid: a68b748db388f482f98c22ba02b2f7b0, type: 3}
   spawnPlayerPosition: {fileID: 0}
   pauseMenu: {fileID: 0}
+  pauseMenuFirstSelectedButton: {fileID: 0}
   levelCompleteWindow: {fileID: 0}
+  levelCompleteFirstSelectedButton: {fileID: 0}
+  levelCompleteScoreText: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: e69075b6cfc2d4958a0ec60a88fd55de, type: 2}
 --- !u!1 &439333093159659450
 GameObject:

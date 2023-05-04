@@ -10169,6 +10169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red Pickup Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8548987101248584728, guid: b66f988e62a13411e982e32ff6d1976a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8548987101248584732, guid: b66f988e62a13411e982e32ff6d1976a, type: 3}
       propertyPath: m_RootOrder
       value: 7

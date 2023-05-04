@@ -13,16 +13,29 @@ public class ScoreController : MonoBehaviour
     private TextMeshProUGUI scoringText;
     private float timer;
 
+    private DeliveryController deliveryController;
+
     private void Awake()
     {
+        deliveryController = FindObjectOfType<DeliveryController>();
         scoringText = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
+        if (deliveryController.allPackagesCorrectDelivered)
+        {
+            return;
+        }
+
+        DecreaseScore();
+    }
+
+    private void DecreaseScore()
+    {
         timer += Time.deltaTime;
 
-        if(timer >= scoreDelayAmount)
+        if (timer >= scoreDelayAmount)
         {
             timer = 0f;
             startScore -= 1;

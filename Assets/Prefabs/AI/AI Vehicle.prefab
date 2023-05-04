@@ -5252,6 +5252,7 @@ GameObject:
   - component: {fileID: 2099065491208819141}
   - component: {fileID: 7862271225779100248}
   - component: {fileID: 7362709789034261529}
+  - component: {fileID: 8379181782834453144}
   m_Layer: 7
   m_Name: AI Vehicle
   m_TagString: AI
@@ -5401,6 +5402,18 @@ MonoBehaviour:
   maxSpeed: 15
   isAvoidingCars: 1
   skillLevel: 1
+--- !u!114 &8379181782834453144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862271225779100224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd838df6a2fe84f619d5d763c92ce427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7862271225876829485
 GameObject:
   m_ObjectHideFlags: 0

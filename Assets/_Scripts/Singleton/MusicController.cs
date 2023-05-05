@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 public class MusicController : MonoBehaviour
 {
     public static MusicController Instance { get; private set; }
+
+    private static string MUSIC_VOLUME = "MusicVolume";
+    private static string SFX_VOLUME = "SFXVolume";
 
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
@@ -37,11 +37,9 @@ public class MusicController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        audioMixer.SetFloat("MusicVolume", -10f);
-        audioMixer.SetFloat("UIVolume", 0f);
-        audioMixer.SetFloat("SFXVolume", -2f);
+        LoadVolumeSettings();
     }
 
     void Update()
@@ -51,10 +49,11 @@ public class MusicController : MonoBehaviour
             menuAudioSource.Play();
         }
 
-        if (SceneManager.GetActiveScene().name.Equals("Main Menu") ||
-            SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main Menu")
+            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Settings Menu")
+            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
-            audioMixer.SetFloat("MusicVolume", -10f);
+            //audioMixer.SetFloat("MusicVolume", -10f);
 
             levelAudioSource.Stop();
             if (!menuAudioSource.isPlaying)
@@ -72,17 +71,62 @@ public class MusicController : MonoBehaviour
         }
     }
 
+    public void LoadVolumeSettings()
+    {
+        if (PlayerPrefs.HasKey(MUSIC_VOLUME))
+        {
+            LoadMusicVolume();
+        }
+        else
+        {
+            DefaultMusicVolume();
+        }
+
+        if (PlayerPrefs.HasKey(SFX_VOLUME))
+        {
+            LoadSFXVolume();
+        }
+        else
+        {
+            DefaultSFXVolume();
+        }
+    }
+
+    private void LoadMusicVolume()
+    {
+        float volume = PlayerPrefs.GetFloat(MUSIC_VOLUME);
+        Debug.Log("MusicController: Load Music Volume: " + volume + " from PlayerPrefs");
+        audioMixer.SetFloat(MUSIC_VOLUME, Mathf.Log10(volume) * 40);
+    }
+
+    private void DefaultMusicVolume()
+    {
+        Debug.Log("MusicController: Load Default Music Volume");
+        audioMixer.SetFloat(MUSIC_VOLUME, -10f);
+    }
+
+    private void LoadSFXVolume()
+    {
+        float volume = PlayerPrefs.GetFloat(SFX_VOLUME);
+        Debug.Log("MusicController: Load SFX Volume: " + volume + " from PlayerPrefs");
+        audioMixer.SetFloat(SFX_VOLUME, Mathf.Log10(volume) * 40);
+    }
+
+    private void DefaultSFXVolume()
+    {
+        Debug.Log("MusicController: Load Default SFX Volume");
+        audioMixer.SetFloat(SFX_VOLUME, -2f);
+    }
+
     public void Mute()
     {
-        audioMixer.SetFloat("MusicVolume", -80f);
-        audioMixer.SetFloat("SFXVolume", -80f);
+        audioMixer.SetFloat(MUSIC_VOLUME, -80f);
+        audioMixer.SetFloat(SFX_VOLUME, -80f);
     }
 
     public void Unmute()
     {
-        audioMixer.SetFloat("MusicVolume", -10f);
-        audioMixer.SetFloat("UIVolume", 0f);
-        audioMixer.SetFloat("SFXVolume", -2f);
+        LoadVolumeSettings();
     }
 
 

@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] public LevelLoader levelLoader;
     [SerializeField] public UIController uiController;
 
     [Header("Level Setup")]
@@ -20,10 +17,12 @@ public class LevelController : MonoBehaviour
     private bool isInLevelCompleteTransition;
 
     private DeliveryController deliveryController;
+    private SceneManager sceneManager;
 
     void Start()
     {
         deliveryController = FindObjectOfType<DeliveryController>();
+        sceneManager = FindObjectOfType<SceneManager>();
 
         if (DifficultyController.Instance.randomizePackageValues)
         {
@@ -49,11 +48,11 @@ public class LevelController : MonoBehaviour
             if (LevelDifficultyEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
                 || LevelDifficultyEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
             {
-                levelLoader.LoadNextLevel();
+                sceneManager.LoadNextLevel();
             }
             else
             {
-                levelLoader.ShowLevelComplete();
+                sceneManager.ShowLevelComplete();
             }
         }
     }

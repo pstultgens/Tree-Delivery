@@ -644,8 +644,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577979217641541860}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 8072998030906986442}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1742,8 +1742,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScore: 999
   scoreDelayAmount: 1
-  addScoreFirstTimeCorrectDelivered: 20
-  removeScoreWrongDelivered: 15
+  scoreAmountFirstTimeCorrectDelivered: 20
+  scoreAmountWrongDelivered: 15
+  timesWrongDeliveredPenalty: 5
 --- !u!1 &4632661860716250716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,8 +1868,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577979217641541860}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 8072998030906986442}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: BackToMainMenu
         m_Mode: 1
         m_Arguments:
@@ -2638,8 +2639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577979217641541860}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 8072998030906986442}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: LoadNextLevel
         m_Mode: 1
         m_Arguments:
@@ -3014,8 +3015,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1577979217641541860}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 8072998030906986442}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -3297,7 +3298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_Name
-      value: LevelLoader
+      value: SceneManager
       objectReference: {fileID: 0}
     - target: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_Layer
@@ -3375,19 +3376,32 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 4811103010101662201}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: levelCompleteWindow
+      value: 
+      objectReference: {fileID: 1263805639584133413}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: spawnPlayerPosition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: levelCompleteScoreText
+      value: 
+      objectReference: {fileID: 982221506082771199}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: pauseMenuFirstSelectedButton
+      value: 
+      objectReference: {fileID: 9025034276664056874}
+    - target: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+      propertyPath: levelCompleteFirstSelectedButton
+      value: 
+      objectReference: {fileID: 7986689672907006228}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
---- !u!114 &1577979217641541860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 439333092404982166, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
-  m_PrefabInstance: {fileID: 1440809530067149170}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577979217641541862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 166b3b53f746a491aa30bb318d10e12f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1577979217641541861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439333092404982167, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
@@ -3398,6 +3412,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
   m_PrefabInstance: {fileID: 1440809530067149170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8072998030906986442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+  m_PrefabInstance: {fileID: 1440809530067149170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577979217641541862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349995aebeb8a43bc82cb899dcb64d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3976294604965274257
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5306,8 +5306,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838796101}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 1585586542}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: GoToScene
         m_Mode: 5
         m_Arguments:
@@ -6431,8 +6431,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1838796101}
-        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+      - m_Target: {fileID: 1585586542}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -9652,7 +9652,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_Name
-      value: LevelLoader
+      value: SceneManager
       objectReference: {fileID: 0}
     - target: {fileID: 439333092404982164, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
       propertyPath: m_IsActive
@@ -9706,8 +9706,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 439333092404982166, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+--- !u!114 &1585586542 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7203441966208904888, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
+  m_PrefabInstance: {fileID: 1585586541}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349995aebeb8a43bc82cb899dcb64d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1600148852
 GameObject:
   m_ObjectHideFlags: 0
@@ -10033,7 +10045,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1666554540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585586542}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Settings Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1666554540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10713,17 +10737,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c01cd0ef21da42fca1623bc6fd7153a, type: 3}
---- !u!114 &1838796101 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 439333092404982166, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
-  m_PrefabInstance: {fileID: 1585586541}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 166b3b53f746a491aa30bb318d10e12f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1838796102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439333092404982167, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}

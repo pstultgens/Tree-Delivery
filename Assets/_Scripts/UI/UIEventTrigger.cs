@@ -5,20 +5,30 @@ using UnityEngine.EventSystems;
 
 public class UIEventTrigger : EventTrigger
 {
+    private Vector3 originalScale;
+
+    private void Start()
+    {
+        originalScale = transform.localScale;
+    }
+
     public override void OnSelect(BaseEventData data)
     {
-        StartCoroutine(Transition(new Vector3(1.15f, 1.15f, 1.15f), 0.2f));
+        // Scale up with 15%
+        Vector3 newSize = transform.localScale * 1.15f;
+        StartCoroutine(Transition(newSize, 0.2f));
     }
 
     public override void OnDeselect(BaseEventData data)
     {
-        StartCoroutine(Transition(Vector3.one, 0.2f));
+        Vector3 newSize = originalScale;
+        StartCoroutine(Transition(newSize, 0.2f));
         MusicController.Instance.PlayMenuNavigationSFX();
     }
 
     public override void OnSubmit(BaseEventData data)
     {
-        transform.localScale = Vector3.one;
+        transform.localScale = originalScale;
         MusicController.Instance.PlayButtonSubmitSFX();
     }
 

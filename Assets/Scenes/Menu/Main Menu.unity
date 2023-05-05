@@ -6158,15 +6158,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cafa4c7ee638d49939bb0bd035b3b403, type: 2}
-  m_sharedMaterial: {fileID: 72377333811623049, guid: cafa4c7ee638d49939bb0bd035b3b403, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
+  m_sharedMaterial: {fileID: -2433455193238524033, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6193,7 +6193,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 20
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -10485,8 +10485,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cafa4c7ee638d49939bb0bd035b3b403, type: 2}
-  m_sharedMaterial: {fileID: 72377333811623049, guid: cafa4c7ee638d49939bb0bd035b3b403, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
+  m_sharedMaterial: {fileID: -2433455193238524033, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10520,7 +10520,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 20
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11126,6 +11126,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 139222000}
     m_Modifications:
+    - target: {fileID: 3378173816727159603, guid: 2525030455f2a44d7a98123a70fa1a6e, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378173816727159603, guid: 2525030455f2a44d7a98123a70fa1a6e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
+    - target: {fileID: 3378173816727159603, guid: 2525030455f2a44d7a98123a70fa1a6e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2433455193238524033, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
+    - target: {fileID: 3378173816727159603, guid: 2525030455f2a44d7a98123a70fa1a6e, type: 3}
+      propertyPath: m_characterSpacing
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3378173817007971530, guid: 2525030455f2a44d7a98123a70fa1a6e, type: 3}
       propertyPath: m_Name
       value: Title Panel

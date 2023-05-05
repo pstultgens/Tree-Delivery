@@ -10,8 +10,9 @@ public class ScoreController : MonoBehaviour
     [SerializeField] public int startScore = 999;
     [SerializeField] public int scoreDelayAmount = 1;
 
-    [SerializeField] public int addScoreFirstTimeCorrectDelivered = 20;
-    [SerializeField] public int removeScoreWrongDelivered = 15;
+    [SerializeField] public int scoreAmountFirstTimeCorrectDelivered = 20;   
+    [SerializeField] public int scoreAmountWrongDelivered = 15;
+    [SerializeField] public int timesWrongDeliveredPenalty = 5;
 
 
     private TextMeshProUGUI scoringText;
@@ -49,15 +50,25 @@ public class ScoreController : MonoBehaviour
         currentScore = startScore;
     }
 
-    public void AddScorePackageFirstTimeCorrectDelivered()
+    public void IncreaseScorePackageFirstTimeCorrectDelivered(Mailbox mailbox)
     {
         Debug.Log("Add score: Package first time correct delivered");
-        startScore += addScoreFirstTimeCorrectDelivered;
+        startScore += scoreAmountFirstTimeCorrectDelivered;
+        mailbox.ShowScorePopup(scoreAmountFirstTimeCorrectDelivered);
     }
 
-    public void RemoveScorePackageWrongDelivered()
+    public void IncreaseScorePackageDelivered(Mailbox mailbox, int timesPackageWrongDeliveredCounter)
+    {
+        Debug.Log("Add score: Package correct delivered, after times: " + timesPackageWrongDeliveredCounter);
+        int amount = Mathf.RoundToInt(scoreAmountFirstTimeCorrectDelivered - (timesPackageWrongDeliveredCounter * timesWrongDeliveredPenalty));
+        startScore += amount;
+        mailbox.ShowScorePopup(amount);
+    }
+
+    public void DecreaseScorePackageWrongDelivered(Mailbox mailbox)
     {
         Debug.Log("Remove score: Package wrong delivered");
-        startScore -= removeScoreWrongDelivered;
+        startScore -= scoreAmountWrongDelivered;
+        mailbox.ShowScorePopup(-scoreAmountWrongDelivered);
     }
 }

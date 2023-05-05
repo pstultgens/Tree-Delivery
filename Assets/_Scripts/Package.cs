@@ -10,9 +10,9 @@ public class Package : MonoBehaviour
 
     private UIController uiController;
     private GameObject player;
-
     private ScoreController scoreController;
-    private int timesPackageWrongDeliveredCounter = 0;
+
+    public int timesPackageWrongDeliveredCounter = 0;
 
     private void Awake()
     {
@@ -53,13 +53,17 @@ public class Package : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void CorrectDelivered()
+    public void CorrectDelivered(Mailbox mailbox)
     {
         isCorrectDelivered = true;
 
         if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
         {
-            scoreController.AddScorePackageFirstTimeCorrectDelivered();
+            scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(mailbox);
+        }
+        else if (scoreController != null)
+        {
+            scoreController.IncreaseScorePackageDelivered(mailbox, timesPackageWrongDeliveredCounter);
         }
 
         if (DifficultyController.Instance.showHintUIPackageAndMinimap)

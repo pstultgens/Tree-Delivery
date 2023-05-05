@@ -5,7 +5,7 @@ using TMPro;
 
 public class DeliveryController : MonoBehaviour
 {
-   
+
 
     [Header("Stats")]
     [SerializeField] public GameObject collectedPackageOnCarSprite;
@@ -151,12 +151,12 @@ public class DeliveryController : MonoBehaviour
         if (currentCollidingMailbox.correctValue.Equals(packageValue))
         {
             Debug.Log("Package Correct Delivered");
-            
+
             collectedPackageOnCarSprite.SetActive(false);
             collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
             currentCollidingMailbox.CorrectPackageReceived();
-            currentCollectedPackage.CorrectDelivered();
+            currentCollectedPackage.CorrectDelivered(currentCollidingMailbox);
 
             allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
             currentCollectedPackage = null;
@@ -169,7 +169,7 @@ public class DeliveryController : MonoBehaviour
 
             if (scoreController != null)
             {
-                scoreController.RemoveScorePackageWrongDelivered();
+                scoreController.DecreaseScorePackageWrongDelivered(currentCollidingMailbox);
             }
 
             DifficultyController.Instance.IncreaseWrongDelivery();

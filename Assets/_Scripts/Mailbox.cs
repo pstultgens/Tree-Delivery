@@ -11,6 +11,9 @@ public class Mailbox : MonoBehaviour
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
 
+    [Header("Score")]
+    [SerializeField] private Transform scorePopupPrefab;
+
     [Header("Minimap Icons")]
     [SerializeField] public GameObject minimapNode;
     [SerializeField] public GameObject minimapEdgeLeft;
@@ -41,16 +44,13 @@ public class Mailbox : MonoBehaviour
     private TextMeshPro minimapNodeTextMeshPro;
     private SpriteRenderer minimapNodeSpriteRenderer;
 
-    
-
-    
     private void Awake()
     {
         textMeshPro = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
-        minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();        
+        minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
     }
 
     public void ShowCorrectValue()
@@ -106,7 +106,7 @@ public class Mailbox : MonoBehaviour
         {
             PlayCorrectDeliveredSFX();
             PlayCorrectDeliveredVFX();
-            spriteRenderer.color = correctDeliverdColor;
+            spriteRenderer.color = correctDeliverdColor;            
         }
 
         UpdateMinimap();
@@ -119,6 +119,14 @@ public class Mailbox : MonoBehaviour
         hasReceivedCorrectPackage = false;
         receivedPackageValue = packageValue;
         textMeshPro.text = packageValue.ToString();
+    }
+
+    public void ShowScorePopup(int scoreAmount)
+    {
+        Debug.Log("Show Score Popup: " + scoreAmount);
+        Transform scorePopupTransform = Instantiate(scorePopupPrefab, transform.position, Quaternion.identity);
+        ScorePopup damagePopup = scorePopupTransform.GetComponent<ScorePopup>();
+        damagePopup.Setup(scoreAmount);
     }
 
     private void UpdateMinimap()

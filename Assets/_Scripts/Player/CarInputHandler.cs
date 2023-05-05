@@ -28,14 +28,12 @@ public class CarInputHandler : MonoBehaviour
         playerActions.Player.MoveDown.canceled += MoveDown;
 
         playerActions.Player.Drop.performed += Drop;
-
     }
 
     private void OnDisable()
     {
         playerActions.Enable();
     }
-
 
     private void Awake()
     {
@@ -47,7 +45,7 @@ public class CarInputHandler : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
-        Vector2 inputVector = Vector2.zero;
+        Vector2 inputVector;
 
         if (context.performed)
         {

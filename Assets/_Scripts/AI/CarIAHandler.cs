@@ -54,6 +54,11 @@ public class CarIAHandler : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (SceneManager.isGamePaused)
+        {           
+            return;
+        }
+
         Vector2 inputVector = Vector2.zero;
 
         switch (aiMode)

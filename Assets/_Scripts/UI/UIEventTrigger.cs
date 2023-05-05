@@ -5,23 +5,20 @@ using UnityEngine.EventSystems;
 
 public class UIEventTrigger : EventTrigger
 {
-
-
     public override void OnSelect(BaseEventData data)
     {
-        Debug.Log("OnSelect");
         StartCoroutine(Transition(new Vector3(1.15f, 1.15f, 1.15f), 0.2f));
     }
 
     public override void OnDeselect(BaseEventData data)
     {
-        Debug.Log("OnDeselect");
         StartCoroutine(Transition(Vector3.one, 0.2f));
         MusicController.Instance.PlayMenuNavigationSFX();
     }
 
     public override void OnSubmit(BaseEventData data)
     {
+        transform.localScale = Vector3.one;
         MusicController.Instance.PlayButtonSubmitSFX();
     }
 

@@ -9,6 +9,7 @@ using TMPro;
 
 public class SceneManager : MonoBehaviour
 {
+    public static bool isGamePaused;
     public static string selectedLevel;
     public static string selectedCar;
 
@@ -21,9 +22,13 @@ public class SceneManager : MonoBehaviour
     [SerializeField] public GameObject playerBluePickupPrefab;
     [SerializeField] public Transform spawnPlayerPosition;
 
-    [Header("Pause Menu")]
-    [SerializeField] public GameObject pauseMenu;
-    [SerializeField] public GameObject pauseMenuFirstSelectedButton;
+    [Header("Pause Window")]
+    [SerializeField] public GameObject pauseWindow;
+    [SerializeField] public GameObject pauseWindowFirstSelectedButton;
+
+    [Header("Settings Window")]
+    [SerializeField] public GameObject settingsWindow;
+    [SerializeField] public GameObject settingsWindowFirstSelectedButton;
 
     [Header("Level Complete")]
     [SerializeField] public GameObject levelCompleteWindow;
@@ -32,6 +37,7 @@ public class SceneManager : MonoBehaviour
 
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
+
 
     private bool isLoadingLevel;
     private bool isShowingLevelComplete;
@@ -54,7 +60,7 @@ public class SceneManager : MonoBehaviour
         playerActions = new PlayerInputActions();
         playerActions.Enable();
 
-        playerActions.Player.Pause.performed += PauseGame;
+        playerActions.Player.Pause.performed += PauseGameCallBackContext;
     }
 
     private void OnDisable()
@@ -102,7 +108,6 @@ public class SceneManager : MonoBehaviour
         GameObject player = Instantiate(selectedCarPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
 
         // Set player as thing to follow for the MainCamera and the MinimapCamera
-        //Camera.main.GetComponent<FollowCamera>().thingToFollow = player;
         cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         cinemachineVirtualCamera.Follow = player.transform;
         cinemachineVirtualCamera.LookAt = player.transform;
@@ -111,11 +116,34 @@ public class SceneManager : MonoBehaviour
         minimapCamera.GetComponent<FollowCamera>().thingToFollow = player;
     }
 
-    private void PauseGame(InputAction.CallbackContext context)
+    public void ResumeGame()
     {
-        if (pauseMenu == null)
+        StartCoroutine(ResumeGameCoroutine());
+    }
+
+    private IEnumerator ResumeGameCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        pauseWindow.SetActive(false);
+        isGamePaused = false;
+        fadeTransition.SetTrigger("End");
+    }
+
+    private void PauseGameCallBackContext(InputAction.CallbackContext context)
+    {
+        if (isGamePaused)
         {
-            Debug.Log("Pause Menu in LevelLoader not set");
+            return;
+        }
+        ShowPauseWindow();
+    }
+
+    public void ShowPauseWindow()
+    {
+        if (pauseWindow == null)
+        {
+            Debug.Log("Pause Window in SceneManager not set");
             return;
         }
 
@@ -124,35 +152,49 @@ public class SceneManager : MonoBehaviour
             return;
         }
 
-        // Set UI first selected button
-        EventSystem eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(pauseMenuFirstSelectedButton, new BaseEventData(eventSystem));
+        isGamePaused = true;               
 
-        // Mute audio when paused
-        MusicController.Instance.Mute();
-
-        pauseMenu.SetActive(true);
-
-        Time.timeScale = 0f;
+        StartCoroutine(ShowPauseWindowCoroutine());
     }
 
-    public void ResumeGame()
+    private IEnumerator ShowPauseWindowCoroutine()
     {
-        // Resume audio when resuming
-        MusicController.Instance.Unmute();
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        settingsWindow.SetActive(false);
+        pauseWindow.SetActive(true);
+        SetFirstSelectedUIButton(pauseWindowFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
+    }        
 
-        pauseMenu.SetActive(false);
+    public void ShowSettingsWindow()
+    {
+        // This shows the window from the pause menu, not the Settings Menu scene
+        if (settingsWindow == null)
+        {
+            Debug.Log("Settings Window in SceneManager not set");
+            return;
+        }
 
-        Time.timeScale = 1f;
+        StartCoroutine(ShowSettingsWindowCoroutine());
+    }
+
+    private IEnumerator ShowSettingsWindowCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        pauseWindow.SetActive(false);
+        settingsWindow.SetActive(true);
+        SetFirstSelectedUIButton(settingsWindowFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
     }
 
     public void BackToMainMenu()
     {
-        MusicController.Instance.Unmute();
         MusicController.Instance.LoadVolumeSettings();
+        isGamePaused = false;
         selectedCar = null;
         selectedLevel = null;
-        Time.timeScale = 1f;
         GoToScene("Main Menu");
     }
 
@@ -163,10 +205,6 @@ public class SceneManager : MonoBehaviour
             return;
         }
         isShowingLevelComplete = true;
-
-        // Set UI first selected button
-        EventSystem eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(levelCompleteFirstSelectedButton, new BaseEventData(eventSystem));
 
         // Show Level Complete
         if (levelCompleteWindow == null)
@@ -180,16 +218,12 @@ public class SceneManager : MonoBehaviour
 
     IEnumerator ShowLevelCompleteCoroutine()
     {
-        Debug.Log("Start Fade");
         fadeTransition.SetTrigger("Start");
-                    
         yield return new WaitForSeconds(tranistionTime);
-
         levelCompleteWindow.SetActive(true);
-        Debug.Log("End Fade");
+        SetFirstSelectedUIButton(levelCompleteFirstSelectedButton);
         fadeTransition.SetTrigger("End");
 
-        Debug.Log("Done");
         Time.timeScale = 0f;
         audioMixer.SetFloat("SFXVolume", -80f);
     }
@@ -244,7 +278,7 @@ public class SceneManager : MonoBehaviour
     public void CarSelect(string carName)
     {
         selectedCar = carName;
-        
+
         DifficultyController.Instance.currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
 
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
@@ -283,5 +317,21 @@ public class SceneManager : MonoBehaviour
 
         // Load Scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    private void SetFirstSelectedUIButton(GameObject firstSelectedButton)
+    {
+        EventSystem eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(firstSelectedButton, new BaseEventData(eventSystem));
+        SimulateOnSelect(firstSelectedButton);
+    }
+
+    private void SimulateOnSelect(GameObject selectedGameObject)
+    {
+        // Create a new pointer event
+        PointerEventData pointerEvent = new PointerEventData(EventSystem.current);
+
+        // Simulate an OnSelect event
+        ExecuteEvents.Execute(selectedGameObject, pointerEvent, ExecuteEvents.selectHandler);
     }
 }

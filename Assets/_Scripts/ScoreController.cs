@@ -31,6 +31,11 @@ public class ScoreController : MonoBehaviour
             return;
         }
 
+        if (SceneManager.isGamePaused)
+        {
+            return;
+        }
+
         DecreaseScoreOverTime();
     }
 

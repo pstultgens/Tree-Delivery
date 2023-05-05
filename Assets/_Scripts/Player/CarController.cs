@@ -43,10 +43,12 @@ public class CarController : MonoBehaviour
     public bool inSpikeTrapMode;
 
     private Rigidbody2D carRigidbody;
+    private CarInputHandler carInputHandler;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody2D>();
+        carInputHandler = GetComponent<CarInputHandler>();
         isAI = GetComponent<CarIAHandler>() != null;
     }
 
@@ -61,9 +63,36 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        PauseCheck();
+
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
+    }
+
+    private void PauseCheck()
+    {
+        if (SceneManager.isGamePaused)
+        {
+            // Only for player relevant
+            if (carInputHandler != null)
+            {
+                carInputHandler.enabled = false;
+            }
+            carRigidbody.Sleep();
+            carRigidbody.isKinematic = true;
+            return;
+        }
+        else
+        {
+            // Only for player relevant
+            if (carInputHandler != null)
+            {
+                carInputHandler.enabled = true;
+            }
+            carRigidbody.isKinematic = false;
+            carRigidbody.WakeUp();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

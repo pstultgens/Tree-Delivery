@@ -16,15 +16,14 @@ public class HighscoreTable : MonoBehaviour
 
     private void Awake()
     {
-        entryTemplate.gameObject.SetActive(false);
+        //entryTemplate.gameObject.SetActive(false);
 
         if (!PlayerPrefs.HasKey(HIGHSCORE_TABLE))
         {
             return;
         }
 
-        List<HighscoreEntry> loadedHighscoredForLevel = LoadHighscoresForLevel(levelName);
-
+        List<HighscoreEntry> loadedHighscoredForLevel = LoadTop10HighscoresForLevel(levelName);
         ShowHighscores(loadedHighscoredForLevel);
 
         //AddHighscoreEntry("Test", 123213, "Esmee");
@@ -36,11 +35,12 @@ public class HighscoreTable : MonoBehaviour
         //AddHighscoreEntry("Test", 3, "A");
         //AddHighscoreEntry("Test", 4, "A");
         //AddHighscoreEntry("Test", 5, "A");
-        //AddHighscoreEntry("Test", 994324234, "MASTERR");
+        //AddHighscoreEntry("Test", 994324234, "Winner");
+        //AddHighscoreEntry("Test", 999994235, "Topper");
     }
 
 
-    private List<HighscoreEntry> LoadHighscoresForLevel(string levelName)
+    private List<HighscoreEntry> LoadTop10HighscoresForLevel(string levelName)
     {
         Debug.Log("LoadHighscoresForLevel: " + levelName);
         if (!PlayerPrefs.HasKey(HIGHSCORE_TABLE))
@@ -59,16 +59,30 @@ public class HighscoreTable : MonoBehaviour
             .Take(10)
             .ToList();
 
-        Debug.Log("LoadHighscoresForLevel: " + levelName + ", size: " + filterAndSortListForLevelName.Count);
+        Debug.Log("Load Top10 for level: " + levelName + ", size: " + filterAndSortListForLevelName.Count);
         return filterAndSortListForLevelName;
     }
 
     private void ShowHighscores(List<HighscoreEntry> entries)
     {
+        CleanHighscoreTableFromEntries();
         highscoreEntryTransformList = new List<Transform>();
         foreach (HighscoreEntry entry in entries)
         {
             CreateHighscoreEntryTransform(entry, entryContainer, highscoreEntryTransformList);
+        }
+    }
+
+    private void CleanHighscoreTableFromEntries()
+    {        
+        // Clean highscore table from entries
+        for (int i = 0; i < entryContainer.childCount; i++)
+        {
+            // Get a reference to the child game object
+            GameObject child = entryContainer.GetChild(i).gameObject;
+
+            // Destroy the child game object
+            Destroy(child);
         }
     }
 
@@ -79,7 +93,7 @@ public class HighscoreTable : MonoBehaviour
         Transform entryTransform = Instantiate(entryTemplate, container);
         RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
         entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * transformList.Count);
-        entryTransform.gameObject.SetActive(true);
+        //entryTransform.gameObject.SetActive(true);
 
         int rank = transformList.Count + 1;
         string rankString;
@@ -110,10 +124,10 @@ public class HighscoreTable : MonoBehaviour
         transformList.Add(entryTransform);
     }
 
-    public bool CanHighscoreBeAdded(string levelName, int score)
+    public bool IsHighscoreInTop10(string levelName, int score)
     {
         Debug.Log("CanHighscoreBeAdded");
-        List<HighscoreEntry> loadedHighscoredForLevel = LoadHighscoresForLevel(levelName);
+        List<HighscoreEntry> loadedHighscoredForLevel = LoadTop10HighscoresForLevel(levelName);
         HighscoreEntry lastEntry = loadedHighscoredForLevel[loadedHighscoredForLevel.Count - 1];
 
         return loadedHighscoredForLevel.Count < 10 || score > lastEntry.score;
@@ -131,25 +145,26 @@ public class HighscoreTable : MonoBehaviour
         };
 
         // Load excisting Highscores
-        Highscores loadedHighscores = new Highscores();
-        loadedHighscores.highscoreEntryList = LoadHighscoresForLevel(levelName);
+        List<HighscoreEntry> top10Highscores = LoadTop10HighscoresForLevel(levelName);
 
         // Add new entry to Highscores
-        loadedHighscores.highscoreEntryList.Add(entry);
-
-        loadedHighscores.highscoreEntryList.OrderByDescending(e => e.score).Take(10).ToList();
+        top10Highscores.Add(entry);
+        List<HighscoreEntry> newList = top10Highscores.OrderByDescending(e => e.score).Take(10).ToList();
 
         // Save updated Highscores
-        string json = JsonUtility.ToJson(loadedHighscores);
+        Highscores highscores = new Highscores();
+        highscores.highscoreEntryList = newList;
+        string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString(HIGHSCORE_TABLE, json);
-        //PlayerPrefs.Save();
+        PlayerPrefs.Save();
 
-        ShowHighscores(loadedHighscores.highscoreEntryList);
+        ShowHighscores(newList);
     }
 
+    [System.Serializable]
     private class Highscores
     {
-        public List<HighscoreEntry> highscoreEntryList = new List<HighscoreEntry>();
+        public List<HighscoreEntry> highscoreEntryList;
     }
 
     [System.Serializable]

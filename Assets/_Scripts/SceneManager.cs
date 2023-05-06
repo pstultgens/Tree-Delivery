@@ -33,11 +33,17 @@ public class SceneManager : MonoBehaviour
     [Header("Level Complete")]
     [SerializeField] public GameObject levelCompleteWindow;
     [SerializeField] public GameObject levelCompleteFirstSelectedButton;
-    [SerializeField] public TextMeshProUGUI levelCompleteScoreText;
+
+    [Header("Input Highscore Window")]
+    [SerializeField] public GameObject inputHighscoreWindow;
+    [SerializeField] public GameObject inputHighscoreFirstSelectedButton;
+
+    [Header("Highscore Table Window")]
+    [SerializeField] public GameObject highscoreTableWindow;
+    [SerializeField] public GameObject highscoreTableFirstSelectedButton;
 
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
-
 
     private bool isLoadingLevel;
     private bool isShowingLevelComplete;
@@ -51,8 +57,6 @@ public class SceneManager : MonoBehaviour
         {
             InstantiatePlayer();
         }
-
-        MusicController.Instance.Unmute();
     }
 
     private void OnEnable()
@@ -152,7 +156,7 @@ public class SceneManager : MonoBehaviour
             return;
         }
 
-        isGamePaused = true;               
+        isGamePaused = true;
 
         StartCoroutine(ShowPauseWindowCoroutine());
     }
@@ -165,7 +169,7 @@ public class SceneManager : MonoBehaviour
         pauseWindow.SetActive(true);
         SetFirstSelectedUIButton(pauseWindowFirstSelectedButton);
         fadeTransition.SetTrigger("End");
-    }        
+    }
 
     public void ShowSettingsWindow()
     {
@@ -205,6 +209,7 @@ public class SceneManager : MonoBehaviour
             return;
         }
         isShowingLevelComplete = true;
+        isGamePaused = true;
 
         // Show Level Complete
         if (levelCompleteWindow == null)
@@ -223,9 +228,61 @@ public class SceneManager : MonoBehaviour
         levelCompleteWindow.SetActive(true);
         SetFirstSelectedUIButton(levelCompleteFirstSelectedButton);
         fadeTransition.SetTrigger("End");
+    }
 
-        Time.timeScale = 0f;
-        audioMixer.SetFloat("SFXVolume", -80f);
+    public void ContinueAfterLevelCompleted()
+    {
+        HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
+        if (highscoreTable.IsHighscoreInTop10(DifficultyController.Instance.currentLevelDifficulty, ScoreController.currentScore))
+        {
+            // Input Highscore Window
+            StartCoroutine(ShowInputHighscoreCoroutine());
+        }
+        else
+        {
+            // Show Highscore Table Window
+            StartCoroutine(ShowHighscoreTableCoroutine());
+        }
+    }
+
+    public void InputHighscore()
+    {
+        InputHighscore input = inputHighscoreWindow.GetComponent<InputHighscore>();
+
+        if (string.IsNullOrEmpty(input.GetName()))
+        {
+            return;
+        }
+
+        HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
+        highscoreTable.AddHighscoreEntry(DifficultyController.Instance.currentLevelDifficulty, ScoreController.currentScore, input.GetName());
+
+        StartCoroutine(ShowHighscoreTableCoroutine());
+    }
+
+    IEnumerator ShowInputHighscoreCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        levelCompleteWindow.SetActive(false);
+        inputHighscoreWindow.SetActive(true);
+        SetFirstSelectedUIButton(inputHighscoreFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
+    }
+
+    IEnumerator ShowHighscoreTableCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        levelCompleteWindow.SetActive(false);
+        inputHighscoreWindow.SetActive(false);
+        highscoreTableWindow.SetActive(true);
+
+        HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
+        highscoreTable.ShowHighscores(DifficultyController.Instance.currentLevelDifficulty);
+
+        SetFirstSelectedUIButton(highscoreTableFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
     }
 
     public void LoadNextLevel()
@@ -238,7 +295,7 @@ public class SceneManager : MonoBehaviour
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
-        switch (DifficultyController.Instance.DetermineDifficulty())
+        switch (DifficultyController.Instance.DetermineNextLevel())
         {
             case LevelDifficultyEnum.Test:
                 StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));

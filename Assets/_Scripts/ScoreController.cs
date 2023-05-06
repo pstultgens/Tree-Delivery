@@ -22,6 +22,7 @@ public class ScoreController : MonoBehaviour
     {
         deliveryController = FindObjectOfType<DeliveryController>();
         scoringText = GetComponent<TextMeshProUGUI>();
+        currentScore = startScore;
     }
 
     private void Update()
@@ -46,17 +47,22 @@ public class ScoreController : MonoBehaviour
         if (timer >= scoreDelayAmount)
         {
             timer = 0f;
-            startScore -= 1;
+            currentScore -= 1;
         }
 
-        scoringText.text = startScore.ToString();
-        currentScore = startScore;
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        scoringText.text = currentScore.ToString();
     }
 
     public void IncreaseScorePackageFirstTimeCorrectDelivered(Mailbox mailbox)
     {
         Debug.Log("Add score: Package first time correct delivered");
-        startScore += scoreAmountFirstTimeCorrectDelivered;
+        currentScore += scoreAmountFirstTimeCorrectDelivered;
+        UpdateScoreText();
         mailbox.ShowScorePopup(scoreAmountFirstTimeCorrectDelivered);
     }
 
@@ -64,14 +70,16 @@ public class ScoreController : MonoBehaviour
     {
         Debug.Log("Add score: Package correct delivered, after times: " + timesPackageWrongDeliveredCounter);
         int amount = Mathf.RoundToInt(scoreAmountFirstTimeCorrectDelivered - (timesPackageWrongDeliveredCounter * timesWrongDeliveredPenalty));
-        startScore += amount;
+        currentScore += amount;
+        UpdateScoreText();
         mailbox.ShowScorePopup(amount);
     }
 
     public void DecreaseScorePackageWrongDelivered(Mailbox mailbox)
     {
         Debug.Log("Remove score: Package wrong delivered");
-        startScore -= scoreAmountWrongDelivered;
+        currentScore -= scoreAmountWrongDelivered;
+        UpdateScoreText();
         mailbox.ShowScorePopup(-scoreAmountWrongDelivered);
     }
 }

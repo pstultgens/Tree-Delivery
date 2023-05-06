@@ -44,7 +44,7 @@ public class DifficultyController : MonoBehaviour
         countWrongDeliveries++;
     }
 
-    public LevelDifficultyEnum DetermineDifficulty()
+    public LevelDifficultyEnum DetermineNextLevel()
     {
         Debug.Log("Current Level Difficulty: " + currentLevelDifficulty.ToString());
         switch (currentLevelDifficulty)

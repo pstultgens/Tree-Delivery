@@ -53,8 +53,6 @@ public class MusicController : MonoBehaviour
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Settings Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
-            //audioMixer.SetFloat("MusicVolume", -10f);
-
             levelAudioSource.Stop();
             if (!menuAudioSource.isPlaying)
             {

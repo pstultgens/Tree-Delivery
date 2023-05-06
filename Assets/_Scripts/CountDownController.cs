@@ -7,23 +7,22 @@ using UnityEngine.Audio;
 public class CountDownController : MonoBehaviour
 {
     [Header("Audio Mixers")]
-    [SerializeField] public AudioMixer audioMixer;
+    [SerializeField] AudioMixer audioMixer;
 
     [Header("Audio sources")]
-    [SerializeField] public AudioSource countDownAudioSource;
-    [SerializeField] public AudioSource goAudioSource;
+    [SerializeField] AudioSource countDownAudioSource;
+    [SerializeField] AudioSource goAudioSource;
 
-    private int countDownTime = 3;
-    private TextMeshProUGUI countDownText;
+    [Header("Text")]
+    [SerializeField] TextMeshProUGUI countText;
+    [SerializeField] TextMeshProUGUI levelNameText;
 
-    private void Awake()
-    {
-        countDownText = GetComponent<TextMeshProUGUI>();
-        SceneManager.isCountingDown = true;
-    }
+    private int countDownTime = 3;       
 
     private void Start()
-    {
+    {        
+        levelNameText.text = DifficultyController.Instance.currentLevelDifficulty.GetName();
+        SceneManager.isCountingDown = true;
         StartCoroutine(CountDownToStartCoroutine());
     }
 
@@ -34,16 +33,16 @@ public class CountDownController : MonoBehaviour
         {
             yield return new WaitUntil(() => !SceneManager.isGamePaused);
             PlayCountDownSFX();
-            countDownText.text = countDownTime.ToString();
+            countText.text = countDownTime.ToString();
             yield return new WaitForSeconds(1f);
             countDownTime--;
         }
         PlayGoSFX();
-        countDownText.text = "GO";
+        countText.text = "GO";
         SceneManager.isCountingDown = false;
 
         yield return new WaitForSeconds(1f);
-        countDownText.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void PlayCountDownSFX()

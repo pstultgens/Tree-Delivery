@@ -912,7 +912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318256, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: currentLevelDifficulty
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318258, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_Name

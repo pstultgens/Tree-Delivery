@@ -4,7 +4,7 @@ public class DifficultyController : MonoBehaviour
 {
     public static DifficultyController Instance { get; private set; }
 
-    [SerializeField] public LevelDifficultyEnum currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+    [SerializeField] public LevelEnum currentLevelDifficulty = LevelEnum.Tutorial;
     [SerializeField] public bool showAlreadyCorrectValueOnNode;
     [SerializeField] public bool showHintValueWhenWrongDelivered;
     [SerializeField] public bool showHintColorWhenDelivered; // Correct or wrong
@@ -44,35 +44,36 @@ public class DifficultyController : MonoBehaviour
         countWrongDeliveries++;
     }
 
-    public LevelDifficultyEnum DetermineNextLevel()
+    public LevelEnum DetermineNextLevel()
     {
         Debug.Log("Current Level Difficulty: " + currentLevelDifficulty.ToString());
         switch (currentLevelDifficulty)
         {
-            case LevelDifficultyEnum.Tutorial:
-                currentLevelDifficulty = LevelDifficultyEnum.Test;
+            case LevelEnum.Tutorial:
+                currentLevelDifficulty = LevelEnum.Test;
                 break;
-            case LevelDifficultyEnum.Test:
+            case LevelEnum.Test:
                 if (countWrongDeliveries > acceptableNumberOfWrongDeliveries)
                 {
-                    currentLevelDifficulty = LevelDifficultyEnum.Easy1;
+                    currentLevelDifficulty = LevelEnum.Easy1;
                 }
                 else
                 {
-                    currentLevelDifficulty = LevelDifficultyEnum.Hard1;
+                    currentLevelDifficulty = LevelEnum.Hard1;
                 }
                 break;
-            case LevelDifficultyEnum.Easy1:
-                currentLevelDifficulty = LevelDifficultyEnum.Easy2;
+            case LevelEnum.Easy1:
+                currentLevelDifficulty = LevelEnum.Easy2;
                 break;
-            case LevelDifficultyEnum.Easy2:
-                currentLevelDifficulty = LevelDifficultyEnum.Easy3;
+            case LevelEnum.Easy2:
+                currentLevelDifficulty = LevelEnum.Easy3;
                 break;
-            case LevelDifficultyEnum.Hard1:
-                currentLevelDifficulty = LevelDifficultyEnum.Hard2;
+            case LevelEnum.Hard1:
+                currentLevelDifficulty = LevelEnum.Hard2;
                 break;
             default:
                 Debug.LogWarning("Unable to determine difficulty, back to main menu!");
+                currentLevelDifficulty = LevelEnum.MainMenu;
                 break;
         }
         Debug.Log("Next Determined Level Difficulty: " + currentLevelDifficulty.ToString());
@@ -88,7 +89,9 @@ public class DifficultyController : MonoBehaviour
 
         switch (currentLevelDifficulty)
         {
-            case LevelDifficultyEnum.Tutorial:
+            case LevelEnum.MainMenu:
+                break;
+            case LevelEnum.Tutorial:
                 Debug.Log("Set Tutorial Mode stats");
                 showAlreadyCorrectValueOnNode = true;
                 showHintValueWhenWrongDelivered = false;
@@ -101,7 +104,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
                 break;
-            case LevelDifficultyEnum.Test:
+            case LevelEnum.Test:
                 Debug.Log("Set Test Mode stats");
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
@@ -114,7 +117,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
                 break;
-            case LevelDifficultyEnum.Easy1:
+            case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");
                 showAlreadyCorrectValueOnNode = true;
                 showHintValueWhenWrongDelivered = true;
@@ -127,7 +130,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = false;
                 randomizeOrderUIPackages = false;
                 break;
-            case LevelDifficultyEnum.Easy2:
+            case LevelEnum.Easy2:
                 Debug.Log("Set Easy 2 Mode stats");
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = true;
@@ -140,7 +143,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
                 break;
-            case LevelDifficultyEnum.Easy3:
+            case LevelEnum.Easy3:
                 Debug.Log("Set Easy 3 Mode stats");
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = true;
@@ -153,7 +156,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
                 break;
-            case LevelDifficultyEnum.Hard1:
+            case LevelEnum.Hard1:
                 Debug.Log("Set Hard 1 Mode stats");
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
@@ -166,7 +169,7 @@ public class DifficultyController : MonoBehaviour
                 randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
                 break;
-            case LevelDifficultyEnum.Hard2:
+            case LevelEnum.Hard2:
                 Debug.Log("Set Hard 2 Mode stats");
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;

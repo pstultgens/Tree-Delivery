@@ -241,7 +241,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 920ec6192f23f461daf0310afe8096c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -497,7 +497,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 8dccb0204639a4f9e9886c988b580461, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -581,7 +581,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: fb6d9369855144ebaa69861e40cdc660, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -711,7 +711,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 28f152931ed80480eaa42ec68b4d0a1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -757,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318256, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: currentLevelDifficulty
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318258, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_Name
@@ -870,7 +870,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0f3eb2a0542cd4bcc8d1eefb316efac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -959,7 +959,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eda8068af436d4ceeb702f8e446592ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1043,7 +1043,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1e35ec5e7b89441d6b1d7ecff4864c78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14368,7 +14368,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5c68bd46170154f17bafc96da0ef5a72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14557,7 +14557,7 @@ PrefabInstance:
     - target: {fileID: 4812683332753349292, guid: 92e45ea9568b24d82baaf82473aab298, type: 3}
       propertyPath: levelLoader
       value: 
-      objectReference: {fileID: 3390315943804007292}
+      objectReference: {fileID: 0}
     - target: {fileID: 4812683332753349292, guid: 92e45ea9568b24d82baaf82473aab298, type: 3}
       propertyPath: uiController
       value: 
@@ -14676,7 +14676,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 83d90dcea84484fd589f6b472e68f5ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -15132,17 +15132,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5e4d7717411446a9c21579c41861fb, type: 3}
---- !u!114 &3390315943804007292 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1577979217641541860, guid: 9f5e4d7717411446a9c21579c41861fb, type: 3}
-  m_PrefabInstance: {fileID: 3390315943804007291}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 166b3b53f746a491aa30bb318d10e12f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3390315943804007293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4811103010101662201, guid: 9f5e4d7717411446a9c21579c41861fb, type: 3}

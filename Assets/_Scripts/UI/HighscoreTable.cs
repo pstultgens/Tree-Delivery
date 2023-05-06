@@ -6,7 +6,7 @@ using System.Linq;
 
 public class HighscoreTable : MonoBehaviour
 {
-    private static string HIGHSCORE_TABLE = "HighscoreTable";
+    private static string HIGHSCORE_TABLE = "HighscoreTable_";
 
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] Transform entryContainer;
@@ -39,21 +39,20 @@ public class HighscoreTable : MonoBehaviour
     }
 
 
-    private List<HighscoreEntry> LoadTop10HighscoresForLevel(LevelDifficultyEnum levelName)
+    private List<HighscoreEntry> LoadTop10HighscoresForLevel(LevelEnum levelName)
     {
         Debug.Log("LoadHighscoresForLevel: " + levelName.GetName());
-        if (!PlayerPrefs.HasKey(HIGHSCORE_TABLE))
+        if (!PlayerPrefs.HasKey(HIGHSCORE_TABLE + levelName))
         {
             return new List<HighscoreEntry>();
         }
 
-        string jsonString = PlayerPrefs.GetString(HIGHSCORE_TABLE);
+        string jsonString = PlayerPrefs.GetString(HIGHSCORE_TABLE + levelName);
         Highscores loadedAllHighscores = JsonUtility.FromJson<Highscores>(jsonString);
         Debug.Log("loadedAllHighscores entries " + loadedAllHighscores.highscoreEntryList.Count);
 
         // Filter and order list for levelName
-        List<HighscoreEntry> filterAndSortListForLevelName = loadedAllHighscores.highscoreEntryList
-            .Where(e => e.levelName.Equals(levelName.GetName()))
+        List<HighscoreEntry> filterAndSortListForLevelName = loadedAllHighscores.highscoreEntryList            
             .OrderByDescending(e => e.score)
             .Take(10)
             .ToList();
@@ -62,10 +61,10 @@ public class HighscoreTable : MonoBehaviour
         return filterAndSortListForLevelName;
     }
 
-    
+
 
     private void CleanHighscoreTableFromEntries()
-    {        
+    {
         // Clean highscore table from entries
         for (int i = 0; i < entryContainer.childCount; i++)
         {
@@ -114,7 +113,7 @@ public class HighscoreTable : MonoBehaviour
         transformList.Add(entryTransform);
     }
 
-    public bool IsHighscoreInTop10(LevelDifficultyEnum levelName, int score)
+    public bool IsHighscoreInTop10(LevelEnum levelName, int score)
     {
         Debug.Log("CanHighscoreBeAdded");
         List<HighscoreEntry> loadedHighscoredForLevel = LoadTop10HighscoresForLevel(levelName);
@@ -128,13 +127,12 @@ public class HighscoreTable : MonoBehaviour
         return score > lastEntry.score;
     }
 
-    public void AddHighscoreEntry(LevelDifficultyEnum levelName, int score, string name)
+    public void AddHighscoreEntry(LevelEnum levelName, int score, string name)
     {
         Debug.Log("AddHighscoreEntry");
         // Create Highscore entry
         HighscoreEntry entry = new HighscoreEntry
         {
-            levelName = levelName.GetName(),
             score = score,
             playerName = name
         };
@@ -150,11 +148,11 @@ public class HighscoreTable : MonoBehaviour
         Highscores highscores = new Highscores();
         highscores.highscoreEntryList = newList;
         string json = JsonUtility.ToJson(highscores);
-        PlayerPrefs.SetString(HIGHSCORE_TABLE, json);
+        PlayerPrefs.SetString(HIGHSCORE_TABLE + levelName, json);
         PlayerPrefs.Save();
     }
 
-    public void ShowHighscores(LevelDifficultyEnum levelName)
+    public void ShowHighscores(LevelEnum levelName)
     {
         List<HighscoreEntry> entries = LoadTop10HighscoresForLevel(levelName);
         levelNameText.text = DifficultyController.Instance.currentLevelDifficulty.GetName();
@@ -167,7 +165,6 @@ public class HighscoreTable : MonoBehaviour
         }
     }
 
-    [System.Serializable]
     private class Highscores
     {
         public List<HighscoreEntry> highscoreEntryList;
@@ -176,7 +173,6 @@ public class HighscoreTable : MonoBehaviour
     [System.Serializable]
     private class HighscoreEntry
     {
-        public string levelName;
         public int score;
         public string playerName;
     }

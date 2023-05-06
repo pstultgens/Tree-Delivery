@@ -45,8 +45,8 @@ public class LevelController : MonoBehaviour
             }
             isInLevelCompleteTransition = true;
 
-            if (LevelDifficultyEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
-                || LevelDifficultyEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
+            if (LevelEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
+                || LevelEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
             {
                 sceneManager.LoadNextLevel();
             }

@@ -1,7 +1,9 @@
 ﻿using System;
 
-public enum LevelDifficultyEnum
+public enum LevelEnum
 {
+    [LevelName("Main Menu")]
+    MainMenu,
     [LevelName("Tutorial Level")]
     Tutorial,
     [LevelName("Test Level")]

@@ -290,29 +290,31 @@ public class SceneManager : MonoBehaviour
         if (isLoadingLevel)
         {
             return;
-        }
-        Time.timeScale = 1f;
+        }        
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
         switch (DifficultyController.Instance.DetermineNextLevel())
         {
-            case LevelDifficultyEnum.Test:
+            case LevelEnum.MainMenu:
+                BackToMainMenu();
+                break;
+            case LevelEnum.Test:
                 StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
                 break;
-            case LevelDifficultyEnum.Easy1:
+            case LevelEnum.Easy1:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
                 break;
-            case LevelDifficultyEnum.Easy2:
+            case LevelEnum.Easy2:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
                 break;
-            case LevelDifficultyEnum.Easy3:
+            case LevelEnum.Easy3:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
                 break;
-            case LevelDifficultyEnum.Hard1:
+            case LevelEnum.Hard1:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
                 break;
-            case LevelDifficultyEnum.Hard2:
+            case LevelEnum.Hard2:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
                 break;
             default:
@@ -336,7 +338,7 @@ public class SceneManager : MonoBehaviour
     {
         selectedCar = carName;
 
-        DifficultyController.Instance.currentLevelDifficulty = LevelDifficultyEnum.Tutorial;
+        DifficultyController.Instance.currentLevelDifficulty = LevelEnum.Tutorial;
 
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
     }
@@ -360,6 +362,7 @@ public class SceneManager : MonoBehaviour
         // Wait
         yield return new WaitForSeconds(tranistionTime);
 
+        isGamePaused = false;
         // Load Scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(levelIndex);
     }
@@ -372,6 +375,7 @@ public class SceneManager : MonoBehaviour
         // Wait
         yield return new WaitForSeconds(tranistionTime);
 
+        isGamePaused = false;
         // Load Scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }

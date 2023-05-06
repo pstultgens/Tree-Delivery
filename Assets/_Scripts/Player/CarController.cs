@@ -72,7 +72,7 @@ public class CarController : MonoBehaviour
 
     private void PauseCheck()
     {
-        if (SceneManager.isGamePaused)
+        if (SceneManager.isGamePaused || SceneManager.isCountingDown)
         {
             // Only for player relevant
             if (carInputHandler != null)

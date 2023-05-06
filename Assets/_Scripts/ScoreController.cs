@@ -18,7 +18,7 @@ public class ScoreController : MonoBehaviour
 
     private DeliveryController deliveryController;
 
-    private void Awake()
+    private void Start()
     {
         deliveryController = FindObjectOfType<DeliveryController>();
         scoringText = GetComponent<TextMeshProUGUI>();
@@ -32,7 +32,7 @@ public class ScoreController : MonoBehaviour
             return;
         }
 
-        if (SceneManager.isGamePaused)
+        if (SceneManager.isGamePaused || SceneManager.isCountingDown)
         {
             return;
         }

@@ -44,6 +44,13 @@ public class DifficultyController : MonoBehaviour
         countWrongDeliveries++;
     }
 
+    public void SetLevelDifficulty(LevelEnum levelEnum)
+    {
+        currentLevelDifficulty = levelEnum;
+        UpdateDifficultyStats();
+    }
+
+
     public LevelEnum DetermineNextLevel()
     {
         Debug.Log("Current Level Difficulty: " + currentLevelDifficulty.ToString());
@@ -83,7 +90,7 @@ public class DifficultyController : MonoBehaviour
         return currentLevelDifficulty;
     }
 
-    private void UpdateDifficultyStats()
+    public void UpdateDifficultyStats()
     {
         Debug.Log("Update Difficulty Stats");
 
@@ -101,8 +108,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
+                randomizePackageValues = true;
                 break;
             case LevelEnum.Test:
                 Debug.Log("Set Test Mode stats");
@@ -114,8 +121,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
+                randomizePackageValues = true;
                 break;
             case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");
@@ -127,8 +134,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = false;
                 randomizeOrderUIPackages = false;
+                randomizePackageValues = false;
                 break;
             case LevelEnum.Easy2:
                 Debug.Log("Set Easy 2 Mode stats");
@@ -140,8 +147,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
+                randomizePackageValues = true;                
                 break;
             case LevelEnum.Easy3:
                 Debug.Log("Set Easy 3 Mode stats");
@@ -153,8 +160,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = false;
+                randomizePackageValues = true;                
                 break;
             case LevelEnum.Hard1:
                 Debug.Log("Set Hard 1 Mode stats");
@@ -166,8 +173,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
+                randomizePackageValues = true;
                 break;
             case LevelEnum.Hard2:
                 Debug.Log("Set Hard 2 Mode stats");
@@ -179,8 +186,8 @@ public class DifficultyController : MonoBehaviour
                 showPackageValueOnMinimap = false;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = false;
-                randomizePackageValues = true;
                 randomizeOrderUIPackages = true;
+                randomizePackageValues = true;
                 break;
             default:
                 Debug.LogWarning("Undefined Level Mode in DifficultyController!");

@@ -10,6 +10,8 @@ using TMPro;
 public class SceneManager : MonoBehaviour
 {
     public static bool isGamePaused;
+    public static bool isCountingDown;
+
     public static string selectedLevel;
     public static string selectedCar;
 
@@ -197,6 +199,7 @@ public class SceneManager : MonoBehaviour
     {
         MusicController.Instance.LoadVolumeSettings();
         isGamePaused = false;
+        isCountingDown = false;
         selectedCar = null;
         selectedLevel = null;
         GoToScene("Main Menu");
@@ -338,7 +341,7 @@ public class SceneManager : MonoBehaviour
     {
         selectedCar = carName;
 
-        DifficultyController.Instance.currentLevelDifficulty = LevelEnum.Tutorial;
+        DifficultyController.Instance.SetLevelDifficulty(LevelEnum.Tutorial);
 
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
     }

@@ -54,7 +54,7 @@ public class CarIAHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (SceneManager.isGamePaused)
+        if (SceneManager.isGamePaused || SceneManager.isCountingDown)
         {           
             return;
         }

@@ -22,7 +22,7 @@ public class Package : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if (DifficultyController.Instance.showPackageOnMinimap)
+        if (HintController.Instance.showPackageOnMinimap)
         {
             ShowOnMinimap();
         }
@@ -51,20 +51,20 @@ public class Package : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void CorrectDelivered(Mailbox mailbox)
+    public void CorrectDelivered(Spot spot)
     {
         isCorrectDelivered = true;
 
         if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
         {
-            scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(mailbox);
+            scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(spot);
         }
         else if (scoreController != null)
         {
-            scoreController.IncreaseScorePackageDelivered(mailbox, timesPackageWrongDeliveredCounter);
+            scoreController.IncreaseScorePackageDelivered(spot, timesPackageWrongDeliveredCounter);
         }
 
-        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
+        if (HintController.Instance.showHintUIPackageAndMinimapNode)
         {
             uiController.PackageCorrectDelivered(Value());
         }
@@ -78,7 +78,7 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = false;
 
-        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
+        if (HintController.Instance.showHintUIPackageAndMinimapNode)
         {
             uiController.PackageWrongDelivered(Value());
         }
@@ -96,11 +96,15 @@ public class Package : MonoBehaviour
     private void ShowOnMinimap()
     {
         minimapIcon.SetActive(true);
-
-        if (DifficultyController.Instance.showPackageValueOnMinimap)
+        TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
+        if (HintController.Instance.showPackageValueOnMinimap)
         {
-            TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
+
             minimapIconText.text = Value().ToString();
+        }
+        else
+        {
+            minimapIconText.text = "";
         }
     }
 

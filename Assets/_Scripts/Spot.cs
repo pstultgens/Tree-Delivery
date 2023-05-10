@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class Mailbox : MonoBehaviour
+public class Spot : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] public int correctValue;
@@ -101,7 +101,7 @@ public class Mailbox : MonoBehaviour
         receivedPackageValue = correctValue;
         ShowCorrectValue();
 
-        if (DifficultyController.Instance.showHintColorWhenDelivered)
+        if (HintController.Instance.showHintColorWhenDelivered)
         {
             PlayCorrectDeliveredSFX();
             PlayCorrectDeliveredVFX();
@@ -133,7 +133,7 @@ public class Mailbox : MonoBehaviour
         // Update Minimap Node
         minimapNode.GetComponentInChildren<TextMeshPro>().text = correctValue.ToString();
 
-        if (DifficultyController.Instance.showHintUIPackageAndMinimap)
+        if (HintController.Instance.showHintUIPackageAndMinimapNode)
         {
             minimapNode.GetComponent<SpriteRenderer>().color = correctDeliverdColor;
 
@@ -170,7 +170,7 @@ public class Mailbox : MonoBehaviour
         PlayWrongDeliveredSFX();
         PlayWrongDeliveredVFX();
 
-        Color32 defaultMailboxColor = spriteRenderer.color;
+        Color32 defaultSpotColor = spriteRenderer.color;
         Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
 
         spriteRenderer.color = wrongDeliverdColor;
@@ -178,7 +178,7 @@ public class Mailbox : MonoBehaviour
 
         yield return new WaitForSeconds(wrongDeliveryDelay);
 
-        spriteRenderer.color = defaultMailboxColor;
+        spriteRenderer.color = defaultSpotColor;
         minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
 
         isWrongDeliveryColorCoroutineRunning = false;
@@ -193,7 +193,7 @@ public class Mailbox : MonoBehaviour
         yield return new WaitForSeconds(wrongDeliveryDelay);
         HideValue();
 
-        if (DifficultyController.Instance.showAlreadyCorrectValueOnNode)
+        if (HintController.Instance.showAlreadyCorrectValueOnNode)
         {
             minimapNodeTextMeshPro.text = correctValue.ToString();
         }

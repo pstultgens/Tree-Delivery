@@ -21,7 +21,7 @@ public class CountDownController : MonoBehaviour
 
     private void Start()
     {        
-        levelNameText.text = DifficultyController.Instance.currentLevelDifficulty.GetName();
+        levelNameText.text = HintController.Instance.currentLevel.GetName();
         SceneManager.isCountingDown = true;
         StartCoroutine(CountDownToStartCoroutine());
     }

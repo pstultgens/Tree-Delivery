@@ -15,6 +15,7 @@ TagManager:
   - SpikeTrap
   - OilTrap
   - Road
+  - Spot
   layers:
   - Default
   - TransparentFX

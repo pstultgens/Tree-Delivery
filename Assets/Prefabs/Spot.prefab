@@ -5375,10 +5375,10 @@ GameObject:
   - component: {fileID: 7878354532709353542}
   - component: {fileID: 7878354532709353545}
   - component: {fileID: 7878354532709353544}
-  - component: {fileID: 7878354532709353543}
+  - component: {fileID: 3409018951303528871}
   m_Layer: 0
-  m_Name: Mailbox
-  m_TagString: Mailbox
+  m_Name: Spot
+  m_TagString: Spot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5470,7 +5470,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7878354532709353543
+--- !u!114 &3409018951303528871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5479,17 +5479,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7878354532709353541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a3a52d9001c49c889f4c7ca7c3e065, type: 3}
+  m_Script: {fileID: 11500000, guid: 719ee6e9798f24a8ea534738394003ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctValue: 20
+  correctValue: 0
   wrongDeliveryDelay: 2
   correctDeliverdColor:
     serializedVersion: 2
-    rgba: 4288472979
+    rgba: 4289392255
   wrongDeliverdColor:
     serializedVersion: 2
-    rgba: 4285427436
+    rgba: 4281941237
   scorePopupPrefab: {fileID: 1053539395481077626, guid: c01e121d7e9e24bd3856a6a6037278e2, type: 3}
   minimapNode: {fileID: 0}
   minimapEdgeLeft: {fileID: 0}

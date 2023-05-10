@@ -58,28 +58,28 @@ public class ScoreController : MonoBehaviour
         scoringText.text = currentScore.ToString();
     }
 
-    public void IncreaseScorePackageFirstTimeCorrectDelivered(Mailbox mailbox)
+    public void IncreaseScorePackageFirstTimeCorrectDelivered(Spot spot)
     {
         Debug.Log("Add score: Package first time correct delivered");
         currentScore += scoreAmountFirstTimeCorrectDelivered;
         UpdateScoreText();
-        mailbox.ShowScorePopup(scoreAmountFirstTimeCorrectDelivered);
+        spot.ShowScorePopup(scoreAmountFirstTimeCorrectDelivered);
     }
 
-    public void IncreaseScorePackageDelivered(Mailbox mailbox, int timesPackageWrongDeliveredCounter)
+    public void IncreaseScorePackageDelivered(Spot spot, int timesPackageWrongDeliveredCounter)
     {
         Debug.Log("Add score: Package correct delivered, after times: " + timesPackageWrongDeliveredCounter);
         int amount = Mathf.RoundToInt(scoreAmountFirstTimeCorrectDelivered - (timesPackageWrongDeliveredCounter * timesWrongDeliveredPenalty));
         currentScore += amount;
         UpdateScoreText();
-        mailbox.ShowScorePopup(amount);
+        spot.ShowScorePopup(amount);
     }
 
-    public void DecreaseScorePackageWrongDelivered(Mailbox mailbox)
+    public void DecreaseScorePackageWrongDelivered(Spot spot)
     {
         Debug.Log("Remove score: Package wrong delivered");
         currentScore -= scoreAmountWrongDelivered;
         UpdateScoreText();
-        mailbox.ShowScorePopup(-scoreAmountWrongDelivered);
+        spot.ShowScorePopup(-scoreAmountWrongDelivered);
     }
 }

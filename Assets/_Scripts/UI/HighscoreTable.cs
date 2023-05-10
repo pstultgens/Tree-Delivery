@@ -155,7 +155,7 @@ public class HighscoreTable : MonoBehaviour
     public void ShowHighscores(LevelEnum levelName)
     {
         List<HighscoreEntry> entries = LoadTop10HighscoresForLevel(levelName);
-        levelNameText.text = DifficultyController.Instance.currentLevelDifficulty.GetName();
+        levelNameText.text = HintController.Instance.currentLevel.GetName();
 
         CleanHighscoreTableFromEntries();
         highscoreEntryTransformList = new List<Transform>();

@@ -236,7 +236,7 @@ public class SceneManager : MonoBehaviour
     public void ContinueAfterLevelCompleted()
     {
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
-        if (highscoreTable.IsHighscoreInTop10(DifficultyController.Instance.currentLevelDifficulty, ScoreController.currentScore))
+        if (highscoreTable.IsHighscoreInTop10(HintController.Instance.currentLevel, ScoreController.currentScore))
         {
             // Input Highscore Window
             StartCoroutine(ShowInputHighscoreCoroutine());
@@ -258,7 +258,7 @@ public class SceneManager : MonoBehaviour
         }
 
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
-        highscoreTable.AddHighscoreEntry(DifficultyController.Instance.currentLevelDifficulty, ScoreController.currentScore, input.GetName());
+        highscoreTable.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore, input.GetName());
 
         StartCoroutine(ShowHighscoreTableCoroutine());
     }
@@ -282,7 +282,7 @@ public class SceneManager : MonoBehaviour
         highscoreTableWindow.SetActive(true);
 
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
-        highscoreTable.ShowHighscores(DifficultyController.Instance.currentLevelDifficulty);
+        highscoreTable.ShowHighscores(HintController.Instance.currentLevel);
 
         SetFirstSelectedUIButton(highscoreTableFirstSelectedButton);
         fadeTransition.SetTrigger("End");
@@ -297,7 +297,7 @@ public class SceneManager : MonoBehaviour
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 
-        switch (DifficultyController.Instance.DetermineNextLevel())
+        switch (HintController.Instance.DetermineNextLevel())
         {
             case LevelEnum.MainMenu:
                 BackToMainMenu();
@@ -341,7 +341,7 @@ public class SceneManager : MonoBehaviour
     {
         selectedCar = carName;
 
-        DifficultyController.Instance.SetLevelDifficulty(LevelEnum.Tutorial);
+        HintController.Instance.SetLevelDifficulty(LevelEnum.Tutorial);
 
         StartCoroutine(LoadLevelCoroutine("Tutorial"));
     }

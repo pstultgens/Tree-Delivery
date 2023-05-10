@@ -13,14 +13,14 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
 
     public bool allPackagesCorrectDelivered;
-    public bool isCollidingWithMailbox;
+    public bool isCollidingWithSpot;
     public bool isCollidingWithPackage;
 
     private CarVfxHandler carVfxHandler;
 
     public Package currentCollectedPackage;
     private Package[] allPackages;
-    public Mailbox currentCollidingMailbox;
+    public Spot currentCollidingSpot;
     public Package currentCollidingPackage;
 
     private ScoreController scoreController;
@@ -39,10 +39,10 @@ public class DeliveryController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Mailbox"))
+        if (other.tag.Equals("Spot"))
         {
-            isCollidingWithMailbox = true;
-            currentCollidingMailbox = other.GetComponent<Mailbox>();
+            isCollidingWithSpot = true;
+            currentCollidingSpot = other.GetComponent<Spot>();
         }
 
         if (other.tag.Equals("Package"))
@@ -54,10 +54,10 @@ public class DeliveryController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag.Equals("Mailbox"))
+        if (other.tag.Equals("Spot"))
         {
-            isCollidingWithMailbox = false;
-            currentCollidingMailbox = null;
+            isCollidingWithSpot = false;
+            currentCollidingSpot = null;
         }
         if (other.tag.Equals("Package"))
         {
@@ -80,12 +80,12 @@ public class DeliveryController : MonoBehaviour
 
     public void DropOrPickupPackage()
     {
-        if (currentCollidingPackage == null && currentCollidingMailbox == null && currentCollectedPackage == null)
+        if (currentCollidingPackage == null && currentCollidingSpot == null && currentCollectedPackage == null)
         {
             return;
         }
 
-        if (currentCollectedPackage != null && !isCollidingWithMailbox)
+        if (currentCollectedPackage != null && !isCollidingWithSpot)
         {
             DropPackage();
         }
@@ -94,14 +94,14 @@ public class DeliveryController : MonoBehaviour
             PickupPackage();
         }
         else if (currentCollectedPackage == null &&
-            !currentCollidingMailbox.hasReceivedCorrectPackage &&
-            currentCollidingMailbox.hasReceivedPackage &&
-            isCollidingWithMailbox &&
+            !currentCollidingSpot.hasReceivedCorrectPackage &&
+            currentCollidingSpot.hasReceivedPackage &&
+            isCollidingWithSpot &&
             !isCollidingWithPackage)
         {
             PickupDeliveredPackage();
         }
-        else if (currentCollectedPackage != null && isCollidingWithMailbox)
+        else if (currentCollectedPackage != null && isCollidingWithSpot)
         {
             TryToDeliverPackage();
         }
@@ -143,25 +143,25 @@ public class DeliveryController : MonoBehaviour
 
         int packageValue = currentCollectedPackage.Value();
 
-        if (currentCollidingMailbox.hasReceivedPackage)
+        if (currentCollidingSpot.hasReceivedPackage)
         {
             return;
         }
 
-        if (currentCollidingMailbox.correctValue.Equals(packageValue))
+        if (currentCollidingSpot.correctValue.Equals(packageValue))
         {
             Debug.Log("Package Correct Delivered");
 
             collectedPackageOnCarSprite.SetActive(false);
             collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
-            currentCollidingMailbox.CorrectPackageReceived();
-            currentCollectedPackage.CorrectDelivered(currentCollidingMailbox);
+            currentCollidingSpot.CorrectPackageReceived();
+            currentCollectedPackage.CorrectDelivered(currentCollidingSpot);
 
             allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
             currentCollectedPackage = null;
         }
-        else if (!currentCollidingMailbox.hasReceivedCorrectPackage)
+        else if (!currentCollidingSpot.hasReceivedCorrectPackage)
         {
             Debug.Log("Package Wrong Delivered");
 
@@ -169,31 +169,31 @@ public class DeliveryController : MonoBehaviour
 
             if (scoreController != null)
             {
-                scoreController.DecreaseScorePackageWrongDelivered(currentCollidingMailbox);
+                scoreController.DecreaseScorePackageWrongDelivered(currentCollidingSpot);
             }
 
-            DifficultyController.Instance.IncreaseWrongDelivery();
+            HintController.Instance.IncreaseWrongDelivery();
 
-            if (DifficultyController.Instance.canPackageBeDeliveredAtWrongNode)
+            if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
             {
                 collectedPackageOnCarSprite.SetActive(false);
                 collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = "";
 
-                currentCollidingMailbox.WrongPackageReceived(currentCollectedPackage.Value());
+                currentCollidingSpot.WrongPackageReceived(currentCollectedPackage.Value());
                 currentCollectedPackage.WrongDelivered();
 
                 currentCollectedPackage = null;
             }
             else
             {
-                if (DifficultyController.Instance.showHintValueWhenWrongDelivered)
+                if (HintController.Instance.showHintValueWhenWrongDelivered)
                 {
-                    currentCollidingMailbox.ShowWrongDeliveryHintValue();
+                    currentCollidingSpot.ShowWrongDeliveryHintValue();
                 }
 
-                if (DifficultyController.Instance.showHintColorWhenDelivered)
+                if (HintController.Instance.showHintColorWhenDelivered)
                 {
-                    currentCollidingMailbox.ShowWrongDeliveryHintColor();
+                    currentCollidingSpot.ShowWrongDeliveryHintColor();
                 }
             }
         }
@@ -202,7 +202,7 @@ public class DeliveryController : MonoBehaviour
     private void PickupDeliveredPackage()
     {
         Debug.Log("Pickup delivered package");
-        Package package = FindPackage(currentCollidingMailbox.receivedPackageValue);
+        Package package = FindPackage(currentCollidingSpot.receivedPackageValue);
         package.gameObject.SetActive(true);
 
         currentCollectedPackage = package;
@@ -212,7 +212,7 @@ public class DeliveryController : MonoBehaviour
         collectedPackageOnCarSprite.SetActive(true);
         collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = packageTMPro.text;
 
-        currentCollidingMailbox.PickupPackage();
+        currentCollidingSpot.PickupPackage();
 
         currentCollectedPackage.Pickedup();
     }

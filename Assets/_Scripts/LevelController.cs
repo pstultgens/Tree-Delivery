@@ -24,7 +24,7 @@ public class LevelController : MonoBehaviour
         deliveryController = FindObjectOfType<DeliveryController>();
         sceneManager = FindObjectOfType<SceneManager>();
 
-        if (DifficultyController.Instance.randomizePackageValues)
+        if (HintController.Instance.randomizePackageValues)
         {
             FillNodes(GenerateUniqueRandomIntegersBasedOnNodes());
         }
@@ -45,8 +45,8 @@ public class LevelController : MonoBehaviour
             }
             isInLevelCompleteTransition = true;
 
-            if (LevelEnum.Tutorial.Equals(DifficultyController.Instance.currentLevelDifficulty)
-                || LevelEnum.Test.Equals(DifficultyController.Instance.currentLevelDifficulty))
+            if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel)
+                || LevelEnum.Test.Equals(HintController.Instance.currentLevel))
             {
                 sceneManager.LoadNextLevel();
             }
@@ -59,32 +59,52 @@ public class LevelController : MonoBehaviour
 
     private void FillNodes(List<int> values)
     {
+        
+
         for (int i = 0; i < nodes.Count; i++)
         {
             GameObject node = nodes[i];
             Package package = node.GetComponentInChildren<Package>();
-            Mailbox mailbox = node.GetComponentInChildren<Mailbox>();
+            Spot spot = node.GetComponentInChildren<Spot>();
 
             int value = values[i];
 
             TextMeshPro packageTMPro = package.GetComponentInChildren<TextMeshPro>();
 
             packageTMPro.text = value.ToString();
-            mailbox.correctValue = value;
+            spot.correctValue = value;
 
-            if (DifficultyController.Instance.showAlreadyCorrectValueOnNode)
+            if (HintController.Instance.showAlreadyCorrectValueOnNode)
             {
-                mailbox.ShowHintCorrectValue();
+                spot.ShowHintCorrectValue();
             }
         }
-        if (DifficultyController.Instance.showUIPackages)
+        if (HintController.Instance.showUIPackages)
         {
+            if (HintController.Instance.randomizeOrderUIPackages)
+            {
+                values = RandomizeList(values);
+            }
             uiController.ShowUIPackages(values);
         }
         else
         {
             uiController.HideUIPackages();
         }
+    }
+
+    private List<int> RandomizeList(List<int> values)
+    {
+        // Use Fisher-Yates shuffle algorithm
+        for (int i = values.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            int temp = values[i];
+            values[i] = values[randomIndex];
+            values[randomIndex] = temp;
+        }
+
+        return values;
     }
 
     private List<int> GenerateUniqueRandomIntegersBasedOnNodes()

@@ -54,7 +54,7 @@ public class AStarLite : MonoBehaviour
                         || hitCollider.transform.CompareTag("SpikeTrap")
                         || hitCollider.transform.CompareTag("Boost")
                         || hitCollider.transform.CompareTag("Package")
-                        || hitCollider.transform.CompareTag("Mailbox"))
+                        || hitCollider.transform.CompareTag("Spot"))
                     {
                         continue;
                     }

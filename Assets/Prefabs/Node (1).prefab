@@ -116,13 +116,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7430213654231317421}
     m_Modifications:
+    - target: {fileID: 3409018951303528871, guid: 84511f8faae4f4a94b54b07b9873ea76, type: 3}
+      propertyPath: edgeLeftClosed
+      value: 
+      objectReference: {fileID: 5413078175689387454}
+    - target: {fileID: 3409018951303528871, guid: 84511f8faae4f4a94b54b07b9873ea76, type: 3}
+      propertyPath: edgeRightClosed
+      value: 
+      objectReference: {fileID: 4147757677556981327}
     - target: {fileID: 7878354532052387974, guid: 84511f8faae4f4a94b54b07b9873ea76, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878354532709353541, guid: 84511f8faae4f4a94b54b07b9873ea76, type: 3}
       propertyPath: m_Name
-      value: Mailbox
+      value: Spot
       objectReference: {fileID: 0}
     - target: {fileID: 7878354532709353542, guid: 84511f8faae4f4a94b54b07b9873ea76, type: 3}
       propertyPath: m_RootOrder
@@ -341,6 +349,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5551055286805258154, guid: 3c796d124a87f4a14a644d92ca8abb0b, type: 3}
   m_PrefabInstance: {fileID: 8396544784616522212}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4147757677556981327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5551055286805258155, guid: 3c796d124a87f4a14a644d92ca8abb0b, type: 3}
+  m_PrefabInstance: {fileID: 8396544784616522212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9178356294920671290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -446,6 +459,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+--- !u!1 &5413078175689387454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3782759254978805124, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+  m_PrefabInstance: {fileID: 9178356294920671290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5413078175689387455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3782759254978805125, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}

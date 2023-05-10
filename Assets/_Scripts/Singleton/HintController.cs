@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class DifficultyController : MonoBehaviour
+public class HintController : MonoBehaviour
 {
-    public static DifficultyController Instance { get; private set; }
+    public static HintController Instance { get; private set; }
 
-    [SerializeField] public LevelEnum currentLevelDifficulty = LevelEnum.Tutorial;
+    [SerializeField] public LevelEnum currentLevel = LevelEnum.Tutorial;
+
+    [Header("READ ONLY STATS")]
     [SerializeField] public bool showAlreadyCorrectValueOnNode;
     [SerializeField] public bool showHintValueWhenWrongDelivered;
     [SerializeField] public bool showHintColorWhenDelivered; // Correct or wrong
-    [SerializeField] public bool showHintUIPackageAndMinimap;
+    [SerializeField] public bool showHintUIPackageAndMinimapNode;
     [SerializeField] public bool showPackageOnMinimap;
     [SerializeField] public bool showPackageValueOnMinimap;
     [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
@@ -36,7 +38,7 @@ public class DifficultyController : MonoBehaviour
 
     private void Start()
     {
-        UpdateDifficultyStats();
+        UpdateHintStats();
     }
 
     public void IncreaseWrongDelivery()
@@ -46,55 +48,55 @@ public class DifficultyController : MonoBehaviour
 
     public void SetLevelDifficulty(LevelEnum levelEnum)
     {
-        currentLevelDifficulty = levelEnum;
-        UpdateDifficultyStats();
+        currentLevel = levelEnum;
+        UpdateHintStats();
     }
 
 
     public LevelEnum DetermineNextLevel()
     {
-        Debug.Log("Current Level Difficulty: " + currentLevelDifficulty.ToString());
-        switch (currentLevelDifficulty)
+        Debug.Log("Current Level Difficulty: " + currentLevel.ToString());
+        switch (currentLevel)
         {
             case LevelEnum.Tutorial:
-                currentLevelDifficulty = LevelEnum.Test;
+                currentLevel = LevelEnum.Test;
                 break;
             case LevelEnum.Test:
                 if (countWrongDeliveries > acceptableNumberOfWrongDeliveries)
                 {
-                    currentLevelDifficulty = LevelEnum.Easy1;
+                    currentLevel = LevelEnum.Easy1;
                 }
                 else
                 {
-                    currentLevelDifficulty = LevelEnum.Hard1;
+                    currentLevel = LevelEnum.Hard1;
                 }
                 break;
             case LevelEnum.Easy1:
-                currentLevelDifficulty = LevelEnum.Easy2;
+                currentLevel = LevelEnum.Easy2;
                 break;
             case LevelEnum.Easy2:
-                currentLevelDifficulty = LevelEnum.Easy3;
+                currentLevel = LevelEnum.Easy3;
                 break;
             case LevelEnum.Hard1:
-                currentLevelDifficulty = LevelEnum.Hard2;
+                currentLevel = LevelEnum.Hard2;
                 break;
             default:
                 Debug.LogWarning("Unable to determine difficulty, back to main menu!");
-                currentLevelDifficulty = LevelEnum.MainMenu;
+                currentLevel = LevelEnum.MainMenu;
                 break;
         }
-        Debug.Log("Next Determined Level Difficulty: " + currentLevelDifficulty.ToString());
+        Debug.Log("Next Determined Level Difficulty: " + currentLevel.ToString());
 
-        UpdateDifficultyStats();
+        UpdateHintStats();
 
-        return currentLevelDifficulty;
+        return currentLevel;
     }
 
-    public void UpdateDifficultyStats()
+    private void UpdateHintStats()
     {
         Debug.Log("Update Difficulty Stats");
 
-        switch (currentLevelDifficulty)
+        switch (currentLevel)
         {
             case LevelEnum.MainMenu:
                 break;
@@ -103,7 +105,7 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = true;
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
@@ -116,20 +118,21 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
                 showUIPackages = true;
                 randomizeOrderUIPackages = true;
                 randomizePackageValues = true;
+                acceptableNumberOfWrongDeliveries = 1;
                 break;
             case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");
                 showAlreadyCorrectValueOnNode = true;
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
@@ -142,7 +145,7 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
@@ -155,7 +158,7 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = true;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
@@ -168,7 +171,7 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = true;
                 showPackageValueOnMinimap = true;
                 canPackageBeDeliveredAtWrongNode = false;
@@ -181,7 +184,7 @@ public class DifficultyController : MonoBehaviour
                 showAlreadyCorrectValueOnNode = false;
                 showHintValueWhenWrongDelivered = false;
                 showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimap = true;
+                showHintUIPackageAndMinimapNode = true;
                 showPackageOnMinimap = false;
                 showPackageValueOnMinimap = false;
                 canPackageBeDeliveredAtWrongNode = false;

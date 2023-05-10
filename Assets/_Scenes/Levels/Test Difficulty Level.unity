@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 1332214397}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -66.36
@@ -187,6 +191,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 1332214399}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -357,6 +365,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 1119242804}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -62.28
@@ -377,6 +389,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 1604016865}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -949,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318258, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_Name
-      value: DifficultyController
+      value: HintController
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318259, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_RootOrder
@@ -8361,6 +8377,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 789339340}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.57
@@ -8381,6 +8401,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 1392404415}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8608,6 +8632,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 1603943814}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -59.42
@@ -8628,6 +8656,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 1603943816}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8909,6 +8941,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 881015182}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -78.76
@@ -8929,6 +8965,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 881015184}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -28725,6 +28765,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 839581467}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -55.63
@@ -28745,6 +28789,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 839581469}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -30129,6 +30177,10 @@ PrefabInstance:
       propertyPath: minimapEdgeRight
       value: 
       objectReference: {fileID: 832838623}
+    - target: {fileID: 741090934477749491, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: m_Name
+      value: Spot 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3838748914131844937, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 59.24
@@ -30149,6 +30201,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211279804534469905, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
+      propertyPath: minimapNode
+      value: 
+      objectReference: {fileID: 1090628647}
     - target: {fileID: 5413078175689387454, guid: c73f6d0e728fc42ae93bf4383be3d8e1, type: 3}
       propertyPath: m_IsActive
       value: 0

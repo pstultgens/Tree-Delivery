@@ -8,29 +8,37 @@ public enum LevelEnum
     Tutorial,
     [LevelName("Test Level")]
     Test,
-    [LevelName("Easy Level 1")]
+    [LevelName("Level 1 - Easy")]
     Easy1,
-    [LevelName("Hard Level 1")]
-    Hard1,
-    [LevelName("Easy Level 2")]
+    [LevelName("Level 2 - Easy")]
     Easy2,
-    [LevelName("Hard Level 2")]
-    Hard2,
-    [LevelName("Easy Level 3")]
+    [LevelName("Level 3 - Easy")]
     Easy3,
-    [LevelName("Hard Level 3")]
-    Hard3,
-    [LevelName("Easy Level 4")]
+    [LevelName("Level 4 - Easy")]
     Easy4,
-    [LevelName("Hard Level 4")]
-    Hard4,
-    [LevelName("Easy Level 5")]
+    [LevelName("Level 5 - Easy")]
     Easy5,
-    [LevelName("Hard Level 5")]
-    Hard5
+    [LevelName("Level 6 - Easy")]
+    Easy6,
+    [LevelName("Level 7 - Easy")]
+    Easy7,
+    [LevelName("Level 1 - Hard")]
+    Hard1,
+    [LevelName("Level 2 - Hard")]
+    Hard2,
+    [LevelName("Level 3 - Hard")]
+    Hard3,
+    [LevelName("Level 4 - Hard")]
+    Hard4,
+    [LevelName("Level 5 - Hard")]
+    Hard5,
+    [LevelName("Level 6 - Hard")]
+    Hard6,
+    [LevelName("Level 7 - Hard")]
+    Hard7
 }
 
-public class LevelName : Attribute 
+public class LevelName : Attribute
 {
     public string Name;
 

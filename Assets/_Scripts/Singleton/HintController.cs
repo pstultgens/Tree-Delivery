@@ -13,10 +13,12 @@ public class HintController : MonoBehaviour
     [SerializeField] public bool showHintUIPackageAndMinimapNode;
     [SerializeField] public bool showPackageOnMinimap;
     [SerializeField] public bool showPackageValueOnMinimap;
-    [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
     [SerializeField] public bool showUIPackages;
+
     [SerializeField] public bool randomizeOrderUIPackages;
     [SerializeField] public bool randomizePackageValues;
+    [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
+    [SerializeField] public bool spawnPackageAfterPackage;
 
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
 
@@ -101,100 +103,111 @@ public class HintController : MonoBehaviour
             case LevelEnum.MainMenu:
                 break;
             case LevelEnum.Tutorial:
-                Debug.Log("Set Tutorial Mode stats");
-                showAlreadyCorrectValueOnNode = true;
-                showHintValueWhenWrongDelivered = false;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = true;
-                randomizePackageValues = true;
+                Debug.Log("Set Tutorial Mode stats");     
+                SetHints(true, false, true, true, true, true, true);
+                SetDifficulties(true, true, false, false);
                 break;
             case LevelEnum.Test:
-                Debug.Log("Set Test Mode stats");
-                showAlreadyCorrectValueOnNode = false;
-                showHintValueWhenWrongDelivered = false;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = true;
-                randomizePackageValues = true;
+                Debug.Log("Set Test Mode stats");         
+                SetHints(false, false, true, true, true, true, true);
+                SetDifficulties(true, true, false, false);
                 acceptableNumberOfWrongDeliveries = 1;
                 break;
             case LevelEnum.Easy1:
-                Debug.Log("Set Easy 1 Mode stats");
-                showAlreadyCorrectValueOnNode = true;
-                showHintValueWhenWrongDelivered = true;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = false;
-                randomizePackageValues = false;
+                Debug.Log("Set Easy 1 Mode stats");  
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Easy2:
                 Debug.Log("Set Easy 2 Mode stats");
-                showAlreadyCorrectValueOnNode = false;
-                showHintValueWhenWrongDelivered = true;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = false;
-                randomizePackageValues = true;                
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Easy3:
                 Debug.Log("Set Easy 3 Mode stats");
-                showAlreadyCorrectValueOnNode = false;
-                showHintValueWhenWrongDelivered = true;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = false;
-                randomizePackageValues = true;                
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
+                break;
+            case LevelEnum.Easy4:
+                Debug.Log("Set Easy 4 Mode stats");
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
+                break;
+            case LevelEnum.Easy5:
+                Debug.Log("Set Easy 5 Mode stats");
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
+                break;
+            case LevelEnum.Easy6:
+                Debug.Log("Set Easy 6 Mode stats");
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
+                break;
+            case LevelEnum.Easy7:
+                Debug.Log("Set Easy 7 Mode stats");
+                SetHints(true, true, true, true, true, true, true);
+                SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Hard1:
-                Debug.Log("Set Hard 1 Mode stats");
-                showAlreadyCorrectValueOnNode = false;
-                showHintValueWhenWrongDelivered = false;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = true;
-                showPackageValueOnMinimap = true;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = true;
-                randomizeOrderUIPackages = true;
-                randomizePackageValues = true;
+                Debug.Log("Set Hard 1 Mode stats");                
+                SetHints(false, false, true, true, true, false, true);
+                SetDifficulties(true, true, false, false);                
                 break;
             case LevelEnum.Hard2:
                 Debug.Log("Set Hard 2 Mode stats");
-                showAlreadyCorrectValueOnNode = false;
-                showHintValueWhenWrongDelivered = false;
-                showHintColorWhenDelivered = true;
-                showHintUIPackageAndMinimapNode = true;
-                showPackageOnMinimap = false;
-                showPackageValueOnMinimap = false;
-                canPackageBeDeliveredAtWrongNode = false;
-                showUIPackages = false;
-                randomizeOrderUIPackages = true;
-                randomizePackageValues = true;
+                SetHints(false, false, true, true, true, false, true);
+                SetDifficulties(true, true, false, false);
+                break;
+            case LevelEnum.Hard3:
+                Debug.Log("Set Hard 3 Mode stats");
+                SetHints(false, false, true, true, true, false, true);
+                SetDifficulties(true, true, false, false);
+                break;
+            case LevelEnum.Hard4:
+                Debug.Log("Set Hard 4 Mode stats");
+                SetHints(false, false, false, false, true, false, true);
+                SetDifficulties(true, true, true, false);
+                break;
+            case LevelEnum.Hard5:
+                Debug.Log("Set Hard 5 Mode stats");
+                SetHints(false, false, false, false, true, false, true);
+                SetDifficulties(true, true, true, false);
+                break;
+            case LevelEnum.Hard6:
+                Debug.Log("Set Hard 6 Mode stats");
+                SetHints(false, false, false, false, false, false, true);
+                SetDifficulties(true, true, true, true);
+                break;
+            case LevelEnum.Hard7:
+                Debug.Log("Set Hard 7 Mode stats");
+                SetHints(false, false, false, false, false, false, true);
+                SetDifficulties(true, true, true, true);
                 break;
             default:
                 Debug.LogWarning("Undefined Level Mode in DifficultyController!");
                 break;
         }
+    }
+
+    private void SetHints(
+        bool showAlreadyCorrectValueOnNode, bool showHintValueWhenWrongDelivered, bool showHintColorWhenDelivered,
+        bool showHintUIPackageAndMinimapNode, bool showPackageOnMinimap, bool showPackageValueOnMinimap,
+        bool showUIPackages)
+    {
+        this.showAlreadyCorrectValueOnNode = showAlreadyCorrectValueOnNode;
+        this.showHintValueWhenWrongDelivered = showHintValueWhenWrongDelivered;
+        this.showHintColorWhenDelivered = showHintColorWhenDelivered;
+        this.showHintUIPackageAndMinimapNode = showHintUIPackageAndMinimapNode;
+        this.showPackageOnMinimap = showPackageOnMinimap;
+        this.showPackageValueOnMinimap = showPackageValueOnMinimap;
+        this.showUIPackages = showUIPackages;
+    }
+
+    private void SetDifficulties(bool randomizeOrderUIPackages, bool randomizePackageValues, bool canPackageBeDeliveredAtWrongNode, bool spawnPackageAfterPackage)
+    {
+        this.randomizeOrderUIPackages = randomizeOrderUIPackages;
+        this.randomizePackageValues = randomizePackageValues;
+        this.canPackageBeDeliveredAtWrongNode = canPackageBeDeliveredAtWrongNode;
+        this.spawnPackageAfterPackage = spawnPackageAfterPackage;
     }
 }

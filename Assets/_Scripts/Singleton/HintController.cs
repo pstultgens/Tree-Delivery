@@ -130,23 +130,23 @@ public class HintController : MonoBehaviour
                 break;
             case LevelEnum.Easy4:
                 Debug.Log("Set Easy 4 Mode stats");
-                SetHints(true, true, true, true, true, true, true);
+                SetHints(false, true, true, true, true, true, true);
                 SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Easy5:
                 Debug.Log("Set Easy 5 Mode stats");
-                SetHints(true, true, true, true, true, true, true);
+                SetHints(false, true, true, true, true, true, true);
                 SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Easy6:
                 Debug.Log("Set Easy 6 Mode stats");
-                SetHints(true, true, true, true, true, true, true);
+                SetHints(false, true, true, true, true, true, true);
                 SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Easy7:
                 Debug.Log("Set Easy 7 Mode stats");
-                SetHints(true, true, true, true, true, true, true);
-                SetDifficulties(false, false, false, false);
+                SetHints(false, false, true, true, true, true, true);
+                SetDifficulties(false, true, false, false);
                 break;
             case LevelEnum.Hard1:
                 Debug.Log("Set Hard 1 Mode stats");                

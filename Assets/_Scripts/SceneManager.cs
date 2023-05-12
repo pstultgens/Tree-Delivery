@@ -28,6 +28,10 @@ public class SceneManager : MonoBehaviour
     [SerializeField] public GameObject pauseWindow;
     [SerializeField] public GameObject pauseWindowFirstSelectedButton;
 
+    [Header("Controls Window")]
+    [SerializeField] public GameObject controlsWindow;
+    [SerializeField] public GameObject controlsWindowFirstSelectedButton;
+
     [Header("Settings Window")]
     [SerializeField] public GameObject settingsWindow;
     [SerializeField] public GameObject settingsWindowFirstSelectedButton;
@@ -168,8 +172,24 @@ public class SceneManager : MonoBehaviour
         fadeTransition.SetTrigger("Start");
         yield return new WaitForSeconds(tranistionTime);
         settingsWindow.SetActive(false);
+        controlsWindow.SetActive(false);
         pauseWindow.SetActive(true);
         SetFirstSelectedUIButton(pauseWindowFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
+    }
+
+    public void ShowControlsWindow()
+    {
+        StartCoroutine(ShowControlsWindowCoroutine());
+    }
+
+    private IEnumerator ShowControlsWindowCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        pauseWindow.SetActive(false);
+        controlsWindow.SetActive(true);
+        SetFirstSelectedUIButton(controlsWindowFirstSelectedButton);
         fadeTransition.SetTrigger("End");
     }
 

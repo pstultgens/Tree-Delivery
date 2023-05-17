@@ -312,7 +312,7 @@ public class SceneManager : MonoBehaviour
         if (isLoadingLevel)
         {
             return;
-        }        
+        }
         isLoadingLevel = true;
         Debug.Log("Load next Level...");
 

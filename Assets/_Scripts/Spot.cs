@@ -61,7 +61,7 @@ public class Spot : MonoBehaviour
     public void ShowHintCorrectValue()
     {
         textMeshPro.text = correctValue.ToString();
-        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0.6f);
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
 
         minimapNodeTextMeshPro.text = correctValue.ToString();
     }

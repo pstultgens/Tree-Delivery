@@ -52,6 +52,7 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator LevelCompleteCoroutine()
     {
+        SceneManager.isGamePaused = true; 
         // Wait some time before showing the Level Complete Window
         yield return new WaitForSeconds(1.5f);
 

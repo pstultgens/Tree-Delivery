@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -45,21 +46,29 @@ public class LevelController : MonoBehaviour
             }
             isInLevelCompleteTransition = true;
 
-            if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel)
+            StartCoroutine(LevelCompleteCoroutine());            
+        }
+    }
+
+    private IEnumerator LevelCompleteCoroutine()
+    {
+        // Wait some time before showing the Level Complete Window
+        yield return new WaitForSeconds(1.5f);
+
+        if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel)
                 || LevelEnum.Test.Equals(HintController.Instance.currentLevel))
-            {
-                sceneManager.LoadNextLevel();
-            }
-            else
-            {
-                sceneManager.ShowLevelComplete();
-            }
+        {
+            sceneManager.LoadNextLevel();
+        }
+        else
+        {
+            sceneManager.ShowLevelComplete();
         }
     }
 
     private void FillNodes(List<int> values)
     {
-        
+
 
         for (int i = 0; i < nodes.Count; i++)
         {

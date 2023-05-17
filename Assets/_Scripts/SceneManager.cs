@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using Cinemachine;
 using UnityEngine.EventSystems;
-using TMPro;
 
 
 public class SceneManager : MonoBehaviour
@@ -246,8 +245,6 @@ public class SceneManager : MonoBehaviour
 
     IEnumerator ShowLevelCompleteCoroutine()
     {
-        // Wait some time before showing the Level Complete Window
-        yield return new WaitForSeconds(1.5f);
         fadeTransition.SetTrigger("Start");
         yield return new WaitForSeconds(tranistionTime);
         levelCompleteWindow.SetActive(true);
@@ -420,7 +417,7 @@ public class SceneManager : MonoBehaviour
     }
 
     IEnumerator LoadLevelCoroutine(string sceneName)
-    {
+    {      
         // Play animation
         fadeTransition.SetTrigger("Start");
 

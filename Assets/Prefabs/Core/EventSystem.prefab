@@ -65,11 +65,11 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
-  m_PointAction: {fileID: 0}
+  m_PointAction: {fileID: 1928195748818838620, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
   m_MoveAction: {fileID: 2227060209702793083, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
   m_SubmitAction: {fileID: -6813916199034364282, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
   m_CancelAction: {fileID: 1139360950891597748, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
-  m_LeftClickAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: 4139db33c15df484b8bbc53484493b9d, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 0}

@@ -5369,6 +5369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  normalColor:
+    serializedVersion: 2
+    rgba: 0
 --- !u!95 &540813721 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 439333091917504616, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
@@ -6494,6 +6497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  normalColor:
+    serializedVersion: 2
+    rgba: 0
 --- !u!1001 &1177462691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10109,6 +10115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  normalColor:
+    serializedVersion: 2
+    rgba: 0
 --- !u!1 &1691505525
 GameObject:
   m_ObjectHideFlags: 0

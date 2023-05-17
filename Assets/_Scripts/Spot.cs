@@ -191,14 +191,14 @@ public class Spot : MonoBehaviour
         ShowCorrectValue();
         minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
-        HideValue();
-
+        
         if (HintController.Instance.showAlreadyCorrectValueOnNode)
         {
             minimapNodeTextMeshPro.text = correctValue.ToString();
         }
         else
         {
+            HideValue();
             minimapNodeTextMeshPro.text = "?";
         }
 

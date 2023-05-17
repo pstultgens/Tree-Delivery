@@ -92,7 +92,7 @@ public class HintController : MonoBehaviour
                 currentLevel = LevelEnum.Easy7;
                 break;
             case LevelEnum.Easy7:
-                currentLevel = LevelEnum.MainMenu;
+                currentLevel = LevelEnum.Hard1;
                 break;
             case LevelEnum.Hard1:
                 currentLevel = LevelEnum.Hard2;
@@ -141,6 +141,7 @@ public class HintController : MonoBehaviour
                 Debug.Log("Set Test Mode stats");         
                 SetHints(false, false, true, true, true, true, true);
                 SetDifficulties(true, true, false, false);
+                acceptableNumberOfWrongDeliveries = 2;
                 break;
             case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");  

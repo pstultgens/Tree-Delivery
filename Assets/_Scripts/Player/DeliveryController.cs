@@ -167,11 +167,6 @@ public class DeliveryController : MonoBehaviour
 
             currentCollectedPackage.AddCounterWrongDelivered();
 
-            if (scoreController != null)
-            {
-                scoreController.DecreaseScorePackageWrongDelivered(currentCollidingSpot);
-            }
-
             HintController.Instance.IncreaseWrongDelivery();
 
             if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
@@ -186,6 +181,11 @@ public class DeliveryController : MonoBehaviour
             }
             else
             {
+                if (scoreController != null)
+                {
+                    scoreController.DecreaseScorePackageWrongDelivered(currentCollidingSpot);
+                }
+
                 if (HintController.Instance.showHintValueWhenWrongDelivered)
                 {
                     currentCollidingSpot.ShowWrongDeliveryHintValue();

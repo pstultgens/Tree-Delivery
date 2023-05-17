@@ -55,13 +55,16 @@ public class Package : MonoBehaviour
     {
         isCorrectDelivered = true;
 
-        if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
+        if (!HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
-            scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(spot);
-        }
-        else if (scoreController != null)
-        {
-            scoreController.IncreaseScorePackageDelivered(spot, timesPackageWrongDeliveredCounter);
+            if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
+            {
+                scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(spot);
+            }
+            else if (scoreController != null)
+            {
+                scoreController.IncreaseScorePackageDelivered(spot, timesPackageWrongDeliveredCounter);
+            }
         }
 
         if (HintController.Instance.showHintUIPackageAndMinimapNode)

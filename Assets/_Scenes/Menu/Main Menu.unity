@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396749334229318258, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_Name
-      value: DifficultyController
+      value: HintController
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318259, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1396749334229318259, guid: 2242581d0954b4142aa9d79ab62c8f26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -408,7 +408,7 @@ RectTransform:
   - {fileID: 590482915}
   - {fileID: 1838796102}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5369,9 +5369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  normalColor:
-    serializedVersion: 2
-    rgba: 0
 --- !u!95 &540813721 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 439333091917504616, guid: 7c2f3aeb4411f4c689756bc7ba589ace, type: 3}
@@ -5390,7 +5387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5332156255537465577, guid: 73057aa0bd02d43b5b224a618ab686a0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5332156255537465577, guid: 73057aa0bd02d43b5b224a618ab686a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5701,7 +5698,7 @@ Transform:
   - {fileID: 1322240892}
   - {fileID: 471815191}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &711930428
 GameObject:
@@ -5844,7 +5841,7 @@ Transform:
   - {fileID: 183836689}
   - {fileID: 1796447831}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &795081735
 GameObject:
@@ -5893,7 +5890,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &834220347
 PrefabInstance:
@@ -6053,7 +6050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6644550397608469669, guid: 301215dc4f8e6467b8956725ebb1a0ad, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6644550397608469669, guid: 301215dc4f8e6467b8956725ebb1a0ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6347,6 +6344,10 @@ PrefabInstance:
       propertyPath: m_FrequencyGain
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6203503328505191444, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d64ce60a7e824cd9bf120b1fce266d1, type: 3}
 --- !u!1 &1173804574
@@ -6497,9 +6498,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  normalColor:
-    serializedVersion: 2
-    rgba: 0
 --- !u!1001 &1177462691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6537,7 +6535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2106300141862044978, guid: b7ef4b6ecee5b4d6f94afccb91e7a049, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2106300141862044978, guid: b7ef4b6ecee5b4d6f94afccb91e7a049, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10115,9 +10113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
-  normalColor:
-    serializedVersion: 2
-    rgba: 0
 --- !u!1 &1691505525
 GameObject:
   m_ObjectHideFlags: 0
@@ -10686,7 +10681,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3066938306866103822, guid: 3c01cd0ef21da42fca1623bc6fd7153a, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3066938306866103822, guid: 3c01cd0ef21da42fca1623bc6fd7153a, type: 3}
       propertyPath: m_LocalScale.x

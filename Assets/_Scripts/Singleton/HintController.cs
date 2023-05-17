@@ -79,8 +79,38 @@ public class HintController : MonoBehaviour
             case LevelEnum.Easy2:
                 currentLevel = LevelEnum.Easy3;
                 break;
+            case LevelEnum.Easy3:
+                currentLevel = LevelEnum.Easy4;
+                break;
+            case LevelEnum.Easy4:
+                currentLevel = LevelEnum.Easy5;
+                break;
+            case LevelEnum.Easy5:
+                currentLevel = LevelEnum.Easy6;
+                break;
+            case LevelEnum.Easy6:
+                currentLevel = LevelEnum.Easy7;
+                break;
+            case LevelEnum.Easy7:
+                currentLevel = LevelEnum.Hard1;
+                break;
             case LevelEnum.Hard1:
                 currentLevel = LevelEnum.Hard2;
+                break;
+            case LevelEnum.Hard2:
+                currentLevel = LevelEnum.Hard3;
+                break;
+            case LevelEnum.Hard3:
+                currentLevel = LevelEnum.Hard4;
+                break;
+            case LevelEnum.Hard4:
+                currentLevel = LevelEnum.Hard5;
+                break;
+            case LevelEnum.Hard5:
+                currentLevel = LevelEnum.Hard6;
+                break;
+            case LevelEnum.Hard6:
+                currentLevel = LevelEnum.Hard7;
                 break;
             default:
                 Debug.LogWarning("Unable to determine difficulty, back to main menu!");

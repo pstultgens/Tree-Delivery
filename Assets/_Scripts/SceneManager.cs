@@ -334,11 +334,38 @@ public class SceneManager : MonoBehaviour
             case LevelEnum.Easy3:
                 StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
                 break;
+            case LevelEnum.Easy4:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 4"));
+                break;
+            case LevelEnum.Easy5:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 5"));
+                break;
+            case LevelEnum.Easy6:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 6"));
+                break;
+            case LevelEnum.Easy7:
+                StartCoroutine(LoadLevelCoroutine("Easy Level 7"));
+                break;
             case LevelEnum.Hard1:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
                 break;
             case LevelEnum.Hard2:
                 StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
+                break;
+            case LevelEnum.Hard3:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 3"));
+                break;
+            case LevelEnum.Hard4:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 4"));
+                break;
+            case LevelEnum.Hard5:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 5"));
+                break;
+            case LevelEnum.Hard6:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 6"));
+                break;
+            case LevelEnum.Hard7:
+                StartCoroutine(LoadLevelCoroutine("Hard Level 7"));
                 break;
             default:
                 Debug.LogWarning("Unable to load level by difficulty!");

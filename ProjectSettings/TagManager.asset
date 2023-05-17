@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Package
-  - Mailbox
   - Boost
   - AI
   - MinimapCamera
@@ -59,7 +58,7 @@ TagManager:
   - name: Road
     uniqueID: 2919723561
     locked: 0
-  - name: Mailbox
+  - name: Spot
     uniqueID: 2474154763
     locked: 0
   - name: PowerUps

@@ -457,6 +457,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoadBlock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396419, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396419, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396419, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396419, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396419, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156617672102396430, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
+      propertyPath: m_Name
+      value: RoadBlock (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a17de14229a4979af865a1f44f0b8f, type: 3}
 --- !u!1 &5413078175689387454 stripped

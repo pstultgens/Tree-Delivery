@@ -210,7 +210,7 @@ public class HintController : MonoBehaviour
                 break;
             case LevelEnum.Hard7:
                 Debug.Log("Set Hard 7 Mode stats");
-                SetHints(false, false, false, false, false, false, true);
+                SetHints(false, false, false, false, false, false, false);
                 SetDifficulties(true, true, true, true);
                 break;
             default:

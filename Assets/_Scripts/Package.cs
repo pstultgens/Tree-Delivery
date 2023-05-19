@@ -4,7 +4,8 @@ using TMPro;
 public class Package : MonoBehaviour
 {
     [SerializeField] public GameObject minimapIcon;
-    [SerializeField] public bool isCorrectDelivered;
+    public bool isCorrectDelivered;
+    public bool isDelivered;
 
     private UIController uiController;
     private GameObject player;
@@ -36,24 +37,31 @@ public class Package : MonoBehaviour
 
     public void Pickedup()
     {
+        isCorrectDelivered = false;
+        isDelivered = false;
+
         MusicController.Instance.PlayPickupSFX();
 
         uiController.PackagePickedup(Value());
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);        
     }
 
     public void Drop(Vector2 dropLocation)
     {
+        isCorrectDelivered = false;
+        isDelivered = false;
+
         MusicController.Instance.PlayDropSFX();
 
         transform.position = dropLocation;
         ShowOnMinimap();
-        gameObject.SetActive(true);
+        gameObject.SetActive(true);        
     }
 
     public void CorrectDelivered(Spot spot)
     {
         isCorrectDelivered = true;
+        isDelivered = true;
 
         if (!HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
@@ -80,6 +88,7 @@ public class Package : MonoBehaviour
     public void WrongDelivered()
     {
         isCorrectDelivered = false;
+        isDelivered = true;
 
         if (HintController.Instance.showHintUIPackageAndMinimapNode)
         {

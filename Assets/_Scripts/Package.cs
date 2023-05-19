@@ -22,11 +22,7 @@ public class Package : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        if (HintController.Instance.showPackageOnMinimap)
-        {
-            ShowOnMinimap();
-        }
+        ShowOnMinimap();
     }
 
     public int Value()
@@ -43,7 +39,7 @@ public class Package : MonoBehaviour
         MusicController.Instance.PlayPickupSFX();
 
         uiController.PackagePickedup(Value());
-        gameObject.SetActive(false);        
+        gameObject.SetActive(false);
     }
 
     public void Drop(Vector2 dropLocation)
@@ -55,7 +51,7 @@ public class Package : MonoBehaviour
 
         transform.position = dropLocation;
         ShowOnMinimap();
-        gameObject.SetActive(true);        
+        gameObject.SetActive(true);
     }
 
     public void CorrectDelivered(Spot spot)
@@ -107,18 +103,19 @@ public class Package : MonoBehaviour
 
     private void ShowOnMinimap()
     {
-        minimapIcon.SetActive(true);
-        TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
-        if (HintController.Instance.showPackageValueOnMinimap)
+        if (HintController.Instance.showPackageOnMinimap)
         {
+            minimapIcon.SetActive(true);
+            TextMeshPro minimapIconText = minimapIcon.GetComponentInChildren<TextMeshPro>();
+            if (HintController.Instance.showPackageValueOnMinimap)
+            {
 
-            minimapIconText.text = Value().ToString();
-        }
-        else
-        {
-            minimapIconText.text = "";
+                minimapIconText.text = Value().ToString();
+            }
+            else
+            {
+                minimapIconText.text = "";
+            }
         }
     }
-
-
 }

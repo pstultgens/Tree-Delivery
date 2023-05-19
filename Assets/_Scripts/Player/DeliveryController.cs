@@ -110,7 +110,16 @@ public class DeliveryController : MonoBehaviour
         }
         else if (currentCollectedPackage != null && isCollidingWithSpot)
         {
-            TryToDeliverPackage();
+
+            if (!currentCollidingSpot.hasReceivedPackage)
+            {
+                DeliverPackage();
+            }
+            else if (currentCollidingSpot.hasReceivedPackage && HintController.Instance.canPackageBeDeliveredAtWrongNode)
+            {
+
+                SwapDeliveredPackage();
+            }
         }
     }
 
@@ -144,16 +153,11 @@ public class DeliveryController : MonoBehaviour
         currentCollectedPackage = null;
     }
 
-    private void TryToDeliverPackage()
+    private void DeliverPackage()
     {
-        Debug.Log("Try to deliver package");
+        Debug.Log("Deliver package");
 
         int packageValue = currentCollectedPackage.Value();
-
-        if (currentCollidingSpot.hasReceivedPackage)
-        {
-            return;
-        }
 
         if (currentCollidingSpot.correctValue.Equals(packageValue))
         {
@@ -220,8 +224,38 @@ public class DeliveryController : MonoBehaviour
         collectedPackageOnCarSprite.GetComponentInChildren<TextMeshPro>().text = packageTMPro.text;
 
         currentCollidingSpot.PickupPackage();
-
         currentCollectedPackage.Pickedup();
+    }
+
+    private void SwapDeliveredPackage()
+    {
+        Debug.Log("Swap Package with Spot");
+        Package carPackage = currentCollectedPackage;
+
+        PickupDeliveredPackage();
+
+        int packageValue = carPackage.Value();
+
+        if (currentCollidingSpot.correctValue.Equals(packageValue))
+        {
+            Debug.Log("Swap Package Correct Delivered");
+
+            currentCollidingSpot.CorrectPackageReceived();
+            carPackage.CorrectDelivered(currentCollidingSpot);
+
+            allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
+        }
+        else if (!currentCollidingSpot.hasReceivedCorrectPackage)
+        {
+            Debug.Log("Swap Package Wrong Delivered");
+
+            carPackage.AddCounterWrongDelivered();
+
+            HintController.Instance.IncreaseWrongDelivery();
+
+            currentCollidingSpot.WrongPackageReceived(carPackage.Value());
+            carPackage.WrongDelivered();
+        }
     }
 
     private Package FindPackage(int value)

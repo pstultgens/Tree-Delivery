@@ -13,6 +13,7 @@ public class PackageSpawner : MonoBehaviour
     private bool isMoving;
 
     private List<Package> packagesToSpawn = new List<Package>();
+    private List<Package> spawnedPackages = new List<Package>();
     private Package spawnedPackage;
 
     void Start()
@@ -26,12 +27,12 @@ public class PackageSpawner : MonoBehaviour
 
     void Update()
     {
-        if(SceneManager.isGamePaused || SceneManager.isCountingDown)
+        if (SceneManager.isGamePaused || SceneManager.isCountingDown)
         {
             return;
         }
 
-        if (packagesToSpawn.Count > 0 && (spawnedPackage == null || spawnedPackage.isDelivered))
+        if (packagesToSpawn.Count > 0 && AllSpawnedPackagesDelivered())
         {
             SpawnPackage();
         }
@@ -69,7 +70,21 @@ public class PackageSpawner : MonoBehaviour
         packagesToSpawn.RemoveAt(randomIndex);
         spawnedPackage.transform.position = packageSpawnPositionStart.position;
         spawnedPackage.gameObject.SetActive(true);
+        spawnedPackages.Add(spawnedPackage);
         MoveItemToDestination();
+    }
+
+    private bool AllSpawnedPackagesDelivered()
+    {
+
+        foreach (Package package in spawnedPackages)
+        {
+            if (!package.isDelivered)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void MoveItemToDestination()

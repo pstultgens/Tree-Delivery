@@ -10,14 +10,13 @@ public class DeliveryController : MonoBehaviour
     [Header("Stats")]
     [SerializeField] GameObject collectedPackageOnCarSprite;
     [SerializeField] Transform dropPackageLocation;
-    [SerializeField] float wrongDeliveryDelay = 2.0f;
     [SerializeField] float packagePickupDelay = 1f;
 
     public bool allPackagesCorrectDelivered;
     public bool isCollidingWithSpot;
-    public bool isCollidingWithPackage;      
+    public bool isCollidingWithPackage;
 
-    public Package currentCollectedPackage;    
+    public Package currentCollectedPackage;
     public Spot currentCollidingSpot;
     public Package currentCollidingPackage;
 
@@ -25,7 +24,7 @@ public class DeliveryController : MonoBehaviour
     private Package[] allPackages;
     private ScoreController scoreController;
     private bool canPackageBePickedUp = true;
-   
+
 
     private void Awake()
     {
@@ -45,6 +44,11 @@ public class DeliveryController : MonoBehaviour
         {
             isCollidingWithSpot = true;
             currentCollidingSpot = other.GetComponent<Spot>();
+
+            if (currentCollectedPackage != null && !currentCollidingSpot.hasReceivedPackage)
+            {
+                DeliverPackage();
+            }
         }
 
         if (other.tag.Equals("Package"))
@@ -110,24 +114,18 @@ public class DeliveryController : MonoBehaviour
                 PickupDeliveredPackage();
             }
         }
-        else if (currentCollectedPackage != null && isCollidingWithSpot)
+        else if (currentCollectedPackage != null
+            && isCollidingWithSpot
+            && currentCollidingSpot.hasReceivedPackage
+            && HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
-
-            if (!currentCollidingSpot.hasReceivedPackage)
-            {
-                DeliverPackage();
-            }
-            else if (currentCollidingSpot.hasReceivedPackage && HintController.Instance.canPackageBeDeliveredAtWrongNode)
-            {
-
-                SwapDeliveredPackage();
-            }
+            SwapDeliveredPackage();
         }
     }
 
     private IEnumerator PackagePickupDelayCoroutine()
     {
-        canPackageBePickedUp = false;      
+        canPackageBePickedUp = false;
         yield return new WaitForSeconds(packagePickupDelay);
         canPackageBePickedUp = true;
     }

@@ -8,22 +8,24 @@ public class DeliveryController : MonoBehaviour
 
 
     [Header("Stats")]
-    [SerializeField] public GameObject collectedPackageOnCarSprite;
-    [SerializeField] public Transform dropPackageLocation;
-    [SerializeField] public float wrongDeliveryDelay = 2.0f;
+    [SerializeField] GameObject collectedPackageOnCarSprite;
+    [SerializeField] Transform dropPackageLocation;
+    [SerializeField] float wrongDeliveryDelay = 2.0f;
+    [SerializeField] float packagePickupDelay = 1f;
 
     public bool allPackagesCorrectDelivered;
     public bool isCollidingWithSpot;
-    public bool isCollidingWithPackage;
+    public bool isCollidingWithPackage;      
 
-    private CarVfxHandler carVfxHandler;
-
-    public Package currentCollectedPackage;
-    private Package[] allPackages;
+    public Package currentCollectedPackage;    
     public Spot currentCollidingSpot;
     public Package currentCollidingPackage;
 
+    private CarVfxHandler carVfxHandler;
+    private Package[] allPackages;
     private ScoreController scoreController;
+    private bool canPackageBePickedUp = true;
+   
 
     private void Awake()
     {
@@ -49,6 +51,11 @@ public class DeliveryController : MonoBehaviour
         {
             isCollidingWithPackage = true;
             currentCollidingPackage = other.GetComponent<Package>();
+
+            if (canPackageBePickedUp)
+            {
+                PickupPackage();
+            }
         }
     }
 
@@ -89,14 +96,10 @@ public class DeliveryController : MonoBehaviour
         {
             DropPackage();
         }
-        else if (currentCollectedPackage == null && isCollidingWithPackage)
-        {
-            PickupPackage();
-        }
         else if (currentCollectedPackage == null &&
-            currentCollidingSpot.hasReceivedPackage &&
             isCollidingWithSpot &&
-            !isCollidingWithPackage)
+            !isCollidingWithPackage &&
+            currentCollidingSpot.hasReceivedPackage)
         {
             if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
             {
@@ -106,7 +109,6 @@ public class DeliveryController : MonoBehaviour
             {
                 PickupDeliveredPackage();
             }
-
         }
         else if (currentCollectedPackage != null && isCollidingWithSpot)
         {
@@ -121,6 +123,13 @@ public class DeliveryController : MonoBehaviour
                 SwapDeliveredPackage();
             }
         }
+    }
+
+    private IEnumerator PackagePickupDelayCoroutine()
+    {
+        canPackageBePickedUp = false;      
+        yield return new WaitForSeconds(packagePickupDelay);
+        canPackageBePickedUp = true;
     }
 
     private void PickupPackage()
@@ -151,6 +160,8 @@ public class DeliveryController : MonoBehaviour
         carVfxHandler.PlayDropPackageVFX(dropLocation);
 
         currentCollectedPackage = null;
+
+        StartCoroutine(PackagePickupDelayCoroutine());
     }
 
     private void DeliverPackage()

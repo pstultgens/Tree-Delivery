@@ -29,6 +29,7 @@ public class Spot : MonoBehaviour
     [Header("SFX Audio sources")]
     [SerializeField] public AudioSource correctDeliveredAudioSource;
     [SerializeField] public AudioSource wrongDeliveredAudioSource;
+    [SerializeField] public AudioSource neutralDeliveredAudioSource;
 
     public bool hasReceivedCorrectPackage;
     public bool hasReceivedPackage;
@@ -85,12 +86,14 @@ public class Spot : MonoBehaviour
     public void HideValue()
     {
         textMeshPro.text = "?";
+        minimapNodeTextMeshPro.text = "?";
     }
 
     public void PickupPackage()
     {
         HideValue();
         hasReceivedPackage = false;
+        hasReceivedCorrectPackage = false;
         receivedPackageValue = 0;
     }
 
@@ -105,7 +108,11 @@ public class Spot : MonoBehaviour
         {
             PlayCorrectDeliveredSFX();
             PlayCorrectDeliveredVFX();
-            spriteRenderer.color = correctDeliverdColor;            
+            spriteRenderer.color = correctDeliverdColor;
+        }
+        else if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
+        {
+            PlayNeutralDeliveredSFX();
         }
 
         UpdateMinimap();
@@ -118,6 +125,9 @@ public class Spot : MonoBehaviour
         hasReceivedCorrectPackage = false;
         receivedPackageValue = packageValue;
         textMeshPro.text = packageValue.ToString();
+        minimapNodeTextMeshPro.text = packageValue.ToString();
+
+        PlayNeutralDeliveredSFX();
     }
 
     public void ShowScorePopup(int scoreAmount)
@@ -191,7 +201,7 @@ public class Spot : MonoBehaviour
         ShowCorrectValue();
         minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
-        
+
         if (HintController.Instance.showAlreadyCorrectValueOnNode)
         {
             minimapNodeTextMeshPro.text = correctValue.ToString();
@@ -223,5 +233,10 @@ public class Spot : MonoBehaviour
     private void PlayWrongDeliveredSFX()
     {
         wrongDeliveredAudioSource.Play();
+    }
+
+    private void PlayNeutralDeliveredSFX()
+    {
+        neutralDeliveredAudioSource.Play();
     }
 }

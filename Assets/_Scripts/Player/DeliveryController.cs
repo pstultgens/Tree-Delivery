@@ -94,12 +94,19 @@ public class DeliveryController : MonoBehaviour
             PickupPackage();
         }
         else if (currentCollectedPackage == null &&
-            !currentCollidingSpot.hasReceivedCorrectPackage &&
             currentCollidingSpot.hasReceivedPackage &&
             isCollidingWithSpot &&
             !isCollidingWithPackage)
         {
-            PickupDeliveredPackage();
+            if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
+            {
+                PickupDeliveredPackage();
+            }
+            else if (!currentCollidingSpot.hasReceivedCorrectPackage)
+            {
+                PickupDeliveredPackage();
+            }
+
         }
         else if (currentCollectedPackage != null && isCollidingWithSpot)
         {

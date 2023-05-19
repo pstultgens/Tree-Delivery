@@ -4,10 +4,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using Cinemachine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class SceneManager : MonoBehaviour
 {
+    private static string PLAYER_PREFS_PLAYER_NAME = "PlayerName";
+
     public static bool isGamePaused;
     public static bool isCountingDown;
 
@@ -16,6 +19,9 @@ public class SceneManager : MonoBehaviour
 
     [SerializeField] public Animator fadeTransition;
     [SerializeField] public float tranistionTime = 1f;
+
+    [Header("Player Name")]
+    [SerializeField] public TMP_InputField playerNameInputField;
 
     [Header("Instantiate Player")]
     [SerializeField] public GameObject playerYellowPickupPrefab;
@@ -38,10 +44,6 @@ public class SceneManager : MonoBehaviour
     [Header("Level Complete")]
     [SerializeField] public GameObject levelCompleteWindow;
     [SerializeField] public GameObject levelCompleteFirstSelectedButton;
-
-    [Header("Input Highscore Window")]
-    [SerializeField] public GameObject inputHighscoreWindow;
-    [SerializeField] public GameObject inputHighscoreFirstSelectedButton;
 
     [Header("Highscore Table Window")]
     [SerializeField] public GameObject highscoreTableWindow;
@@ -255,41 +257,38 @@ public class SceneManager : MonoBehaviour
     public void ContinueAfterLevelCompleted()
     {
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
+
         if (highscoreTable.IsHighscoreInTop10(HintController.Instance.currentLevel, ScoreController.currentScore))
         {
-            // Input Highscore Window
-            StartCoroutine(ShowInputHighscoreCoroutine());
+            // Input Highscore
+            InputHighscore();
         }
         else
         {
             // Show Highscore Table Window
             StartCoroutine(ShowHighscoreTableCoroutine());
         }
+
     }
 
     public void InputHighscore()
     {
-        InputHighscore input = inputHighscoreWindow.GetComponent<InputHighscore>();
+        string playerName = "";
 
-        if (string.IsNullOrEmpty(input.GetName()))
+        if (PlayerPrefs.HasKey(PLAYER_PREFS_PLAYER_NAME))
         {
-            return;
+            playerName = PlayerPrefs.GetString(PLAYER_PREFS_PLAYER_NAME);
+
+        }
+        else
+        {
+            playerName = "Debugger";
         }
 
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
-        highscoreTable.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore, input.GetName());
+        highscoreTable.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore, playerName);
 
         StartCoroutine(ShowHighscoreTableCoroutine());
-    }
-
-    IEnumerator ShowInputHighscoreCoroutine()
-    {
-        fadeTransition.SetTrigger("Start");
-        yield return new WaitForSeconds(tranistionTime);
-        levelCompleteWindow.SetActive(false);
-        inputHighscoreWindow.SetActive(true);
-        SetFirstSelectedUIButton(inputHighscoreFirstSelectedButton);
-        fadeTransition.SetTrigger("End");
     }
 
     IEnumerator ShowHighscoreTableCoroutine()
@@ -297,7 +296,6 @@ public class SceneManager : MonoBehaviour
         fadeTransition.SetTrigger("Start");
         yield return new WaitForSeconds(tranistionTime);
         levelCompleteWindow.SetActive(false);
-        inputHighscoreWindow.SetActive(false);
         highscoreTableWindow.SetActive(true);
 
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
@@ -383,6 +381,14 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine(sceneName));
     }
 
+    public void EnterPlayerName()
+    {
+        PlayerPrefs.SetString(PLAYER_PREFS_PLAYER_NAME, playerNameInputField.text);
+        PlayerPrefs.Save();
+
+        GoToScene("Select Car Menu");
+    }
+
     public void CarSelect(string carName)
     {
         selectedCar = carName;
@@ -417,7 +423,7 @@ public class SceneManager : MonoBehaviour
     }
 
     IEnumerator LoadLevelCoroutine(string sceneName)
-    {      
+    {
         // Play animation
         fadeTransition.SetTrigger("Start");
 

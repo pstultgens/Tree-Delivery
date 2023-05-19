@@ -52,7 +52,7 @@ public class DeliveryController : MonoBehaviour
             isCollidingWithPackage = true;
             currentCollidingPackage = other.GetComponent<Package>();
 
-            if (canPackageBePickedUp)
+            if (canPackageBePickedUp && currentCollectedPackage == null)
             {
                 PickupPackage();
             }

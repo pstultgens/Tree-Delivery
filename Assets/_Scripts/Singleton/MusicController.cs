@@ -51,6 +51,7 @@ public class MusicController : MonoBehaviour
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Settings Menu")
+            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Enter Name Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
             levelAudioSource.Stop();

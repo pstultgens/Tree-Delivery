@@ -6,11 +6,12 @@ using System.Linq;
 
 public class HighscoreTable : MonoBehaviour
 {
-    private static string HIGHSCORE_TABLE = "HighscoreTable_";
+    private static string PLAYER_PREFS_HIGHSCORE_TABLE = "HighscoreTable_";
 
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] Transform entryContainer;
     [SerializeField] Transform entryTemplate;
+    [SerializeField] Color32 entryHighlightColor = new Color32(25, 239, 181, 255);
 
     private List<Transform> highscoreEntryTransformList;
 
@@ -42,17 +43,17 @@ public class HighscoreTable : MonoBehaviour
     private List<HighscoreEntry> LoadTop10HighscoresForLevel(LevelEnum levelName)
     {
         Debug.Log("LoadHighscoresForLevel: " + levelName.GetName());
-        if (!PlayerPrefs.HasKey(HIGHSCORE_TABLE + levelName))
+        if (!PlayerPrefs.HasKey(PLAYER_PREFS_HIGHSCORE_TABLE + levelName))
         {
             return new List<HighscoreEntry>();
         }
 
-        string jsonString = PlayerPrefs.GetString(HIGHSCORE_TABLE + levelName);
+        string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_HIGHSCORE_TABLE + levelName);
         Highscores loadedAllHighscores = JsonUtility.FromJson<Highscores>(jsonString);
         Debug.Log("loadedAllHighscores entries " + loadedAllHighscores.highscoreEntryList.Count);
 
         // Filter and order list for levelName
-        List<HighscoreEntry> filterAndSortListForLevelName = loadedAllHighscores.highscoreEntryList            
+        List<HighscoreEntry> filterAndSortListForLevelName = loadedAllHighscores.highscoreEntryList
             .OrderByDescending(e => e.score)
             .Take(10)
             .ToList();
@@ -102,15 +103,34 @@ public class HighscoreTable : MonoBehaviour
                 break;
         }
 
-        entryTransform.Find("PositionValue").GetComponent<TextMeshProUGUI>().text = rankString;
+        var postionValue = entryTransform.Find("PositionValue").GetComponent<TextMeshProUGUI>();
+        postionValue.text = rankString;
 
-        int randomScore = highscoreEntry.score;
-        entryTransform.Find("ScoreValue").GetComponent<TextMeshProUGUI>().text = randomScore.ToString();
+        int score = highscoreEntry.score;
+        var scoreValue = entryTransform.Find("ScoreValue").GetComponent<TextMeshProUGUI>();
+        scoreValue.text = score.ToString();
 
         string name = highscoreEntry.playerName;
-        entryTransform.Find("NameValue").GetComponent<TextMeshProUGUI>().text = name;
+        var nameValue = entryTransform.Find("NameValue").GetComponent<TextMeshProUGUI>();
+        nameValue.text = name;
+
+
+        if (HighlightHighscoreEntry(name, score))
+        {
+            postionValue.color = entryHighlightColor;
+            scoreValue.color = entryHighlightColor;
+            nameValue.color = entryHighlightColor;
+        }
 
         transformList.Add(entryTransform);
+    }
+
+    private bool HighlightHighscoreEntry(string playerName, int score)
+    {
+        string currentPlayerName = PlayerPrefs.GetString("PlayerName");
+        int currentScore = ScoreController.currentScore;
+
+        return currentPlayerName.Equals(playerName) && currentScore.Equals(score);
     }
 
     public bool IsHighscoreInTop10(LevelEnum levelName, int score)
@@ -148,7 +168,7 @@ public class HighscoreTable : MonoBehaviour
         Highscores highscores = new Highscores();
         highscores.highscoreEntryList = newList;
         string json = JsonUtility.ToJson(highscores);
-        PlayerPrefs.SetString(HIGHSCORE_TABLE + levelName, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_HIGHSCORE_TABLE + levelName, json);
         PlayerPrefs.Save();
     }
 

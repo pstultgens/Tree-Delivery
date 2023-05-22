@@ -25,6 +25,7 @@ public class Spot : MonoBehaviour
     [Header("VFX")]
     [SerializeField] public ParticleSystem correctDeliveredVFX;
     [SerializeField] public ParticleSystem wrongDeliveredVFX;
+    [SerializeField] public ParticleSystem neutralDeliveredVFX;
 
     [Header("SFX Audio sources")]
     [SerializeField] public AudioSource correctDeliveredAudioSource;
@@ -113,6 +114,7 @@ public class Spot : MonoBehaviour
         else if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
             PlayNeutralDeliveredSFX();
+            PlayNeutralDeliveredVFX();
         }
 
         UpdateMinimap();
@@ -128,6 +130,7 @@ public class Spot : MonoBehaviour
         minimapNodeTextMeshPro.text = packageValue.ToString();
 
         PlayNeutralDeliveredSFX();
+        PlayNeutralDeliveredVFX();
     }
 
     public void ShowScorePopup(int scoreAmount)
@@ -223,6 +226,11 @@ public class Spot : MonoBehaviour
     private void PlayWrongDeliveredVFX()
     {
         wrongDeliveredVFX.Play();
+    }
+
+    private void PlayNeutralDeliveredVFX()
+    {
+        neutralDeliveredVFX.Play();
     }
 
     private void PlayCorrectDeliveredSFX()

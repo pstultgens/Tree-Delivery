@@ -27,7 +27,7 @@ public class ScoreController : MonoBehaviour
 
     private void Update()
     {
-        if (deliveryController.allPackagesCorrectDelivered)
+        if (deliveryController.AllPackagesCorrectDelivered())
         {
             return;
         }

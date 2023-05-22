@@ -12,7 +12,7 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] Transform dropPackageLocation;
     [SerializeField] float packagePickupDelay = 1f;
 
-    public bool allPackagesCorrectDelivered;
+  
     public bool isCollidingWithSpot;
     public bool isCollidingWithPackage;
 
@@ -77,7 +77,7 @@ public class DeliveryController : MonoBehaviour
         }
     }
 
-    private bool AllPackagesCorrectDelivered()
+    public bool AllPackagesCorrectDelivered()
     {
         foreach (Package package in allPackages)
         {
@@ -89,7 +89,19 @@ public class DeliveryController : MonoBehaviour
         return true;
     }
 
-    public void DropOrPickupPackage()
+    public bool AllPackagesDelivered()
+    {
+        foreach (Package package in allPackages)
+        {
+            if (!package.isDelivered)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void PlayerInputDropHandler()
     {
         if (currentCollidingPackage == null && currentCollidingSpot == null && currentCollectedPackage == null)
         {
@@ -105,7 +117,7 @@ public class DeliveryController : MonoBehaviour
             !isCollidingWithPackage &&
             currentCollidingSpot.hasReceivedPackage)
         {
-            if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
+            if (HintController.Instance.canPackageBeDeliveredAtWrongNode && !currentCollidingSpot.isLocked)
             {
                 PickupDeliveredPackage();
             }
@@ -115,11 +127,20 @@ public class DeliveryController : MonoBehaviour
             }
         }
         else if (currentCollectedPackage != null
+            && !currentCollidingSpot.isLocked
             && isCollidingWithSpot
             && currentCollidingSpot.hasReceivedPackage
             && HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
             SwapDeliveredPackage();
+        }
+        else if (
+          currentCollectedPackage != null
+          && !currentCollidingSpot.isLocked
+          && isCollidingWithSpot
+          && !currentCollidingSpot.hasReceivedPackage)
+        {
+            DeliverPackage();
         }
     }
 
@@ -178,7 +199,8 @@ public class DeliveryController : MonoBehaviour
             currentCollidingSpot.CorrectPackageReceived();
             currentCollectedPackage.CorrectDelivered(currentCollidingSpot);
 
-            allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
+            
+
             currentCollectedPackage = null;
         }
         else if (!currentCollidingSpot.hasReceivedCorrectPackage)
@@ -252,7 +274,6 @@ public class DeliveryController : MonoBehaviour
             currentCollidingSpot.CorrectPackageReceived();
             carPackage.CorrectDelivered(currentCollidingSpot);
 
-            allPackagesCorrectDelivered = AllPackagesCorrectDelivered();
         }
         else if (!currentCollidingSpot.hasReceivedCorrectPackage)
         {

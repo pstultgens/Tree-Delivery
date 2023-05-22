@@ -139,8 +139,8 @@ public class HintController : MonoBehaviour
                 break;
             case LevelEnum.Test:
                 Debug.Log("Set Test Mode stats");         
-                SetHints(false, false, true, true, true, true, true);
-                SetDifficulties(true, true, false, false);
+                SetHints(false, false, false, false, false, false, true);
+                SetDifficulties(true, true, true, false);
                 acceptableNumberOfWrongDeliveries = 2;
                 break;
             case LevelEnum.Easy1:

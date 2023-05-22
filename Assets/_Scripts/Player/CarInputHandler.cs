@@ -99,6 +99,6 @@ public class CarInputHandler : MonoBehaviour
 
     private void Drop(InputAction.CallbackContext context)
     {
-        deliveryController.DropOrPickupPackage();
+        deliveryController.PlayerInputDropHandler();
     }
 }

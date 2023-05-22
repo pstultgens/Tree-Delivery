@@ -68,9 +68,11 @@ public class PackageSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, packagesToSpawn.Count);
         spawnedPackage = packagesToSpawn[randomIndex];
         packagesToSpawn.RemoveAt(randomIndex);
+
         spawnedPackage.transform.position = packageSpawnPositionStart.position;
         spawnedPackage.gameObject.SetActive(true);
         spawnedPackages.Add(spawnedPackage);
+
         MoveItemToDestination();
     }
 

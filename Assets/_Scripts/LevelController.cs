@@ -15,7 +15,8 @@ public class LevelController : MonoBehaviour
     [Header("Add Nodes in BST sorted order")]
     [SerializeField] public List<GameObject> nodes = new List<GameObject>();
 
-    private bool isInLevelCompleteTransition;
+    private bool isInLevelCompleteTransition = false;
+    private bool alreadyAllPackagesDelivered = false;
 
     private DeliveryController deliveryController;
     private SceneManager sceneManager;
@@ -37,7 +38,7 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        if (deliveryController.allPackagesCorrectDelivered)
+        if (deliveryController.AllPackagesCorrectDelivered())
         {
             // This should only be once
             if (isInLevelCompleteTransition)
@@ -46,13 +47,39 @@ public class LevelController : MonoBehaviour
             }
             isInLevelCompleteTransition = true;
 
-            StartCoroutine(LevelCompleteCoroutine());            
+            // Color all nodes green
+            foreach (GameObject node in nodes)
+            {
+                Spot spot = node.GetComponentInChildren<Spot>();
+                spot.ShowHintColor();
+            }
+
+            StartCoroutine(LevelCompleteCoroutine());
+        }
+        else if (deliveryController.AllPackagesDelivered())
+        {
+            if (alreadyAllPackagesDelivered)
+            {
+                return;
+            }
+
+            alreadyAllPackagesDelivered = true;
+            Debug.Log("All packages are delivered, but not all are correct delivered!");
+            // Show some text
+
+            // All Spots show hint color
+            foreach (GameObject node in nodes)
+            {
+                Spot spot = node.GetComponentInChildren<Spot>();
+                spot.ShowHintColor();
+                HintController.Instance.showHintColorWhenDelivered = true;
+            }
         }
     }
 
     private IEnumerator LevelCompleteCoroutine()
     {
-        SceneManager.isGamePaused = true; 
+        SceneManager.isGamePaused = true;
         // Wait some time before showing the Level Complete Window
         yield return new WaitForSeconds(1.5f);
 
@@ -69,8 +96,6 @@ public class LevelController : MonoBehaviour
 
     private void FillNodes(List<int> values)
     {
-
-
         for (int i = 0; i < nodes.Count; i++)
         {
             GameObject node = nodes[i];

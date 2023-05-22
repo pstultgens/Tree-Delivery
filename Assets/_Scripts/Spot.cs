@@ -35,6 +35,10 @@ public class Spot : MonoBehaviour
     public bool hasReceivedCorrectPackage;
     public bool hasReceivedPackage;
     public int receivedPackageValue;
+    public bool isLocked;
+
+    Color32 defaultSpotColor;
+    Color32 defaultMinimapNodeColor;
 
     private bool isWrongDeliveryColorCoroutineRunning;
     private bool isShowHintValueCoroutineRunning;
@@ -52,6 +56,25 @@ public class Spot : MonoBehaviour
 
         minimapNodeTextMeshPro = minimapNode.GetComponentInChildren<TextMeshPro>();
         minimapNodeSpriteRenderer = minimapNode.GetComponent<SpriteRenderer>();
+
+        defaultSpotColor = spriteRenderer.color;
+        defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
+    }
+
+    // Show hint color when all packages are delivered
+    public void ShowHintColor()
+    {
+        if (hasReceivedCorrectPackage)
+        {
+            isLocked = true;
+            spriteRenderer.color = correctDeliverdColor;
+            minimapNodeSpriteRenderer.color = correctDeliverdColor;
+        }
+        else
+        {
+            spriteRenderer.color = wrongDeliverdColor;
+            minimapNodeSpriteRenderer.color = wrongDeliverdColor;
+        }
     }
 
     public void ShowCorrectValue()
@@ -96,6 +119,9 @@ public class Spot : MonoBehaviour
         hasReceivedPackage = false;
         hasReceivedCorrectPackage = false;
         receivedPackageValue = 0;
+
+        spriteRenderer.color = defaultSpotColor;
+        minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
     }
 
     public void CorrectPackageReceived()
@@ -107,9 +133,11 @@ public class Spot : MonoBehaviour
 
         if (HintController.Instance.showHintColorWhenDelivered)
         {
+            isLocked = true;
             PlayCorrectDeliveredSFX();
             PlayCorrectDeliveredVFX();
             spriteRenderer.color = correctDeliverdColor;
+            minimapNodeSpriteRenderer.color = correctDeliverdColor;
         }
         else if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
@@ -129,8 +157,18 @@ public class Spot : MonoBehaviour
         textMeshPro.text = packageValue.ToString();
         minimapNodeTextMeshPro.text = packageValue.ToString();
 
-        PlayNeutralDeliveredSFX();
-        PlayNeutralDeliveredVFX();
+        if (HintController.Instance.showHintColorWhenDelivered)
+        {
+            PlayWrongDeliveredSFX();
+            PlayWrongDeliveredVFX();
+            spriteRenderer.color = wrongDeliverdColor;
+            minimapNodeSpriteRenderer.color = wrongDeliverdColor;
+        }
+        else
+        {
+            PlayNeutralDeliveredSFX();
+            PlayNeutralDeliveredVFX();
+        }
     }
 
     public void ShowScorePopup(int scoreAmount)
@@ -182,9 +220,6 @@ public class Spot : MonoBehaviour
 
         PlayWrongDeliveredSFX();
         PlayWrongDeliveredVFX();
-
-        Color32 defaultSpotColor = spriteRenderer.color;
-        Color32 defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
 
         spriteRenderer.color = wrongDeliverdColor;
         minimapNodeSpriteRenderer.color = wrongDeliverdColor;

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/Menu/Enter Name Menu.unity
     guid: a8a7022a2c7ea420da17b949512253b9
   - enabled: 1
+    path: Assets/_Scenes/Menu/Select Level Menu.unity
+    guid: b8de7ce6b6a174c2c9f04a74a36731a8
+  - enabled: 1
     path: Assets/_Scenes/Menu/Select Car Menu.unity
     guid: 96ab146dc41f0495eb0cb7b351110e3c
   - enabled: 1

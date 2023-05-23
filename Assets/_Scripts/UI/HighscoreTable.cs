@@ -184,17 +184,4 @@ public class HighscoreTable : MonoBehaviour
             CreateHighscoreEntryTransform(entry, entryContainer, highscoreEntryTransformList);
         }
     }
-
-    private class Highscores
-    {
-        public List<HighscoreEntry> highscoreEntryList;
-    }
-
-    [System.Serializable]
-    private class HighscoreEntry
-    {
-        public int score;
-        public string playerName;
-    }
-
 }

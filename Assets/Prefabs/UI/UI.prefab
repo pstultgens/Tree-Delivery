@@ -306,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5077732672522325443
 RectTransform:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -75}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6234943857543974160
@@ -958,10 +958,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: score
+  m_text: Your Score
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
-  m_sharedMaterial: {fileID: -2433455193238524033, guid: 26167536b330f40e0b02f81f5dc83b0e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
+  m_sharedMaterial: {fileID: 2017673355279344868, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -985,17 +985,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 100
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 20
+  m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1556,8 +1556,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 175
+  m_fontSizeBase: 175
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

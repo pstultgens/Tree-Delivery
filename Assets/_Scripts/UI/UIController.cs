@@ -5,10 +5,20 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    [Header("Level Name Window")]
+    [SerializeField] public GameObject levelNameWindow;
+
+    [Header("Package Window")]
     [SerializeField] public UIPackage uiPackagePrefab;
     [SerializeField] public GameObject uiPackageWindowGrid;
 
     private List<UIPackage> allUIPackages = new List<UIPackage>();
+
+    public void ShowLevelNameWindow()
+    {
+        levelNameWindow.GetComponentInChildren<TextMeshProUGUI>().text = HintController.Instance.currentLevel.GetName();
+        levelNameWindow.SetActive(true);
+    }
 
     public void ShowUIPackages(List<int> packageValues)
     {

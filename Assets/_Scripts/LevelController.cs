@@ -34,6 +34,8 @@ public class LevelController : MonoBehaviour
         {
             FillNodes(defaultPackageValuesLowToHigh);
         }
+
+        uiController.ShowLevelNameWindow();
     }
 
     void Update()

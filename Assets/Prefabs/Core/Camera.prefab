@@ -230,7 +230,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.41998932, g: 0.6226415, b: 0.50992566, a: 1}
+  m_BackGroundColor: {r: 0.64705884, g: 0.79215693, b: 0.7960785, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 5
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
+  mNoiseOffsets: {x: -19.906372, y: -359.65146, z: -499.05237}
 --- !u!114 &6203503328145970045
 MonoBehaviour:
   m_ObjectHideFlags: 0

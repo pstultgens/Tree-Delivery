@@ -50,7 +50,6 @@ public class SceneManager : MonoBehaviour
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
-    private bool isLoadingLevel;
     private bool isShowingLevelComplete;
 
     private PlayerInputActions playerActions;
@@ -295,8 +294,13 @@ public class SceneManager : MonoBehaviour
 
     public void EnterPlayerName()
     {
-        PlayerPrefsRepository.Instance.AddPlayerName(playerNameInputField.text);
-        GoToScene("Select Level Menu");
+        string playerName = playerNameInputField.text;
+
+        if (playerName != "")
+        {
+            PlayerPrefsRepository.Instance.AddPlayerName(playerName);
+            GoToScene("Select Level Menu");
+        }
     }
 
     public void SelectTutorialLevel() => LevelSelect(LevelEnum.Tutorial);

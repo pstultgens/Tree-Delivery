@@ -5,8 +5,6 @@ using TMPro;
 
 public class LevelController : MonoBehaviour
 {
-    private static string PLAYER_PREFS_LEVEL = "Level_";
-
     [SerializeField] public UIController uiController;
 
     [Header("Level Setup")]
@@ -101,61 +99,8 @@ public class LevelController : MonoBehaviour
 
     private void UpdateLevelData()
     {
-        UnlockNextLevel();
-        UpdateFinishedLevel();
-    }
-
-    private void UpdateFinishedLevel()
-    {
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + HintController.Instance.currentLevel))
-        {
-            string loadedJson = PlayerPrefs.GetString(PLAYER_PREFS_LEVEL + HintController.Instance.currentLevel);
-            Level loadedLevel = JsonUtility.FromJson<Level>(loadedJson);
-            loadedLevel.finished = true;
-            string updatedJson = JsonUtility.ToJson(loadedLevel);
-            PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + HintController.Instance.currentLevel, updatedJson);
-            PlayerPrefs.Save();
-        }
-        else
-        {
-            Level level = new Level();
-            level.unlocked = true;
-            level.finished = true;
-            string json = JsonUtility.ToJson(level);
-            PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + HintController.Instance.currentLevel, json);
-            PlayerPrefs.Save();
-        }
-    }
-
-    private void UnlockNextLevel()
-    {
-        LevelEnum nextLevel = HintController.Instance.DetermineNextLevel();
-        Debug.Log("Unlock next level: " + nextLevel);
-        if (!PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + nextLevel))
-        {
-            Level level = new Level();
-            level.unlocked = true;
-            string json = JsonUtility.ToJson(level);
-
-            PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + nextLevel, json);
-            PlayerPrefs.Save();
-        }
-    }
-
-    public void UnlockAllEasyLevels()
-    {
-        Level level = new Level();
-        level.unlocked = true;
-        string json = JsonUtility.ToJson(level);
-
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy1, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy2, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy3, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy4, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy5, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy6, json);
-        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy7, json);
-        PlayerPrefs.Save();
+        PlayerPrefsRepository.Instance.UnlockNextLevel();
+        PlayerPrefsRepository.Instance.UpdateFinishedLevel();
     }
 
     private void FillNodes(List<int> values)

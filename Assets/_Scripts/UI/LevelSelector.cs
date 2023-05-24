@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class LevelSelector : MonoBehaviour
 {
-    private static string PLAYER_PREFS_LEVEL = "Level_";
 
     [SerializeField] public LevelEnum level;
     [SerializeField] public GameObject lockImage;
@@ -20,7 +19,7 @@ public class LevelSelector : MonoBehaviour
         sceneManager = FindObjectOfType<SceneManager>();
         button = GetComponent<Button>();
 
-        if (lockImage != null && IsLevelUnlocked())
+        if (lockImage != null && PlayerPrefsRepository.Instance.IsLevelUnlocked(level))
         {
             Debug.Log("Level unlocked: " + level);
             lockImage.SetActive(false);
@@ -32,7 +31,7 @@ public class LevelSelector : MonoBehaviour
             button.onClick.RemoveAllListeners();
         }
 
-        if (IsLevelFinished())
+        if (PlayerPrefsRepository.Instance.IsLevelFinished(level))
         {
             Debug.Log("Level finished: " + level);
             levelFinishedCheckmark.SetActive(true);
@@ -42,29 +41,5 @@ public class LevelSelector : MonoBehaviour
             Debug.Log("Level unfinished: " + level);
             levelFinishedCheckmark.SetActive(false);
         }
-    }
-
-    private bool IsLevelUnlocked()
-    {
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + level))
-        {
-            string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_LEVEL + level);
-            Level loadedLevel = JsonUtility.FromJson<Level>(jsonString);
-
-            return loadedLevel.unlocked;
-        }
-        return false;
-    }
-
-    private bool IsLevelFinished()
-    {
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + level))
-        {
-            string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_LEVEL + level);
-            Level loadedLevel = JsonUtility.FromJson<Level>(jsonString);
-
-            return loadedLevel.finished;
-        }
-        return false;
     }
 }

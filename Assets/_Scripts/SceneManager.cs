@@ -9,8 +9,6 @@ using TMPro;
 
 public class SceneManager : MonoBehaviour
 {
-    private static string PLAYER_PREFS_PLAYER_NAME = "PlayerName";
-
     public static bool isGamePaused;
     public static bool isCountingDown;
 
@@ -272,21 +270,7 @@ public class SceneManager : MonoBehaviour
 
     public void AddHighscore()
     {
-        string playerName = "";
-
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_PLAYER_NAME))
-        {
-            playerName = PlayerPrefs.GetString(PLAYER_PREFS_PLAYER_NAME);
-
-        }
-        else
-        {
-            playerName = "Debugger";
-        }
-
-        HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
-        highscoreTable.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore, playerName);
-
+        PlayerPrefsRepository.Instance.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore);
         StartCoroutine(ShowHighscoreTableCoroutine());
     }
 
@@ -304,72 +288,6 @@ public class SceneManager : MonoBehaviour
         fadeTransition.SetTrigger("End");
     }
 
-    //public void LoadNextLevel()
-    //{
-    //    if (isLoadingLevel)
-    //    {
-    //        return;
-    //    }
-    //    isLoadingLevel = true;
-    //    Debug.Log("Load next Level...");
-
-    //    switch (HintController.Instance.DetermineNextLevel())
-    //    {
-    //        case LevelEnum.MainMenu:
-    //            BackToMainMenu();
-    //            break;
-    //        case LevelEnum.Test:
-    //            StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
-    //            break;
-    //        case LevelEnum.Easy1:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
-    //            break;
-    //        case LevelEnum.Easy2:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
-    //            break;
-    //        case LevelEnum.Easy3:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
-    //            break;
-    //        case LevelEnum.Easy4:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 4"));
-    //            break;
-    //        case LevelEnum.Easy5:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 5"));
-    //            break;
-    //        case LevelEnum.Easy6:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 6"));
-    //            break;
-    //        case LevelEnum.Easy7:
-    //            StartCoroutine(LoadLevelCoroutine("Easy Level 7"));
-    //            break;
-    //        case LevelEnum.Hard1:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
-    //            break;
-    //        case LevelEnum.Hard2:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
-    //            break;
-    //        case LevelEnum.Hard3:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 3"));
-    //            break;
-    //        case LevelEnum.Hard4:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 4"));
-    //            break;
-    //        case LevelEnum.Hard5:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 5"));
-    //            break;
-    //        case LevelEnum.Hard6:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 6"));
-    //            break;
-    //        case LevelEnum.Hard7:
-    //            StartCoroutine(LoadLevelCoroutine("Hard Level 7"));
-    //            break;
-    //        default:
-    //            Debug.LogWarning("Unable to load level by difficulty!");
-    //            BackToMainMenu();
-    //            break;
-    //    }
-    //}
-
     public void GoToScene(string sceneName)
     {
         StartCoroutine(LoadLevelCoroutine(sceneName));
@@ -377,9 +295,7 @@ public class SceneManager : MonoBehaviour
 
     public void EnterPlayerName()
     {
-        PlayerPrefs.SetString(PLAYER_PREFS_PLAYER_NAME, playerNameInputField.text);
-        PlayerPrefs.Save();
-
+        PlayerPrefsRepository.Instance.AddPlayerName(playerNameInputField.text);
         GoToScene("Select Level Menu");
     }
 
@@ -404,7 +320,7 @@ public class SceneManager : MonoBehaviour
     {
         // Check if level is unlocked
         selectedLevel = level;
-        GoToScene("Select Car Menu");        
+        GoToScene("Select Car Menu");
     }
 
     public void CarSelect(string carName)

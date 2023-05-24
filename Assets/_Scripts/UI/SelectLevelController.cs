@@ -7,8 +7,6 @@ using System.Linq;
 
 public class SelectLevelController : MonoBehaviour
 {
-    private static string PLAYER_PREFS_HIGHSCORE_TABLE = "HighscoreTable_";
-
     [SerializeField] public GameObject firstSelectedButton;
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] TextMeshProUGUI informationText;
@@ -26,7 +24,6 @@ public class SelectLevelController : MonoBehaviour
     {
         eventSystem = EventSystem.current;
         SetFirstSelectedUIButton(firstSelectedButton);
-
     }
 
     private void Update()
@@ -70,25 +67,18 @@ public class SelectLevelController : MonoBehaviour
 
     private void GetHighscore()
     {
-        if (!PlayerPrefs.HasKey(PLAYER_PREFS_HIGHSCORE_TABLE + currentSelectedLevelEnum))
+        HighscoreEntry highscore = PlayerPrefsRepository.Instance.GetHighscore(currentSelectedLevelEnum);
+
+        if (highscore == null)
         {
             highscoreGameObject.SetActive(false);
-            return;
         }
-
-        string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_HIGHSCORE_TABLE + currentSelectedLevelEnum);
-        Highscores loadedAllHighscores = JsonUtility.FromJson<Highscores>(jsonString);
-        Debug.Log("loadedAllHighscores entries " + loadedAllHighscores.highscoreEntryList.Count);
-
-        // Filter and order list for levelName
-        List<HighscoreEntry> filterAndSortListForLevelName = loadedAllHighscores.highscoreEntryList
-            .OrderByDescending(e => e.score)
-            .Take(1)
-            .ToList();
-
-        highscoreGameObject.SetActive(true);
-        highscoreValueText.text = filterAndSortListForLevelName.First().score.ToString();
-        highscoreNameText.text = filterAndSortListForLevelName.First().playerName;
+        else
+        {
+            highscoreGameObject.SetActive(true);
+            highscoreValueText.text = highscore.score.ToString();
+            highscoreNameText.text = highscore.playerName;
+        }
     }
 
     private void SetFirstSelectedUIButton(GameObject firstSelectedButton)

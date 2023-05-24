@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CameraShakeSettings : MonoBehaviour
 {
-    private static string CAMERA_SHAKE = "CameraShake";
-
     [Header("UI Sliders")]
     [SerializeField] private Toggle cameraShakeToggle;
 
@@ -15,34 +13,24 @@ public class CameraShakeSettings : MonoBehaviour
     private void Start()
     {
         cinemachineShake = FindObjectOfType<CinemachineShake>();
-
-        if (PlayerPrefs.HasKey(CAMERA_SHAKE))
-        {
-            LoadCameraShakeSetting();
-        }
-        else
-        {
-            SetCameraShakeSetting();
-        }
+        LoadCameraShakeSetting();
     }
 
     public void SetCameraShakeSetting()
     {
         bool isOn = cameraShakeToggle.isOn;
-        Debug.Log("CameraShakeSettings: Set Camera Shake: " + isOn + " in PlayerPrefs");
 
         cinemachineShake.SetCameraShakeSetting(isOn);
-
-        PlayerPrefs.SetString(CAMERA_SHAKE, isOn.ToString());
+        PlayerPrefsRepository.Instance.SetCameraShakeSetting(isOn);
     }
 
     private void LoadCameraShakeSetting()
     {
-        bool isOn = bool.Parse(PlayerPrefs.GetString(CAMERA_SHAKE));
-        Debug.Log("CameraShakeSettings: Load Camera Shake: " + isOn + " from PlayerPrefs");
+        bool isOn = PlayerPrefsRepository.Instance.LoadCameraShakeSetting();
+
         cameraShakeToggle.isOn = isOn;
         cinemachineShake.SetCameraShakeSetting(isOn);
-        
+
         SetCameraShakeSetting();
     }
 }

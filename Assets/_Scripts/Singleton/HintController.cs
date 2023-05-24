@@ -71,8 +71,7 @@ public class HintController : MonoBehaviour
                 }
                 else
                 {
-                    LevelController levelController = FindObjectOfType<LevelController>();
-                    levelController.UnlockAllEasyLevels();
+                    PlayerPrefsRepository.Instance.UnlockAllEasyLevels();
                     nextLevel = LevelEnum.Hard1;
                 }
                 break;

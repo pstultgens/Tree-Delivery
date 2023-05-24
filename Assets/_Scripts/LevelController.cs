@@ -109,6 +109,18 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    public void UnlockAllEasyLevels()
+    {
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy1, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy2, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy3, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy4, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy5, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy6, bool.TrueString);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy7, bool.TrueString);
+        PlayerPrefs.Save();
+    }
+
     private void FillNodes(List<int> values)
     {
         for (int i = 0; i < nodes.Count; i++)

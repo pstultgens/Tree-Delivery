@@ -17,23 +17,18 @@ public class SelectLevelController : MonoBehaviour
     [SerializeField] TextMeshProUGUI highscoreNameText;
 
     private GameObject currentSelectedLevel;
+    private LevelEnum currentSelectedLevelEnum;
     private EventSystem eventSystem;
 
     private void Start()
     {
         eventSystem = EventSystem.current;
         SetFirstSelectedUIButton(firstSelectedButton);
-        
+
     }
 
     private void Update()
     {
-        if (currentSelectedLevel == null)
-        {
-            ShowNoneInformation();
-            currentSelectedLevel = eventSystem.currentSelectedGameObject;
-        }
-
         if (ChangedLevelSelection())
         {
             currentSelectedLevel = eventSystem.currentSelectedGameObject;
@@ -42,10 +37,10 @@ public class SelectLevelController : MonoBehaviour
             LevelSelector levelSelector = currentSelectedLevel.GetComponent<LevelSelector>();
             if (levelSelector != null)
             {
-                LevelEnum levelEnum = levelSelector.level;
-                levelNameText.text = levelEnum.GetName();
-                informationText.text = levelEnum.GetInformation();
-                GetHighscore(levelEnum);
+                currentSelectedLevelEnum = levelSelector.level;
+                levelNameText.text = currentSelectedLevelEnum.GetName();
+                informationText.text = currentSelectedLevelEnum.GetInformation();
+                GetHighscore();
             }
             else
             {
@@ -73,9 +68,9 @@ public class SelectLevelController : MonoBehaviour
         return !currentSelectedLevel.Equals(eventSystem.currentSelectedGameObject);
     }
 
-    private void GetHighscore(LevelEnum levelName)
+    private void GetHighscore()
     {
-        if (!PlayerPrefs.HasKey(PLAYER_PREFS_HIGHSCORE_TABLE + levelName))
+        if (!PlayerPrefs.HasKey(PLAYER_PREFS_HIGHSCORE_TABLE + currentSelectedLevelEnum))
         {
             highscoreTitleText.enabled = false;
             highscoreValueText.text = string.Empty;
@@ -83,7 +78,7 @@ public class SelectLevelController : MonoBehaviour
             return;
         }
 
-        string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_HIGHSCORE_TABLE + levelName);
+        string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_HIGHSCORE_TABLE + currentSelectedLevelEnum);
         Highscores loadedAllHighscores = JsonUtility.FromJson<Highscores>(jsonString);
         Debug.Log("loadedAllHighscores entries " + loadedAllHighscores.highscoreEntryList.Count);
 
@@ -99,10 +94,12 @@ public class SelectLevelController : MonoBehaviour
     }
 
     private void SetFirstSelectedUIButton(GameObject firstSelectedButton)
-    {        
+    {
         eventSystem.SetSelectedGameObject(firstSelectedButton, new BaseEventData(eventSystem));
         SimulateOnSelect(firstSelectedButton);
         currentSelectedLevel = firstSelectedButton;
+        currentSelectedLevelEnum = currentSelectedLevel.GetComponent<LevelSelector>().level;
+        GetHighscore();
     }
 
     private void SimulateOnSelect(GameObject selectedGameObject)

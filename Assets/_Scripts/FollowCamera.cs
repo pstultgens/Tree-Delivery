@@ -15,7 +15,7 @@ public class FollowCamera : MonoBehaviour
         }
         else
         {
-            Debug.Log("Camera thingToFollow is Empty!");
+            //Debug.Log("Camera thingToFollow is Empty!");
         }
     }
 }

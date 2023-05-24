@@ -14,7 +14,7 @@ public class SceneManager : MonoBehaviour
     public static bool isGamePaused;
     public static bool isCountingDown;
 
-    public static string selectedLevel;
+    private static LevelEnum selectedLevel;
     public static string selectedCar;
 
     [SerializeField] public Animator fadeTransition;
@@ -222,7 +222,6 @@ public class SceneManager : MonoBehaviour
         isGamePaused = false;
         isCountingDown = false;
         selectedCar = null;
-        selectedLevel = null;
         GoToScene("Main Menu");
     }
 
@@ -261,7 +260,7 @@ public class SceneManager : MonoBehaviour
         if (highscoreTable.IsHighscoreInTop10(HintController.Instance.currentLevel, ScoreController.currentScore))
         {
             // Input Highscore
-            InputHighscore();
+            AddHighscore();
         }
         else
         {
@@ -271,7 +270,7 @@ public class SceneManager : MonoBehaviour
 
     }
 
-    public void InputHighscore()
+    public void AddHighscore()
     {
         string playerName = "";
 
@@ -371,11 +370,6 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel(int levelIndex)
-    {
-        StartCoroutine(LoadLevelCoroutine(levelIndex));
-    }
-
     public void GoToScene(string sceneName)
     {
         StartCoroutine(LoadLevelCoroutine(sceneName));
@@ -386,22 +380,39 @@ public class SceneManager : MonoBehaviour
         PlayerPrefs.SetString(PLAYER_PREFS_PLAYER_NAME, playerNameInputField.text);
         PlayerPrefs.Save();
 
-        GoToScene("Select Car Menu");
+        GoToScene("Select Level Menu");
+    }
+
+    public void SelectTutorialLevel() => LevelSelect(LevelEnum.Tutorial);
+    public void SelectTestLevel() => LevelSelect(LevelEnum.Test);
+    public void SelectLevel1() => LevelSelect(LevelEnum.Easy1);
+    public void SelectLevel2() => LevelSelect(LevelEnum.Easy2);
+    public void SelectLevel3() => LevelSelect(LevelEnum.Easy3);
+    public void SelectLevel4() => LevelSelect(LevelEnum.Easy4);
+    public void SelectLevel5() => LevelSelect(LevelEnum.Easy5);
+    public void SelectLevel6() => LevelSelect(LevelEnum.Easy6);
+    public void SelectLevel7() => LevelSelect(LevelEnum.Easy7);
+    public void SelectLevel8() => LevelSelect(LevelEnum.Hard1);
+    public void SelectLevel9() => LevelSelect(LevelEnum.Hard2);
+    public void SelectLevel10() => LevelSelect(LevelEnum.Hard3);
+    public void SelectLevel11() => LevelSelect(LevelEnum.Hard4);
+    public void SelectLevel12() => LevelSelect(LevelEnum.Hard5);
+    public void SelectLevel13() => LevelSelect(LevelEnum.Hard6);
+    public void SelectLevel14() => LevelSelect(LevelEnum.Hard7);
+
+    private void LevelSelect(LevelEnum level)
+    {
+        selectedLevel = level;
+        GoToScene("Select Car Menu");        
     }
 
     public void CarSelect(string carName)
     {
         selectedCar = carName;
 
-        HintController.Instance.SetLevelDifficulty(LevelEnum.Tutorial);
+        HintController.Instance.SetLevelDifficulty(selectedLevel);
 
-        StartCoroutine(LoadLevelCoroutine("Tutorial"));
-    }
-
-    public void LevelSelect(string sceneName)
-    {
-        selectedLevel = sceneName;
-        StartCoroutine(LoadLevelCoroutine(sceneName));
+        StartCoroutine(LoadLevelCoroutine(selectedLevel.GetSceneName()));
     }
 
     public void QuitGame()

@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class HighscoreTable : MonoBehaviour
 {
     private static string PLAYER_PREFS_HIGHSCORE_TABLE = "HighscoreTable_";
+
+    [SerializeField] Sprite trophySprite;
+
+    [SerializeField] Color32 trophy1Color = new Color32(255, 255, 255, 255); // F8F15A
+    [SerializeField] Color32 trophy2Color = new Color32(255, 255, 255, 255); // 8E8E8E
+    [SerializeField] Color32 trophy3Color = new Color32(255, 255, 255, 255); // BF762E
 
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] Transform entryContainer;
@@ -88,19 +95,32 @@ public class HighscoreTable : MonoBehaviour
 
         int rank = transformList.Count + 1;
         string rankString;
+        var trophy = entryTransform.Find("Trophy").gameObject;
+        var trophyImage = trophy.transform.Find("TrophyImage").GetComponent<Image>();
+        var trophyBorder = trophy.transform.Find("Border").GetComponent<Image>();
         switch (rank)
         {
             case 1:
                 rankString = "1ST";
+                trophyImage.sprite = trophySprite;
+                trophyImage.color = trophy1Color;
+                trophyBorder.color = trophy1Color;
                 break;
             case 2:
                 rankString = "2ND";
+                trophyImage.sprite = trophySprite;
+                trophyImage.color = trophy2Color;
+                trophyBorder.color = trophy2Color;
                 break;
             case 3:
                 rankString = "3RD";
+                trophyImage.sprite = trophySprite;
+                trophyImage.color = trophy3Color;
+                trophyBorder.color = trophy3Color;
                 break;
             default:
                 rankString = rank + "TH";
+                trophy.SetActive(false);
                 break;
         }
 

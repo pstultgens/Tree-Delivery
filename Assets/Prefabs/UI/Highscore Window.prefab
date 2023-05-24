@@ -694,9 +694,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db97df1219034f7487f656dece63bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trophySprite: {fileID: 21300000, guid: 9083dc7c4414a4da38771910f584979a, type: 3}
+  trophy1Color:
+    serializedVersion: 2
+    rgba: 4284150264
+  trophy2Color:
+    serializedVersion: 2
+    rgba: 4287532686
+  trophy3Color:
+    serializedVersion: 2
+    rgba: 4281235135
   levelNameText: {fileID: 4272311696796097602}
   entryContainer: {fileID: 4272311697127868961}
   entryTemplate: {fileID: 2060865209009837389, guid: c9040d942a2694a0b95ded30c9f01501, type: 3}
+  entryHighlightColor:
+    serializedVersion: 2
+    rgba: 4290113305
 --- !u!1 &8072112886547379731
 GameObject:
   m_ObjectHideFlags: 0

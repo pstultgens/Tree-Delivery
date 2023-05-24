@@ -12,6 +12,8 @@ public class SelectLevelController : MonoBehaviour
     [SerializeField] public GameObject firstSelectedButton;
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] TextMeshProUGUI informationText;
+
+    [SerializeField] GameObject highscoreGameObject;
     [SerializeField] TextMeshProUGUI highscoreTitleText;
     [SerializeField] TextMeshProUGUI highscoreValueText;
     [SerializeField] TextMeshProUGUI highscoreNameText;
@@ -54,9 +56,7 @@ public class SelectLevelController : MonoBehaviour
         levelNameText.text = string.Empty;
         informationText.text = string.Empty;
 
-        highscoreTitleText.enabled = false;
-        highscoreValueText.text = string.Empty;
-        highscoreNameText.text = string.Empty;
+        highscoreGameObject.SetActive(false);
     }
 
     private bool ChangedLevelSelection()
@@ -72,9 +72,7 @@ public class SelectLevelController : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey(PLAYER_PREFS_HIGHSCORE_TABLE + currentSelectedLevelEnum))
         {
-            highscoreTitleText.enabled = false;
-            highscoreValueText.text = string.Empty;
-            highscoreNameText.text = string.Empty;
+            highscoreGameObject.SetActive(false);
             return;
         }
 
@@ -88,7 +86,7 @@ public class SelectLevelController : MonoBehaviour
             .Take(1)
             .ToList();
 
-        highscoreTitleText.enabled = true;
+        highscoreGameObject.SetActive(true);
         highscoreValueText.text = filterAndSortListForLevelName.First().score.ToString();
         highscoreNameText.text = filterAndSortListForLevelName.First().playerName;
     }

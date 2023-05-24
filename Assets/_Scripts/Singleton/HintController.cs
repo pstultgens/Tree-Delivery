@@ -57,94 +57,92 @@ public class HintController : MonoBehaviour
 
     public LevelEnum DetermineNextLevel()
     {
-        Debug.Log("Current Level Difficulty: " + currentLevel.ToString());
+        Debug.Log("Current Level: " + currentLevel.ToString());
+        LevelEnum nextLevel;
         switch (currentLevel)
         {
             case LevelEnum.Tutorial:
-                currentLevel = LevelEnum.Test;
+                nextLevel = LevelEnum.Test;
                 break;
             case LevelEnum.Test:
                 if (countWrongDeliveries >= acceptableNumberOfWrongDeliveries)
                 {
-                    currentLevel = LevelEnum.Easy1;
+                    nextLevel = LevelEnum.Easy1;
                 }
                 else
                 {
-                    currentLevel = LevelEnum.Hard1;
+                    nextLevel = LevelEnum.Hard1;
                 }
                 break;
             case LevelEnum.Easy1:
-                currentLevel = LevelEnum.Easy2;
+                nextLevel = LevelEnum.Easy2;
                 break;
             case LevelEnum.Easy2:
-                currentLevel = LevelEnum.Easy3;
+                nextLevel = LevelEnum.Easy3;
                 break;
             case LevelEnum.Easy3:
-                currentLevel = LevelEnum.Easy4;
+                nextLevel = LevelEnum.Easy4;
                 break;
             case LevelEnum.Easy4:
-                currentLevel = LevelEnum.Easy5;
+                nextLevel = LevelEnum.Easy5;
                 break;
             case LevelEnum.Easy5:
-                currentLevel = LevelEnum.Easy6;
+                nextLevel = LevelEnum.Easy6;
                 break;
             case LevelEnum.Easy6:
-                currentLevel = LevelEnum.Easy7;
+                nextLevel = LevelEnum.Easy7;
                 break;
             case LevelEnum.Easy7:
-                currentLevel = LevelEnum.Hard1;
+                nextLevel = LevelEnum.Hard1;
                 break;
             case LevelEnum.Hard1:
-                currentLevel = LevelEnum.Hard2;
+                nextLevel = LevelEnum.Hard2;
                 break;
             case LevelEnum.Hard2:
-                currentLevel = LevelEnum.Hard3;
+                nextLevel = LevelEnum.Hard3;
                 break;
             case LevelEnum.Hard3:
-                currentLevel = LevelEnum.Hard4;
+                nextLevel = LevelEnum.Hard4;
                 break;
             case LevelEnum.Hard4:
-                currentLevel = LevelEnum.Hard5;
+                nextLevel = LevelEnum.Hard5;
                 break;
             case LevelEnum.Hard5:
-                currentLevel = LevelEnum.Hard6;
+                nextLevel = LevelEnum.Hard6;
                 break;
             case LevelEnum.Hard6:
-                currentLevel = LevelEnum.Hard7;
+                nextLevel = LevelEnum.Hard7;
                 break;
             default:
                 Debug.LogWarning("Unable to determine difficulty, back to main menu!");
-                currentLevel = LevelEnum.MainMenu;
+                nextLevel = LevelEnum.MainMenu;
                 break;
         }
-        Debug.Log("Next Determined Level Difficulty: " + currentLevel.ToString());
 
-        UpdateHintStats();
-
-        return currentLevel;
+        return nextLevel;
     }
 
     private void UpdateHintStats()
     {
-        Debug.Log("Update Difficulty Stats");
+        Debug.Log("Update Hint Stats for: " + currentLevel.GetName());
 
         switch (currentLevel)
         {
             case LevelEnum.MainMenu:
                 break;
             case LevelEnum.Tutorial:
-                Debug.Log("Set Tutorial Mode stats");     
+                Debug.Log("Set Tutorial Mode stats");
                 SetHints(true, true, true, true, true, true, true);
                 SetDifficulties(false, false, false, false);
                 break;
             case LevelEnum.Test:
-                Debug.Log("Set Test Mode stats");         
+                Debug.Log("Set Test Mode stats");
                 SetHints(false, false, false, false, false, false, true);
                 SetDifficulties(true, true, true, false);
                 acceptableNumberOfWrongDeliveries = 2;
                 break;
             case LevelEnum.Easy1:
-                Debug.Log("Set Easy 1 Mode stats");  
+                Debug.Log("Set Easy 1 Mode stats");
                 SetHints(true, true, true, true, true, true, true);
                 SetDifficulties(false, false, false, false);
                 break;
@@ -179,9 +177,9 @@ public class HintController : MonoBehaviour
                 SetDifficulties(false, true, false, false);
                 break;
             case LevelEnum.Hard1:
-                Debug.Log("Set Hard 1 Mode stats");                
+                Debug.Log("Set Hard 1 Mode stats");
                 SetHints(false, false, true, true, true, false, true);
-                SetDifficulties(true, true, false, false);                
+                SetDifficulties(true, true, false, false);
                 break;
             case LevelEnum.Hard2:
                 Debug.Log("Set Hard 2 Mode stats");

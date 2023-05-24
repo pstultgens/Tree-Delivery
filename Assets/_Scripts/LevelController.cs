@@ -5,6 +5,8 @@ using TMPro;
 
 public class LevelController : MonoBehaviour
 {
+    private static string PLAYER_PREFS_LEVEL_UNLOCKED = "LevelUnlocked_";
+
     [SerializeField] public UIController uiController;
 
     [Header("Level Setup")]
@@ -80,17 +82,30 @@ public class LevelController : MonoBehaviour
     private IEnumerator LevelCompleteCoroutine()
     {
         SceneManager.isGamePaused = true;
+        UnlockNextLevel();
+
         // Wait some time before showing the Level Complete Window
         yield return new WaitForSeconds(1.5f);
 
         if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel)
                 || LevelEnum.Test.Equals(HintController.Instance.currentLevel))
         {
-            sceneManager.LoadNextLevel();
+            sceneManager.GoToScene("Select Level Menu");
         }
         else
         {
             sceneManager.ShowLevelComplete();
+        }
+    }
+
+    private void UnlockNextLevel()
+    {
+        LevelEnum nextLevel = HintController.Instance.DetermineNextLevel();
+
+        if (!PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL_UNLOCKED + nextLevel))
+        {
+            PlayerPrefs.SetString(PLAYER_PREFS_LEVEL_UNLOCKED + nextLevel, bool.TrueString);
+            PlayerPrefs.Save();
         }
     }
 

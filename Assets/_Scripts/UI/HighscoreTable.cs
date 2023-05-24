@@ -14,6 +14,7 @@ public class HighscoreTable : MonoBehaviour
     [SerializeField] Color32 entryHighlightColor = new Color32(25, 239, 181, 255);
 
     private List<Transform> highscoreEntryTransformList;
+    private bool highscoreEntryHighlighted;
 
     private void Awake()
     {
@@ -115,8 +116,9 @@ public class HighscoreTable : MonoBehaviour
         nameValue.text = name;
 
 
-        if (HighlightHighscoreEntry(name, score))
+        if (!highscoreEntryHighlighted && HighlightHighscoreEntry(name, score))
         {
+            highscoreEntryHighlighted = true;
             postionValue.color = entryHighlightColor;
             scoreValue.color = entryHighlightColor;
             nameValue.color = entryHighlightColor;

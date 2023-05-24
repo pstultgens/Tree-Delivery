@@ -304,71 +304,71 @@ public class SceneManager : MonoBehaviour
         fadeTransition.SetTrigger("End");
     }
 
-    public void LoadNextLevel()
-    {
-        if (isLoadingLevel)
-        {
-            return;
-        }
-        isLoadingLevel = true;
-        Debug.Log("Load next Level...");
+    //public void LoadNextLevel()
+    //{
+    //    if (isLoadingLevel)
+    //    {
+    //        return;
+    //    }
+    //    isLoadingLevel = true;
+    //    Debug.Log("Load next Level...");
 
-        switch (HintController.Instance.DetermineNextLevel())
-        {
-            case LevelEnum.MainMenu:
-                BackToMainMenu();
-                break;
-            case LevelEnum.Test:
-                StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
-                break;
-            case LevelEnum.Easy1:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
-                break;
-            case LevelEnum.Easy2:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
-                break;
-            case LevelEnum.Easy3:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
-                break;
-            case LevelEnum.Easy4:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 4"));
-                break;
-            case LevelEnum.Easy5:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 5"));
-                break;
-            case LevelEnum.Easy6:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 6"));
-                break;
-            case LevelEnum.Easy7:
-                StartCoroutine(LoadLevelCoroutine("Easy Level 7"));
-                break;
-            case LevelEnum.Hard1:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
-                break;
-            case LevelEnum.Hard2:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
-                break;
-            case LevelEnum.Hard3:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 3"));
-                break;
-            case LevelEnum.Hard4:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 4"));
-                break;
-            case LevelEnum.Hard5:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 5"));
-                break;
-            case LevelEnum.Hard6:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 6"));
-                break;
-            case LevelEnum.Hard7:
-                StartCoroutine(LoadLevelCoroutine("Hard Level 7"));
-                break;
-            default:
-                Debug.LogWarning("Unable to load level by difficulty!");
-                BackToMainMenu();
-                break;
-        }
-    }
+    //    switch (HintController.Instance.DetermineNextLevel())
+    //    {
+    //        case LevelEnum.MainMenu:
+    //            BackToMainMenu();
+    //            break;
+    //        case LevelEnum.Test:
+    //            StartCoroutine(LoadLevelCoroutine("Test Difficulty Level"));
+    //            break;
+    //        case LevelEnum.Easy1:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 1"));
+    //            break;
+    //        case LevelEnum.Easy2:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 2"));
+    //            break;
+    //        case LevelEnum.Easy3:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 3"));
+    //            break;
+    //        case LevelEnum.Easy4:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 4"));
+    //            break;
+    //        case LevelEnum.Easy5:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 5"));
+    //            break;
+    //        case LevelEnum.Easy6:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 6"));
+    //            break;
+    //        case LevelEnum.Easy7:
+    //            StartCoroutine(LoadLevelCoroutine("Easy Level 7"));
+    //            break;
+    //        case LevelEnum.Hard1:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 1"));
+    //            break;
+    //        case LevelEnum.Hard2:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 2"));
+    //            break;
+    //        case LevelEnum.Hard3:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 3"));
+    //            break;
+    //        case LevelEnum.Hard4:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 4"));
+    //            break;
+    //        case LevelEnum.Hard5:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 5"));
+    //            break;
+    //        case LevelEnum.Hard6:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 6"));
+    //            break;
+    //        case LevelEnum.Hard7:
+    //            StartCoroutine(LoadLevelCoroutine("Hard Level 7"));
+    //            break;
+    //        default:
+    //            Debug.LogWarning("Unable to load level by difficulty!");
+    //            BackToMainMenu();
+    //            break;
+    //    }
+    //}
 
     public void GoToScene(string sceneName)
     {
@@ -400,8 +400,9 @@ public class SceneManager : MonoBehaviour
     public void SelectLevel13() => LevelSelect(LevelEnum.Hard6);
     public void SelectLevel14() => LevelSelect(LevelEnum.Hard7);
 
-    private void LevelSelect(LevelEnum level)
+    public void LevelSelect(LevelEnum level)
     {
+        // Check if level is unlocked
         selectedLevel = level;
         GoToScene("Select Car Menu");        
     }
@@ -418,19 +419,6 @@ public class SceneManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    IEnumerator LoadLevelCoroutine(int levelIndex)
-    {
-        // Play animation
-        fadeTransition.SetTrigger("Start");
-
-        // Wait
-        yield return new WaitForSeconds(tranistionTime);
-
-        isGamePaused = false;
-        // Load Scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(levelIndex);
     }
 
     IEnumerator LoadLevelCoroutine(string sceneName)

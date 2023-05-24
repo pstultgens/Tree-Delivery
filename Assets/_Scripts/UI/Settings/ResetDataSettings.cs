@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResetDataSettings : MonoBehaviour
 {
-    private static string PLAYER_PREFS_LEVEL_UNLOCKED = "LevelUnlocked_";
+    private static string PLAYER_PREFS_LEVEL = "Level_";
     private static string PLAYER_PREFS_HIGHSCORE_TABLE = "HighscoreTable_";
 
     private SceneManager sceneManager;
@@ -17,31 +17,32 @@ public class ResetDataSettings : MonoBehaviour
 
     public void ResetData()
     {
-        ResetUnlockedLevels();
+        ResetAllLevels();
         ResetHighscores();       
 
         sceneManager.BackToMainMenu();
     }
 
-    private void ResetUnlockedLevels()
+    private void ResetAllLevels()
     {
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Test);
-        
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy1);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy2);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy3);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy4);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy5);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy6);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Easy7);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Tutorial);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Test);
 
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard1);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard2);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard3);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard4);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard5);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard6);
-        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL_UNLOCKED + LevelEnum.Hard7);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy1);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy2);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy3);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy4);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy5);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy6);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy7);
+
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard1);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard2);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard3);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard4);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard5);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard6);
+        PlayerPrefs.DeleteKey(PLAYER_PREFS_LEVEL + LevelEnum.Hard7);
 
         PlayerPrefs.Save();
     }

@@ -10,9 +10,6 @@ public class Spot : MonoBehaviour
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
 
-    [Header("Score")]
-    [SerializeField] private Transform scorePopupPrefab;
-
     [Header("Minimap Icons")]
     [SerializeField] public GameObject minimapNode;
     [SerializeField] public GameObject minimapEdgeLeft;
@@ -171,13 +168,6 @@ public class Spot : MonoBehaviour
         }
     }
 
-    public void ShowScorePopup(int scoreAmount)
-    {
-        Debug.Log("Show Score Popup: " + scoreAmount);
-        Transform scorePopupTransform = Instantiate(scorePopupPrefab, transform.position, Quaternion.identity);
-        ScorePopup damagePopup = scorePopupTransform.GetComponent<ScorePopup>();
-        damagePopup.Setup(scoreAmount);
-    }
 
     private void UpdateMinimap()
     {

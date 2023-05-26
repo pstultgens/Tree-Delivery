@@ -5,14 +5,11 @@ using TMPro;
 
 public class DeliveryController : MonoBehaviour
 {
-
-
     [Header("Stats")]
     [SerializeField] GameObject collectedPackageOnCarSprite;
     [SerializeField] Transform dropPackageLocation;
     [SerializeField] float packagePickupDelay = 1f;
 
-  
     public bool isCollidingWithSpot;
     public bool isCollidingWithPackage;
 
@@ -22,14 +19,15 @@ public class DeliveryController : MonoBehaviour
 
     private CarVfxHandler carVfxHandler;
     private Package[] allPackages;
-    private ScoreController scoreController;
     private bool canPackageBePickedUp = true;
 
+    private ScoreController scoreController;
 
     private void Awake()
     {
-        allPackages = FindObjectsOfType<Package>();
         carVfxHandler = GetComponent<CarVfxHandler>();
+
+        allPackages = FindObjectsOfType<Package>();
         scoreController = FindObjectOfType<ScoreController>();
     }
 
@@ -199,8 +197,6 @@ public class DeliveryController : MonoBehaviour
             currentCollidingSpot.CorrectPackageReceived();
             currentCollectedPackage.CorrectDelivered(currentCollidingSpot);
 
-            
-
             currentCollectedPackage = null;
         }
         else if (!currentCollidingSpot.hasReceivedCorrectPackage)
@@ -209,7 +205,7 @@ public class DeliveryController : MonoBehaviour
 
             currentCollectedPackage.AddCounterWrongDelivered();
 
-            HintController.Instance.IncreaseWrongDelivery();
+            scoreController.IncreaseWrongDeliveredCounter();
 
             if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
             {
@@ -223,10 +219,6 @@ public class DeliveryController : MonoBehaviour
             }
             else
             {
-                if (scoreController != null)
-                {
-                    scoreController.DecreaseScorePackageWrongDelivered(currentCollidingSpot);
-                }
 
                 if (HintController.Instance.showHintValueWhenWrongDelivered)
                 {
@@ -281,7 +273,7 @@ public class DeliveryController : MonoBehaviour
 
             carPackage.AddCounterWrongDelivered();
 
-            HintController.Instance.IncreaseWrongDelivery();
+            scoreController.IncreaseWrongDeliveredCounter();
 
             currentCollidingSpot.WrongPackageReceived(carPackage.Value());
             carPackage.WrongDelivered();

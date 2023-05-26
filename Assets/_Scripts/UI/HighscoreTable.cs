@@ -21,6 +21,13 @@ public class HighscoreTable : MonoBehaviour
     private List<Transform> highscoreEntryTransformList;
     private bool highscoreEntryHighlighted;
 
+    private ScoreController scoreController;
+
+    private void Awake()
+    {
+        scoreController = FindObjectOfType<ScoreController>();
+    }
+
     private void CleanHighscoreTableFromEntries()
     {
         // Clean highscore table from entries
@@ -99,12 +106,12 @@ public class HighscoreTable : MonoBehaviour
     private bool HighlightHighscoreEntry(string playerName, int score)
     {
         string currentPlayerName = PlayerPrefs.GetString("PlayerName");
-        int currentScore = ScoreController.currentScore;
+        int currentScore = scoreController.DetermineTotalScore();
 
         return currentPlayerName.Equals(playerName) && currentScore.Equals(score);
     }
 
-    public bool IsHighscoreInTop10(LevelEnum levelName, int score)
+    public bool IsHighscoreInTop10(LevelEnum levelName, float score)
     {
         Debug.Log("CanHighscoreBeAdded");
         List<HighscoreEntry> loadedHighscoredForLevel = PlayerPrefsRepository.Instance.LoadTop10HighscoresForLevel(levelName);
@@ -116,7 +123,7 @@ public class HighscoreTable : MonoBehaviour
 
         HighscoreEntry lastEntry = loadedHighscoredForLevel[loadedHighscoredForLevel.Count - 1];
         return score > lastEntry.score;
-    }    
+    }
 
     public void ShowHighscores(LevelEnum levelName)
     {

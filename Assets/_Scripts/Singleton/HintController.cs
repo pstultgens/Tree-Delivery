@@ -22,7 +22,6 @@ public class HintController : MonoBehaviour
 
     [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
 
-    private int countWrongDeliveries = 0;
 
     private void Awake()
     {
@@ -40,13 +39,7 @@ public class HintController : MonoBehaviour
 
     private void Start()
     {
-        countWrongDeliveries = 0;
         UpdateHintStats();
-    }
-
-    public void IncreaseWrongDelivery()
-    {
-        countWrongDeliveries++;
     }
 
     public void SetLevelDifficulty(LevelEnum levelEnum)
@@ -66,7 +59,7 @@ public class HintController : MonoBehaviour
                 nextLevel = LevelEnum.Test;
                 break;
             case LevelEnum.Test:
-                if (countWrongDeliveries >= acceptableNumberOfWrongDeliveries)
+                if (ScoreController.countWrongDeliveries >= acceptableNumberOfWrongDeliveries)
                 {
                     nextLevel = LevelEnum.Easy1;
                 }

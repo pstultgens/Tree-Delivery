@@ -8,20 +8,20 @@ public class Package : MonoBehaviour
     public bool isDelivered;
 
     private UIController uiController;
-    private GameObject player;
     private ScoreController scoreController;
+    private GameObject player;
 
     public int timesPackageWrongDeliveredCounter = 0;
 
     private void Awake()
     {
         uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
-        scoreController = FindObjectOfType<ScoreController>();
     }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        scoreController = FindObjectOfType<ScoreController>();
         ShowOnMinimap();
     }
 
@@ -59,21 +59,14 @@ public class Package : MonoBehaviour
         isCorrectDelivered = true;
         isDelivered = true;
 
-        if (!HintController.Instance.canPackageBeDeliveredAtWrongNode)
-        {
-            if (timesPackageWrongDeliveredCounter == 0 && scoreController != null)
-            {
-                scoreController.IncreaseScorePackageFirstTimeCorrectDelivered(spot);
-            }
-            else if (scoreController != null)
-            {
-                scoreController.IncreaseScorePackageDelivered(spot, timesPackageWrongDeliveredCounter);
-            }
-        }
-
         if (HintController.Instance.showHintUIPackageAndMinimapNode)
         {
             uiController.PackageCorrectDelivered(Value());
+        }
+
+        if(timesPackageWrongDeliveredCounter == 0)
+        {
+            scoreController.IncreaseFirstTimeCorrectDeliveredCounter();
         }
         // Set delivered package at players location
         transform.position = player.transform.position;

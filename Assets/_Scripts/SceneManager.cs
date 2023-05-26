@@ -54,6 +54,7 @@ public class SceneManager : MonoBehaviour
 
     private PlayerInputActions playerActions;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
+    private ScoreController scoreController;
 
     private void Awake()
     {
@@ -61,6 +62,7 @@ public class SceneManager : MonoBehaviour
         {
             InstantiatePlayer();
         }
+        scoreController = FindObjectOfType<ScoreController>();
     }
 
     private void OnEnable()
@@ -222,6 +224,11 @@ public class SceneManager : MonoBehaviour
         GoToScene("Main Menu");
     }
 
+    public void BackToSelectLevelMenu()
+    {
+        GoToScene("Select Level Menu");
+    }
+
     public void ShowLevelComplete()
     {
         if (isShowingLevelComplete)
@@ -254,7 +261,7 @@ public class SceneManager : MonoBehaviour
     {
         HighscoreTable highscoreTable = highscoreTableWindow.GetComponent<HighscoreTable>();
 
-        if (highscoreTable.IsHighscoreInTop10(HintController.Instance.currentLevel, ScoreController.currentScore))
+        if (highscoreTable.IsHighscoreInTop10(HintController.Instance.currentLevel, scoreController.DetermineTotalScore()))
         {
             // Input Highscore
             AddHighscore();
@@ -269,7 +276,7 @@ public class SceneManager : MonoBehaviour
 
     public void AddHighscore()
     {
-        PlayerPrefsRepository.Instance.AddHighscoreEntry(HintController.Instance.currentLevel, ScoreController.currentScore);
+        PlayerPrefsRepository.Instance.AddHighscoreEntry(HintController.Instance.currentLevel, scoreController.DetermineTotalScore());
         StartCoroutine(ShowHighscoreTableCoroutine());
     }
 

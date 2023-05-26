@@ -3,83 +3,73 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    public static int currentScore;
+    public static int countWrongDeliveries = 0;
+    public static int countFirstTimeCorrectDeliveries = 0;
 
-    [SerializeField] public int startScore = 999;
-    [SerializeField] public int scoreDelayAmount = 1;
+    [Header("Time Bonus")]
+    [SerializeField] float maxTime = 180f;
+    [SerializeField] float maxBonus = 1000f;
 
-    [SerializeField] public int scoreAmountFirstTimeCorrectDelivered = 20;   
-    [SerializeField] public int scoreAmountWrongDelivered = 15;
-    [SerializeField] public int timesWrongDeliveredPenalty = 5;
+    [Header("Delivery Bonus/Penalty")]
+    [SerializeField] int flawlessDeliveryBonus = 200;
+    [SerializeField] int deliveryPenalty = 100;
 
-
-    private TextMeshProUGUI scoringText;
-    private float timer;
-
-    private DeliveryController deliveryController;
+    private TimeController timeController;
 
     private void Start()
     {
-        deliveryController = FindObjectOfType<DeliveryController>();
-        scoringText = GetComponent<TextMeshProUGUI>();
-        currentScore = startScore;
+        timeController = FindObjectOfType<TimeController>();
+
+        countWrongDeliveries = 0;
+        countFirstTimeCorrectDeliveries = 0;
     }
 
     private void Update()
     {
-        if (deliveryController.AllPackagesCorrectDelivered())
+        if (timeController == null)
         {
-            return;
+            timeController = FindObjectOfType<TimeController>();
+        }
+    }
+
+    public void IncreaseWrongDeliveredCounter()
+    {
+        countWrongDeliveries++;
+    }
+
+    public void IncreaseFirstTimeCorrectDeliveredCounter()
+    {
+        countFirstTimeCorrectDeliveries++;
+    }
+
+    public int DetermineTimeBonus()
+    {
+        float timeBonus = 0f;
+
+        int elapsedTime = timeController.GetElapsedTimeInSeconds();
+
+        // Calculate the time bonus based on the elapsed time
+        if (elapsedTime <= maxTime)
+        {
+            float timeRatio = 1f - (elapsedTime / maxTime);
+            timeBonus = timeRatio * maxBonus;
         }
 
-        if (SceneManager.isGamePaused || SceneManager.isCountingDown)
-        {
-            return;
-        }
-
-        DecreaseScoreOverTime();
+        return Mathf.RoundToInt(timeBonus);
     }
 
-    private void DecreaseScoreOverTime()
+    public int DetermineFlawlessDeliveryBonus()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= scoreDelayAmount)
-        {
-            timer = 0f;
-            currentScore -= 1;
-        }
-
-        UpdateScoreText();
+        return countFirstTimeCorrectDeliveries * flawlessDeliveryBonus;
     }
 
-    private void UpdateScoreText()
+    public int DetermineDeliveryPenalty()
     {
-        scoringText.text = currentScore.ToString();
+        return countWrongDeliveries * deliveryPenalty;
     }
 
-    public void IncreaseScorePackageFirstTimeCorrectDelivered(Spot spot)
+    public int DetermineTotalScore()
     {
-        Debug.Log("Add score: Package first time correct delivered");
-        currentScore += scoreAmountFirstTimeCorrectDelivered;
-        UpdateScoreText();
-        spot.ShowScorePopup(scoreAmountFirstTimeCorrectDelivered);
-    }
-
-    public void IncreaseScorePackageDelivered(Spot spot, int timesPackageWrongDeliveredCounter)
-    {
-        Debug.Log("Add score: Package correct delivered, after times: " + timesPackageWrongDeliveredCounter);
-        int amount = Mathf.RoundToInt(scoreAmountFirstTimeCorrectDelivered - (timesPackageWrongDeliveredCounter * timesWrongDeliveredPenalty));
-        currentScore += amount;
-        UpdateScoreText();
-        spot.ShowScorePopup(amount);
-    }
-
-    public void DecreaseScorePackageWrongDelivered(Spot spot)
-    {
-        Debug.Log("Remove score: Package wrong delivered");
-        currentScore -= scoreAmountWrongDelivered;
-        UpdateScoreText();
-        spot.ShowScorePopup(-scoreAmountWrongDelivered);
+        return DetermineTimeBonus() + DetermineFlawlessDeliveryBonus() - DetermineDeliveryPenalty();
     }
 }

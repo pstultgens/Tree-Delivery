@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 5789380792786508556}
   - component: {fileID: 3343481883372907964}
   - component: {fileID: 7827926870043290297}
+  - component: {fileID: 1555813586682223696}
   m_Layer: 5
   m_Name: CountDown
   m_TagString: Untagged
@@ -454,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -488,6 +489,19 @@ MonoBehaviour:
   goAudioSource: {fileID: 3435630939507534298}
   countText: {fileID: 6182167583843575085}
   levelNameText: {fileID: 6222254744692386242}
+--- !u!114 &1555813586682223696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7932210657259420461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a9f757fd6f74ddb86fd23f7def47b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 2.5
 --- !u!1 &8044848074157035499
 GameObject:
   m_ObjectHideFlags: 0

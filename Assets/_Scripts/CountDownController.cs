@@ -41,7 +41,7 @@ public class CountDownController : MonoBehaviour
         countText.text = "GO";
         SceneManager.isCountingDown = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 

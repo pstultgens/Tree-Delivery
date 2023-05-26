@@ -12,7 +12,7 @@ public class MusicController : MonoBehaviour
     [SerializeField] public AudioMixer audioMixer;
 
     [Header("Game Music Audio sources")]
-    [SerializeField] public AudioSource levelAudioSource;
+    [SerializeField] public AudioSource[] levelAudioSources;
 
     [Header("Menu Audio sources")]
     [SerializeField] public AudioSource menuAudioSource;
@@ -22,6 +22,8 @@ public class MusicController : MonoBehaviour
     [Header("Package SFX Audio sources")]
     [SerializeField] public AudioSource pickupAudioSource;
     [SerializeField] public AudioSource dropAudioSource;
+
+    private AudioSource selectedLevelAudioSource;
 
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class MusicController : MonoBehaviour
     private void Start()
     {
         LoadVolumeSettings();
+        RandomiseLevelMusic();
     }
 
     void Update()
@@ -55,7 +58,8 @@ public class MusicController : MonoBehaviour
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Level Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
-            levelAudioSource.Stop();
+            selectedLevelAudioSource.Stop();
+
             if (!menuAudioSource.isPlaying)
             {
                 menuAudioSource.Play();
@@ -64,11 +68,18 @@ public class MusicController : MonoBehaviour
         else
         {
             menuAudioSource.Stop();
-            if (!levelAudioSource.isPlaying)
+
+            if (!selectedLevelAudioSource.isPlaying)
             {
-                levelAudioSource.Play();
+                RandomiseLevelMusic();
+                selectedLevelAudioSource.Play();
             }
         }
+    }
+
+    private void RandomiseLevelMusic()
+    {
+        selectedLevelAudioSource = levelAudioSources[Random.Range(0, levelAudioSources.Length)];
     }
 
     public void LoadVolumeSettings()

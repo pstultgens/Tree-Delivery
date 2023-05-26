@@ -40,6 +40,7 @@ public class HintController : MonoBehaviour
 
     private void Start()
     {
+        countWrongDeliveries = 0;
         UpdateHintStats();
     }
 
@@ -140,7 +141,7 @@ public class HintController : MonoBehaviour
                 Debug.Log("Set Test Mode stats");
                 SetHints(false, false, false, false, false, false, true);
                 SetDifficulties(true, true, true, false);
-                acceptableNumberOfWrongDeliveries = 2;
+                acceptableNumberOfWrongDeliveries = 3;
                 break;
             case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");

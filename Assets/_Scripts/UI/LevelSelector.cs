@@ -21,24 +21,24 @@ public class LevelSelector : MonoBehaviour
 
         if (lockImage != null && PlayerPrefsRepository.Instance.IsLevelUnlocked(level))
         {
-            Debug.Log("Level unlocked: " + level);
+            Debug.Log(level.GetName() + ": Unlocked");
             lockImage.SetActive(false);
             button.onClick.AddListener(() => sceneManager.LevelSelect(level));
         }
         else
         {
-            Debug.Log("Level locked: " + level);
+            Debug.Log(level.GetName() + ": Locked");
             button.onClick.RemoveAllListeners();
         }
 
         if (PlayerPrefsRepository.Instance.IsLevelFinished(level))
         {
-            Debug.Log("Level finished: " + level);
+            Debug.Log(level.GetName() + ": Finished");
             levelFinishedCheckmark.SetActive(true);
         }
         else
         {
-            Debug.Log("Level unfinished: " + level);
+            Debug.Log(level.GetName() + ": Unfinished");
             levelFinishedCheckmark.SetActive(false);
         }
     }

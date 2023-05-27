@@ -168,6 +168,21 @@ public class PlayerPrefsRepository : MonoBehaviour
         }
     }
 
+    public bool AllEasyLevelsUnlocked()
+    {
+        if (PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy1)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy2)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy3)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy4)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy5)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy6)
+            && PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + LevelEnum.Easy7))
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void UnlockAllEasyLevels()
     {
         Level level = new Level();

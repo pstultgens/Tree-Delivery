@@ -47,6 +47,11 @@ public class MusicController : MonoBehaviour
 
     void Update()
     {
+        if (!Application.isFocused)
+        {
+            return;
+        }
+
         if (!menuAudioSource.isPlaying)
         {
             menuAudioSource.Play();
@@ -71,11 +76,14 @@ public class MusicController : MonoBehaviour
 
             if (!selectedLevelAudioSource.isPlaying)
             {
+                Debug.Log("Level Audio is not playing, choose random level music and play");
                 RandomiseLevelMusic();
                 selectedLevelAudioSource.Play();
             }
         }
     }
+
+   
 
     private void RandomiseLevelMusic()
     {

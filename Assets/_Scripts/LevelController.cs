@@ -88,10 +88,13 @@ public class LevelController : MonoBehaviour
         // Wait some time before showing the Level Complete Window
         yield return new WaitForSeconds(1.5f);
 
-        if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel)
-                || LevelEnum.Test.Equals(HintController.Instance.currentLevel))
+        if (LevelEnum.Tutorial.Equals(HintController.Instance.currentLevel))
         {
             sceneManager.GoToScene("Select Level Menu");
+        }
+        else if (LevelEnum.Test.Equals(HintController.Instance.currentLevel))
+        {
+            sceneManager.ShowTestLevelComplete();
         }
         else
         {

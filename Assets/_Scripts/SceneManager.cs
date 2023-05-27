@@ -39,6 +39,10 @@ public class SceneManager : MonoBehaviour
     [SerializeField] public GameObject settingsWindow;
     [SerializeField] public GameObject settingsWindowFirstSelectedButton;
 
+    [Header("Test Level Complete")]
+    [SerializeField] public GameObject testLevelCompleteWindow;
+    [SerializeField] public GameObject testLevelCompleteFirstSelectedButton;
+
     [Header("Level Complete")]
     [SerializeField] public GameObject levelCompleteWindow;
     [SerializeField] public GameObject levelCompleteFirstSelectedButton;
@@ -50,7 +54,8 @@ public class SceneManager : MonoBehaviour
     [Header("Audio Mixers")]
     [SerializeField] public AudioMixer audioMixer;
 
-    private bool isShowingLevelComplete;
+    private bool isShowingTestLevelComplete;
+    private bool isShowingLevelComplete;    
 
     private PlayerInputActions playerActions;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -229,6 +234,34 @@ public class SceneManager : MonoBehaviour
         GoToScene("Select Level Menu");
     }
 
+    public void ShowTestLevelComplete()
+    {
+        if (isShowingTestLevelComplete)
+        {
+            return;
+        }
+        isShowingTestLevelComplete = true;
+        isGamePaused = true;
+
+        // Show Level Complete
+        if (testLevelCompleteWindow == null)
+        {
+            Debug.Log("Test Level Complete Window in SceneManager not set");
+            return;
+        }
+
+        StartCoroutine(ShowTestLevelCompleteCoroutine());
+    }
+
+    IEnumerator ShowTestLevelCompleteCoroutine()
+    {
+        fadeTransition.SetTrigger("Start");
+        yield return new WaitForSeconds(tranistionTime);
+        testLevelCompleteWindow.SetActive(true);
+        SetFirstSelectedUIButton(testLevelCompleteFirstSelectedButton);
+        fadeTransition.SetTrigger("End");
+    }
+
     public void ShowLevelComplete()
     {
         if (isShowingLevelComplete)
@@ -241,7 +274,7 @@ public class SceneManager : MonoBehaviour
         // Show Level Complete
         if (levelCompleteWindow == null)
         {
-            Debug.Log("Level Complete Window in LevelLoader not set");
+            Debug.Log("Level Complete Window in SceneManager not set");
             return;
         }
 

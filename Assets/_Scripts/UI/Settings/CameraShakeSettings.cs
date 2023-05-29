@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CameraShakeSettings : MonoBehaviour
 {
-    [Header("UI Sliders")]
+    [Header("UI Toggle")]
     [SerializeField] private Toggle cameraShakeToggle;
 
     private CinemachineShake cinemachineShake;

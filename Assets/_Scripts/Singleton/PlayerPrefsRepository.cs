@@ -14,6 +14,7 @@ public class PlayerPrefsRepository : MonoBehaviour
     private static string MUSIC_VOLUME = "MusicVolume";
     private static string SFX_VOLUME = "SFXVolume";
     private static string CAMERA_SHAKE = "CameraShake";
+    private static string FULLSCREEN = "Fullscreen";
 
     private void Awake()
     {
@@ -197,6 +198,21 @@ public class PlayerPrefsRepository : MonoBehaviour
         PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy6, json);
         PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy7, json);
         PlayerPrefs.Save();
+    }
+
+    public void SetFullscreenSetting(bool isOn)
+    {
+        PlayerPrefs.SetString(FULLSCREEN, isOn.ToString());
+        PlayerPrefs.Save();
+    }
+
+    public bool LoadFullscreenSetting()
+    {
+        if (PlayerPrefs.HasKey(FULLSCREEN))
+        {
+            return bool.Parse(PlayerPrefs.GetString(FULLSCREEN));
+        }
+        return true;
     }
 
     public void SetCameraShakeSetting(bool isOn)

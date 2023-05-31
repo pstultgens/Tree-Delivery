@@ -5914,6 +5914,7 @@ GameObject:
   - component: {fileID: 6934995812228963763}
   - component: {fileID: 2687430653576696441}
   - component: {fileID: 2687430653576696442}
+  - component: {fileID: 7890235881258207875}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -6042,9 +6043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectedPackageOnCarSprite: {fileID: 2687430653085865048}
   dropPackageLocation: {fileID: 2687430653836382434}
-  wrongDeliveryDelay: 3
   packagePickupDelay: 0.5
-  allPackagesCorrectDelivered: 0
   isCollidingWithSpot: 0
   isCollidingWithPackage: 0
   currentCollectedPackage: {fileID: 0}
@@ -6113,6 +6112,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &7890235881258207875
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687430653576696417}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a7a3a2c7f24f474ebc5ef8956298a85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2687430653836382433
 GameObject:
   m_ObjectHideFlags: 0

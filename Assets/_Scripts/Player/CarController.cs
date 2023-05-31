@@ -44,12 +44,14 @@ public class CarController : MonoBehaviour
 
     private Rigidbody2D carRigidbody;
     private CarInputHandler carInputHandler;
+    private Animator animator;
 
     private void Awake()
     {
         carRigidbody = GetComponent<Rigidbody2D>();
         carInputHandler = GetComponent<CarInputHandler>();
         isAI = GetComponent<CarIAHandler>() != null;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -68,6 +70,31 @@ public class CarController : MonoBehaviour
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
+
+        if (IsRigidbodyIdle())
+        {
+            animator.SetBool("isDriving", false);
+        }
+        else
+        {
+            animator.SetBool("isDriving", true);
+        }
+    }
+
+    private bool IsRigidbodyIdle()
+    {
+        float velocityThreshold = 0.1f; // Define a threshold value for velocity
+        float angularVelocityThreshold = 0.1f; // Define a threshold value for angular velocity
+
+        // Check if both the velocity and angular velocity are below the threshold
+        if (carRigidbody.velocity.magnitude < velocityThreshold && carRigidbody.angularVelocity < angularVelocityThreshold)
+        {
+            return true; // Rigidbody has no movement
+        }
+        else
+        {
+            return false; // Rigidbody is moving
+        }
     }
 
     private void PauseCheck()
@@ -131,7 +158,7 @@ public class CarController : MonoBehaviour
     }
 
     private IEnumerator BoostCoroutine()
-    {        
+    {
         maxSpeed = boostSpeed;
         yield return new WaitForSeconds(boostTime);
         maxSpeed = originalMaxSpeed;
@@ -139,7 +166,7 @@ public class CarController : MonoBehaviour
     }
 
     private IEnumerator OilTrapCoroutine()
-    {        
+    {
         driftFactor = oilTrapDriftFactor;
         turnFactor = oilTrapTurnFactor;
         yield return new WaitForSeconds(oilTrapTime);
@@ -149,7 +176,7 @@ public class CarController : MonoBehaviour
     }
 
     private IEnumerator SpikeTrapCoroutine()
-    {        
+    {
         maxSpeed = spikeTrapSpeed;
         turnFactor = spikeTrapTurnFactor;
         yield return new WaitForSeconds(spikeTrapTime);

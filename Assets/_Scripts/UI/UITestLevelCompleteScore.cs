@@ -6,7 +6,9 @@ using TMPro;
 public class UITestLevelCompleteScore : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI completionTimeText;
-    [SerializeField] TextMeshProUGUI incorrectDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectValueDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectHasNoParentDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectHasChildDeliveriesText;
     [SerializeField] TextMeshProUGUI perfectDeliveriesText;
 
     [SerializeField] GameObject testPassedGameObject;
@@ -23,10 +25,14 @@ public class UITestLevelCompleteScore : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            int countWrongDeliveries = ScoreController.countWrongDeliveries;
+            int countWrongValueDeliveries = ScoreController.countWrongValueDeliveries;
+            int countCannotDeliverHasNoParentDeliveries = ScoreController.countCannotDeliverHasNoParentDeliveries;
+            int countCannotRemoveHasChildDeliveries = ScoreController.countCannotRemoveHasChildDeliveries;
 
             completionTimeText.text = timeController.GetFormattedTime();
-            incorrectDeliveriesText.text = countWrongDeliveries.ToString();
+            incorrectValueDeliveriesText.text = countWrongValueDeliveries.ToString();
+            incorrectHasNoParentDeliveriesText.text = countCannotDeliverHasNoParentDeliveries.ToString();
+            incorrectHasChildDeliveriesText.text = countCannotRemoveHasChildDeliveries.ToString();
             perfectDeliveriesText.text = ScoreController.countFirstTimeCorrectDeliveries.ToString();
 
             if (HintController.Instance.DetermineNextLevel().Equals(LevelEnum.Easy1))

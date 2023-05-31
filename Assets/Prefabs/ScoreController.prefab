@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f56b1b9d94b4e91aeeb948bc081910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 180
+  maxTime: 300
   maxBonus: 1000
-  flawlessDeliveryBonus: 250
-  deliveryPenalty: 100
-  countFirstTimeCorrectDeliveries: 0
+  flawlessDeliveryBonus: 500
+  deliveryPenalty: 150

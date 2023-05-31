@@ -3,7 +3,9 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    public static int countWrongDeliveries = 0;
+    public static int countWrongValueDeliveries = 0;
+    public static int countCannotDeliverHasNoParentDeliveries = 0;
+    public static int countCannotRemoveHasChildDeliveries = 0;
     public static int countFirstTimeCorrectDeliveries = 0;
 
     [Header("Time Bonus")]
@@ -20,7 +22,9 @@ public class ScoreController : MonoBehaviour
     {
         timeController = FindObjectOfType<TimeController>();
 
-        countWrongDeliveries = 0;
+        countWrongValueDeliveries = 0;
+        countCannotDeliverHasNoParentDeliveries = 0;
+        countCannotRemoveHasChildDeliveries = 0;
         countFirstTimeCorrectDeliveries = 0;
     }
 
@@ -32,9 +36,19 @@ public class ScoreController : MonoBehaviour
         }
     }
 
-    public void IncreaseWrongDeliveredCounter()
+    public void IncreaseWrongValueDeliveredCounter()
     {
-        countWrongDeliveries++;
+        countWrongValueDeliveries++;
+    }
+
+    public void IncreaseCannotDeliverHasNoParentCounter()
+    {
+        countCannotDeliverHasNoParentDeliveries++;
+    }
+
+    public void IncreaseCannotRemoveHasChildCounter()
+    {
+        countCannotRemoveHasChildDeliveries++;
     }
 
     public void IncreaseFirstTimeCorrectDeliveredCounter()
@@ -65,7 +79,11 @@ public class ScoreController : MonoBehaviour
 
     public int DetermineDeliveryPenalty()
     {
-        return countWrongDeliveries * deliveryPenalty;
+        int penaltyWrongValueDeliveries = countWrongValueDeliveries * deliveryPenalty;
+        int penaltyNoParentDeliveries = countCannotDeliverHasNoParentDeliveries * deliveryPenalty;
+        int penaltyHasChildDeliveries = countCannotRemoveHasChildDeliveries * deliveryPenalty;
+
+        return penaltyWrongValueDeliveries + penaltyNoParentDeliveries + penaltyHasChildDeliveries;
     }
 
     public int DetermineTotalScore()

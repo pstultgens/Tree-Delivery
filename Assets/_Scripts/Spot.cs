@@ -4,6 +4,12 @@ using TMPro;
 
 public class Spot : MonoBehaviour
 {
+    [Header("Tree Stats")]
+    [SerializeField] public bool isRoot;
+    [SerializeField] public Spot parent;
+    [SerializeField] public Spot leftChild;
+    [SerializeField] public Spot rightChild;
+
     [Header("Stats")]
     [SerializeField] public int correctValue;
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
@@ -56,6 +62,58 @@ public class Spot : MonoBehaviour
 
         defaultSpotColor = spriteRenderer.color;
         defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
+    }
+
+    public bool CanDeliverPackage()
+    {
+        if (isRoot || parent.hasReceivedPackage)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    // Bubbles up to all parents
+    public void ShowHintCannotDeliverPackage()
+    {
+        parent.ShowWrongDeliveryHintColor();
+
+        Spot nextParent = parent.parent;
+
+        if((nextParent.isRoot || nextParent != null) && !nextParent.hasReceivedPackage)
+        {
+            nextParent.ShowWrongDeliveryHintColor();
+        }
+    }
+
+    public bool CanRemovePackage()
+    {
+        // No package to remove
+        if (!hasReceivedPackage)
+        {
+            return false;
+        }              
+
+        // Has children value
+        if ((leftChild != null && leftChild.hasReceivedPackage)
+            || (rightChild != null && rightChild.hasReceivedPackage))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public void ShowHintCannotRemovePackage()
+    {
+        if (leftChild != null && leftChild.hasReceivedPackage)
+        {
+            leftChild.ShowWrongDeliveryHintColor();
+        }
+
+        if (rightChild != null && rightChild.hasReceivedPackage)
+        {
+            rightChild.ShowWrongDeliveryHintColor();
+        }
     }
 
     // Show hint color when all packages are delivered
@@ -210,14 +268,16 @@ public class Spot : MonoBehaviour
 
         PlayWrongDeliveredSFX();
         PlayWrongDeliveredVFX();
+        Color32 currentSpotColor = spriteRenderer.color;
+        Color32 currentMinimapSpotColor = minimapNodeSpriteRenderer.color;
 
         spriteRenderer.color = wrongDeliverdColor;
         minimapNodeSpriteRenderer.color = wrongDeliverdColor;
 
         yield return new WaitForSeconds(wrongDeliveryDelay);
 
-        spriteRenderer.color = defaultSpotColor;
-        minimapNodeSpriteRenderer.color = defaultMinimapNodeColor;
+        spriteRenderer.color = currentSpotColor;
+        minimapNodeSpriteRenderer.color = currentMinimapSpotColor;
 
         isWrongDeliveryColorCoroutineRunning = false;
     }

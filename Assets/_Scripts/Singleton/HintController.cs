@@ -20,7 +20,9 @@ public class HintController : MonoBehaviour
     [SerializeField] public bool canPackageBeDeliveredAtWrongNode;
     [SerializeField] public bool spawnPackageAfterPackage;
 
-    [SerializeField] public int acceptableNumberOfWrongDeliveries = 3;
+    [SerializeField] public int acceptableNumberOfWrongValueDeliveries = 3;
+    [SerializeField] public int acceptableNumberOfWrongHasNoParentDeliveries = 2;
+    [SerializeField] public int acceptableNumberOfWrongHasChildDeliveries = 2;
 
 
     private void Awake()
@@ -59,7 +61,9 @@ public class HintController : MonoBehaviour
                 nextLevel = LevelEnum.Test;
                 break;
             case LevelEnum.Test:
-                if (ScoreController.countWrongDeliveries >= acceptableNumberOfWrongDeliveries)
+                if (ScoreController.countWrongValueDeliveries >= acceptableNumberOfWrongValueDeliveries
+                    || ScoreController.countCannotDeliverHasNoParentDeliveries >= acceptableNumberOfWrongHasNoParentDeliveries
+                    || ScoreController.countCannotRemoveHasChildDeliveries >= acceptableNumberOfWrongHasChildDeliveries)
                 {
                     nextLevel = LevelEnum.Easy1;
                 }
@@ -68,7 +72,7 @@ public class HintController : MonoBehaviour
                     if (!PlayerPrefsRepository.Instance.AllEasyLevelsUnlocked())
                     {
                         PlayerPrefsRepository.Instance.UnlockAllEasyLevels();
-                    }                    
+                    }
                     nextLevel = LevelEnum.Hard1;
                 }
                 break;
@@ -137,7 +141,9 @@ public class HintController : MonoBehaviour
                 Debug.Log("Set Test Mode stats");
                 SetHints(false, false, false, false, false, false, true);
                 SetDifficulties(true, true, true, false);
-                acceptableNumberOfWrongDeliveries = 3;
+                acceptableNumberOfWrongValueDeliveries = 3;
+                acceptableNumberOfWrongHasNoParentDeliveries = 2;
+                acceptableNumberOfWrongHasChildDeliveries = 2;
                 break;
             case LevelEnum.Easy1:
                 Debug.Log("Set Easy 1 Mode stats");

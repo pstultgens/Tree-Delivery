@@ -11,7 +11,7 @@ public class Package : MonoBehaviour
     private ScoreController scoreController;
     private GameObject player;
 
-    public int timesPackageWrongDeliveredCounter = 0;
+    public int timesPackageWrongValueDeliveredCounter = 0;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class Package : MonoBehaviour
             uiController.PackageCorrectDelivered(Value());
         }
 
-        if(timesPackageWrongDeliveredCounter == 0)
+        if(timesPackageWrongValueDeliveredCounter == 0)
         {
             scoreController.IncreaseFirstTimeCorrectDeliveredCounter();
         }
@@ -89,9 +89,9 @@ public class Package : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void AddCounterWrongDelivered()
+    public void AddCounterWrongValueDelivered()
     {
-        timesPackageWrongDeliveredCounter++;
+        timesPackageWrongValueDeliveredCounter++;
     }
 
     private void ShowOnMinimap()

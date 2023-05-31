@@ -6,7 +6,9 @@ using TMPro;
 public class UILevelCompleteScore : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI completionTimeText;
-    [SerializeField] TextMeshProUGUI incorrectDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectValueDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectHasNoParentDeliveriesText;
+    [SerializeField] TextMeshProUGUI incorrectHasChildDeliveriesText;
     [SerializeField] TextMeshProUGUI perfectDeliveriesText;
 
     [SerializeField] TextMeshProUGUI timeBonusText;
@@ -28,7 +30,9 @@ public class UILevelCompleteScore : MonoBehaviour
         if (gameObject.activeSelf)
         {
             completionTimeText.text = timeController.GetFormattedTime();
-            incorrectDeliveriesText.text = ScoreController.countWrongDeliveries.ToString();
+            incorrectValueDeliveriesText.text = ScoreController.countWrongValueDeliveries.ToString();
+            incorrectHasNoParentDeliveriesText.text = ScoreController.countCannotDeliverHasNoParentDeliveries.ToString();
+            incorrectHasChildDeliveriesText.text = ScoreController.countCannotRemoveHasChildDeliveries.ToString();
             perfectDeliveriesText.text = ScoreController.countFirstTimeCorrectDeliveries.ToString();
 
             ShowTimeBonus();

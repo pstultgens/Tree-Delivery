@@ -45,7 +45,14 @@ public class DeliveryController : MonoBehaviour
 
             if (currentCollectedPackage != null && !currentCollidingSpot.hasReceivedPackage)
             {
-                DeliverPackage();
+                if (currentCollidingSpot.CanDeliverPackage())
+                {
+                    DeliverPackage();
+                }
+                else
+                {
+                    CannotDeliverHasNoParent();
+                }
             }
         }
 
@@ -115,13 +122,28 @@ public class DeliveryController : MonoBehaviour
             !isCollidingWithPackage &&
             currentCollidingSpot.hasReceivedPackage)
         {
-            if (HintController.Instance.canPackageBeDeliveredAtWrongNode && !currentCollidingSpot.isLocked)
+            if (HintController.Instance.canPackageBeDeliveredAtWrongNode
+                && !currentCollidingSpot.isLocked)
             {
-                PickupDeliveredPackage();
+                if (currentCollidingSpot.CanRemovePackage())
+                {
+                    PickupDeliveredPackage();
+                }
+                else
+                {
+                    CannotRemoveHasChild();
+                }
             }
             else if (!currentCollidingSpot.hasReceivedCorrectPackage)
             {
-                PickupDeliveredPackage();
+                if (currentCollidingSpot.CanRemovePackage())
+                {
+                    PickupDeliveredPackage();
+                }
+                else
+                {
+                    CannotRemoveHasChild();
+                }
             }
         }
         else if (currentCollectedPackage != null
@@ -130,6 +152,7 @@ public class DeliveryController : MonoBehaviour
             && currentCollidingSpot.hasReceivedPackage
             && HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
+
             SwapDeliveredPackage();
         }
         else if (
@@ -138,8 +161,27 @@ public class DeliveryController : MonoBehaviour
           && isCollidingWithSpot
           && !currentCollidingSpot.hasReceivedPackage)
         {
-            DeliverPackage();
+            if (currentCollidingSpot.CanDeliverPackage())
+            {
+                DeliverPackage();
+            }
+            else
+            {
+                CannotDeliverHasNoParent();
+            }
         }
+    }
+
+    private void CannotRemoveHasChild()
+    {
+        scoreController.IncreaseCannotRemoveHasChildCounter();
+        currentCollidingSpot.ShowHintCannotRemovePackage();
+    }
+
+    private void CannotDeliverHasNoParent()
+    {
+        scoreController.IncreaseCannotDeliverHasNoParentCounter();
+        currentCollidingSpot.ShowHintCannotDeliverPackage();
     }
 
     private IEnumerator PackagePickupDelayCoroutine()
@@ -203,9 +245,9 @@ public class DeliveryController : MonoBehaviour
         {
             Debug.Log("Package Wrong Delivered");
 
-            currentCollectedPackage.AddCounterWrongDelivered();
+            currentCollectedPackage.AddCounterWrongValueDelivered();
 
-            scoreController.IncreaseWrongDeliveredCounter();
+            scoreController.IncreaseWrongValueDeliveredCounter();
 
             if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
             {
@@ -271,9 +313,9 @@ public class DeliveryController : MonoBehaviour
         {
             Debug.Log("Swap Package Wrong Delivered");
 
-            carPackage.AddCounterWrongDelivered();
+            carPackage.AddCounterWrongValueDelivered();
 
-            scoreController.IncreaseWrongDeliveredCounter();
+            scoreController.IncreaseWrongValueDeliveredCounter();
 
             currentCollidingSpot.WrongPackageReceived(carPackage.Value());
             carPackage.WrongDelivered();

@@ -5,82 +5,48 @@ using Cinemachine;
 
 public class CameraZoom : MonoBehaviour
 {
-    
-    [SerializeField] float zoomedOutSize = 30f; // The camera size when zoomed out
-    [SerializeField] float zoomedInSize = 13f; // The camera size when zoomed in
-    [SerializeField] float zoomSpeed = 1f; // The speed of the zoom
-    [SerializeField] float moveSpeed = 5f; // The speed of the movement
-    [SerializeField] float smoothTime = 0.2f; // The smoothing time for the zoom
-    [SerializeField] Transform minimapZoomLocation;
 
-    private CinemachineVirtualCamera cinemachineVirtualCamera;
-    private float targetSize;
-    private float t = 0f;
-    private bool isZooming = false;
-    private float currentVelocity;
-    private GameObject player;
-    private Vector3 targetPosition;
+    public float zoomOutSpeed = 1.0f;
+    public float zoomInSpeed = 1.0f;
+    public float maxZoom = 20.0f;
+    public float velocityThreshold = 10.0f;
+
+    private CinemachineVirtualCamera virtualCamera;
+    private Vector3 previousCameraPosition;
+    private Vector3 currentVelocity;
+    private float initialZoom;
 
     private void Start()
     {
-        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-        player = FindAnyObjectByType<CarController>().gameObject;
-
-        transform.position = minimapZoomLocation.position + new Vector3(0, 0, -10f);
-
-        cinemachineVirtualCamera.Follow = null;
-        cinemachineVirtualCamera.LookAt = null;
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        previousCameraPosition = virtualCamera.transform.position;
+        initialZoom = virtualCamera.m_Lens.OrthographicSize;
     }
 
     private void Update()
     {
-        if (isZooming)
+        // Calculate the current camera velocity
+        Vector3 currentCameraPosition = virtualCamera.transform.position;
+        Vector3 velocity = (currentCameraPosition - previousCameraPosition) / Time.deltaTime;
+
+        // Smooth the velocity using exponential smoothing
+        currentVelocity = Vector3.Lerp(currentVelocity, velocity, 0.1f);
+
+        // Update the previous camera position for the next frame
+        previousCameraPosition = currentCameraPosition;
+
+        // Calculate the magnitude of the velocity
+        float speed = currentVelocity.magnitude;
+        Debug.Log("Camera speed: " + speed);
+
+        // Check if the speed exceeds the threshold
+        if (speed > velocityThreshold)
         {
-            // Increment the interpolation parameter based on time
-            t += Time.deltaTime * zoomSpeed;
-
-            // Perform the camera size interpolation
-            cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.SmoothDamp(cinemachineVirtualCamera.m_Lens.OrthographicSize, targetSize, ref currentVelocity, smoothTime);
-
-            //transform.position = Vector3.MoveTowards(transform.position, targetPosition + new Vector3(0, 0, -10f), moveSpeed * Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, targetPosition + new Vector3(0, 0, -10f), moveSpeed * Time.deltaTime);
-            // If the interpolation parameter exceeds 1, stop the zoom
-            if (t >= 1f)
-            {
-                StopZoom();
-            }
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(virtualCamera.m_Lens.OrthographicSize, maxZoom, zoomOutSpeed * Time.deltaTime);
         }
-    }
-
-    public void ZoomIn()
-    {
-        targetSize = zoomedInSize;
-        targetPosition = player.transform.position;
-        //cinemachineVirtualCamera.Follow = player.transform;
-        //cinemachineVirtualCamera.LookAt = player.transform;
-        
-        StartZoom();
-    }
-
-    public void ZoomOut()
-    {
-        targetPosition = minimapZoomLocation.position;
-        cinemachineVirtualCamera.Follow = null;
-        cinemachineVirtualCamera.LookAt = null;
-        targetSize = zoomedOutSize;
-        StartZoom();
-    }
-
-    private void StartZoom()
-    {
-        isZooming = true;
-        t = 0f;
-    }
-
-    private void StopZoom()
-    {
-        isZooming = false;
-        cinemachineVirtualCamera.Follow = player.transform;
-        cinemachineVirtualCamera.LookAt = player.transform;
+        else
+        {
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(virtualCamera.m_Lens.OrthographicSize, initialZoom, zoomInSpeed * Time.deltaTime);
+        }
     }
 }

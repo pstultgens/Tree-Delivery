@@ -6,10 +6,10 @@ using Cinemachine;
 public class CameraZoom : MonoBehaviour
 {
 
-    public float zoomOutSpeed = 1.0f;
+    public float zoomOutSpeed = 0.25f;
     public float zoomInSpeed = 1.0f;
     public float maxZoom = 20.0f;
-    public float velocityThreshold = 10.0f;
+    public float velocityThreshold = 15.0f;
 
     private CinemachineVirtualCamera virtualCamera;
     private Vector3 previousCameraPosition;
@@ -37,7 +37,6 @@ public class CameraZoom : MonoBehaviour
 
         // Calculate the magnitude of the velocity
         float speed = currentVelocity.magnitude;
-        Debug.Log("Camera speed: " + speed);
 
         // Check if the speed exceeds the threshold
         if (speed > velocityThreshold)

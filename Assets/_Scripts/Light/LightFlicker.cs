@@ -47,7 +47,7 @@ public class LightFlicker : MonoBehaviour
     private void StartFlickering()
     {
         isFlickering = true;
-        light2D.intensity = 0.4f; // Set the light intensity to a low value
+        light2D.intensity = 0.5f; // Set the light intensity to a low value
     }
 
     private void StopFlickering()

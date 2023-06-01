@@ -34,12 +34,10 @@ public class LightsOnOffController : MonoBehaviour
     private void DetermineCurrentIntensity()
     {
         currentIntensity = globalLight.intensity;
-        Debug.Log("Current itensity: " + currentIntensity);
     }
 
     private void TurnLightsOn()
     {
-        Debug.Log("Turn Lights ON");
         foreach (GameObject light in lights)
         {
             light.SetActive(true);
@@ -48,7 +46,6 @@ public class LightsOnOffController : MonoBehaviour
 
     private void TurnLightsOff()
     {
-        Debug.Log("Turn Lights OFF");
         foreach (GameObject light in lights)
         {
             light.SetActive(false);

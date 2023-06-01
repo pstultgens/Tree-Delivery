@@ -7,10 +7,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2687430652107334455, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 2687430652515699332, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8ffb7e03215f34630bb377b9efaea972, type: 3}
+    - target: {fileID: 2687430653085865049, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653085865049, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653085865049, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653085865049, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653085865049, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696417, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_Name
       value: Player Yellow Pickup Variant
@@ -21,11 +45,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.67575
+      value: 52.97
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2582245
+      value: -52.81
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696421, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_LocalPosition.z
@@ -107,5 +131,33 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6614692519430850866, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.434
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614692519430850866, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6698637951031860610, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6698637951031860610, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_InstanceId
+      value: -1164006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891486435468487562, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096011059669715513, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: m_Name
+      value: CarHeadLights
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6614110291028424118, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+    - {fileID: 4700445619397885399, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+    - {fileID: 6778050458987630189, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+    - {fileID: 3129971156103491356, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}

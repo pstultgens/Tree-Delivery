@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3481290088405784000, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 6757871321732453415, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime1
       value: 65535
@@ -43,9 +47,17 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7428170226712659741, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428170226712659741, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_InstanceId
+      value: -1101680
+      objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name
-      value: AI Vehicle Yellow
+      value: AI Vehicle Yellow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100228, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_RootOrder

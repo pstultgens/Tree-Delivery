@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3481290088405784000, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.011
+      objectReference: {fileID: 0}
     - target: {fileID: 6757871321732453415, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.8078432
@@ -30,6 +34,14 @@ PrefabInstance:
     - target: {fileID: 6757871321732453415, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 0.20392159
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428170226712659741, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428170226712659741, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: m_InstanceId
+      value: -1092046
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name

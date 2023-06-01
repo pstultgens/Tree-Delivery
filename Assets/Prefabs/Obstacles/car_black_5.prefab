@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2315175596188531142}
   - component: {fileID: 2315175596188531143}
   - component: {fileID: 2315175596188531136}
+  - component: {fileID: 1565586112732805183}
   m_Layer: 0
   m_Name: car_black_5
   m_TagString: Untagged
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 7
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 59fe726c8300143aba1966fcf8f7c9e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,3 +134,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1565586112732805183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2315175596188531140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000001d85c1bb297207ae0b9b7893a7af10222d7f4f29cd40703889d554284b160b3e7900d36001862f64a1f248fa
+  m_ShapePath:
+  - {x: -0.470088, y: -0.8825226, z: 0}
+  - {x: -0.47341156, y: 0.8792, z: 0}
+  - {x: 0.470088, y: 0.87587595, z: 0}
+  - {x: 0.46676445, y: -0.8758764, z: 0}
+  m_ShapePathHash: -1283904395
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -97716
+  m_LocalBounds:
+    m_Center: {x: -0.0016617775, y: -0.0016613007, z: 0}
+    m_Extent: {x: 0.47174978, y: 0.8808613, z: 0}

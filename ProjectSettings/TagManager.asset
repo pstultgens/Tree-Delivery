@@ -15,6 +15,7 @@ TagManager:
   - OilTrap
   - Road
   - Spot
+  - GlobalLight
   layers:
   - Default
   - TransparentFX

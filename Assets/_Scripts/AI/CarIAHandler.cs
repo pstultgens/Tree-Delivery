@@ -55,7 +55,7 @@ public class CarIAHandler : MonoBehaviour
     void FixedUpdate()
     {
         if (SceneManager.isGamePaused || SceneManager.isCountingDown)
-        {           
+        {
             return;
         }
 
@@ -243,6 +243,7 @@ public class CarIAHandler : MonoBehaviour
         // Apply throttle forward based on how much the car wants to turn
         // If it's a sharp turn this will cause the to apply less speed forward
         float reduceSpeedDueToCornering = Mathf.Abs(inputX) / 1.0f;
+
 
         // Applt throttle based on cornering and skill
         float throttle = 1.05f - reduceSpeedDueToCornering * skillLevel;

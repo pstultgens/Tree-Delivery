@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CarController : MonoBehaviour
 {
     [Header("Car settings")]
@@ -57,6 +58,7 @@ public class CarController : MonoBehaviour
     void Start()
     {
         rotationAngle = transform.rotation.eulerAngles.z;
+
 
         originalDriftFactor = driftFactor;
         originalTurnFactor = turnFactor;
@@ -284,6 +286,15 @@ public class CarController : MonoBehaviour
             return true;
         }
 
+        return false;
+    }
+
+    public bool IsDrivingReverse()
+    {
+        if (velocityVsUp < 0 && accelerationInput < 0)
+        {
+            return true;
+        }
         return false;
     }
 

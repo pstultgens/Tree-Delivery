@@ -8,17 +8,30 @@ public class LightsOnOffController : MonoBehaviour
     [SerializeField] public GameObject[] lights;
     [SerializeField] public float lightsOnIntensity = 0.8f;
 
-
+    private DayNightCycle dayNightCycle;
     private Light2D globalLight;
     private float currentIntensity;
 
     void Start()
     {
-        globalLight = FindObjectOfType<DayNightCycle>().GetComponent<Light2D>();
+        dayNightCycle = FindObjectOfType<DayNightCycle>();
+
+        if (dayNightCycle == null)
+        {
+            Debug.Log("No GlobalLight2D in scene: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            return;
+        }
+
+        globalLight = dayNightCycle.GetComponent<Light2D>();
     }
 
     void Update()
     {
+        if (globalLight == null)
+        {
+            return;
+        }
+
         DetermineCurrentIntensity();
 
         if (currentIntensity <= lightsOnIntensity)

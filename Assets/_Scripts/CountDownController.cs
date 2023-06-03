@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
+using MoreMountains.Feedbacks;
 
 public class CountDownController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class CountDownController : MonoBehaviour
     [SerializeField] TextMeshProUGUI countText;
     [SerializeField] TextMeshProUGUI levelNameText;
 
+    [Header("Feedbacks")]
+    [SerializeField] MMFeedbacks feedbacks;
+
     private int countDownTime = 3;       
 
     private void Start()
@@ -28,20 +32,27 @@ public class CountDownController : MonoBehaviour
 
     private IEnumerator CountDownToStartCoroutine()
     {
+        
 
         while (countDownTime > 0)
         {
             yield return new WaitUntil(() => !SceneManager.isGamePaused);
-            PlayCountDownSFX();
+
+            PlayCountDownSFX();            
             countText.text = countDownTime.ToString();
+            feedbacks.PlayFeedbacks();
+
             yield return new WaitForSeconds(1f);
             countDownTime--;
         }
+
         PlayGoSFX();
         countText.text = "GO";
-        SceneManager.isCountingDown = false;
+        feedbacks.PlayFeedbacks();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+        
+        SceneManager.isCountingDown = false;
         gameObject.SetActive(false);
     }
 

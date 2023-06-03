@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2974079039473629393}
   - component: {fileID: 2974079039473629398}
+  - component: {fileID: 663657226037830096}
   m_Layer: 0
   m_Name: tires_white
   m_TagString: Untagged
@@ -84,3 +85,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &663657226037830096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974079039473629399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000001d85c1bb297207ae0b9b7893a7af10222d7f4f29cd40703889d554284b160b3e7900d36001862f64a1f248fa
+  m_ShapePath:
+  - {x: -0.31030083, y: -0.3065586, z: 0}
+  - {x: -0.44585037, y: -0.0158782, z: 0.000000014901161}
+  - {x: -0.3065586, y: 0.33274698, z: 0}
+  - {x: 0.010574341, y: 0.44428635, z: 0.000000014901161}
+  - {x: 0.3551941, y: 0.27662945, z: 0}
+  - {x: 0.4520321, y: -0.0158782, z: 0.000000014901161}
+  - {x: 0.29533577, y: -0.33274698, z: 0}
+  - {x: 0.01805687, y: -0.44237232, z: 0.000000014901161}
+  m_ShapePathHash: -2054131099
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -873408
+  m_LocalBounds:
+    m_Center: {x: 0.0030908585, y: 0.0009570122, z: 0}
+    m_Extent: {x: 0.44894123, y: 0.44332933, z: 0}

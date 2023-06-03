@@ -15,6 +15,7 @@ public class UITestLevelCompleteScore : MonoBehaviour
     [SerializeField] GameObject testFailedGameObject;
 
     private TimeController timeController;
+    private bool showResults;
 
     private void Start()
     {
@@ -25,6 +26,12 @@ public class UITestLevelCompleteScore : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
+            if (showResults)
+            {
+                return;
+            }
+            showResults = true;
+
             int countWrongValueDeliveries = ScoreController.countWrongValueDeliveries;
             int countCannotDeliverHasNoParentDeliveries = ScoreController.countCannotDeliverHasNoParentDeliveries;
             int countCannotRemoveHasChildDeliveries = ScoreController.countCannotRemoveHasChildDeliveries;

@@ -142,18 +142,30 @@ public class CarController : MonoBehaviour
     {
         if (other.tag.Equals("Boost") && !inBoostMode)
         {
+            if (!isAI)
+            {
+                FeedbacksManager.Instance.booster.PlayFeedbacks();
+            }
             inBoostMode = true;
             StartCoroutine(BoostCoroutine());
         }
 
         if (other.tag.Equals("OilTrap") && !inOilTrapMode)
         {
+            if (!isAI)
+            {
+                FeedbacksManager.Instance.oilTrap.PlayFeedbacks();
+            }
             inOilTrapMode = true;
             StartCoroutine(OilTrapCoroutine());
         }
 
         if (other.tag.Equals("SpikeTrap") && !inSpikeTrapMode)
         {
+            if (!isAI)
+            {
+                FeedbacksManager.Instance.spikeTrap.PlayFeedbacks();
+            }
             inSpikeTrapMode = true;
             StartCoroutine(SpikeTrapCoroutine());
         }

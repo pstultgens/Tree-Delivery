@@ -7,6 +7,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.77647066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.75045365
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068912596000862356, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.5255874
+      objectReference: {fileID: 0}
     - target: {fileID: 3481290088405784000, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.011
@@ -41,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7428170226712659741, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_InstanceId
-      value: -1092046
+      value: -1596918
       objectReference: {fileID: 0}
     - target: {fileID: 7862271225779100224, guid: 49f424b3b1a7a47e594583d046c4a077, type: 3}
       propertyPath: m_Name

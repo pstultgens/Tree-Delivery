@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
   m_SortingLayer: 9
-  m_SortingOrder: 10
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: fb6d9369855144ebaa69861e40cdc660, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +95,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303864239591305391}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b3a372fa66b6d46cc89cc2df1e260e65, type: 2}
   m_CullingMode: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   - {x: -0.4725876, y: -1.4769678, z: -0.00000011175871}
   m_ShapePathHash: 970023581
   m_Mesh: {fileID: 0}
-  m_InstanceId: 410304
+  m_InstanceId: 834876
   m_LocalBounds:
     m_Center: {x: 0.014760017, y: 0.0013222694, z: 0}
     m_Extent: {x: 1.6488619, y: 1.6326165, z: 0}
@@ -211,8 +211,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     FrequencyMin: 0
     FrequencyMax: 1
-    AmplitudeMin: {x: 0, y: 0.3, z: 0}
-    AmplitudeMax: {x: 0, y: 0.3, z: 1}
+    AmplitudeMin: {x: 0.2, y: 0.2, z: 0}
+    AmplitudeMax: {x: 0.2, y: 0.2, z: 1}
     RelativeAmplitude: 1
     UniformValues: 0
     Curve:
@@ -276,9 +276,9 @@ MonoBehaviour:
     LimitedTimeResetValue: 1
     LimitedTimeLeft: 0
     NoiseFrequencyMin: {x: 0, y: 2, z: 0}
-    NoiseFrequencyMax: {x: 1, y: 2, z: 1}
-    NoiseShiftMin: {x: 0, y: 0.2, z: 0}
-    NoiseShiftMax: {x: 0, y: 0.2, z: 0}
+    NoiseFrequencyMax: {x: 2, y: 2, z: 1}
+    NoiseShiftMin: {x: 0.1, y: 0.1, z: 0}
+    NoiseShiftMax: {x: 0.1, y: 0.1, z: 0}
   RotationWiggleProperties:
     WigglePermitted: 1
     WiggleType: 1

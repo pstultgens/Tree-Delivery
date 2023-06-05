@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 
 public class CarController : MonoBehaviour
@@ -28,6 +29,13 @@ public class CarController : MonoBehaviour
     [SerializeField] public SpriteRenderer carSpriteRenderer;
     [SerializeField] public SpriteRenderer carShadowSpriteRenderer;
 
+    [Header("Feedbacks")]
+    [SerializeField] public MMFeedbacks collisionFeedback;
+
+    [Header("Read only")]
+    public bool inOilTrapMode;
+    public bool inSpikeTrapMode;
+
     private float accelerationInput = 0;
     private float steeringInput = 0;
     private float rotationAngle = 0;
@@ -38,10 +46,7 @@ public class CarController : MonoBehaviour
     private float originalMaxSpeed;
 
     private bool inBoostMode;
-    private bool isAI;
-
-    public bool inOilTrapMode;
-    public bool inSpikeTrapMode;
+    private bool isAI;   
 
     private Rigidbody2D carRigidbody;
     private CarInputHandler carInputHandler;
@@ -126,6 +131,8 @@ public class CarController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        collisionFeedback.PlayFeedbacks();
+
         if (isAI)
         {
             return;
@@ -135,6 +142,7 @@ public class CarController : MonoBehaviour
         float relativeVelocity = other.relativeVelocity.magnitude;
         float intensity = relativeVelocity * 0.4f;
         Debug.Log("Shake Camera with intensity: " + intensity);
+        
         CinemachineShake.Instance.ShakeCamera(intensity, 0.5f);
     }
 

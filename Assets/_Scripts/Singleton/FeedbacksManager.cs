@@ -10,6 +10,7 @@ public class FeedbacksManager : MonoBehaviour
     [SerializeField] public MMFeedbacks booster;
     [SerializeField] public MMFeedbacks oilTrap;
     [SerializeField] public MMFeedbacks spikeTrap;
+    [SerializeField] public MMFeedbacks spotDelivered;
 
     private void Awake()
     {

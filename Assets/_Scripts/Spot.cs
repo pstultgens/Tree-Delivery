@@ -305,16 +305,19 @@ public class Spot : MonoBehaviour
 
     private void PlayCorrectDeliveredVFX()
     {
+        FeedbacksManager.Instance.spotDelivered.PlayFeedbacks();
         correctDeliveredVFX.Play();
     }
 
     private void PlayWrongDeliveredVFX()
     {
+        FeedbacksManager.Instance.spotDelivered.PlayFeedbacks();
         wrongDeliveredVFX.Play();
     }
 
     private void PlayNeutralDeliveredVFX()
     {
+        FeedbacksManager.Instance.spotDelivered.PlayFeedbacks();
         neutralDeliveredVFX.Play();
     }
 

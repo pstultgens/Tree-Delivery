@@ -197,7 +197,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 263268082124171256}
         DebugActive: 0
-        ShakeDuration: 2
+        ShakeDuration: 2.5
         RelativeIntensity: 1
         ResetShakerValuesAfterShake: 1
         ResetTargetValuesAfterShake: 1
@@ -284,14 +284,23 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5
-            value: 1
+            time: 0.15066528
+            value: 1.0012512
             inSlope: 0
             outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
             outWeight: 0
+          - serializedVersion: 3
+            time: 0.5002755
+            value: 1.0008421
+            inSlope: -0.0064622867
+            outSlope: -0.0064622867
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.099073485
+            outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
             value: 0
@@ -350,7 +359,7 @@ MonoBehaviour:
           m_RotationOrder: 4
         RemapContrastZero: 0
         RemapContrastOne: 0
-        ColorFilterMode: 0
+        ColorFilterMode: 2
         ColorFilterGradient:
           serializedVersion: 2
           key0: {r: 0, g: 0, b: 0, a: 1}
@@ -380,7 +389,7 @@ MonoBehaviour:
           m_Mode: 0
           m_NumColorKeys: 2
           m_NumAlphaKeys: 2
-        ColorFilterDestination: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        ColorFilterDestination: {r: 0, g: 0, b: 0, a: 1}
         ColorFilterCurve:
           serializedVersion: 2
           m_Curve:

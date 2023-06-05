@@ -46,7 +46,7 @@ public class CarController : MonoBehaviour
     private float originalMaxSpeed;
 
     private bool inBoostMode;
-    private bool isAI;   
+    private bool isAI;
 
     private Rigidbody2D carRigidbody;
     private CarInputHandler carInputHandler;
@@ -142,7 +142,7 @@ public class CarController : MonoBehaviour
         float relativeVelocity = other.relativeVelocity.magnitude;
         float intensity = relativeVelocity * 0.4f;
         Debug.Log("Shake Camera with intensity: " + intensity);
-        
+
         CinemachineShake.Instance.ShakeCamera(intensity, 0.5f);
     }
 

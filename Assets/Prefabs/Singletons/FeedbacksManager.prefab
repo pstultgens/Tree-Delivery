@@ -52,6 +52,7 @@ MonoBehaviour:
   oilTrap: {fileID: 7698820580832774035}
   spikeTrap: {fileID: 3151888693998322419}
   spotDelivered: {fileID: 5079296467271498404}
+  fade: {fileID: 0}
 --- !u!1001 &1821487387118398396
 PrefabInstance:
   m_ObjectHideFlags: 0

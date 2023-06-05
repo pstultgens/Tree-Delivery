@@ -385,6 +385,7 @@ public class SceneManager : MonoBehaviour
     {
         // Play animation
         fadeTransition.SetTrigger("Start");
+        
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);

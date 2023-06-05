@@ -1007,7 +1007,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         RemapIntensityZero: 0
-        RemapIntensityOne: 0.5
+        RemapIntensityOne: 0.35
     - rid: 3415903425392017415
       type: {class: MMF_Scale, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
@@ -1304,8 +1304,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.50393677
-            value: 2.4979248
+            time: 0.4991455
+            value: 1.4987564
             inSlope: 0
             outSlope: 0
             tangentMode: 0

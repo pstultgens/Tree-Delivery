@@ -5,52 +5,93 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(ParticleSystem))]
 public class AttachGameObjectsToParticles : MonoBehaviour
 {
-    public GameObject m_Prefab;
+    public GameObject prefab;
 
-    private ParticleSystem m_ParticleSystem;
-    private List<GameObject> m_Instances = new List<GameObject>();
-    private ParticleSystem.Particle[] m_Particles;
+    private ParticleSystem myParticleSystem;
+    private List<GameObject> instances = new List<GameObject>();
+    private ParticleSystem.Particle[] particles;
 
-    // Start is called before the first frame update
     void Start()
     {
-        m_ParticleSystem = GetComponent<ParticleSystem>();
-        m_Particles = new ParticleSystem.Particle[m_ParticleSystem.main.maxParticles];
+        myParticleSystem = GetComponent<ParticleSystem>();
+        particles = new ParticleSystem.Particle[myParticleSystem.main.maxParticles];
     }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        int count = m_ParticleSystem.GetParticles(m_Particles);
+    //void LateUpdate()
+    //{
+    //    int particleCount = particleSystem.GetParticles(particles);
 
-        while (m_Instances.Count < count)
+    //    while (instance.Count < particleCount)
+    //    {
+    //        instance.Add(Instantiate(prefab, particleSystem.transform));
+    //    }
+
+    //    bool worldSpace = (particleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World);
+    //    for (int i = 0; i < instance.Count; i++)
+    //    {
+
+
+    //        Vector2 particleSize = new Vector2(particles[i].startSize, particles[i].startSize);
+    //        instance[i].transform.localScale = particleSize;
+
+    //        if (i < count)
+    //        {
+
+    //            if (worldSpace)
+    //            {
+    //                instance[i].transform.position = particles[i].position;
+    //            }
+    //            else
+    //            {
+    //                instance[i].transform.localPosition = particles[i].position;
+    //            }
+
+    //            instance[i].SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            instance[i].SetActive(false);
+    //        }
+    //    }
+    //}
+
+
+    private void LateUpdate()
+    {
+        int particleCount = myParticleSystem.GetParticles(particles);
+
+        while (instances.Count < particleCount)
         {
-            m_Instances.Add(Instantiate(m_Prefab, m_ParticleSystem.transform));
+            instances.Add(Instantiate(prefab, myParticleSystem.transform.position, Quaternion.identity));
         }
 
-        bool worldSpace = (m_ParticleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World);
-        for (int i = 0; i < m_Instances.Count; i++)
+        bool worldSpace = (myParticleSystem.main.simulationSpace == ParticleSystemSimulationSpace.World);
+        for (int i = 0; i < instances.Count; i++)
         {
-            //m_Instances[i].GetComponent<Light2D>().pointLightOuterRadius = m_Particles[i].startSize / 4;
+            ParticleSystem.Particle particle = particles[i];
 
-            if (i < count)
+            float startSize = particle.startSize / 6f;
+            instances[i].transform.localScale = new Vector3(startSize, startSize, startSize);
+
+            if (i < particleCount)
             {
-
                 if (worldSpace)
                 {
-                    m_Instances[i].transform.position = m_Particles[i].position;
+                    instances[i].transform.position = particles[i].position;
                 }
                 else
                 {
-                    m_Instances[i].transform.localPosition = m_Particles[i].position;
+                    instances[i].transform.localPosition = particles[i].position;
                 }
 
-                m_Instances[i].GetComponent<Light2D>().pointLightOuterRadius = m_Instances[i].GetComponent<Light2D>().pointLightOuterRadius * (m_Particles[i].remainingLifetime / 1f);
-                m_Instances[i].SetActive(true);
+                instances[i].transform.localScale = instances[i].transform.localScale * particles[i].remainingLifetime;
+                instances[i].transform.localRotation = Quaternion.AngleAxis(particles[i].rotation, Vector3.forward);
+
+                instances[i].SetActive(true);
             }
             else
             {
-                m_Instances[i].SetActive(false);
+                instances[i].SetActive(false);
             }
         }
     }

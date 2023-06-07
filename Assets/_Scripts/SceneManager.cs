@@ -120,7 +120,7 @@ public class SceneManager : MonoBehaviour
                 break;
         }
 
-        GameObject player = Instantiate(selectedCarPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), Quaternion.identity);
+        GameObject player = Instantiate(selectedCarPrefab, new Vector2(spawnPlayerPosition.position.x, spawnPlayerPosition.position.y), spawnPlayerPosition.transform.rotation);
 
         // Set player as thing to follow for the MainCamera and the MinimapCamera
         cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();

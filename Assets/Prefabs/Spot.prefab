@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lights:
-  - {fileID: 6595138690318423650}
+  - {fileID: 1701933027461579205}
   lightsOnIntensity: 0.7
 --- !u!1 &6595138690318423650
 GameObject:

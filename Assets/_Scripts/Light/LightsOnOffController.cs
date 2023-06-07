@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class LightsOnOffController : MonoBehaviour
 {
-    [SerializeField] public GameObject[] lights;
+    [SerializeField] public Light2D[] lights;
     [SerializeField] public float lightsOnIntensity = 0.8f;
 
     private DayNightCycle dayNightCycle;
@@ -51,17 +51,17 @@ public class LightsOnOffController : MonoBehaviour
 
     private void TurnLightsOn()
     {
-        foreach (GameObject light in lights)
+        foreach (Light2D light in lights)
         {
-            light.SetActive(true);
+            light.enabled = true;
         }
     }
 
     private void TurnLightsOff()
     {
-        foreach (GameObject light in lights)
+        foreach (Light2D light in lights)
         {
-            light.SetActive(false);
+            light.enabled = false;
         }
     }
 }

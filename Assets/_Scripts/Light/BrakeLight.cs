@@ -5,24 +5,35 @@ using UnityEngine.Rendering.Universal;
 
 public class BrakeLight : MonoBehaviour
 {
-    [SerializeField] public float brakeIntensity = 2.0f;
-    [SerializeField] public float brakeOuterRadius = 3.0f;
+    [Header("Spot")]
+    [SerializeField] float spotBrakeIntensity = 2.0f;
+    [SerializeField] float spotBrakeOuterRadius = 3.0f;
+
+    [Header("Bulb")]
+    [SerializeField] Light2D bulbBrakeLight;
+    [SerializeField] float bulbBrakeIntensity = 3.0f;
 
     private CarController carController;
-    private Light2D brakeLight;
-    private float initialIntensity;
-    private float initialOuterRadius;
-    private Color32 initialBrakeColor;
+
+    private Light2D spotBrakeLight;
+    private float spotInitialIntensity;
+    private float spotInitialOuterRadius;
+    private Color32 spotInitialBrakeColor;
+
+    private float bulbInitialIntensity;
+    private Color32 bulbInitialBrakeColor;
 
     void Start()
     {
         carController = GetComponentInParent<CarController>();
-        brakeLight = GetComponent<Light2D>();
 
+        spotBrakeLight = GetComponent<Light2D>();
+        spotInitialIntensity = spotBrakeLight.intensity;
+        spotInitialOuterRadius = spotBrakeLight.pointLightOuterRadius;
+        spotInitialBrakeColor = spotBrakeLight.color;
 
-        initialIntensity = brakeLight.intensity;
-        initialOuterRadius = brakeLight.pointLightOuterRadius;
-        initialBrakeColor = brakeLight.color;
+        bulbInitialIntensity = bulbBrakeLight.intensity;
+        bulbInitialBrakeColor = bulbBrakeLight.color;
     }
 
     void FixedUpdate()
@@ -33,23 +44,32 @@ public class BrakeLight : MonoBehaviour
         if (isBraking && !isDrivingReverse)
         {
             // Is Braking
-            brakeLight.color = initialBrakeColor;
-            brakeLight.intensity = brakeIntensity;
-            brakeLight.pointLightOuterRadius = brakeOuterRadius;
+            spotBrakeLight.color = spotInitialBrakeColor;
+            spotBrakeLight.intensity = spotBrakeIntensity;
+            spotBrakeLight.pointLightOuterRadius = spotBrakeOuterRadius;
+
+            bulbBrakeLight.color = bulbInitialBrakeColor;
+            bulbBrakeLight.intensity = bulbBrakeIntensity;
         }
-        else if(!isBraking && isDrivingReverse)
+        else if (!isBraking && isDrivingReverse)
         {
             // Is driving reverse
-            brakeLight.color = Color.white;
-            brakeLight.intensity = initialIntensity;
-            brakeLight.pointLightOuterRadius = initialOuterRadius;
+            spotBrakeLight.color = Color.white;
+            spotBrakeLight.intensity = spotInitialIntensity;
+            spotBrakeLight.pointLightOuterRadius = spotInitialOuterRadius;
+
+            bulbBrakeLight.color = Color.white;
+            bulbBrakeLight.intensity = bulbInitialIntensity;
         }
         else
         {
             // Is not Braking or Driving reverse
-            brakeLight.color = initialBrakeColor;
-            brakeLight.intensity = initialIntensity;
-            brakeLight.pointLightOuterRadius = initialOuterRadius;
+            spotBrakeLight.color = spotInitialBrakeColor;
+            spotBrakeLight.intensity = spotInitialIntensity;
+            spotBrakeLight.pointLightOuterRadius = spotInitialOuterRadius;
+
+            bulbBrakeLight.color = bulbInitialBrakeColor;
+            bulbBrakeLight.intensity = bulbInitialIntensity;
         }
     }
 

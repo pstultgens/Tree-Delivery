@@ -124,3 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c284230c4ad4585b03d5bb0e773757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableDayToNight: 0
+  nightIntensity: 0.3
+  dayIntensity: 1
+  duration: 90

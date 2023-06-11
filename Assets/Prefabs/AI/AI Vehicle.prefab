@@ -506,7 +506,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &7862271225779100230
 MonoBehaviour:
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000001d85c1bb297207ae0b9b7893a7af10222d7f4f29cd40703889d554284b160b3e7900d36001862f64a1f248fa
+  m_ApplyToSortingLayers: 1d85c1bb297207ae4b160b3e7900d360
   m_ShapePath:
   - {x: -0.4842744, y: -0.88606787, z: 0}
   - {x: -0.4842744, y: 0.87968826, z: 0}
@@ -646,7 +646,7 @@ MonoBehaviour:
   - {x: 0.4866166, y: -0.88606787, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 272622
+  m_InstanceId: 1207280
   m_LocalBounds:
     m_Center: {x: 0.0011711121, y: -0.0031898022, z: 0}
     m_Extent: {x: 0.4854455, y: 0.88287807, z: 0}
@@ -763,9 +763,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 693075757
-  m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingLayerID: -1375243735
+  m_SortingLayer: 2
+  m_SortingOrder: 50
   m_Time: 50
   m_Parameters:
     serializedVersion: 3
@@ -5625,7 +5625,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 10
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5874,7 +5874,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1040913995
-  m_SortingLayer: 8
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 399f0988c97e24942be8b5dd5b78eba6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5959,9 +5959,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 693075757
-  m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingLayerID: -1375243735
+  m_SortingLayer: 2
+  m_SortingOrder: 50
   m_Time: 50
   m_Parameters:
     serializedVersion: 3
@@ -10858,7 +10858,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 10
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

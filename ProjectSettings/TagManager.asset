@@ -59,26 +59,14 @@ TagManager:
   - name: Road
     uniqueID: 2919723561
     locked: 0
-  - name: Spot
-    uniqueID: 2474154763
-    locked: 0
-  - name: PowerUps
-    uniqueID: 571518887
-    locked: 0
-  - name: Skidmarks
-    uniqueID: 693075757
-    locked: 0
-  - name: Trap
-    uniqueID: 946880717
-    locked: 0
-  - name: Package
-    uniqueID: 676648329
-    locked: 0
   - name: Player
     uniqueID: 1040913995
     locked: 0
   - name: Obstacles
     uniqueID: 1624440953
+    locked: 0
+  - name: Foreground
+    uniqueID: 1473686259
     locked: 0
   - name: Particles
     uniqueID: 1680836097

@@ -148,34 +148,61 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Boost") && !inBoostMode)
+        if (other.tag.Equals("Boost"))
         {
             if (!isAI)
             {
                 FeedbacksManager.Instance.booster.PlayFeedbacks();
             }
-            inBoostMode = true;
-            StartCoroutine(BoostCoroutine());
+
+            if (inBoostMode)
+            {
+                StopCoroutine(BoostCoroutine());
+                StartCoroutine(BoostCoroutine());
+            }
+            else
+            {
+                inBoostMode = true;
+                StartCoroutine(BoostCoroutine());
+            }
         }
 
-        if (other.tag.Equals("OilTrap") && !inOilTrapMode)
+        if (other.tag.Equals("OilTrap"))
         {
             if (!isAI)
             {
                 FeedbacksManager.Instance.oilTrap.PlayFeedbacks();
             }
-            inOilTrapMode = true;
-            StartCoroutine(OilTrapCoroutine());
+
+            if (inOilTrapMode)
+            {
+                StopCoroutine(OilTrapCoroutine());
+                StartCoroutine(OilTrapCoroutine());
+            }
+            else
+            {
+                inOilTrapMode = true;
+                StartCoroutine(OilTrapCoroutine());
+            }
         }
 
-        if (other.tag.Equals("SpikeTrap") && !inSpikeTrapMode)
+        if (other.tag.Equals("SpikeTrap"))
         {
             if (!isAI)
             {
                 FeedbacksManager.Instance.spikeTrap.PlayFeedbacks();
             }
-            inSpikeTrapMode = true;
-            StartCoroutine(SpikeTrapCoroutine());
+
+            if (inSpikeTrapMode)
+            {
+                StopCoroutine(SpikeTrapCoroutine());
+                StartCoroutine(SpikeTrapCoroutine());
+            }
+            else
+            {
+                inSpikeTrapMode = true;
+                StartCoroutine(SpikeTrapCoroutine());
+            }
         }
     }
 

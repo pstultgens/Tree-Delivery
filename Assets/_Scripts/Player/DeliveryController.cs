@@ -20,6 +20,8 @@ public class DeliveryController : MonoBehaviour
     private CarVfxHandler carVfxHandler;
     private Package[] allPackages;
     private bool canPackageBePickedUp = true;
+    private bool isSwappingPackage = false;
+    private Package previousDroppedPackage;
 
     private ScoreController scoreController;
 
@@ -58,15 +60,25 @@ public class DeliveryController : MonoBehaviour
 
         if (other.tag.Equals("Package"))
         {
+            if (isSwappingPackage) { return; }
+            
             isCollidingWithPackage = true;
             currentCollidingPackage = other.GetComponent<Package>();
 
             if (canPackageBePickedUp && currentCollectedPackage == null)
             {
+                Debug.Log("Pickup Package, after pickup delay");
+                PickupPackage();
+            }
+            else if (currentCollectedPackage == null && !currentCollidingPackage.Equals(previousDroppedPackage))
+            {
+                // Want to pickup an other package as previous, ignoring pickup delay
+                Debug.Log("Pickup different Package as previous, ignore pickup delay");
                 PickupPackage();
             }
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -110,6 +122,12 @@ public class DeliveryController : MonoBehaviour
     {
         if (currentCollidingPackage == null && currentCollidingSpot == null && currentCollectedPackage == null)
         {
+            return;
+        }
+
+        if (currentCollidingPackage != null && currentCollectedPackage != null)
+        {
+            SwapPickupPackage();
             return;
         }
 
@@ -204,11 +222,13 @@ public class DeliveryController : MonoBehaviour
         currentCollectedPackage.Pickedup();
 
         carVfxHandler.PlayPickupPackageVFX(dropPackageLocation.position);
+        isSwappingPackage = false;
     }
 
     private void DropPackage()
     {
         Debug.Log("Drop package");
+        previousDroppedPackage = currentCollectedPackage;
 
         Vector2 dropLocation = new Vector2(dropPackageLocation.position.x, dropPackageLocation.position.y);
         currentCollectedPackage.Drop(dropLocation);
@@ -290,6 +310,14 @@ public class DeliveryController : MonoBehaviour
 
         currentCollidingSpot.PickupPackage();
         currentCollectedPackage.Pickedup();
+    }
+
+    private void SwapPickupPackage()
+    {
+        Debug.Log("Swap with other Package to pickup");
+        isSwappingPackage = true;
+        DropPackage();
+        PickupPackage();
     }
 
     private void SwapDeliveredPackage()

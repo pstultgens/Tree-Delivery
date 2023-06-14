@@ -776,7 +776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 40.000004}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 0, y: 79.99999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4475743693126780416
@@ -4441,7 +4441,7 @@ Canvas:
   m_GameObject: {fileID: 3390315943878483068}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -10830,6 +10830,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5815443342788346473, guid: 73168ace66b87412285fb2dad6fd57de, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8072112886547379729, guid: 73168ace66b87412285fb2dad6fd57de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
@@ -10870,6 +10874,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3390315943878483059}
     m_Modifications:
+    - target: {fileID: 641894842250036630, guid: 0fbe18399dda14891a463d4523177654, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -190.20001
+      objectReference: {fileID: 0}
     - target: {fileID: 1979789405018132637, guid: 0fbe18399dda14891a463d4523177654, type: 3}
       propertyPath: m_Name
       value: Controls Window
@@ -10885,6 +10893,10 @@ PrefabInstance:
     - target: {fileID: 2440239494165903364, guid: 0fbe18399dda14891a463d4523177654, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowPauseWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990187106836595683, guid: 0fbe18399dda14891a463d4523177654, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -188.20001
       objectReference: {fileID: 0}
     - target: {fileID: 7406737241922268133, guid: 0fbe18399dda14891a463d4523177654, type: 3}
       propertyPath: m_Pivot.x
@@ -11214,6 +11226,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3390315943878483059}
     m_Modifications:
+    - target: {fileID: 1175945542933466706, guid: b6233f27780d94e91a48128aa441fc91, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700910405088912438, guid: b6233f27780d94e91a48128aa441fc91, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6674509884704446715, guid: b6233f27780d94e91a48128aa441fc91, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11587,6 +11607,10 @@ PrefabInstance:
     - target: {fileID: 3894450305050059965, guid: 866f5c831b8e94eeaa779691d06982d8, type: 3}
       propertyPath: m_Name
       value: ScoreController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894450305050059965, guid: 866f5c831b8e94eeaa779691d06982d8, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 866f5c831b8e94eeaa779691d06982d8, type: 3}

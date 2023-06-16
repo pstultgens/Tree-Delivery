@@ -125,6 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableDayToNight: 0
-  nightIntensity: 0.3
+  nightIntensity: 0.2
   dayIntensity: 1
   duration: 90

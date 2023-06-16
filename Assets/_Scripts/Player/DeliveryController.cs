@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using MoreMountains.Feedbacks;
 
 public class DeliveryController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class DeliveryController : MonoBehaviour
     [SerializeField] GameObject collectedPackageOnCarSprite;
     [SerializeField] Transform dropPackageLocation;
     [SerializeField] float packagePickupDelay = 1f;
+
+
+    private MMFeedbacks cannotRemoveParentFeedback;
+    private MMFeedbacks cannotAddChildFeedback;
 
     public bool isCollidingWithSpot;
     public bool isCollidingWithPackage;
@@ -31,6 +36,18 @@ public class DeliveryController : MonoBehaviour
 
         allPackages = FindObjectsOfType<Package>();
         scoreController = FindObjectOfType<ScoreController>();
+
+        GameObject cannotRemoveParentFeedbackGameObject = GameObject.FindGameObjectWithTag("CannotRemoveParentFeedback");
+        if (cannotRemoveParentFeedbackGameObject != null)
+        {
+            cannotRemoveParentFeedback = cannotRemoveParentFeedbackGameObject.GetComponent<MMFeedbacks>();
+        }
+
+        GameObject cannotAddChildFeedbackGameObject = GameObject.FindGameObjectWithTag("CannotAddChildFeedback");
+        if (cannotAddChildFeedbackGameObject != null)
+        {
+            cannotAddChildFeedback = cannotAddChildFeedbackGameObject.GetComponent<MMFeedbacks>();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -61,7 +78,7 @@ public class DeliveryController : MonoBehaviour
         if (other.tag.Equals("Package"))
         {
             if (isSwappingPackage) { return; }
-            
+
             isCollidingWithPackage = true;
             currentCollidingPackage = other.GetComponent<Package>();
 
@@ -131,6 +148,12 @@ public class DeliveryController : MonoBehaviour
             return;
         }
 
+        if (currentCollidingPackage != null && currentCollectedPackage == null)
+        {
+            PickupPackage();
+            return;
+        }
+
         if (currentCollectedPackage != null && !isCollidingWithSpot)
         {
             DropPackage();
@@ -140,8 +163,7 @@ public class DeliveryController : MonoBehaviour
             !isCollidingWithPackage &&
             currentCollidingSpot.hasReceivedPackage)
         {
-            if (HintController.Instance.canPackageBeDeliveredAtWrongNode
-                && !currentCollidingSpot.isLocked)
+            if (HintController.Instance.canPackageBeDeliveredAtWrongNode)
             {
                 if (currentCollidingSpot.CanRemovePackage())
                 {
@@ -165,17 +187,14 @@ public class DeliveryController : MonoBehaviour
             }
         }
         else if (currentCollectedPackage != null
-            && !currentCollidingSpot.isLocked
             && isCollidingWithSpot
             && currentCollidingSpot.hasReceivedPackage
             && HintController.Instance.canPackageBeDeliveredAtWrongNode)
         {
-
             SwapDeliveredPackage();
         }
         else if (
           currentCollectedPackage != null
-          && !currentCollidingSpot.isLocked
           && isCollidingWithSpot
           && !currentCollidingSpot.hasReceivedPackage)
         {
@@ -192,12 +211,14 @@ public class DeliveryController : MonoBehaviour
 
     private void CannotRemoveHasChild()
     {
+        cannotRemoveParentFeedback.PlayFeedbacks();
         scoreController.IncreaseCannotRemoveHasChildCounter();
         currentCollidingSpot.ShowHintCannotRemovePackage();
     }
 
     private void CannotDeliverHasNoParent()
     {
+        cannotAddChildFeedback.PlayFeedbacks();
         scoreController.IncreaseCannotDeliverHasNoParentCounter();
         currentCollidingSpot.ShowHintCannotDeliverPackage();
     }

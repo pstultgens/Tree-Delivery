@@ -15,6 +15,7 @@ public class Spot : MonoBehaviour
     [SerializeField] public float wrongDeliveryDelay = 2.0f;
     [SerializeField] Color32 correctDeliverdColor = new Color32(1, 1, 1, 1);
     [SerializeField] Color32 wrongDeliverdColor = new Color32(1, 1, 1, 1);
+    [SerializeField] Package initialWrongReceivedPackage;
 
     [Header("Minimap Icons")]
     [SerializeField] public GameObject minimapNode;
@@ -38,7 +39,7 @@ public class Spot : MonoBehaviour
     public bool hasReceivedCorrectPackage;
     public bool hasReceivedPackage;
     public int receivedPackageValue;
-    public bool isLocked;
+    //public bool isLocked;
 
     Color32 defaultSpotColor;
     Color32 defaultMinimapNodeColor;
@@ -64,6 +65,24 @@ public class Spot : MonoBehaviour
         defaultMinimapNodeColor = minimapNodeSpriteRenderer.color;
     }
 
+    private void Start()
+    {
+        if (initialWrongReceivedPackage != null)
+        {
+            InitialWrongReceivedPackage();
+        }
+    }
+
+    private void InitialWrongReceivedPackage()
+    {
+        hasReceivedPackage = true;
+        hasReceivedCorrectPackage = false;
+        receivedPackageValue = initialWrongReceivedPackage.Value();
+        textMeshPro.text = initialWrongReceivedPackage.Value().ToString();
+        minimapNodeTextMeshPro.text = initialWrongReceivedPackage.Value().ToString();
+        initialWrongReceivedPackage.WrongDelivered();
+    }
+
     public bool CanDeliverPackage()
     {
         if (isRoot || parent.hasReceivedPackage)
@@ -80,7 +99,7 @@ public class Spot : MonoBehaviour
 
         Spot nextParent = parent.parent;
 
-        if((nextParent.isRoot || nextParent != null) && !nextParent.hasReceivedPackage)
+        if ((nextParent.isRoot || nextParent != null) && !nextParent.hasReceivedPackage)
         {
             nextParent.ShowWrongDeliveryHintColor();
         }
@@ -92,7 +111,7 @@ public class Spot : MonoBehaviour
         if (!hasReceivedPackage)
         {
             return false;
-        }              
+        }
 
         // Has children value
         if ((leftChild != null && leftChild.hasReceivedPackage)
@@ -121,7 +140,7 @@ public class Spot : MonoBehaviour
     {
         if (hasReceivedCorrectPackage)
         {
-            isLocked = true;
+            //isLocked = true;
             spriteRenderer.color = correctDeliverdColor;
             minimapNodeSpriteRenderer.color = correctDeliverdColor;
         }
@@ -188,7 +207,7 @@ public class Spot : MonoBehaviour
 
         if (HintController.Instance.showHintColorWhenDelivered)
         {
-            isLocked = true;
+            //isLocked = true;
             PlayCorrectDeliveredSFX();
             PlayCorrectDeliveredVFX();
             spriteRenderer.color = correctDeliverdColor;

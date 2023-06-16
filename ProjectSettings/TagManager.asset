@@ -16,6 +16,8 @@ TagManager:
   - Road
   - Spot
   - GlobalLight
+  - CannotRemoveParentFeedback
+  - CannotAddChildFeedback
   layers:
   - Default
   - TransparentFX

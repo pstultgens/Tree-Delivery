@@ -9,9 +9,10 @@ public class Package : MonoBehaviour
 
     private UIController uiController;
     private ScoreController scoreController;
-    private GameObject player;
 
     public int timesPackageWrongValueDeliveredCounter = 0;
+
+    private bool isAlreadyFirstTimeCorrectDelivered;
 
     private void Awake()
     {
@@ -20,7 +21,6 @@ public class Package : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         scoreController = FindObjectOfType<ScoreController>();
         ShowOnMinimap();
     }
@@ -64,12 +64,17 @@ public class Package : MonoBehaviour
             uiController.PackageCorrectDelivered(Value());
         }
 
-        if(timesPackageWrongValueDeliveredCounter == 0)
+        if(timesPackageWrongValueDeliveredCounter == 0 && !isAlreadyFirstTimeCorrectDelivered)
         {
+            isAlreadyFirstTimeCorrectDelivered = true;
+
+            if (scoreController == null)
+            {
+                scoreController = FindObjectOfType<ScoreController>();
+            }
+
             scoreController.IncreaseFirstTimeCorrectDeliveredCounter();
         }
-        // Set delivered package at players location
-        transform.position = player.transform.position;
 
         this.gameObject.SetActive(false);
     }
@@ -83,8 +88,6 @@ public class Package : MonoBehaviour
         {
             uiController.PackageWrongDelivered(Value());
         }
-        // Set delivered package at players location
-        transform.position = player.transform.position;
 
         this.gameObject.SetActive(false);
     }

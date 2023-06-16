@@ -59,6 +59,8 @@ public class MusicController : MonoBehaviour
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Settings Menu")
+            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("About Menu")
+            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Credits Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Enter Name Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Level Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))

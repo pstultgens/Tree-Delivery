@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomOutSpeed: 0.25
   zoomInSpeed: 1
-  maxZoom: 18
+  maxZoom: 20
   velocityThreshold: 15
 --- !u!114 &4515254904111939058
 MonoBehaviour:

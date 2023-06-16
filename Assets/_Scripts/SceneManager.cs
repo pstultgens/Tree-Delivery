@@ -25,6 +25,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] public GameObject playerYellowPickupPrefab;
     [SerializeField] public GameObject playerRedPickupPrefab;
     [SerializeField] public GameObject playerBluePickupPrefab;
+    [SerializeField] public GameObject playerPurplePickupPrefab;
     [SerializeField] public Transform spawnPlayerPosition;
 
     [Header("Pause Window")]
@@ -112,9 +113,18 @@ public class SceneManager : MonoBehaviour
             case "CarBlue":
                 selectedCarPrefab = playerBluePickupPrefab;
                 carController = playerBluePickupPrefab.GetComponent<CarController>();
-                carController.maxSpeed = 10f;
-                carController.accelerationFactor = 27.5f;
-                carController.turnFactor = 2f;
+                carController.maxSpeed = 12.5f;
+                carController.accelerationFactor = 25.5f;
+                carController.turnFactor = 3.5f;
+                carController.boostSpeed = carController.maxSpeed + 7.5f;
+
+                break;
+            case "CarPurple":
+                selectedCarPrefab = playerPurplePickupPrefab;
+                carController = playerPurplePickupPrefab.GetComponent<CarController>();
+                carController.maxSpeed = 17.5f;
+                carController.accelerationFactor = 22.5f;
+                carController.turnFactor = 4f;
                 carController.boostSpeed = carController.maxSpeed + 7.5f;
 
                 break;

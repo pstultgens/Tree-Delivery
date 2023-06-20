@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 4958087374592970549, guid: a2840165cb6894a759da14d9bb39ab27, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
-      objectReference: {fileID: 743452338}
+      objectReference: {fileID: 1165126964}
     - target: {fileID: 4958087374592970549, guid: a2840165cb6894a759da14d9bb39ab27, type: 3}
       propertyPath: m_Navigation.m_SelectOnRight
       value: 

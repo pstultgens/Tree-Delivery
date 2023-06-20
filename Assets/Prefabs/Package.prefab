@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks: []
-  InitializationMode: 2
+  InitializationMode: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   - {x: 0.62009364, y: -0.6223088, z: 0}
   m_ShapePathHash: 1011022330
   m_Mesh: {fileID: 0}
-  m_InstanceId: 221968
+  m_InstanceId: 429010
   m_LocalBounds:
     m_Center: {x: 0.0014886856, y: -0.0014888048, z: 0}
     m_Extent: {x: 0.6186049, y: 0.62082, z: 0}
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedbacks: []
-  InitializationMode: 2
+  InitializationMode: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
@@ -1608,7 +1608,7 @@ MonoBehaviour:
         RelativePosition: 0
         DeterminePositionsOnPlay: 1
         InitialPosition: {x: 0.7, y: -0.7, z: 0}
-        DestinationPosition: {x: -0.7, y: 0.7, z: 0}
+        DestinationPosition: {x: -1, y: 1, z: 0}
         InitialPositionTransform: {fileID: 0}
         DestinationPositionTransform: {fileID: 0}
         AnimatePositionCurveX:
@@ -1726,14 +1726,14 @@ MonoBehaviour:
               inWeight: 0
               outWeight: 0.14359246
             - serializedVersion: 3
-              time: 0.5004295
-              value: 0.60047746
-              inSlope: 0.016541379
-              outSlope: 0.016541379
+              time: 0.5014061
+              value: 0.60019517
+              inSlope: 0.00059258
+              outSlope: 0.00059258
               tangentMode: 0
               weightedMode: 0
               inWeight: 0.18795492
-              outWeight: 0.12052097
+              outWeight: 0.28495646
             - serializedVersion: 3
               time: 1.0011597
               value: -0.00046920776

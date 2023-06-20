@@ -606,8 +606,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 13
-  lockImage: {fileID: 1751591366}
-  levelFinishedCheckmark: {fileID: 1907844425}
+  lockBackgroundGameObject: {fileID: 1751591366}
+  levelFinishedCheckmarkGameObject: {fileID: 1907844425}
+  lockImage: {fileID: 1225978030}
 --- !u!1 &55606461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,8 +1526,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 10
-  lockImage: {fileID: 1206200286}
-  levelFinishedCheckmark: {fileID: 310505922}
+  lockBackgroundGameObject: {fileID: 1206200286}
+  levelFinishedCheckmarkGameObject: {fileID: 310505922}
+  lockImage: {fileID: 932374416}
 --- !u!1 &238542406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,8 +2464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 5
-  lockImage: {fileID: 1924245988}
-  levelFinishedCheckmark: {fileID: 1407545400}
+  lockBackgroundGameObject: {fileID: 1924245988}
+  levelFinishedCheckmarkGameObject: {fileID: 1407545400}
+  lockImage: {fileID: 404308101}
 --- !u!1 &367214091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,8 +3090,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 12
-  lockImage: {fileID: 908952863}
-  levelFinishedCheckmark: {fileID: 367214091}
+  lockBackgroundGameObject: {fileID: 908952863}
+  levelFinishedCheckmarkGameObject: {fileID: 367214091}
+  lockImage: {fileID: 408367208}
 --- !u!1 &526740264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,8 +3393,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 3
-  lockImage: {fileID: 1474813097}
-  levelFinishedCheckmark: {fileID: 1261526480}
+  lockBackgroundGameObject: {fileID: 1474813097}
+  levelFinishedCheckmarkGameObject: {fileID: 1261526480}
+  lockImage: {fileID: 824888814}
 --- !u!1001 &557313347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5268,8 +5273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 7
-  lockImage: {fileID: 2076652271}
-  levelFinishedCheckmark: {fileID: 609494972}
+  lockBackgroundGameObject: {fileID: 2076652271}
+  levelFinishedCheckmarkGameObject: {fileID: 609494972}
+  lockImage: {fileID: 1605255005}
 --- !u!1 &781763859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5435,8 +5441,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 6
-  lockImage: {fileID: 415354500}
-  levelFinishedCheckmark: {fileID: 960945429}
+  lockBackgroundGameObject: {fileID: 415354500}
+  levelFinishedCheckmarkGameObject: {fileID: 960945429}
+  lockImage: {fileID: 1246685218}
 --- !u!1 &787568515
 GameObject:
   m_ObjectHideFlags: 0
@@ -7355,8 +7362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 8
-  lockImage: {fileID: 1234005956}
-  levelFinishedCheckmark: {fileID: 1422474641}
+  lockBackgroundGameObject: {fileID: 1234005956}
+  levelFinishedCheckmarkGameObject: {fileID: 1422474641}
+  lockImage: {fileID: 1950323007}
 --- !u!1 &1083346280
 GameObject:
   m_ObjectHideFlags: 0
@@ -7522,8 +7530,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 9
-  lockImage: {fileID: 973508583}
-  levelFinishedCheckmark: {fileID: 1482048502}
+  lockBackgroundGameObject: {fileID: 973508583}
+  levelFinishedCheckmarkGameObject: {fileID: 1482048502}
+  lockImage: {fileID: 842553317}
 --- !u!1001 &1110652320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11316,8 +11325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  lockBackgroundGameObject: {fileID: 0}
+  levelFinishedCheckmarkGameObject: {fileID: 2063434235}
   lockImage: {fileID: 0}
-  levelFinishedCheckmark: {fileID: 2063434235}
 --- !u!1001 &1594650034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11665,8 +11675,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 4
-  lockImage: {fileID: 1704522730}
-  levelFinishedCheckmark: {fileID: 1314777696}
+  lockBackgroundGameObject: {fileID: 1704522730}
+  levelFinishedCheckmarkGameObject: {fileID: 1314777696}
+  lockImage: {fileID: 438280475}
 --- !u!1 &1618465753
 GameObject:
   m_ObjectHideFlags: 0
@@ -11832,8 +11843,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 15
-  lockImage: {fileID: 787568515}
-  levelFinishedCheckmark: {fileID: 1555040543}
+  lockBackgroundGameObject: {fileID: 787568515}
+  levelFinishedCheckmarkGameObject: {fileID: 1555040543}
+  lockImage: {fileID: 698553215}
 --- !u!1001 &1620503409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12124,8 +12136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 14
-  lockImage: {fileID: 1726661027}
-  levelFinishedCheckmark: {fileID: 769579107}
+  lockBackgroundGameObject: {fileID: 1726661027}
+  levelFinishedCheckmarkGameObject: {fileID: 769579107}
+  lockImage: {fileID: 941873732}
 --- !u!1 &1679423659
 GameObject:
   m_ObjectHideFlags: 0
@@ -12609,8 +12622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 16
-  lockImage: {fileID: 681527380}
-  levelFinishedCheckmark: {fileID: 668499201}
+  lockBackgroundGameObject: {fileID: 681527380}
+  levelFinishedCheckmarkGameObject: {fileID: 668499201}
+  lockImage: {fileID: 378802773}
 --- !u!1 &1726661027
 GameObject:
   m_ObjectHideFlags: 0
@@ -14346,8 +14360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 11
-  lockImage: {fileID: 1452720463}
-  levelFinishedCheckmark: {fileID: 1237787993}
+  lockBackgroundGameObject: {fileID: 1452720463}
+  levelFinishedCheckmarkGameObject: {fileID: 1237787993}
+  lockImage: {fileID: 1981342342}
 --- !u!1 &2076652271
 GameObject:
   m_ObjectHideFlags: 0
@@ -14644,5 +14659,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 2
-  lockImage: {fileID: 693944021}
-  levelFinishedCheckmark: {fileID: 1141940182}
+  lockBackgroundGameObject: {fileID: 693944021}
+  levelFinishedCheckmarkGameObject: {fileID: 1141940182}
+  lockImage: {fileID: 584325295}

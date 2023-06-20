@@ -93,9 +93,9 @@ public class UIEventTrigger : EventTrigger
 
     public override void OnPointerExit(PointerEventData data)
     {
-        buttonFeedbacks.StopFeedbacks();
-        Vector3 newSize = originalScale;
-        StartCoroutine(Transition(newSize, 0.2f));
+        //buttonFeedbacks.StopFeedbacks();
+        //Vector3 newSize = originalScale;
+        //StartCoroutine(Transition(newSize, 0.2f));
     }
 
     public override void OnSubmit(BaseEventData data)

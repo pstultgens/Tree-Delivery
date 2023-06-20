@@ -6,23 +6,46 @@ using UnityEngine.EventSystems;
 
 public class LevelSelector : MonoBehaviour
 {
-
     [SerializeField] public LevelEnum level;
-    [SerializeField] public GameObject lockImage;
-    [SerializeField] public GameObject levelFinishedCheckmark;
+    [SerializeField] public GameObject lockBackgroundGameObject;
+    [SerializeField] public GameObject levelFinishedCheckmarkGameObject;
+    [SerializeField] Image lockImage;
 
+    private Image lockBackgroundImage;
+    private Color32 normalLockBackgroundColor;
+    private Color32 selectedLockBackgroundColor = new Color32(94, 94, 94, 255);
+
+    private Color32 normalLockImageColor;
+    private Color32 selectedLockImageColor = new Color32(152, 152, 152, 255);
+   
+    private bool isLevelUnLocked;
+
+    private EventSystem eventSystem;
     private SceneManager sceneManager;
     private Button button;
 
     private void Start()
     {
+        eventSystem = EventSystem.current;
         sceneManager = FindObjectOfType<SceneManager>();
         button = GetComponent<Button>();
 
-        if (lockImage != null && PlayerPrefsRepository.Instance.IsLevelUnlocked(level))
+        isLevelUnLocked = PlayerPrefsRepository.Instance.IsLevelUnlocked(level);
+
+        if (!isLevelUnLocked)
+        {
+            lockBackgroundImage = lockBackgroundGameObject.GetComponent<Image>();
+            normalLockBackgroundColor = lockBackgroundImage.color;
+
+            
+            normalLockImageColor = lockImage.color;
+            
+        }
+
+        if (lockBackgroundGameObject != null && isLevelUnLocked)
         {
             Debug.Log(level.GetName() + ": Unlocked");
-            lockImage.SetActive(false);
+            lockBackgroundGameObject.SetActive(false);
             button.onClick.AddListener(() => sceneManager.LevelSelect(level));
         }
         else
@@ -34,12 +57,37 @@ public class LevelSelector : MonoBehaviour
         if (PlayerPrefsRepository.Instance.IsLevelFinished(level))
         {
             Debug.Log(level.GetName() + ": Finished");
-            levelFinishedCheckmark.SetActive(true);
+            levelFinishedCheckmarkGameObject.SetActive(true);
         }
         else
         {
             Debug.Log(level.GetName() + ": Unfinished");
-            levelFinishedCheckmark.SetActive(false);
+            levelFinishedCheckmarkGameObject.SetActive(false);
         }
+    }
+
+    private void Update()
+    {
+        if (isLevelUnLocked)
+        {
+            return;
+        }
+
+        if (IsButtonSelected() && !isLevelUnLocked)
+        {
+            lockBackgroundImage.color = selectedLockBackgroundColor;
+            lockImage.color = selectedLockImageColor;
+
+        }
+        else if (!IsButtonSelected() && !isLevelUnLocked)
+        {
+            lockBackgroundImage.color = normalLockBackgroundColor;
+            lockImage.color = normalLockImageColor;
+        }
+    }
+
+    private bool IsButtonSelected()
+    {
+        return gameObject.Equals(eventSystem.currentSelectedGameObject);
     }
 }

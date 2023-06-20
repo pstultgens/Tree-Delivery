@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 public class UIEventTrigger : EventTrigger
 {
@@ -15,16 +16,26 @@ public class UIEventTrigger : EventTrigger
     private Button button;
 
     private EventSystem eventSystem;
+    private MMFeedbacks buttonFeedbacks;
 
     private void Start()
     {
         eventSystem = EventSystem.current;
         originalScale = transform.localScale;
+        buttonFeedbacks = GetComponentInChildren<MMFeedbacks>();
 
         button = GetComponent<Button>();
         if (button != null)
         {
             SetButtonColors();
+        }
+    }
+
+    private void Update()
+    {
+        if(buttonFeedbacks == null)
+        {
+            buttonFeedbacks = GetComponentInChildren<MMFeedbacks>();
         }
     }
 
@@ -43,9 +54,17 @@ public class UIEventTrigger : EventTrigger
     public override void OnSelect(BaseEventData data)
     {
         // Scale up with 15%
-        Vector3 newSize = transform.localScale * 1.15f;
-        StartCoroutine(Transition(newSize, 0.2f));
+        //Vector3 newSize = transform.localScale * 1.15f;
+        //StartCoroutine(Transition(newSize, 0.2f));
+
+        if (buttonFeedbacks == null)
+        {
+            buttonFeedbacks = GetComponentInChildren<MMFeedbacks>();
+        }
+
+        buttonFeedbacks.PlayFeedbacks();
         MusicController.Instance.PlayMenuNavigationSFX();
+
     }
 
     public override void OnPointerEnter(PointerEventData data)
@@ -56,33 +75,45 @@ public class UIEventTrigger : EventTrigger
         }
 
         // Scale up with 15%
-        Vector3 newSize = transform.localScale * 1.15f;
-        StartCoroutine(Transition(newSize, 0.2f));
+        //Vector3 newSize = transform.localScale * 1.15f;
+        //StartCoroutine(Transition(newSize, 0.2f));
+
+        buttonFeedbacks.PlayFeedbacks();
         SetSelectedButton(this.gameObject);
         MusicController.Instance.PlayMenuNavigationSFX();
     }
 
     public override void OnDeselect(BaseEventData data)
-    {
+    {      
+
+        buttonFeedbacks.StopFeedbacks();
         Vector3 newSize = originalScale;
         StartCoroutine(Transition(newSize, 0.2f));
-
     }
 
     public override void OnPointerExit(PointerEventData data)
     {
-
+        buttonFeedbacks.StopFeedbacks();
+        Vector3 newSize = originalScale;
+        StartCoroutine(Transition(newSize, 0.2f));
     }
 
     public override void OnSubmit(BaseEventData data)
     {
-        transform.localScale = originalScale;
+        //transform.localScale = originalScale;
+
+        //buttonFeedbacks.StopFeedbacks();
+        //Vector3 newSize = originalScale;
+        //StartCoroutine(Transition(newSize, 0.2f));
         MusicController.Instance.PlayButtonSubmitSFX();
     }
 
     public override void OnPointerClick(PointerEventData data)
     {
-        transform.localScale = originalScale;
+        //transform.localScale = originalScale;
+        //buttonFeedbacks.StopFeedbacks();
+        //Vector3 newSize = originalScale;
+        //StartCoroutine(Transition(newSize, 0.2f));
         MusicController.Instance.PlayButtonSubmitSFX();
     }
 

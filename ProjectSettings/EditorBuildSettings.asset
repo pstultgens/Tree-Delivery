@@ -75,4 +75,4 @@ EditorBuildSettings:
     path: Assets/_Scenes/Levels/Hard/Hard Level 7.unity
     guid: a5e3ba895c34c494cb0790d4d44d7475
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 8f591b8498983488b956e4c87e48a96c, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 4de7b8ddf88b04f2e9db6c841e12641d, type: 2}

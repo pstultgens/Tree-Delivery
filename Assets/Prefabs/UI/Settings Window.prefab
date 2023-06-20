@@ -3108,6 +3108,14 @@ PrefabInstance:
       value: UIButtonFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 2757190813952256054, guid: b80178f4c339d42f09f22d3417e864ca, type: 3}
+      propertyPath: managedReferences[3415903810981986305].RemapCurveOne
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757190813952256054, guid: b80178f4c339d42f09f22d3417e864ca, type: 3}
+      propertyPath: managedReferences[3415903810981986305].RemapCurveZero
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2757190813952256054, guid: b80178f4c339d42f09f22d3417e864ca, type: 3}
       propertyPath: managedReferences[3415903810981986305].AnimateScaleTarget
       value: 
       objectReference: {fileID: 6806330388218690324}

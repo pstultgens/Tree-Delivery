@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class PlayerPrefsRepository : MonoBehaviour
 {
@@ -16,8 +17,31 @@ public class PlayerPrefsRepository : MonoBehaviour
     private static string CAMERA_SHAKE = "CameraShake";
     private static string FULLSCREEN = "Fullscreen";
 
+    private PlayerInputActions playerActions;
+    private bool cheat1Pressed;
+    private bool cheat2Pressed;
+    private bool cheat3Pressed;
+
+    private void OnEnable()
+    {
+        playerActions.Enable();
+        playerActions.Player.Cheat1.started += OnCheat1Pressed;
+        playerActions.Player.Cheat2.started += OnCheat2Pressed;
+        playerActions.Player.Cheat3.started += OnCheat3Pressed;
+    }
+
+    private void OnDisable()
+    {
+        playerActions.Disable();
+        playerActions.Player.Cheat1.canceled -= OnCheat1Pressed;
+        playerActions.Player.Cheat2.canceled -= OnCheat2Pressed;
+        playerActions.Player.Cheat3.canceled -= OnCheat3Pressed;
+    }
+
     private void Awake()
     {
+        playerActions = new PlayerInputActions();
+
         // Singleton pattern
         if (Instance == null)
         {
@@ -27,7 +51,28 @@ public class PlayerPrefsRepository : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }       
+    } 
+
+    private void Update()
+    {
+        if (cheat1Pressed && cheat2Pressed && cheat3Pressed)
+        {
+            UnlockAndCompleteAllLevels();
         }
+    }
+
+    private void OnCheat1Pressed(InputAction.CallbackContext context)
+    {
+        cheat1Pressed = true;
+    }
+    private void OnCheat2Pressed(InputAction.CallbackContext context)
+    {
+        cheat2Pressed = true;
+    }
+    private void OnCheat3Pressed(InputAction.CallbackContext context)
+    {
+        cheat3Pressed = true;
     }
 
     public HighscoreEntry GetHighscore(LevelEnum level)
@@ -110,6 +155,12 @@ public class PlayerPrefsRepository : MonoBehaviour
 
     public bool IsLevelUnlocked(LevelEnum level)
     {
+        if (LevelEnum.Tutorial.Equals(level))
+        {
+            // Tutorial Level is always unlocked
+            return true;
+        }
+
         if (PlayerPrefs.HasKey(PLAYER_PREFS_LEVEL + level))
         {
             string jsonString = PlayerPrefs.GetString(PLAYER_PREFS_LEVEL + level);
@@ -184,6 +235,27 @@ public class PlayerPrefsRepository : MonoBehaviour
         return false;
     }
 
+    public bool AllLevelsFinished()
+    {
+        return
+            IsLevelFinished(LevelEnum.Tutorial) &&
+            IsLevelFinished(LevelEnum.Test) &&
+            IsLevelFinished(LevelEnum.Easy1) &&
+            IsLevelFinished(LevelEnum.Easy2) &&
+            IsLevelFinished(LevelEnum.Easy3) &&
+            IsLevelFinished(LevelEnum.Easy4) &&
+            IsLevelFinished(LevelEnum.Easy5) &&
+            IsLevelFinished(LevelEnum.Easy6) &&
+            IsLevelFinished(LevelEnum.Easy7) &&
+            IsLevelFinished(LevelEnum.Hard1) &&
+            IsLevelFinished(LevelEnum.Hard2) &&
+            IsLevelFinished(LevelEnum.Hard3) &&
+            IsLevelFinished(LevelEnum.Hard4) &&
+            IsLevelFinished(LevelEnum.Hard5) &&
+            IsLevelFinished(LevelEnum.Hard6) &&
+            IsLevelFinished(LevelEnum.Hard7);
+    }
+
     public void UnlockAllEasyLevels()
     {
         Level level = new Level();
@@ -197,6 +269,35 @@ public class PlayerPrefsRepository : MonoBehaviour
         PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy5, json);
         PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy6, json);
         PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy7, json);
+        PlayerPrefs.Save();
+    }
+
+    private void UnlockAndCompleteAllLevels()
+    {
+        Level level = new Level();
+        level.unlocked = true;
+        level.finished = true;
+        string json = JsonUtility.ToJson(level);
+
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Tutorial, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Test, json);
+
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy1, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy2, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy3, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy4, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy5, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy6, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Easy7, json);
+
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard1, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard2, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard3, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard4, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard5, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard6, json);
+        PlayerPrefs.SetString(PLAYER_PREFS_LEVEL + LevelEnum.Hard7, json);
+
         PlayerPrefs.Save();
     }
 

@@ -89,6 +89,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cheat1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed77ce8f-5a80-408a-82aa-5582dfd9ca70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cheat2"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca38e3c2-742d-43a0-9532-f7fb3523f332"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cheat3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6cabe8a-eb3a-4ef9-8d94-2332cfe34fcc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -331,6 +358,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Minimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bc45fb5-daf4-4cc4-a835-da9e29aec9d1"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cheat1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef585e81-f68a-45f5-bb15-8782c8f559b3"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cheat2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7724580a-65f1-4a18-988e-9757cc92edea"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cheat3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -832,6 +892,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_MoveDown = m_Player.FindAction("MoveDown", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Minimap = m_Player.FindAction("Minimap", throwIfNotFound: true);
+        m_Player_Cheat1 = m_Player.FindAction("Cheat1", throwIfNotFound: true);
+        m_Player_Cheat2 = m_Player.FindAction("Cheat2", throwIfNotFound: true);
+        m_Player_Cheat3 = m_Player.FindAction("Cheat3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -909,6 +972,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveDown;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Minimap;
+    private readonly InputAction m_Player_Cheat1;
+    private readonly InputAction m_Player_Cheat2;
+    private readonly InputAction m_Player_Cheat3;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -920,6 +986,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @MoveDown => m_Wrapper.m_Player_MoveDown;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Minimap => m_Wrapper.m_Player_Minimap;
+        public InputAction @Cheat1 => m_Wrapper.m_Player_Cheat1;
+        public InputAction @Cheat2 => m_Wrapper.m_Player_Cheat2;
+        public InputAction @Cheat3 => m_Wrapper.m_Player_Cheat3;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -950,6 +1019,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Minimap.started += instance.OnMinimap;
             @Minimap.performed += instance.OnMinimap;
             @Minimap.canceled += instance.OnMinimap;
+            @Cheat1.started += instance.OnCheat1;
+            @Cheat1.performed += instance.OnCheat1;
+            @Cheat1.canceled += instance.OnCheat1;
+            @Cheat2.started += instance.OnCheat2;
+            @Cheat2.performed += instance.OnCheat2;
+            @Cheat2.canceled += instance.OnCheat2;
+            @Cheat3.started += instance.OnCheat3;
+            @Cheat3.performed += instance.OnCheat3;
+            @Cheat3.canceled += instance.OnCheat3;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -975,6 +1053,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Minimap.started -= instance.OnMinimap;
             @Minimap.performed -= instance.OnMinimap;
             @Minimap.canceled -= instance.OnMinimap;
+            @Cheat1.started -= instance.OnCheat1;
+            @Cheat1.performed -= instance.OnCheat1;
+            @Cheat1.canceled -= instance.OnCheat1;
+            @Cheat2.started -= instance.OnCheat2;
+            @Cheat2.performed -= instance.OnCheat2;
+            @Cheat2.canceled -= instance.OnCheat2;
+            @Cheat3.started -= instance.OnCheat3;
+            @Cheat3.performed -= instance.OnCheat3;
+            @Cheat3.canceled -= instance.OnCheat3;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1140,6 +1227,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMoveDown(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnMinimap(InputAction.CallbackContext context);
+        void OnCheat1(InputAction.CallbackContext context);
+        void OnCheat2(InputAction.CallbackContext context);
+        void OnCheat3(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -1082,11 +1082,9 @@ MonoBehaviour:
     More Mountains \n(https://assetstore.unity.com/packages/tools/particles-effects/feel-183370)\n\nPhilipp
     St\xFCltgens\n\n\n<style=h1>Sound & Music</style>\nhttps://freesound.org/\nhttps://incompetech.com\n\n\n<style=h1>Quality
     Assurance</style>\nAndr\xE9 Schumacher\n\n\n<style=h1>Special Thanks</style>\nDr.
-    Ebrahim Rahimi\nDr. Ir. Clara Maathuis\nAndr\xE9 Schumacher\nGuido Chorus\nPierre
-    Munnichs\nWim Dohmen\nEmiel Ekkerink\nAd Zeevaarders\nRick Snackers\nRobbin van
-    Hout\nReyn van de Craats\nPretty Fly Games\n\n\n<style=h1>Special Special Thanks</style>\nSimone
-    \nEsm\xE9e\nOlivia\n\n\n<style=h1>Thank you for playing!</style>\nHope you enjoyed
-    the game and learned something\n\n"
+    Ebrahim Rahimi\nDr. Ir. Clara Maathuis\nAndr\xE9 Schumacher\nPretty Fly Games\n\n\n<style=h1>Special
+    Special Thanks</style>\nSimone \nEsm\xE9e\nOlivia\n\n\n<style=h1>Thank you for
+    playing!</style>\nHope you enjoyed the game and learned something\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}

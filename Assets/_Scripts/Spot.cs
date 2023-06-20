@@ -99,7 +99,7 @@ public class Spot : MonoBehaviour
 
         Spot nextParent = parent.parent;
 
-        if ((nextParent.isRoot || nextParent != null) && !nextParent.hasReceivedPackage)
+        if ((nextParent != null || nextParent.isRoot) && !nextParent.hasReceivedPackage)
         {
             nextParent.ShowWrongDeliveryHintColor();
         }

@@ -78,8 +78,13 @@ public class Spot : MonoBehaviour
         hasReceivedPackage = true;
         hasReceivedCorrectPackage = false;
         receivedPackageValue = initialWrongReceivedPackage.Value();
+
         textMeshPro.text = initialWrongReceivedPackage.Value().ToString();
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
+
         minimapNodeTextMeshPro.text = initialWrongReceivedPackage.Value().ToString();
+        minimapNodeTextMeshPro.color = new Color(minimapNodeTextMeshPro.color.r, minimapNodeTextMeshPro.color.g, minimapNodeTextMeshPro.color.b, 1f);
+
         initialWrongReceivedPackage.WrongDelivered();
     }
 
@@ -155,14 +160,27 @@ public class Spot : MonoBehaviour
     {
         textMeshPro.text = correctValue.ToString();
         textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
+
+        minimapNodeTextMeshPro.text = correctValue.ToString();
+        minimapNodeTextMeshPro.color = new Color(minimapNodeTextMeshPro.color.r, minimapNodeTextMeshPro.color.g, minimapNodeTextMeshPro.color.b, 1f);
     }
 
     public void ShowHintCorrectValue()
     {
         textMeshPro.text = correctValue.ToString();
-        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0.5f);
 
         minimapNodeTextMeshPro.text = correctValue.ToString();
+        minimapNodeTextMeshPro.color = new Color(minimapNodeTextMeshPro.color.r, minimapNodeTextMeshPro.color.g, minimapNodeTextMeshPro.color.b, 0.5f);
+    }
+
+    public void ShowDeliveredValue()
+    {
+        textMeshPro.text = receivedPackageValue.ToString();
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
+
+        minimapNodeTextMeshPro.text = receivedPackageValue.ToString();
+        minimapNodeTextMeshPro.color = new Color(minimapNodeTextMeshPro.color.r, minimapNodeTextMeshPro.color.g, minimapNodeTextMeshPro.color.b, 1f);
     }
 
     public void ShowWrongDeliveryHintValue()
@@ -184,7 +202,10 @@ public class Spot : MonoBehaviour
     public void HideValue()
     {
         textMeshPro.text = "?";
+        textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0.5f);
+
         minimapNodeTextMeshPro.text = "?";
+        minimapNodeTextMeshPro.color = new Color(minimapNodeTextMeshPro.color.r, minimapNodeTextMeshPro.color.g, minimapNodeTextMeshPro.color.b, 0.5f);
     }
 
     public void PickupPackage()
@@ -203,7 +224,7 @@ public class Spot : MonoBehaviour
         hasReceivedCorrectPackage = true;
         hasReceivedPackage = true;
         receivedPackageValue = correctValue;
-        ShowCorrectValue();
+        ShowDeliveredValue();
 
         if (HintController.Instance.showHintColorWhenDelivered)
         {
@@ -228,8 +249,7 @@ public class Spot : MonoBehaviour
         hasReceivedPackage = true;
         hasReceivedCorrectPackage = false;
         receivedPackageValue = packageValue;
-        textMeshPro.text = packageValue.ToString();
-        minimapNodeTextMeshPro.text = packageValue.ToString();
+        ShowDeliveredValue();
 
         if (HintController.Instance.showHintColorWhenDelivered)
         {
@@ -306,17 +326,15 @@ public class Spot : MonoBehaviour
         isShowHintValueCoroutineRunning = true;
 
         ShowCorrectValue();
-        minimapNodeTextMeshPro.text = correctValue.ToString();
         yield return new WaitForSeconds(wrongDeliveryDelay);
 
         if (HintController.Instance.showAlreadyCorrectValueOnNode)
         {
-            minimapNodeTextMeshPro.text = correctValue.ToString();
+            ShowHintCorrectValue();
         }
         else
         {
             HideValue();
-            minimapNodeTextMeshPro.text = "?";
         }
 
         isShowHintValueCoroutineRunning = false;

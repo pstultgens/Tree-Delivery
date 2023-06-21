@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using Cinemachine;
 using UnityEngine.EventSystems;
 using TMPro;
-
+using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour
 {
@@ -56,7 +56,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] public AudioMixer audioMixer;
 
     private bool isShowingTestLevelComplete;
-    private bool isShowingLevelComplete;    
+    private bool isShowingLevelComplete;
 
     private PlayerInputActions playerActions;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -69,6 +69,7 @@ public class SceneManager : MonoBehaviour
             InstantiatePlayer();
         }
         scoreController = FindObjectOfType<ScoreController>();
+
     }
 
     private void OnEnable()
@@ -83,6 +84,7 @@ public class SceneManager : MonoBehaviour
     {
         playerActions.Enable();
     }
+
 
     // Instantiate player with selected car stats
     private void InstantiatePlayer()
@@ -395,7 +397,7 @@ public class SceneManager : MonoBehaviour
     {
         // Play animation
         fadeTransition.SetTrigger("Start");
-        
+
 
         // Wait
         yield return new WaitForSeconds(tranistionTime);

@@ -126,6 +126,9 @@ public class LevelController : MonoBehaviour
             if (HintController.Instance.showAlreadyCorrectValueOnNode)
             {
                 spot.ShowHintCorrectValue();
+            } else
+            {
+                spot.HideValue();
             }
         }
         if (HintController.Instance.showUIPackages)

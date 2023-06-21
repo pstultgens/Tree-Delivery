@@ -656,23 +656,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<style=h1>Tree Delivery</style>
-
-    Tree Delivery is an exciting and
-    innovative game designed to make learning the challenging data structure Binary
-    Search Tree (BST) an enjoyable experience. Developed as part of a Master''s thesis
-    in Software Engineering, the game takes players on a thrilling 2D top-down delivery
-    adventure within the nodes and edges of a BST racing track. As players navigate
-    through the tree, they encounter packages, traps, obstacles, and AI-driven vehicles,
-    adding an element of exploration and surprise. The objective is to deliver packages
-    to the correct tree nodes as quickly as possible. This is done by solving the
-    tree and progressing to higher levels with the aim of achieving the highest score.
-    The game caters to different skill levels by offering varying difficulties, hints,
-    and feedback based on a pre-knowledge test. With each level, the challenges intensify,
-    allowing players to master fundamental BST concepts like inserting values in
-    the right place. By gamifying the learning process, Tree Delivery not only offers
-    enjoyment and excitement but also ensures a comprehensive understanding of Binary
-    Search Trees through engaging gameplay.'
+  m_text: "<style=h1>Tree Delivery</style>\nA game that aims to make learning the
+    Binary Search Tree (BST) data structure enjoyable. The game was developed as
+    part of a Master's Thesis in Software Engineering. It provides players with a
+    2D top-down delivery adventure within the nodes and edges of a BST racing track.\n\nIn
+    the game, players navigate through the tree while encountering packages, traps,
+    obstacles, and AI-driven vehicles, adding an element of exploration and surprise.
+    The main objective is to deliver packages to the correct tree nodes as quickly
+    as possible. As players progress through the game, they solve the tree and advance
+    to higher levels in order to achieve the highest score. \n\nTo cater to different
+    skill levels, Tree Delivery offers varying difficulties, hints, and feedback
+    based on a pre-knowledge test. With each level, the challenges become more intense,
+    allowing players to master common problems and difficulties associated with BSTs,
+    such as inserting values at the wrong place or removing nodes with children.\n\nBy
+    gamifying the learning process, Tree Delivery not only provides enjoyment and
+    excitement but also ensures a comprehensive understanding of Binary Search Trees
+    through engaging gameplay."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
   m_sharedMaterial: {fileID: 2017673355279344868, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
@@ -699,8 +698,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.05
-  m_fontSizeBase: 60
+  m_fontSize: 25.6
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18

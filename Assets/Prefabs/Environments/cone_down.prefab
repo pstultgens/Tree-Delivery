@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5208283031012793906}
   - component: {fileID: 5208283031012793907}
   - component: {fileID: 6424708136004514138}
+  - component: {fileID: 4813131613341792451}
   m_Layer: 0
   m_Name: cone_down
   m_TagString: Untagged
@@ -115,7 +116,19 @@ MonoBehaviour:
   - {x: -0.1279459, y: -0.34002304, z: 0.000000014901161}
   m_ShapePathHash: -1406408795
   m_Mesh: {fileID: 0}
-  m_InstanceId: 608558
+  m_InstanceId: 299766
   m_LocalBounds:
     m_Center: {x: -0.0008211136, y: 0.001627922, z: 0}
     m_Extent: {x: 0.34993553, y: 0.34227848, z: 0}
+--- !u!114 &4813131613341792451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208283031012793904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

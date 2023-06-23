@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7682004140086259832}
   - component: {fileID: 7682004140086259833}
   - component: {fileID: 564477067660629787}
+  - component: {fileID: 6678512630426808576}
   m_Layer: 0
   m_Name: barrier_white_race
   m_TagString: Untagged
@@ -111,7 +112,19 @@ MonoBehaviour:
   - {x: 1.640625, y: -0.484375, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 955188
+  m_InstanceId: 299740
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 1.640625, y: 0.484375, z: 0}
+--- !u!114 &6678512630426808576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682004140086259834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

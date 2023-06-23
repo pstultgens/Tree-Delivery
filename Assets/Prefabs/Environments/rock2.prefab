@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6247308636134326688}
   - component: {fileID: 6247308636134326689}
   - component: {fileID: 8017178471269804857}
+  - component: {fileID: 6248736265431807225}
   m_Layer: 0
   m_Name: rock2
   m_TagString: Untagged
@@ -113,7 +114,19 @@ MonoBehaviour:
   - {x: 0.13454819, y: -0.4931507, z: 0}
   m_ShapePathHash: 1691726557
   m_Mesh: {fileID: 0}
-  m_InstanceId: 936194
+  m_InstanceId: 299686
   m_LocalBounds:
     m_Center: {x: 0.0071430206, y: -0.0011906624, z: 0}
     m_Extent: {x: 0.54172707, y: 0.49196005, z: 0}
+--- !u!114 &6248736265431807225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6247308636134326686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

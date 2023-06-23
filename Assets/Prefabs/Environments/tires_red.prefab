@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4433013556611309891}
   - component: {fileID: 4433013556611309890}
   - component: {fileID: 8723800618415555923}
+  - component: {fileID: 7297646887417651897}
   m_Layer: 0
   m_Name: tires_red
   m_TagString: Untagged
@@ -115,7 +116,19 @@ MonoBehaviour:
   - {x: -0.010002136, y: -0.4367199, z: 0.000000014901161}
   m_ShapePathHash: 541433637
   m_Mesh: {fileID: 0}
-  m_InstanceId: 371518
+  m_InstanceId: 299600
   m_LocalBounds:
     m_Center: {x: 0.0017795563, y: -0.0043706894, z: 0}
     m_Extent: {x: 0.44059563, y: 0.4323492, z: 0}
+--- !u!114 &7297646887417651897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433013556611309893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

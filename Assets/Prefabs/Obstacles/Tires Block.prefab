@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2512108891608913661}
   - component: {fileID: 2512108891608913662}
   - component: {fileID: 5297140926648951153}
+  - component: {fileID: 3190562406752733201}
   m_Layer: 0
   m_Name: tires_red (2)
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 9
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e55b30c0e3f0427d94dc682223a0a15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -154,10 +155,22 @@ MonoBehaviour:
   - {x: -0.013122559, y: -0.43418503, z: 0}
   m_ShapePathHash: -624197411
   m_Mesh: {fileID: 0}
-  m_InstanceId: 725716
+  m_InstanceId: 299884
   m_LocalBounds:
     m_Center: {x: 0.0034784079, y: -0.0010490417, z: 0}
     m_Extent: {x: 0.44520938, y: 0.433136, z: 0}
+--- !u!114 &3190562406752733201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512108891608913663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2512108891983041959
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +184,7 @@ GameObject:
   - component: {fileID: 2512108891983041957}
   - component: {fileID: 2512108891983041958}
   - component: {fileID: 6150287970815713888}
+  - component: {fileID: 4751370463632053089}
   m_Layer: 0
   m_Name: tires_white
   m_TagString: Untagged
@@ -232,7 +246,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 9
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 28c21d854d2a04c618a055b13342d6aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -312,10 +326,22 @@ MonoBehaviour:
   - {x: -0.011024475, y: -0.44324017, z: 0}
   m_ShapePathHash: 624362573
   m_Mesh: {fileID: 0}
-  m_InstanceId: 725718
+  m_InstanceId: 299886
   m_LocalBounds:
     m_Center: {x: 0.001049161, y: -0.004067421, z: 0}
     m_Extent: {x: 0.4286083, y: 0.43917274, z: 0}
+--- !u!114 &4751370463632053089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512108891983041959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2512108892640868603
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +355,7 @@ GameObject:
   - component: {fileID: 2512108892640868601}
   - component: {fileID: 2512108892640868602}
   - component: {fileID: 2271520508994625891}
+  - component: {fileID: 2799107101420293996}
   m_Layer: 0
   m_Name: tires_red
   m_TagString: Untagged
@@ -390,7 +417,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 9
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e55b30c0e3f0427d94dc682223a0a15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -470,10 +497,22 @@ MonoBehaviour:
   - {x: -0.011024475, y: -0.45019674, z: 0}
   m_ShapePathHash: -1432121987
   m_Mesh: {fileID: 0}
-  m_InstanceId: 725670
+  m_InstanceId: 299838
   m_LocalBounds:
     m_Center: {x: 0.0010492802, y: -0.011024237, z: 0}
     m_Extent: {x: 0.43766332, y: 0.4391725, z: 0}
+--- !u!114 &2799107101420293996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512108892640868603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2512108892706972537
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +526,7 @@ GameObject:
   - component: {fileID: 2512108892706972543}
   - component: {fileID: 2512108892706972536}
   - component: {fileID: 9148043147580050010}
+  - component: {fileID: 835392503594428998}
   m_Layer: 0
   m_Name: tires_white (1)
   m_TagString: Untagged
@@ -548,7 +588,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1624440953
-  m_SortingLayer: 9
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 28c21d854d2a04c618a055b13342d6aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -628,10 +668,22 @@ MonoBehaviour:
   - {x: -0.0070858, y: -0.4411416, z: 0}
   m_ShapePathHash: 1833672701
   m_Mesh: {fileID: 0}
-  m_InstanceId: 725720
+  m_InstanceId: 299888
   m_LocalBounds:
     m_Center: {x: -0.0055766106, y: -0.001969099, z: 0}
     m_Extent: {x: 0.44520926, y: 0.4391725, z: 0}
+--- !u!114 &835392503594428998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512108892706972537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab64a2211394707acbf30d3020373a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5131363589973327896
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class UITestLevelCompleteScore : MonoBehaviour
 {
@@ -56,20 +56,18 @@ public class UITestLevelCompleteScore : MonoBehaviour
                 testLevelPassed = true;
             }
 
-
-            AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                "TestLevelFinished",
-                new Dictionary<string, object>               {
-                    { "time", timeController.GetFormattedTime() },
-                    { "passed", testLevelPassed},
-                    { "incorrectValueDeliveries", countWrongValueDeliveries },
-                    { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
-                    { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
-                    { "perfectDeliveries", countFirstTimeCorrectDeliveries},
-            });
-
-            Debug.Log("AnalyticsResult TestLevelFinished: " + analyticsResult);
-
+            // Analytics
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "time", timeController.GetFormattedTime() },
+                { "passed", testLevelPassed},
+                { "incorrectValueDeliveries", countWrongValueDeliveries },
+                { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
+                { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
+                { "perfectDeliveries", countFirstTimeCorrectDeliveries},
+            };
+            AnalyticsService.Instance.CustomData("TestLevelFinished", parameters);
+            AnalyticsService.Instance.Flush();
         }
     }
 }

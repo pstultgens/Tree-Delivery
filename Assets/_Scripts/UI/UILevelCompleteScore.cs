@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class UILevelCompleteScore : MonoBehaviour
 {
@@ -54,21 +54,18 @@ public class UILevelCompleteScore : MonoBehaviour
 
             totalScoreText.text = scoreController.DetermineTotalScore().ToString();
 
-
-            AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                "LevelFinished",
-                new Dictionary<string, object>
-                {
-                    { "levelName", HintController.Instance.currentLevel.GetName()},
-                    { "time", timeController.GetFormattedTime() },
-                    { "incorrectValueDeliveries", countWrongValueDeliveries },
-                    { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
-                    { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
-                    { "perfectDeliveries", countFirstTimeCorrectDeliveries},
-            });
-
-            Debug.Log("Analytics Enabled: " + Analytics.enabled);
-            Debug.Log("AnalyticsResult LevelFinished: " + analyticsResult);
+            // Analytics
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "levelName", HintController.Instance.currentLevel.GetName()},
+                { "time", timeController.GetFormattedTime() },
+                { "incorrectValueDeliveries", countWrongValueDeliveries },
+                { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
+                { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
+                { "perfectDeliveries", countFirstTimeCorrectDeliveries},
+            };
+            AnalyticsService.Instance.CustomData("LevelFinished", parameters);
+            AnalyticsService.Instance.Flush();          
         }
     }
 

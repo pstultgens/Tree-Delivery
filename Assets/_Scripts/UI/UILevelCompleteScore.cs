@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Analytics;
 
 public class UILevelCompleteScore : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class UILevelCompleteScore : MonoBehaviour
 
     private TimeController timeController;
     private ScoreController scoreController;
+    private bool showResults = false;
 
     private void Start()
     {
@@ -29,17 +31,44 @@ public class UILevelCompleteScore : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
+            if (showResults)
+            {
+                return;
+            }
+            showResults = true;
+
+            int countWrongValueDeliveries = ScoreController.countWrongValueDeliveries;
+            int countCannotDeliverHasNoParentDeliveries = ScoreController.countCannotDeliverHasNoParentDeliveries;
+            int countCannotRemoveHasChildDeliveries = ScoreController.countCannotRemoveHasChildDeliveries;
+            int countFirstTimeCorrectDeliveries = ScoreController.countFirstTimeCorrectDeliveries;
+
             completionTimeText.text = timeController.GetFormattedTime();
-            incorrectValueDeliveriesText.text = ScoreController.countWrongValueDeliveries.ToString();
-            incorrectHasNoParentDeliveriesText.text = ScoreController.countCannotDeliverHasNoParentDeliveries.ToString();
-            incorrectHasChildDeliveriesText.text = ScoreController.countCannotRemoveHasChildDeliveries.ToString();
-            perfectDeliveriesText.text = ScoreController.countFirstTimeCorrectDeliveries.ToString();
+            incorrectValueDeliveriesText.text = countWrongValueDeliveries.ToString();
+            incorrectHasNoParentDeliveriesText.text = countCannotDeliverHasNoParentDeliveries.ToString();
+            incorrectHasChildDeliveriesText.text = countCannotRemoveHasChildDeliveries.ToString();
+            perfectDeliveriesText.text = countFirstTimeCorrectDeliveries.ToString();
 
             ShowTimeBonus();
             ShowFlawlessDeliveryBonus();
             ShowDeliveryPenalty();
 
             totalScoreText.text = scoreController.DetermineTotalScore().ToString();
+
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                "LevelFinished",
+                new Dictionary<string, object>
+                {
+                    { "levelName", HintController.Instance.currentLevel.GetName()},
+                    { "time", timeController.GetFormattedTime() },
+                    { "incorrectValueDeliveries", countWrongValueDeliveries },
+                    { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
+                    { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
+                    { "perfectDeliveries", countFirstTimeCorrectDeliveries},
+            });
+
+            Debug.Log("Analytics Enabled: " + Analytics.enabled);
+            Debug.Log("AnalyticsResult LevelFinished: " + analyticsResult);
         }
     }
 

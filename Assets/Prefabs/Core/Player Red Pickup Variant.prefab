@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: collisionBounceBackForce
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4555529232091822989, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.09019608

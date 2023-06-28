@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Analytics;
 
 public class UITestLevelCompleteScore : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class UITestLevelCompleteScore : MonoBehaviour
     [SerializeField] GameObject testFailedGameObject;
 
     private TimeController timeController;
-    private bool showResults;
+    private bool showResults = false;
 
     private void Start()
     {
@@ -35,21 +36,40 @@ public class UITestLevelCompleteScore : MonoBehaviour
             int countWrongValueDeliveries = ScoreController.countWrongValueDeliveries;
             int countCannotDeliverHasNoParentDeliveries = ScoreController.countCannotDeliverHasNoParentDeliveries;
             int countCannotRemoveHasChildDeliveries = ScoreController.countCannotRemoveHasChildDeliveries;
+            int countFirstTimeCorrectDeliveries = ScoreController.countFirstTimeCorrectDeliveries;
+            bool testLevelPassed;
 
             completionTimeText.text = timeController.GetFormattedTime();
             incorrectValueDeliveriesText.text = countWrongValueDeliveries.ToString();
             incorrectHasNoParentDeliveriesText.text = countCannotDeliverHasNoParentDeliveries.ToString();
             incorrectHasChildDeliveriesText.text = countCannotRemoveHasChildDeliveries.ToString();
-            perfectDeliveriesText.text = ScoreController.countFirstTimeCorrectDeliveries.ToString();
+            perfectDeliveriesText.text = countFirstTimeCorrectDeliveries.ToString();
 
             if (HintController.Instance.DetermineNextLevel().Equals(LevelEnum.Easy1))
             {
                 testFailedGameObject.SetActive(true);
+                testLevelPassed = false;
             }
             else
             {
                 testPassedGameObject.SetActive(true);
+                testLevelPassed = true;
             }
+
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                "TestLevelFinished",
+                new Dictionary<string, object>               {
+                    { "time", timeController.GetFormattedTime() },
+                    { "passed", testLevelPassed},
+                    { "incorrectValueDeliveries", countWrongValueDeliveries },
+                    { "incorrectHasNoParentDeliveries", countCannotDeliverHasNoParentDeliveries },
+                    { "incorrectHasChildDeliveries", countCannotRemoveHasChildDeliveries },
+                    { "perfectDeliveries", countFirstTimeCorrectDeliveries},
+            });
+
+            Debug.Log("AnalyticsResult TestLevelFinished: " + analyticsResult);
+
         }
     }
 }

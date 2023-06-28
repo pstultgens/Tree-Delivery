@@ -88,12 +88,20 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: boostSpeed
+      value: 22.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: turnFactor
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: accelerationFactor
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687430653576696423, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
+      propertyPath: collisionBounceBackForce
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2687430654004967469, guid: 964d2b8e7c7eb4a0483d9159cc19d463, type: 3}
       propertyPath: m_Sprite

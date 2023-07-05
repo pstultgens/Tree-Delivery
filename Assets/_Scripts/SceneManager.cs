@@ -396,6 +396,11 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine(selectedLevel.GetSceneName()));
     }
 
+    public void RestartLevel()
+    {
+        StartCoroutine(LoadLevelCoroutine(selectedLevel.GetSceneName()));
+    }
+
     public void QuitGame()
     {
         Application.Quit();

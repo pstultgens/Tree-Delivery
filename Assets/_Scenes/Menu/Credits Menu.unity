@@ -991,7 +991,7 @@ MonoBehaviour:
         RelativePosition: 0
         DeterminePositionsOnPlay: 0
         InitialPosition: {x: 0, y: -1000, z: 0}
-        DestinationPosition: {x: 0, y: 2255, z: 0}
+        DestinationPosition: {x: 0, y: 2300, z: 0}
         InitialPositionTransform: {fileID: 0}
         DestinationPositionTransform: {fileID: 0}
         AnimatePositionCurveX:
@@ -1053,7 +1053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: 2255}
+  m_AnchoredPosition: {x: -10, y: 2300}
   m_SizeDelta: {x: -20, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957450009
@@ -1083,10 +1083,10 @@ MonoBehaviour:
     St\xFCltgens\n\n\n<style=h1>Sound & Music</style>\nhttps://freesound.org/\nhttps://incompetech.com\n\n\n<style=h1>Quality
     Assurance</style>\nAndr\xE9 Schumacher\n\n\n<style=h1>Beta Testers</style>\nOscar
     Bud\xE9\nKoen Hawinkels\nWim Dohmen\nRonald Slagboom\nBarry Lendertz\nMartin
-    Beijers\n\n\n<style=h1>Special Thanks</style>\nDr. Ebrahim Rahimi\nDr. Ir. Clara
-    Maathuis\nAndr\xE9 Schumacher\nPretty Fly Games\n\n\n<style=h1>Special Special
-    Thanks</style>\nSimone \nEsm\xE9e\nOlivia\n\n\n\n<style=h1>Thank you for playing!</style>\nHope
-    you enjoyed the game and learned something\n\n"
+    Beijers\nRobbin van Hout\n\n\n<style=h1>Special Thanks</style>\nDr. Ebrahim Rahimi\nDr.
+    Ir. Clara Maathuis\nAndr\xE9 Schumacher\nPretty Fly Games\n\n\n<style=h1>Special
+    Special Thanks</style>\nSimone \nEsm\xE9e\nOlivia\n\n\n\n<style=h1>Thank you
+    for playing!</style>\nHope you enjoyed the game and learned something\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}

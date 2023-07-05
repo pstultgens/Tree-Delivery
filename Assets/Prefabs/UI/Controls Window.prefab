@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 2548625934111988283}
   - component: {fileID: 8862431213828427036}
   m_Layer: 5
-  m_Name: PickupDrop Text
+  m_Name: SwapDrop Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1071,9 +1071,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pickup/
+  m_text: 'Swap/
 
-    drop'
+    Drop'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
   m_sharedMaterial: {fileID: 2017673355279344868, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
@@ -3799,7 +3799,7 @@ GameObject:
   - component: {fileID: 510720657681910661}
   - component: {fileID: 2265695224820085817}
   m_Layer: 5
-  m_Name: PickupDrop Text
+  m_Name: SwapDrop Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pickup/drop
+  m_text: Swap/Drop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}
   m_sharedMaterial: {fileID: 2017673355279344868, guid: 2358eb5bd8d67419096d835291e019bc, type: 2}

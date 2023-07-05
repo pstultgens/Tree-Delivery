@@ -1323,7 +1323,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -108.86, y: -94.767006}
+  m_ConnectedAnchor: {x: 4.233, y: -1.44}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: -35
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   - {x: -0.29866743, y: -0.23677015, z: 0}
   m_ShapePathHash: 759448437
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1293138
+  m_InstanceId: 351602
   m_LocalBounds:
     m_Center: {x: -1.8985374, y: 0.015738249, z: 0}
     m_Extent: {x: 2.2227623, y: 0.37638044, z: 0}
@@ -2241,7 +2241,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -108.86, y: -103.35001}
+  m_ConnectedAnchor: {x: -4.35, y: -1.44}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 35
@@ -2280,7 +2280,7 @@ MonoBehaviour:
   - {x: -0.043680668, y: -0.38922775, z: 0}
   m_ShapePathHash: 1009899525
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1293128
+  m_InstanceId: 351592
   m_LocalBounds:
     m_Center: {x: 1.8898089, y: -0.012847245, z: 0}
     m_Extent: {x: 2.2322996, y: 0.3763805, z: 0}
@@ -2715,4 +2715,4 @@ MonoBehaviour:
   - {fileID: 1981737071657389026}
   - {fileID: 6944816274985239796}
   - {fileID: 4872180465731696219}
-  lightsOnIntensity: 0.8
+  lightsOnIntensity: 0.7

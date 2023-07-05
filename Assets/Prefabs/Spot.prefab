@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lights:
   - {fileID: 1701933027461579205}
-  lightsOnIntensity: 0.7
+  lightsOnIntensity: 0.55
 --- !u!1 &6595138690318423650
 GameObject:
   m_ObjectHideFlags: 0
@@ -5458,7 +5458,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5793,6 +5793,7 @@ MonoBehaviour:
   wrongDeliverdColor:
     serializedVersion: 2
     rgba: 4281941237
+  initialWrongReceivedPackage: {fileID: 0}
   minimapNode: {fileID: 0}
   minimapEdgeLeft: {fileID: 0}
   minimapEdgeRight: {fileID: 0}
@@ -5807,7 +5808,6 @@ MonoBehaviour:
   hasReceivedCorrectPackage: 0
   hasReceivedPackage: 0
   receivedPackageValue: 0
-  isLocked: 0
 --- !u!1 &8326027398558390459
 GameObject:
   m_ObjectHideFlags: 0
@@ -10739,7 +10739,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -15618,7 +15618,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1680836097
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

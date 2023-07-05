@@ -75,7 +75,7 @@ MonoBehaviour:
   lights:
   - {fileID: 1445525367299634312}
   - {fileID: 9138105503470972103}
-  lightsOnIntensity: 0.8
+  lightsOnIntensity: 0.7
 --- !u!1 &4426448680450387573
 GameObject:
   m_ObjectHideFlags: 0

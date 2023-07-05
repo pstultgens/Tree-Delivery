@@ -211,4 +211,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lights:
   - {fileID: 3312533583256393239}
-  lightsOnIntensity: 0.5
+  lightsOnIntensity: 0.35

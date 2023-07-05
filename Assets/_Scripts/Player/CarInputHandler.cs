@@ -32,7 +32,7 @@ public class CarInputHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        playerActions.Enable();
+        playerActions.Disable();
     }
 
     private void Awake()

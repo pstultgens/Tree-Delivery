@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 170049406}
   - component: {fileID: 170049405}
   - component: {fileID: 170049407}
+  - component: {fileID: 170049410}
   m_Layer: 5
   m_Name: Input Field
   m_TagString: Untagged
@@ -314,6 +315,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &170049410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170049404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec8623ea4f8f4f6880b6acad700c791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetButton: {fileID: 644818161}
 --- !u!1001 &304745167
 PrefabInstance:
   m_ObjectHideFlags: 0

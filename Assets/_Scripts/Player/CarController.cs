@@ -293,8 +293,33 @@ public class CarController : MonoBehaviour
         float minSpeedBeforeAllowTurningFactor = (carRigidbody.velocity.magnitude / 8);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
 
-        // Update the rotation angle based on input
-        rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+        if (!inOilTrapMode)
+        {
+            if (velocityVsUp < 0 || accelerationInput < 0)
+            {
+                // driving reverse
+                rotationAngle += steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+            }
+            else
+            {
+                // Update the rotation angle based on input
+                rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+            }
+        }
+        else
+        {
+            // In oil trap mode
+            if (accelerationInput < 0)
+            {
+                // driving reverse
+                rotationAngle += steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+            }
+            else
+            {
+                // Update the rotation angle based on input
+                rotationAngle -= steeringInput * turnFactor * minSpeedBeforeAllowTurningFactor;
+            }
+        }
 
         // Apply steering by rotating the car object
         carRigidbody.MoveRotation(rotationAngle);
@@ -319,6 +344,11 @@ public class CarController : MonoBehaviour
         lateralVelocity = GetLateralVelocity();
         isBraking = false;
 
+        if (IsDrivingReverse())
+        {
+            return false;
+        }
+
         // Check if we ware moving forward and if the player is hitting the brakes
         // In that case the tires should screech
         if (velocityVsUp > 0 && accelerationInput < 0)
@@ -338,11 +368,7 @@ public class CarController : MonoBehaviour
 
     public bool IsDrivingReverse()
     {
-        if (velocityVsUp < 0 && accelerationInput < 0)
-        {
-            return true;
-        }
-        return false;
+        return velocityVsUp < 0 && accelerationInput < 0;
     }
 
     public void SetInputVector(Vector2 inputVector)

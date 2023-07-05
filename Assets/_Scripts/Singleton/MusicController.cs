@@ -16,6 +16,7 @@ public class MusicController : MonoBehaviour
 
     [Header("Menu Audio sources")]
     [SerializeField] public AudioSource menuAudioSource;
+    [SerializeField] public AudioSource creditsAudioSource;
     [SerializeField] public AudioSource menuNavigationAudioSource;
     [SerializeField] public AudioSource buttonSubmitAudioSource;
 
@@ -60,21 +61,32 @@ public class MusicController : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Settings Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("About Menu")
-            || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Credits Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Enter Name Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Level Menu")
             || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Select Car Menu"))
         {
             selectedLevelAudioSource.Stop();
+            creditsAudioSource.Stop();
 
             if (!menuAudioSource.isPlaying)
             {
                 menuAudioSource.Play();
             }
         }
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Credits Menu"))
+        {
+            selectedLevelAudioSource.Stop();
+            menuAudioSource.Stop();
+
+            if (!creditsAudioSource.isPlaying)
+            {
+                creditsAudioSource.Play();
+            }
+        }
         else
         {
             menuAudioSource.Stop();
+            creditsAudioSource.Stop();
 
             if (!selectedLevelAudioSource.isPlaying)
             {
@@ -85,7 +97,7 @@ public class MusicController : MonoBehaviour
         }
     }
 
-   
+
 
     private void RandomiseLevelMusic()
     {

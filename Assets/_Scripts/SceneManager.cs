@@ -340,8 +340,16 @@ public class SceneManager : MonoBehaviour
     }
 
     public void GoToScene(string sceneName)
-    {
-        StartCoroutine(LoadLevelCoroutine(sceneName));
+    {        
+        // If last level is finished, show Credits Menu instead of back to Select Level Menu
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals(LevelEnum.Hard7.GetSceneName()))
+        {            
+            StartCoroutine(LoadLevelCoroutine("Credits Menu"));
+        }
+        else
+        {
+            StartCoroutine(LoadLevelCoroutine(sceneName));
+        }
     }
 
     public void EnterPlayerName()
